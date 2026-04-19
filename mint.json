@@ -1,24 +1,30 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Softbooq",
+  "name": "Softbooq Docs",
   "logo": {
     "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "light": "/logo/light.svg",
+    "href": "https://softbooq.com"
   },
-  "favicon": "/favicon.png",
+  "favicon": "/favicon.svg",
   "colors": {
     "primary": "#6366f1",
     "light": "#a5b4fc",
     "dark": "#4f46e5"
   },
+  "metadata": {
+    "og:title": "Softbooq Docs",
+    "og:description": "Official documentation for the Softbooq platform — ERP, Files, and AI tools for growing businesses.",
+    "og:site_name": "Softbooq Docs"
+  },
   "topbarLinks": [
     {
-      "name": "Go to App",
-      "url": "https://app.softbooq.com"
+      "name": "softbooq.com",
+      "url": "https://softbooq.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Get Started",
+    "name": "Get Started Free",
     "url": "https://app.softbooq.com/signup"
   },
   "navigation": [
