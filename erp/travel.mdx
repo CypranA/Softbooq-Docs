@@ -4,7 +4,7 @@ description: Trips, expense reports, receipts and reimbursements
 icon: plane
 ---
 
-The Travel & Expense module manages business travel and employee expense claims — from booking a trip and capturing receipts to submitting an expense report and processing reimbursement through Finance.
+The Travel & Expense module manages business travel and employee expense claims — from booking a trip and capturing receipts on the go to submitting an expense report and processing reimbursement through Finance.
 
 ## What Travel & Expense owns
 
@@ -22,7 +22,11 @@ The Travel & Expense module manages business travel and employee expense claims 
 
 | Module | What it sends |
 |--------|--------------|
-| Finance | Approved reimbursements |
+| Finance | Approved reimbursements posted as payables |
+
+<Note>
+  Expense reports must be approved by the employee's reporting manager before they are posted to Finance. The reporting manager is set on the employee's HR record.
+</Note>
 
 ---
 
@@ -33,10 +37,13 @@ The Travel & Expense module manages business travel and employee expense claims 
 <Steps>
   <Step title="Open Travel & Expense → Trips → New Trip" />
   <Step title="Enter trip details">
-    Set destination, departure date, return date, and purpose of travel.
+    Set destination, departure date, return date, and purpose of travel. The purpose is used in reporting (e.g. Client Visit, Conference, Internal Meeting).
+  </Step>
+  <Step title="Link to a project or customer (optional)">
+    If travel is for a specific client project, link it here. Travel costs can then appear in the project's budget.
   </Step>
   <Step title="Save">
-    The trip is created. You can now log expenses directly against it as you travel.
+    The trip is created. You can now log expenses directly against it as you travel — from desktop or mobile.
   </Step>
 </Steps>
 
@@ -44,14 +51,35 @@ The Travel & Expense module manages business travel and employee expense claims 
 
 <Steps>
   <Step title="Open the trip → click Add Receipt" />
-  <Step title="Upload the receipt image">
-    Take a photo or upload a PDF. The system extracts the amount, date, and merchant automatically.
+  <Step title="Upload the receipt image or PDF">
+    Take a photo on mobile or upload a file from desktop. The system uses OCR to extract the amount, date, and merchant automatically.
   </Step>
-  <Step title="Verify and categorise">
-    Confirm the extracted details and choose a category (Meals, Transport, Accommodation, etc.).
+  <Step title="Verify the extracted details">
+    Review the auto-filled fields. Correct any OCR errors — especially the amount and date, which must be accurate for reimbursement.
+  </Step>
+  <Step title="Choose a category">
+    Select: Meals, Transport, Accommodation, Conference Fees, Telephone, or Other.
+  </Step>
+  <Step title="Enter the currency">
+    If the receipt is in a foreign currency, enter the original amount and currency. The system converts to your home currency at the mid-market rate. You can override the rate if you have a confirmed exchange rate.
   </Step>
   <Step title="Save">
     The receipt is attached to the trip and ready to include in an expense report.
+  </Step>
+</Steps>
+
+### Log a per diem allowance
+
+<Steps>
+  <Step title="Open the trip → click Add Per Diem" />
+  <Step title="Select the days">
+    Per diems are calculated per day of travel. The trip dates pre-fill automatically.
+  </Step>
+  <Step title="Review the rate">
+    The per diem rate is set by your HR travel policy (destination-based). Rates are configured by your HR Admin under **Settings → HR → Travel Policies**.
+  </Step>
+  <Step title="Save">
+    The per diem allowance is added as a receipt-free expense item. It does not require a receipt — the policy rate is the justification.
   </Step>
 </Steps>
 
@@ -59,40 +87,98 @@ The Travel & Expense module manages business travel and employee expense claims 
 
 <Steps>
   <Step title="Open Travel & Expense → Expense Reports → New Report" />
+  <Step title="Name the report">
+    Give it a clear name (e.g. London Office Visit — March 2025) so approvers and Finance can identify it easily.
+  </Step>
   <Step title="Link the trip (optional)">
-    Attach the trip record to pull in all associated receipts automatically.
+    Attach the trip record to pull in all associated receipts automatically. You can also add receipts manually if they are not linked to a trip.
   </Step>
   <Step title="Add or review receipts">
-    Confirm all receipts are included and correctly categorised.
+    Confirm all receipts are included and correctly categorised. Check that totals match what you expect to claim.
+  </Step>
+  <Step title="Add a note for the approver (optional)">
+    Include any context the approver might need (e.g. "Client dinner — approved in advance by Sarah").
   </Step>
   <Step title="Submit">
-    Click **Submit for Approval**. Your manager receives a notification to review the report.
+    Click **Submit for Approval**. Your reporting manager receives a notification to review the report. You cannot edit the report after submission — withdraw it first if changes are needed.
   </Step>
 </Steps>
 
 ### Approve and process reimbursement
 
 <Steps>
-  <Step title="Open Travel & Expense → Expense Reports (as a manager)" />
+  <Step title="Open Travel & Expense → Expense Reports (as a manager)">
+    Pending approvals also appear in your notification feed.
+  </Step>
   <Step title="Review the report">
-    Check each receipt and the total amount claimed.
+    Check each receipt: is the amount reasonable, does the category match the receipt, is there a valid image attached?
+  </Step>
+  <Step title="Review against policy">
+    Check the amounts against your company's travel policy limits (e.g. meal allowance per day, hotel cap). Policy breaches are automatically highlighted.
   </Step>
   <Step title="Approve or reject">
-    Click **Approve** to move the report to Finance for payment, or **Reject** with a reason if something is wrong.
+    Click **Approve** to move the report to Finance for payment. Click **Reject** and provide a reason if anything is wrong — the employee is notified and can revise and resubmit.
   </Step>
   <Step title="Finance processes the payment">
-    Approved reports are posted to Finance as reimbursement payables, ready to be included in the next payment run.
+    Approved reports are posted to Finance as reimbursement payables. They appear in Finance → Payments for inclusion in the next payment run.
+  </Step>
+</Steps>
+
+### Withdraw and edit a submitted expense report
+
+<Steps>
+  <Step title="Open the submitted expense report" />
+  <Step title="Click Withdraw">
+    The report is returned to Draft status. The approver is notified that it has been withdrawn.
+  </Step>
+  <Step title="Make your edits">
+    Add, remove, or correct receipts as needed.
+  </Step>
+  <Step title="Resubmit">
+    Click **Submit for Approval** again to restart the approval process.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Trip management** — Log expenses directly against a trip for clean reporting and easy reimbursement.
+<AccordionGroup>
+  <Accordion title="My expense report is not moving to Finance after approval">
+    After manager approval, the report is posted to Finance as a payable. Check Finance → Payments → Pending to confirm it arrived. If it is not there, check whether the Finance integration is enabled for your account under **Settings → Finance**. Also confirm the approver clicked **Approve** rather than just commenting on the report.
+  </Accordion>
+  <Accordion title="The OCR extracted the wrong amount from my receipt">
+    OCR extraction accuracy depends on receipt image quality. If the extracted amount is wrong, correct it manually before saving. Always verify the extracted fields — OCR is an assistant, not a guarantee. Use a clear, well-lit photo for best results.
+  </Accordion>
+  <Accordion title="A receipt currency conversion looks wrong">
+    The system uses the mid-market rate at the time the receipt is saved. If you want to use a different rate (e.g. the rate on your bank statement), open the receipt and override the exchange rate manually. Always use the rate you actually paid at — the mid-market rate is a default, not a requirement.
+  </Accordion>
+  <Accordion title="My manager is not receiving the approval notification">
+    Check that the correct reporting manager is set on your employee record in HR. The approval notification goes to that person specifically. If the manager has changed, update the HR record first, then resubmit the report.
+  </Accordion>
+  <Accordion title="An expense was rejected but I believe it should be approved">
+    Open the rejection notification to see the reason. If you disagree, speak with your manager directly. If the expense was policy-compliant, your manager can approve it on review. Expense decisions are not overridable by employees — the approval chain is manager → Admin if escalation is needed.
+  </Accordion>
+</AccordionGroup>
 
-**Expense reports** — Group receipts by trip or period and submit for manager approval.
+---
 
-**Receipt capture** — Upload receipt images from mobile. Automatic extraction of amount, date, and merchant.
+## FAQ
 
-**Reimbursement** — Approved reports post to Finance automatically as payables — no manual data entry.
+<AccordionGroup>
+  <Accordion title="Can I submit expenses without linking them to a trip?">
+    Yes. Expense reports do not require a trip. You can create a report and add receipts directly without a trip record. Trips are optional and are most useful for multi-day travel where you want to group all costs in one place.
+  </Accordion>
+  <Accordion title="Are there limits on how much I can claim?">
+    Yes, if your HR Admin has configured travel policies. Policy limits (e.g. maximum hotel cost per night, meal allowance per day) are set in **Settings → HR → Travel Policies**. Receipts that exceed the limit are flagged automatically during submission — your manager is alerted at approval.
+  </Accordion>
+  <Accordion title="Can I claim expenses in foreign currencies?">
+    Yes. Enter the original amount in the foreign currency on the receipt. The system converts it to your home currency for the expense report total. The original currency amount and the converted amount are both shown.
+  </Accordion>
+  <Accordion title="How long does reimbursement take after approval?">
+    Reimbursement timing depends on your Finance team's payment run schedule. Once an expense report is approved, it appears in Finance → Payments. Your Finance team processes it in the next payment run. The timing is not controlled by the Travel module.
+  </Accordion>
+  <Accordion title="Can I use the mobile app to capture receipts while travelling?">
+    Yes. The Softbooq mobile-responsive interface lets you open a trip, photograph a receipt, and save it from your phone in under 30 seconds. Keeping up with receipts in real time is far easier than catching up after returning — you are less likely to lose receipts or forget the context.
+  </Accordion>
+</AccordionGroup>

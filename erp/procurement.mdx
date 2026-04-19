@@ -4,7 +4,7 @@ description: Purchase orders, suppliers, requisitions and RFQs
 icon: cart-shopping
 ---
 
-The Procurement module manages everything on the buying side of your business — from raising a requisition to issuing a purchase order, receiving goods, and recording the vendor bill in Finance.
+The Procurement module manages everything on the buying side of your business — from raising an internal requisition to issuing a purchase order, receiving goods, and recording the vendor bill in Finance. Every purchase flows into Inventory on receipt and Finance on billing.
 
 ## What Procurement owns
 
@@ -36,10 +36,13 @@ The Procurement module manages everything on the buying side of your business �
 <Steps>
   <Step title="Open Procurement → Suppliers → New Supplier" />
   <Step title="Enter supplier details">
-    Fill in company name, primary contact, email, and address.
+    Fill in company name, primary contact name, email, phone, and registered address.
   </Step>
   <Step title="Set payment terms">
-    Choose the default payment terms for this supplier (e.g. Net 30). These will pre-fill on every PO raised for them.
+    Choose the default payment terms for this supplier (e.g. Net 30). These pre-fill on every PO raised for them and on the vendor bill in Finance.
+  </Step>
+  <Step title="Add bank details (optional)">
+    If you pay this supplier via bank transfer, add their account details here. These are used when processing payment runs.
   </Step>
   <Step title="Save">
     The supplier is now available when creating purchase orders and RFQs.
@@ -52,13 +55,53 @@ The Procurement module manages everything on the buying side of your business �
   <Step title="Open Procurement → Purchase Orders → New PO" />
   <Step title="Select the supplier" />
   <Step title="Add line items">
-    Add the items you are ordering, quantities, and agreed unit prices.
+    Add the items you are ordering, their quantities, and the agreed unit prices. Items can be selected from your Inventory catalogue or entered as free text for one-off purchases.
   </Step>
+  <Step title="Set the expected delivery date" />
   <Step title="Link to a project (optional)">
-    If this PO is for a specific project, link it here so costs are tracked against the project budget.
+    If this PO is for a specific project, link it here. The cost will appear in the project's budget under Materials.
   </Step>
   <Step title="Send to supplier">
-    Click **Send PO**. The supplier receives the order by email and the PO status changes to **Sent**.
+    Click **Send PO**. The supplier receives the PO by email as a PDF. The PO status changes to **Sent**.
+  </Step>
+</Steps>
+
+### Submit an internal requisition
+
+<Steps>
+  <Step title="Open Procurement → Requisitions → New Requisition" />
+  <Step title="Describe what you need">
+    Enter a description of the items required, estimated cost, and reason for the purchase.
+  </Step>
+  <Step title="Attach supporting information (optional)">
+    Attach a quote from a supplier, a product link, or any supporting document for the approver.
+  </Step>
+  <Step title="Submit for approval">
+    The requisition is sent to your manager for approval. You will be notified when it is approved or rejected.
+  </Step>
+  <Step title="Requisition converted to PO on approval">
+    Once approved, the requisition can be converted to a PO with one click. All details carry over automatically.
+  </Step>
+</Steps>
+
+### Send an RFQ to multiple suppliers
+
+<Steps>
+  <Step title="Open Procurement → RFQs → New RFQ" />
+  <Step title="Add the items you want to quote">
+    Enter descriptions, specifications, and quantities for each item you need priced.
+  </Step>
+  <Step title="Select the suppliers to invite">
+    Choose two or more suppliers from your directory. Each will receive the same RFQ by email.
+  </Step>
+  <Step title="Set a response deadline">
+    Choose the date by which quotes must be received. Suppliers are reminded automatically as the deadline approaches.
+  </Step>
+  <Step title="Compare responses">
+    As quotes arrive, log them against the RFQ. The comparison table shows each supplier's price side by side.
+  </Step>
+  <Step title="Convert the winning quote to a PO">
+    Select the preferred supplier's quote and click **Convert to PO**. The PO is created with the quoted prices pre-filled.
   </Step>
 </Steps>
 
@@ -67,21 +110,73 @@ The Procurement module manages everything on the buying side of your business �
 <Steps>
   <Step title="Open the purchase order when goods arrive" />
   <Step title="Click Receive Goods">
-    Confirm the quantities received. Stock is automatically added to Inventory.
+    Confirm the quantities received. If the delivery is partial, enter only what arrived — the remaining balance stays open on the PO.
+  </Step>
+  <Step title="Note any discrepancies">
+    If the quantity received differs from the PO, note the discrepancy. This triggers a notification to the supplier and is logged for dispute resolution.
   </Step>
   <Step title="Record the vendor bill">
-    Click **Create Vendor Bill**. The bill is pre-filled from the PO and appears in Finance → Vendor Bills for payment.
+    Click **Create Vendor Bill**. The bill is pre-filled from the received quantities and agreed unit prices. It appears in Finance → Vendor Bills for payment.
+  </Step>
+  <Step title="Three-way match verification">
+    Finance will flag the bill if the amounts differ from the PO. Resolve the discrepancy before approving the bill for payment.
+  </Step>
+</Steps>
+
+### Manage supplier performance
+
+<Steps>
+  <Step title="Open a supplier record → Activity tab">
+    View the full history of POs, RFQs, and deliveries with this supplier.
+  </Step>
+  <Step title="Review on-time delivery rate">
+    The system tracks expected vs actual delivery dates. Suppliers with consistently late deliveries are flagged.
+  </Step>
+  <Step title="Add a supplier note or rating">
+    Log qualitative notes (e.g. quality issues, pricing disputes) against the supplier record for your team's reference.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Purchase orders** — Create from approved requisitions or directly. Track status from draft through to received and billed.
+<AccordionGroup>
+  <Accordion title="A vendor bill was created twice for the same PO">
+    This happens if a PO was received and a bill was also created manually. Open both bills and compare the reference number, supplier, and amount. Delete the duplicate if it has not been paid — go to the bill and select **Delete**. If both have been paid, create a credit note in Finance against the duplicate.
+  </Accordion>
+  <Accordion title="Stock is not updating in Inventory after receiving goods">
+    Stock updates when you click **Receive Goods** and confirm the quantities on the PO. If you skipped that step and only created the vendor bill, go back to the PO and process the goods receipt. The bill and goods receipt are separate steps.
+  </Accordion>
+  <Accordion title="I sent a PO but the supplier says they didn't receive it">
+    Check that your email provider is connected under **Settings → Email**. Open the PO and use **Resend** to send it again. You can also download the PO as a PDF from the PO record and attach it to a manual email.
+  </Accordion>
+  <Accordion title="A requisition has been pending approval for a long time">
+    Check who the approver is — it is based on the submitter's reporting manager set in HR. If the manager is unavailable, an Admin can approve the requisition directly from Procurement → Requisitions.
+  </Accordion>
+  <Accordion title="The PO amount and vendor bill amount do not match">
+    This is a three-way match failure. Common causes: supplier invoiced a different quantity than was received, or the price on the supplier's invoice differs from the agreed PO price. Open both the PO and the bill, compare line by line, and either update the bill to match the PO or raise a dispute with the supplier.
+  </Accordion>
+</AccordionGroup>
 
-**Supplier management** — Central directory with contacts, payment terms, and full purchase history per supplier.
+---
 
-**Requisitions** — Internal purchase requests that require manager approval before a PO is issued.
+## FAQ
 
-**RFQs** — Send quote requests to multiple suppliers simultaneously. Compare responses and convert the winning quote to a PO.
+<AccordionGroup>
+  <Accordion title="Can I raise a PO without a prior requisition?">
+    Yes. Requisitions are optional. You can create a PO directly without an approval workflow. If your organisation requires requisitions for spend controls, this can be enforced under **Settings → Procurement → Require Requisition Approval**.
+  </Accordion>
+  <Accordion title="Can I order items that are not in my Inventory catalogue?">
+    Yes. When adding line items to a PO, you can enter a free-text description for items that are not in the catalogue. These one-off items are not tracked in Inventory — they are expensed directly to Finance. To start tracking an item in Inventory, add it to the catalogue first.
+  </Accordion>
+  <Accordion title="Can suppliers submit quotes through a portal?">
+    Not directly — suppliers respond by email. You then manually enter their quoted prices into the RFQ comparison table. A supplier self-service portal is on the product roadmap.
+  </Accordion>
+  <Accordion title="How do I handle a PO for a service rather than a physical good?">
+    Select **Service** as the item type on the line item. Service POs do not trigger a goods receipt step — they go directly to vendor bill creation once the service is delivered.
+  </Accordion>
+  <Accordion title="Can I set spending limits per department or per approver?">
+    Yes. Go to **Settings → Procurement → Approval Rules** to set spend thresholds. For example: purchases under £500 can be approved by a Manager; over £500 require an Admin. Thresholds can be set per department.
+  </Accordion>
+</AccordionGroup>

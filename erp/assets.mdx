@@ -4,20 +4,31 @@ description: Fixed assets, depreciation, categories and disposals
 icon: box-open
 ---
 
-The Assets module tracks your company's fixed assets — equipment, vehicles, furniture, and technology — through their full lifecycle from acquisition to disposal, with automatic depreciation posted to Finance.
+The Assets module tracks your company's fixed assets — equipment, vehicles, furniture, and technology — through their full lifecycle from acquisition to disposal, with automatic depreciation posted to Finance each period.
 
 ## What Assets owns
 
 - **Fixed assets** — the asset register with acquisition details and current book value
 - **Depreciation** — scheduled and posted depreciation entries
+- **Asset categories** — groups for reporting and bulk configuration
 - **Disposals** — records of sold or written-off assets
 
 ## Data flows out of Assets to
 
 | Module | What it sends |
 |--------|--------------|
-| Finance | Depreciation entries |
+| Finance | Depreciation journal entries |
 | Maintenance | Asset records for maintenance tracking |
+
+## Data flows into Assets from
+
+| Module | What it sends |
+|--------|--------------|
+| IT & Helpdesk | IT hardware records synced to the asset register |
+
+<Note>
+  Your fiscal year must be configured in **Settings → Company Profile** before you can run depreciation or view asset reports. Depreciation periods are calculated from the fiscal year start month.
+</Note>
 
 ---
 
@@ -28,34 +39,63 @@ The Assets module tracks your company's fixed assets — equipment, vehicles, fu
 <Steps>
   <Step title="Open Assets → New Asset" />
   <Step title="Enter asset details">
-    Fill in the asset name, category (e.g. Vehicles, IT Equipment, Furniture), serial number, and location.
+    Fill in the asset name, category (Vehicles, IT Equipment, Machinery, Furniture, etc.), serial or registration number, and location.
   </Step>
   <Step title="Set acquisition details">
-    Enter the purchase date, purchase cost, and supplier.
+    Enter the purchase date, purchase cost, and supplier. These fields anchor the depreciation calculation.
   </Step>
   <Step title="Configure depreciation">
-    Choose the depreciation method (Straight-line or Declining balance), useful life in years, and residual value.
+    Choose the depreciation method: **Straight-line** (equal amounts each period) or **Declining balance** (higher depreciation in early years). Set the useful life in years and the residual value at end of life.
   </Step>
   <Step title="Assign to an employee (optional)">
-    Link the asset to the employee responsible for it.
+    Link the asset to the employee responsible for it. They are notified of the assignment and the asset appears on their profile.
   </Step>
   <Step title="Save">
-    The asset is added to your register. Depreciation will post to Finance automatically on schedule.
+    The asset is added to the register. Depreciation entries will post to Finance automatically each period based on your configured schedule.
   </Step>
 </Steps>
 
-### Run depreciation
+### Run depreciation for a period
 
 <Steps>
   <Step title="Open Assets → Depreciation → Run Depreciation" />
   <Step title="Select the period">
-    Choose the month/year to depreciate. The system calculates the depreciation amount for every active asset.
+    Choose the month and year to depreciate. The system calculates the depreciation amount for every active asset in that period.
   </Step>
-  <Step title="Review">
-    Check the depreciation schedule. Any asset approaching full depreciation is flagged.
+  <Step title="Review the depreciation schedule">
+    The preview shows each asset, its current book value, and the depreciation amount for this period. Assets approaching full depreciation (book value near residual value) are flagged for review.
   </Step>
   <Step title="Post to Finance">
-    Click **Post**. Journal entries are created in Finance automatically for the total depreciation amount.
+    Click **Post**. Journal entries are created in Finance automatically — debiting depreciation expense and crediting accumulated depreciation for the total amount.
+  </Step>
+  <Step title="Verify">
+    The posted entries appear in Finance → Journal Entries with the source marked as Assets. The book value of each asset updates immediately.
+  </Step>
+</Steps>
+
+### View the asset register and current book values
+
+<Steps>
+  <Step title="Open Assets → Register">
+    The register lists all active assets with their current book value, category, location, and assigned employee.
+  </Step>
+  <Step title="Filter by category or location">
+    Use filters to view a specific category (e.g. all vehicles) or all assets at a particular site.
+  </Step>
+  <Step title="Export the register">
+    Click **Export → CSV** for a full register download. This is the standard format required for most audits and insurance schedules.
+  </Step>
+</Steps>
+
+### Revalue an asset
+
+<Steps>
+  <Step title="Open the asset record → click Revalue" />
+  <Step title="Enter the new value">
+    Enter the revalued amount and the date of revaluation. Add a reason (e.g. professional valuation, insurance revaluation, impairment).
+  </Step>
+  <Step title="Confirm">
+    A revaluation journal entry is posted to Finance. The asset's book value and remaining depreciation schedule update to reflect the new value. The original cost is retained for reference.
   </Step>
 </Steps>
 
@@ -64,21 +104,68 @@ The Assets module tracks your company's fixed assets — equipment, vehicles, fu
 <Steps>
   <Step title="Open the asset record → click Dispose" />
   <Step title="Enter disposal details">
-    Set the disposal date, method (Sale or Write-off), and sale proceeds if applicable.
+    Set the disposal date and method: **Sale** or **Write-off**. If the asset was sold, enter the sale proceeds.
   </Step>
   <Step title="Confirm">
-    The system calculates the gain or loss on disposal and posts the entry to Finance. The asset is marked as Disposed and removed from the active register.
+    The system calculates the gain or loss on disposal: sale proceeds minus the net book value at the disposal date. A disposal journal entry is posted to Finance automatically. The asset is marked as **Disposed** and removed from the active register.
+  </Step>
+</Steps>
+
+### Add an asset from an IT & Helpdesk record
+
+<Steps>
+  <Step title="Open IT & Helpdesk → Assets and find the IT asset" />
+  <Step title="Click Add to Asset Register">
+    The system pre-fills the asset details from the IT record: device name, serial number, purchase date, and cost.
+  </Step>
+  <Step title="Configure depreciation in the asset record">
+    Review the pre-filled details and add the depreciation method, useful life, and residual value.
+  </Step>
+  <Step title="Save">
+    A linked fixed asset record is created. Changes to the IT asset record (e.g. reassignment) are reflected in the asset register.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Asset register** — Complete record per asset: purchase date, cost, location, assigned employee, depreciation method, and current book value.
+<AccordionGroup>
+  <Accordion title="Depreciation is not posting automatically">
+    Check that your fiscal year is configured in **Settings → Company Profile**. Also confirm that the asset's status is **Active** and that the acquisition date is before the period you are trying to depreciate. Fully depreciated assets (book value at residual value) will show zero depreciation — this is correct.
+  </Accordion>
+  <Accordion title="The book value of an asset looks incorrect">
+    Open the asset record and review the Depreciation Schedule tab. This shows every period's planned and posted depreciation. If a period was skipped or posted twice, the book value will be off. Contact your Finance team to post a correcting journal entry manually.
+  </Accordion>
+  <Accordion title="I cannot delete an asset that was added by mistake">
+    Assets with posted depreciation or disposed status cannot be deleted. If the asset was added in error before any depreciation was posted, contact an Admin to delete it. If depreciation has already been posted, the correct action is to dispose of the asset at its cost (zero sale proceeds), which will net the entry out.
+  </Accordion>
+  <Accordion title="Disposal is showing a gain/loss I don't expect">
+    The gain/loss is calculated as: sale proceeds minus net book value on the disposal date. The net book value equals cost minus all accumulated depreciation posted to date. If it looks wrong, check whether all depreciation periods have been run up to the disposal month — if depreciation is behind, the book value will be higher than expected.
+  </Accordion>
+  <Accordion title="An asset category is missing from the dropdown">
+    Categories are configured in **Settings → Assets → Categories**. Admin and Manager roles can add new categories. Once added, they appear immediately in the asset form.
+  </Accordion>
+</AccordionGroup>
 
-**Depreciation** — Straight-line or declining balance. Posts to Finance automatically on schedule with no manual intervention.
+---
 
-**Asset categories** — Group assets for reporting and bulk depreciation configuration.
+## FAQ
 
-**Disposals** — Records sale or write-off with automatic gain/loss calculation and Finance journal entry.
+<AccordionGroup>
+  <Accordion title="Can I depreciate assets on a custom schedule rather than monthly?">
+    Assets depreciate on the schedule set when you run depreciation manually, or on a monthly automatic schedule if automatic posting is enabled. Quarterly or annual depreciation runs are supported — just run depreciation for the relevant period when needed.
+  </Accordion>
+  <Accordion title="What depreciation methods are supported?">
+    Softbooq supports Straight-line (SL) and Declining balance (DB). Straight-line spreads the depreciable amount equally over the useful life. Declining balance applies a fixed percentage to the reducing book value each period, resulting in higher depreciation in early years.
+  </Accordion>
+  <Accordion title="Can I track assets across multiple office locations?">
+    Yes. Enter the location when adding the asset. You can filter the register by location and run depreciation reports per site. Locations are managed under **Settings → Assets → Locations**.
+  </Accordion>
+  <Accordion title="What happens to an asset when the assigned employee leaves?">
+    When an employee is offboarded in HR, their assigned assets are flagged for retrieval. An IT & Helpdesk ticket is created automatically for asset return. The asset itself remains active in the register until it is reassigned or disposed of.
+  </Accordion>
+  <Accordion title="Can I import an existing asset register from a spreadsheet?">
+    Yes. Go to Assets → Import and download the template CSV. Include each asset's details, acquisition date, cost, and current accumulated depreciation. Importing existing accumulated depreciation ensures the book value on import is correct.
+  </Accordion>
+</AccordionGroup>

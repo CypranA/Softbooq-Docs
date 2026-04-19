@@ -1,10 +1,10 @@
 ---
 title: Sales & POS
-description: Sales orders, returns and point-of-sale
+description: Sales orders, quotes, returns and point-of-sale
 icon: cash-register
 ---
 
-The Sales module handles the full order-to-cash cycle — from creating quotes and sales orders to processing returns and running a point-of-sale terminal.
+The Sales module handles the full order-to-cash cycle — from creating quotes and sales orders to processing returns and running a point-of-sale terminal. Every confirmed order automatically depletes stock in Inventory and generates revenue in Finance.
 
 ## What Sales owns
 
@@ -17,9 +17,16 @@ The Sales module handles the full order-to-cash cycle — from creating quotes a
 
 | Module | What it sends |
 |--------|--------------|
-| Finance | Sales revenue |
+| Finance | Sales revenue and invoices |
 | Inventory | Stock depletion on confirmed orders |
 | Dashboard | Sales metrics |
+
+## Data flows into Sales from
+
+| Module | What it sends |
+|--------|--------------|
+| CRM | Customer data |
+| Inventory | Product catalogue and available stock |
 
 ---
 
@@ -30,16 +37,19 @@ The Sales module handles the full order-to-cash cycle — from creating quotes a
 <Steps>
   <Step title="Open Sales → Orders → New Order" />
   <Step title="Select the customer">
-    Choose from your CRM customer list. Delivery address and payment terms auto-populate.
+    Choose from your CRM customer list. Delivery address and payment terms auto-populate from the customer record.
   </Step>
   <Step title="Add line items">
-    Add products from your Inventory catalogue. Quantities, unit prices, and totals calculate automatically.
+    Search for products from your Inventory catalogue. Quantities, unit prices, and line totals calculate automatically. Apply a line-level or overall discount if needed.
   </Step>
-  <Step title="Set delivery date">
-    Enter the expected delivery or fulfilment date.
+  <Step title="Set the delivery date">
+    Enter the expected delivery or fulfilment date. This is visible to the customer on the order confirmation.
   </Step>
   <Step title="Confirm the order">
-    Click **Confirm**. Stock is reserved in Inventory and the order status changes to **Confirmed**.
+    Click **Confirm**. Stock is reserved in Inventory and the order status changes to **Confirmed**. An order confirmation can be emailed to the customer automatically.
+  </Step>
+  <Step title="Convert to invoice">
+    When the order is fulfilled, click **Create Invoice** to generate the invoice in Finance. Line items and amounts carry over automatically.
   </Step>
 </Steps>
 
@@ -48,13 +58,34 @@ The Sales module handles the full order-to-cash cycle — from creating quotes a
 <Steps>
   <Step title="Open Sales → Quotes → New Quote" />
   <Step title="Build the quote">
-    Add the customer, line items, and any applicable discounts or notes.
+    Add the customer, line items, quantities, and unit prices. Apply discounts and add any notes or terms specific to this proposal.
+  </Step>
+  <Step title="Set an expiry date">
+    Quotes should have a validity period (e.g. valid for 30 days). The system flags expired quotes automatically.
   </Step>
   <Step title="Send to customer">
-    Click **Send Quote**. The quote is emailed for the customer to review.
+    Click **Send Quote**. The quote is emailed as a PDF from your connected email provider.
   </Step>
   <Step title="Convert on approval">
-    Once the customer accepts, open the quote and click **Convert to Order**. The sales order is created instantly with all the same line items.
+    Once the customer accepts, open the quote and click **Convert to Order**. The sales order is created instantly with all the same line items. The quote status changes to **Accepted**.
+  </Step>
+  <Step title="If the customer wants changes">
+    Click **Revise Quote** to create a new version. Previous versions are retained for reference. Only send the revised version — the customer receives a new PDF with a version number.
+  </Step>
+</Steps>
+
+### Apply a discount
+
+<Steps>
+  <Step title="Open a quote or sales order in edit mode" />
+  <Step title="Line-level discount">
+    Click the discount field on any line item and enter a percentage or fixed amount. The line total updates immediately.
+  </Step>
+  <Step title="Order-level discount">
+    Scroll to the order totals section and apply a percentage discount to the order subtotal. This is applied after any line-level discounts.
+  </Step>
+  <Step title="Add a reason (optional)">
+    Enter a discount reason for internal records (e.g. Loyalty, Promotional, Negotiated).
   </Step>
 </Steps>
 
@@ -63,24 +94,94 @@ The Sales module handles the full order-to-cash cycle — from creating quotes a
 <Steps>
   <Step title="Open the original sales order" />
   <Step title="Click Process Return">
-    Select the items being returned and the quantity for each.
+    Select the items being returned and the quantity for each. You can process a partial return — not all items need to be returned.
   </Step>
   <Step title="Choose the outcome">
     Select **Refund** to issue a credit note in Finance, or **Exchange** to create a replacement order.
   </Step>
+  <Step title="Set a return reason">
+    Choose: Damaged, Wrong Item, Change of Mind, or Other. This feeds the returns analysis in Reports.
+  </Step>
   <Step title="Confirm">
-    Stock is automatically added back to Inventory and the credit note is generated in Finance.
+    Returned stock is automatically added back to Inventory. If you selected Refund, a credit note is generated in Finance and applied against the original invoice.
+  </Step>
+</Steps>
+
+### Process a POS sale
+
+<Steps>
+  <Step title="Open Sales → Point of Sale">
+    The POS terminal launches in a full-screen interface optimised for counter or tablet use.
+  </Step>
+  <Step title="Add items">
+    Tap items from the product grid or scan a barcode. Quantities can be adjusted directly in the cart.
+  </Step>
+  <Step title="Apply discounts or promotional codes (optional)">
+    Tap the discount icon to apply a percentage off, or enter a promo code if the customer has one.
+  </Step>
+  <Step title="Select payment method">
+    Choose Cash, Card, or Split Payment. For split payments, enter how much is being paid by each method.
+  </Step>
+  <Step title="Complete the sale">
+    Confirm the payment. A receipt is generated and can be printed or emailed. Stock is depleted in Inventory automatically.
+  </Step>
+</Steps>
+
+### Handle a partial delivery
+
+<Steps>
+  <Step title="Open the confirmed sales order" />
+  <Step title="Click Deliver">
+    Enter the quantities being delivered in this shipment. Items not delivered remain on the order with status **Partially Delivered**.
+  </Step>
+  <Step title="Invoice only what was delivered">
+    When creating the invoice, only the delivered quantities are included. The remaining balance stays on the open order.
+  </Step>
+  <Step title="Deliver the remainder later">
+    When the rest of the stock arrives, open the order and process the second delivery. A second invoice can then be generated for the balance.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Sales orders** — Create from CRM deals or from scratch. Convert to invoices in one click.
+<AccordionGroup>
+  <Accordion title="A quote was sent but the customer says they didn't receive it">
+    Check that your email provider is connected under **Settings → Email** and send a test email to verify it is working. Also check that the customer's email address in CRM is correct. Some email providers route automated emails to spam on first contact — ask the customer to check their junk folder.
+  </Accordion>
+  <Accordion title="Stock is not being reserved when I confirm an order">
+    If the item has insufficient stock, the system will warn you but cannot reserve what does not exist. Check the available quantity in Inventory → Items. If the stock level is incorrect, run a stock adjustment before confirming the order.
+  </Accordion>
+  <Accordion title="I converted a quote to an order but the price is different">
+    Prices on a quote are fixed at the time the quote is created. If product prices have changed since the quote was issued, the converted order will use the original quoted price — not the current catalogue price. Review line items on the order if you need to update them.
+  </Accordion>
+  <Accordion title="A return was processed but the credit note is not in Finance">
+    Open the original sales order and check the Returns tab. If the return status is Pending, it has not been confirmed yet — click Confirm Return. If confirmed, go to Finance → Credit Notes and search by the customer name.
+  </Accordion>
+  <Accordion title="The POS terminal is not loading or shows as offline">
+    POS requires an active internet connection. Check your connection and reload the browser tab. If the issue persists, clear your browser cache. POS data is synced in real time — no data is stored locally, so no sales are lost during a temporary disconnect.
+  </Accordion>
+</AccordionGroup>
 
-**Quotes** — Professional quote templates sent directly from the platform. One-click conversion to order on customer approval.
+---
 
-**Returns** — Full or partial returns with automatic stock and finance adjustments.
+## FAQ
 
-**Point of sale** — Streamlined POS interface for counter and retail sales. Supports cash, card, and split payments.
+<AccordionGroup>
+  <Accordion title="Can I create a sales order for a customer who is not in CRM?">
+    No. All orders must be linked to a CRM customer. If the customer doesn't exist, create them in CRM first — it takes less than a minute and ensures their full history is connected.
+  </Accordion>
+  <Accordion title="Can I customise the quote or order PDF template?">
+    Yes. Go to **Settings → Company Profile** to upload your logo and set your company details — these appear on all PDFs automatically. Custom layout design (colours, fonts, additional fields) is available on Plus and Pro plans.
+  </Accordion>
+  <Accordion title="Can I reopen a cancelled order?">
+    No. Cancelled orders are permanent. If you need to recreate the order, open it and use **Duplicate Order** to create an identical draft that you can then edit and confirm.
+  </Accordion>
+  <Accordion title="Does the POS support multiple payment methods in one transaction?">
+    Yes. Select **Split Payment** at checkout and assign specific amounts to each payment method (e.g. part card, part cash). The total must equal the order amount before the sale can be completed.
+  </Accordion>
+  <Accordion title="What happens to stock when an order is cancelled?">
+    If the order was confirmed (stock was reserved), cancelling the order automatically releases the reserved stock back to Inventory. If goods had already been dispatched, you will need to process a return to restock the items.
+  </Accordion>
+</AccordionGroup>

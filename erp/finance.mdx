@@ -28,6 +28,10 @@ The Finance module is the financial hub of your ERP. Every monetary transaction 
 | Assets | Depreciation |
 | Contracts | Contract value |
 
+<Note>
+  Finance requires your company profile and fiscal year to be configured before you can create invoices or run reports. Set these up under **Settings → Company Profile**.
+</Note>
+
 ---
 
 ## Common tasks
@@ -40,27 +44,50 @@ The Finance module is the financial hub of your ERP. Every monetary transaction 
     Choose from your CRM customer list. Billing address and payment terms auto-populate.
   </Step>
   <Step title="Add line items">
-    Add products or services, quantities, and unit prices. Apply a discount if needed.
+    Add products or services, quantities, and unit prices. Apply a line-level or overall discount if needed.
   </Step>
   <Step title="Set the due date">
-    Choose a due date or select a payment term (e.g. Net 30) to calculate it automatically.
+    Choose a specific due date or select a payment term (e.g. Net 30) to calculate it automatically.
+  </Step>
+  <Step title="Add notes or payment instructions (optional)">
+    Include bank details, reference numbers, or any custom message for the customer.
   </Step>
   <Step title="Click Send Invoice">
-    The invoice is emailed from your connected email provider and the status changes to **Sent**.
+    The invoice is emailed from your connected email provider. Status changes to **Sent**.
   </Step>
 </Steps>
 
-### Record a payment
+### Record a payment against an invoice
 
 <Steps>
   <Step title="Open the invoice">
-    Find it under Finance → Invoices. Filter by status **Sent** or **Overdue**.
+    Find it under Finance → Invoices. Filter by **Sent** or **Overdue**.
   </Step>
   <Step title="Click Record Payment">
-    Enter the amount received, payment date, and payment method.
+    Enter the amount received, payment date, and payment method (bank transfer, card, cash, etc.).
+  </Step>
+  <Step title="Partial payment">
+    If the customer paid less than the full amount, enter only what was received. The invoice status becomes **Partially Paid** and the outstanding balance is shown.
   </Step>
   <Step title="Save">
-    Status updates to **Paid** (or **Partially Paid**). The payment posts to your accounts automatically.
+    The payment is posted to your accounts. Status updates to **Paid** when fully settled.
+  </Step>
+</Steps>
+
+### Pay a vendor bill
+
+<Steps>
+  <Step title="Open Finance → Vendor Bills">
+    Bills arrive automatically when a Procurement PO is received. You can also create them manually.
+  </Step>
+  <Step title="Open the bill and review it">
+    Verify the amount, supplier, and due date match the physical invoice you received.
+  </Step>
+  <Step title="Click Record Payment">
+    Enter the amount paid, date, and payment method.
+  </Step>
+  <Step title="Save">
+    The bill is marked **Paid** and the payment is posted to your accounts payable ledger.
   </Step>
 </Steps>
 
@@ -69,13 +96,16 @@ The Finance module is the financial hub of your ERP. Every monetary transaction 
 <Steps>
   <Step title="Open Finance → Expenses → New Expense" />
   <Step title="Fill in the details">
-    Enter amount, date, and category (Travel, Software, Office Supplies, etc.).
+    Enter amount, date, and category (Travel, Software, Office Supplies, Meals, etc.).
   </Step>
   <Step title="Attach a receipt">
-    Upload the receipt image or PDF.
+    Upload the receipt image or PDF. Required for reimbursable expenses.
   </Step>
   <Step title="Assign to a cost centre">
-    Optionally link to a department or project for accurate reporting.
+    Link to a department or project for accurate P&L segmentation.
+  </Step>
+  <Step title="Save">
+    The expense is logged and appears in your expense reports and P&L immediately.
   </Step>
 </Steps>
 
@@ -84,25 +114,92 @@ The Finance module is the financial hub of your ERP. Every monetary transaction 
 <Steps>
   <Step title="Open the original invoice" />
   <Step title="Click Issue Credit Note">
-    Enter the amount to credit (full or partial) and the reason.
+    Enter the amount to credit — full or partial.
+  </Step>
+  <Step title="Select a reason">
+    Choose: Return, Dispute, Pricing Error, Goodwill, or Other.
   </Step>
   <Step title="Send to customer">
-    The credit note is emailed and the invoice balance reduces automatically.
+    The credit note is emailed and the outstanding balance on the original invoice reduces automatically. If the invoice was already paid, the credit sits as a balance on the customer account for future use.
+  </Step>
+</Steps>
+
+### Create a journal entry
+
+<Steps>
+  <Step title="Open Finance → Journal Entries → New Entry" />
+  <Step title="Set the date and reference">
+    The date determines which accounting period the entry falls in. Add a reference or description for audit purposes.
+  </Step>
+  <Step title="Add debit and credit lines">
+    Add at least one debit and one credit line. The entry cannot be saved unless debits equal credits.
+  </Step>
+  <Step title="Attach supporting documents (optional)">
+    Upload the supporting document (e.g. bank statement, accountant memo).
+  </Step>
+  <Step title="Post">
+    The entry is posted to your ledger. Posted entries cannot be deleted — only reversed.
+  </Step>
+</Steps>
+
+### Handle a multi-currency invoice
+
+<Steps>
+  <Step title="Create the invoice as normal" />
+  <Step title="Change the currency">
+    Click the currency field and select the billing currency. The exchange rate auto-populates from the current mid-market rate.
+  </Step>
+  <Step title="Override the rate if needed">
+    If you have an agreed rate with the customer, enter it manually.
+  </Step>
+  <Step title="Send">
+    The invoice is displayed in the selected currency. Your accounts record both the foreign currency amount and the home currency equivalent.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Invoices** — Create from quotes or from scratch. Send via email, track payment status, and issue credit notes for disputes or returns.
+<AccordionGroup>
+  <Accordion title="I can't create an invoice — the button is greyed out">
+    Your company profile or fiscal year is not configured. Go to **Settings → Company Profile**, fill in your company name, address, currency, and fiscal year start month, then save. Return to Finance and try again.
+  </Accordion>
+  <Accordion title="My invoice was sent but the customer says they didn't receive it">
+    Check that your email provider is connected and verified under **Settings → Email**. Send a test email to confirm it's working. Also check your spam/junk folder — some providers route automated emails there on first contact.
+  </Accordion>
+  <Accordion title="I recorded a payment but the invoice still shows as outstanding">
+    Open the invoice and check the Payments tab. If the payment appears there but the status hasn't updated, the amount recorded may be less than the invoice total. Check for rounding differences or partial payment amounts.
+  </Accordion>
+  <Accordion title="My P&L shows figures I don't recognise">
+    Finance aggregates data from all modules. Unexpected figures are usually caused by payroll postings from HR, depreciation from Assets, or reimbursements from Travel & Expense. Check the journal entries list filtered by source to identify the origin.
+  </Accordion>
+  <Accordion title="A vendor bill was created twice">
+    This can happen if a PO was received and a bill was also created manually. Open both bills and check the reference number and amount. Delete the duplicate (only possible if it has not been paid) or mark it as a credit against the supplier account.
+  </Accordion>
+  <Accordion title="I need to correct a posted journal entry">
+    Posted entries cannot be edited. Create a reversing entry with the same accounts and amounts but with debits and credits swapped, dated the same period. Then post the correct entry.
+  </Accordion>
+</AccordionGroup>
 
-**Expenses** — Log against categories and cost centres. Attach receipts and link to projects for accurate P&L.
+---
 
-**Payments** — Supports partial payments, overpayments, and multi-currency transactions.
+## FAQ
 
-**Journal entries** — Manual double-entry bookkeeping for adjustments, opening balances, and corrections.
-
-<Note>
-  Finance requires your company profile and fiscal year to be configured before you can create invoices or run reports. Set these up under **Settings → Company Profile**.
-</Note>
+<AccordionGroup>
+  <Accordion title="Can I customise the invoice template?">
+    Yes. Go to **Settings → Company Profile** and upload your logo. The invoice layout uses your company name, address, and logo automatically. Custom template design (colours, fonts) is available on Plus and Pro plans.
+  </Accordion>
+  <Accordion title="Can I set up recurring invoices?">
+    Yes. When creating an invoice, toggle **Recurring** and set the frequency (weekly, monthly, quarterly). The system generates and sends the invoice automatically on schedule.
+  </Accordion>
+  <Accordion title="How do I handle an overpayment?">
+    Record the full amount received. The invoice status becomes **Overpaid** and the excess amount is recorded as a credit on the customer account. It can be applied to their next invoice.
+  </Accordion>
+  <Accordion title="What currencies are supported?">
+    All major world currencies. Your home currency is set in **Settings → Company Profile**. You can invoice in any currency and the system converts at the rate you specify.
+  </Accordion>
+  <Accordion title="Can multiple users access Finance?">
+    Yes. Users with Admin or Manager roles have full access. Employee and Viewer roles have read-only access. Client roles have no access to Finance.
+  </Accordion>
+</AccordionGroup>

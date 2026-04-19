@@ -4,7 +4,7 @@ description: Employees, payroll, leave, attendance and onboarding
 icon: briefcase
 ---
 
-The HR module manages the complete employee lifecycle — from onboarding a new hire to processing monthly payroll, managing leave requests, and tracking attendance.
+The HR module manages the complete employee lifecycle — from onboarding a new hire to processing monthly payroll, managing leave requests, and tracking attendance. The employee record created here is the single source of truth used by Projects, Travel, Compliance, and Finance.
 
 ## What HR owns
 
@@ -20,9 +20,13 @@ The HR module manages the complete employee lifecycle — from onboarding a new 
 |--------|--------------|
 | Finance | Payroll for accounting |
 | Projects | Resource allocation |
-| Travel & Expense | Employee policies |
-| Compliance | Employee acknowledgements |
+| Travel & Expense | Employee travel policies and per diem rates |
+| Compliance | Employee records for policy assignment |
 | Reports | Workforce data |
+
+<Note>
+  An employee must exist in HR before they can be assigned to projects, log expenses, or be included in payroll. Create the employee record before setting up their system user account.
+</Note>
 
 ---
 
@@ -33,19 +37,22 @@ The HR module manages the complete employee lifecycle — from onboarding a new 
 <Steps>
   <Step title="Open HR → Employees → New Employee" />
   <Step title="Enter personal details">
-    Fill in full name, date of birth, national ID, contact details, and emergency contact.
+    Fill in full name, date of birth, national ID or passport number, personal email, phone, and emergency contact.
   </Step>
   <Step title="Set role and department">
-    Assign a job title, department, and reporting manager.
+    Assign a job title, department, and reporting manager. The reporting manager is used for leave approvals and expense approvals.
   </Step>
   <Step title="Set compensation">
-    Enter the salary, pay frequency (monthly, bi-weekly), and start date.
+    Enter the salary, pay frequency (monthly, bi-weekly), and employment start date. Add any recurring allowances or deductions here.
   </Step>
   <Step title="Upload documents">
-    Attach the signed contract and any required ID documents.
+    Attach the signed employment contract, ID documents, and any required certifications. These are stored securely against the employee record.
+  </Step>
+  <Step title="Assign an onboarding checklist (optional)">
+    Select a checklist template. The employee will receive automated reminders to complete each item.
   </Step>
   <Step title="Save">
-    The employee is now available across Projects, Travel, Compliance, and Payroll.
+    The employee is now available across Projects, Travel, Compliance, and Payroll. Invite them to the system via **Settings → Users & Roles → Invite User** to give them a login.
   </Step>
 </Steps>
 
@@ -54,43 +61,127 @@ The HR module manages the complete employee lifecycle — from onboarding a new 
 <Steps>
   <Step title="Open HR → Payroll → New Payroll Run" />
   <Step title="Select the period">
-    Choose the pay period (e.g. January 2025). The system pulls in all active employees and their salaries.
+    Choose the pay period (e.g. March 2025). The system pulls in all active employees with their base salaries and recurring adjustments.
   </Step>
   <Step title="Review deductions">
-    Check automatically calculated tax, pension, and other deductions. Adjust any exceptions manually.
+    Check automatically calculated tax, pension, national insurance, and any other statutory deductions. Adjust exceptions manually — one-off bonuses, unpaid leave deductions, or advance repayments can be added here.
+  </Step>
+  <Step title="Review the payroll summary">
+    The system shows total gross pay, total deductions, and total net pay. Verify the figures before proceeding.
   </Step>
   <Step title="Process">
-    Click **Process Payroll**. Payslips are generated as PDFs for each employee.
+    Click **Process Payroll**. Payslips are generated as PDFs for each employee. Employees can access their payslips from their profile.
   </Step>
   <Step title="Post to Finance">
-    Click **Post to Finance** to create the payroll journal entry in your accounts automatically.
+    Click **Post to Finance** to create the payroll journal entry automatically. This debits salary expense and credits the payroll liability accounts.
   </Step>
 </Steps>
 
 ### Approve a leave request
 
 <Steps>
-  <Step title="Open HR → Leave or check your notifications">
-    Pending leave requests appear in your notification inbox.
+  <Step title="Open HR → Leave or check your notification inbox">
+    Pending leave requests appear in your notification bell at the top of the screen.
   </Step>
   <Step title="Review the request">
-    Check the dates, leave type, and the employee's remaining balance.
+    Check the requested dates, leave type (annual, sick, parental, etc.), and the employee's remaining balance for that leave type.
+  </Step>
+  <Step title="Check team coverage (optional)">
+    If the employee is on a project or has upcoming scheduled tasks, flag the dates to the project manager before approving.
   </Step>
   <Step title="Approve or reject">
-    Click **Approve** or **Reject**. The employee is notified immediately and their leave balance updates.
+    Click **Approve** or **Reject**. If rejecting, add a reason — the employee receives it in their notification. Leave balances update immediately on approval.
+  </Step>
+</Steps>
+
+### Record a sick day
+
+<Steps>
+  <Step title="Open HR → Leave → New Leave Request">
+    You can submit on behalf of an employee, or employees can submit themselves.
+  </Step>
+  <Step title="Select leave type: Sick Leave" />
+  <Step title="Set the dates">
+    Enter the first day of absence. If the duration is unknown, enter a single day and extend it later.
+  </Step>
+  <Step title="Save">
+    The absence is recorded immediately. If the employee's sick leave policy requires documentation after a certain number of days, the system will remind you to collect it.
+  </Step>
+</Steps>
+
+### Track attendance and timesheets
+
+<Steps>
+  <Step title="Employees clock in and out">
+    Employees use the Clock In / Clock Out button in their dashboard. Each entry is timestamped.
+  </Step>
+  <Step title="View daily attendance">
+    Open HR → Attendance → Daily View to see who is in, who is absent, and who has not yet clocked in.
+  </Step>
+  <Step title="Review timesheets">
+    Open an employee's profile → Attendance tab to see the full monthly timesheet. Managers can edit incorrect clock entries.
+  </Step>
+  <Step title="Export for payroll">
+    If you run hours-based payroll, export the attendance data as CSV. Total hours per employee are calculated automatically.
+  </Step>
+</Steps>
+
+### Offboard a departing employee
+
+<Steps>
+  <Step title="Open the employee record → click Begin Offboarding" />
+  <Step title="Set the last working day" />
+  <Step title="Review open items">
+    The system checks for: outstanding leave balance (accrued but untaken), open expense reports, active project assignments, and assigned IT assets. Each item is flagged for action.
+  </Step>
+  <Step title="Process final payroll">
+    Include the employee in the next payroll run or run an off-cycle payroll for their final payment. Any accrued leave payout is added as a line item.
+  </Step>
+  <Step title="Deactivate the account">
+    On the last working day, click **Deactivate Employee**. Their system login is revoked and the record is archived. All historical data is retained.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Employee profiles** — Complete record including personal details, role, department, salary, and documents. Referenced by Projects, Travel, Compliance, and Payroll.
+<AccordionGroup>
+  <Accordion title="An employee is missing from the payroll run">
+    Check that the employee's start date is on or before the payroll period start, their status is Active, and they have a salary entered on their record. Employees on unpaid leave for the full period can also be excluded — check their leave status.
+  </Accordion>
+  <Accordion title="Payroll deductions look incorrect">
+    Deductions are calculated based on the tax and deduction configuration in **Settings → Payroll**. If rates have changed (e.g. a new tax year), update the rates there and rerun the calculation. One-off corrections can also be entered manually per employee on the payroll run screen before processing.
+  </Accordion>
+  <Accordion title="A leave request was approved but the balance did not update">
+    Open HR → Leave → Employee Balances and search for the employee. If the balance shows the same number, check whether the approved leave type has a balance configured. Some leave types (e.g. sick leave without a cap) do not deduct from a numeric balance. If the balance should have decremented, contact support.
+  </Accordion>
+  <Accordion title="An employee cannot clock in">
+    Clock-in requires the employee to have an active system login and the Attendance feature to be enabled for their role. Check **Settings → Users & Roles** to confirm their account is active. If attendance is role-restricted, confirm they have the correct permissions.
+  </Accordion>
+  <Accordion title="I deactivated an employee but they still appear in project assignments">
+    Deactivating removes their login but does not remove them from active project tasks. Go to Projects and manually reassign their open tasks to another team member. Deactivated employees are hidden from new assignment dropdowns but will remain on records they were already assigned to.
+  </Accordion>
+</AccordionGroup>
 
-**Payroll** — Monthly payroll with automatic deduction calculations. Payslips export as PDF and post directly to Finance.
+---
 
-**Leave management** — Employees submit requests via self-service. Managers approve with one click. Balances update automatically.
+## FAQ
 
-**Attendance** — Clock-in/clock-out with daily and monthly timesheets. Integrates with payroll for hours-based calculations.
-
-**Onboarding** — Structured checklists assigned to new hires with automated reminders until complete.
+<AccordionGroup>
+  <Accordion title="Can employees submit their own leave requests?">
+    Yes. Employees with the Employee role can submit leave requests from their dashboard. The request goes to their reporting manager (set on the employee record) for approval.
+  </Accordion>
+  <Accordion title="Can I run payroll for a subset of employees?">
+    Yes. When creating a new payroll run, you can filter by department or select specific employees instead of running for all active staff. This is useful for off-cycle runs for new starters or departing employees.
+  </Accordion>
+  <Accordion title="How are payslips shared with employees?">
+    Once payroll is processed, payslips are available in each employee's profile under the Payslips tab. If the employee has a system login, they can download their own payslips at any time. You can also email payslips in bulk from the payroll run screen.
+  </Accordion>
+  <Accordion title="Can I set different leave entitlements per employee?">
+    Yes. Each employee's leave entitlements are configured on their individual record. You can set a default policy for new hires under **Settings → HR → Leave Policies** and then override per employee as needed.
+  </Accordion>
+  <Accordion title="What happens to an employee's data when they are deactivated?">
+    Deactivating an employee revokes their login but retains all their data — payroll history, leave records, attendance, documents — permanently. This is necessary for audit and compliance purposes. You can reactivate the employee at any time if they return.
+  </Accordion>
+</AccordionGroup>

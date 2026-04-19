@@ -1,27 +1,32 @@
 ---
 title: Manufacturing
-description: Production runs and bills of materials
+description: Production runs, bills of materials and quality control
 icon: industry
 ---
 
-The Manufacturing module manages the conversion of raw materials into finished goods — tracking production runs, bills of materials, and feeding completed output back into Inventory.
+The Manufacturing module manages the conversion of raw materials into finished goods — tracking bills of materials, production runs, quality checks, and yield variances, with automatic stock updates to Inventory on completion.
 
 ## What Manufacturing owns
 
-- **Production runs** — individual manufacturing orders with status and output tracking
-- **Bills of materials (BOM)** — the recipe of components required to produce each finished product
+- **Bills of materials (BOM)** — the component recipe required to produce each finished product
+- **Production runs** — individual manufacturing orders tracking raw material consumption and output
+- **Quality checks** — pass/fail inspections gating production run completion
 
 ## Data flows into Manufacturing from
 
 | Module | What it sends |
 |--------|--------------|
-| Inventory | Raw materials consumed in production |
+| Inventory | Raw materials reserved and consumed in production |
 
 ## Data flows out of Manufacturing to
 
 | Module | What it sends |
 |--------|--------------|
-| Inventory | Finished goods added to stock |
+| Inventory | Finished goods added to stock on production completion |
+
+<Note>
+  All raw materials used in production must exist as items in Inventory before they can be added to a BOM. Create your product catalogue in Inventory first.
+</Note>
 
 ---
 
@@ -32,16 +37,19 @@ The Manufacturing module manages the conversion of raw materials into finished g
 <Steps>
   <Step title="Open Manufacturing → Bills of Materials → New BOM" />
   <Step title="Select the finished product">
-    Choose the item from your Inventory catalogue that this BOM will produce.
+    Choose the item from your Inventory catalogue that this BOM will produce. This is the output item that gets added to stock when production completes.
+  </Step>
+  <Step title="Set the BOM quantity">
+    Enter the number of finished units this BOM produces per run (e.g. 1 BOM run produces 100 units, 1 unit, or 1 batch).
   </Step>
   <Step title="Add components">
-    Add each raw material or sub-assembly required, with the quantity needed per unit of output.
+    Add each raw material or sub-assembly required. For each component, enter the quantity needed per BOM run. Be precise — variances are tracked against these quantities.
   </Step>
-  <Step title="Set yield">
-    Enter the expected output quantity per production run (e.g. 1 BOM produces 100 units).
+  <Step title="Add operations (optional)">
+    List the production steps (e.g. Mix, Mould, Cure, Assemble, Pack) with estimated time per step. This enables work-in-progress tracking and labour cost capture.
   </Step>
   <Step title="Save">
-    The BOM is now available to use when creating production runs.
+    The BOM is now available for production runs. It can be versioned if the recipe changes over time.
   </Step>
 </Steps>
 
@@ -53,10 +61,13 @@ The Manufacturing module manages the conversion of raw materials into finished g
     Choose the bill of materials for the product you are manufacturing.
   </Step>
   <Step title="Set the quantity">
-    Enter how many units you want to produce in this run.
+    Enter how many BOM runs (and therefore how many finished units) you want to produce.
+  </Step>
+  <Step title="Set the scheduled date">
+    Enter the planned start and end dates. These are used for scheduling and reporting.
   </Step>
   <Step title="Confirm">
-    Click **Start Production**. Raw materials are reserved from Inventory automatically.
+    Click **Start Production**. Raw materials in the quantities required by the BOM are reserved from Inventory automatically. The run status changes to **In Progress**.
   </Step>
   <Step title="Track progress">
     Move the run through stages: Planned → In Progress → Quality Check → Completed.
@@ -66,23 +77,102 @@ The Manufacturing module manages the conversion of raw materials into finished g
 ### Complete a production run
 
 <Steps>
-  <Step title="Open the production run → click Mark Complete" />
+  <Step title="Open the production run → click Move to Quality Check" />
+  <Step title="Perform quality checks">
+    Record pass/fail results for each configured quality check point (e.g. dimensions, weight, appearance). Failed checks hold the run in Quality Check status until resolved.
+  </Step>
+  <Step title="Click Mark Complete" />
   <Step title="Enter actual output">
-    Record how many finished units were produced. If this differs from the planned quantity, the yield variance is calculated.
+    Record how many finished units were produced. If the actual output differs from the planned quantity, a yield variance is calculated and shown.
+  </Step>
+  <Step title="Review material consumption">
+    Confirm the actual raw materials consumed. If you used more or less than the BOM specifies, adjust the quantities here to accurately reflect actual consumption.
   </Step>
   <Step title="Confirm">
-    Finished goods are automatically added to Inventory. Raw materials consumed are deducted.
+    Finished goods are added to Inventory at the specified location. The raw materials consumed are deducted. All variances are logged for analysis.
+  </Step>
+</Steps>
+
+### Version a BOM
+
+<Steps>
+  <Step title="Open the existing BOM → click New Version" />
+  <Step title="Make your changes">
+    Modify components, quantities, or operations as needed. You cannot edit a BOM version that has been used in a completed production run.
+  </Step>
+  <Step title="Set the effective date">
+    Enter the date from which the new version should be used. Production runs started after this date will use the new version automatically.
+  </Step>
+  <Step title="Save">
+    The previous version is archived and remains accessible for reference and historical reporting.
+  </Step>
+</Steps>
+
+### Scrap a production run
+
+<Steps>
+  <Step title="Open the production run → click Scrap Run" />
+  <Step title="Enter scrap reason">
+    Choose: Raw Material Defect, Equipment Failure, Quality Failure, or Other. Add a description.
+  </Step>
+  <Step title="Confirm">
+    The reserved raw materials are released back to Inventory (or written off if they were consumed). The production run is marked as Scrapped. A scrap record is logged for waste analysis.
+  </Step>
+</Steps>
+
+### Analyse yield and waste
+
+<Steps>
+  <Step title="Open Reports → Manufacturing → Yield Analysis" />
+  <Step title="Set the date range and product" />
+  <Step title="Review">
+    The report shows planned vs actual output quantity, planned vs actual material consumption, and the variance percentage per production run. Runs with high waste or low yield are highlighted.
+  </Step>
+  <Step title="Drill down">
+    Click any run to see the full detail: which materials had the most variance, which quality checks failed, and which operators were involved.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Bills of materials** — Define components and quantities needed to produce each product. BOMs are versioned to track changes over time.
+<AccordionGroup>
+  <Accordion title="Raw materials are not being reserved when I start a production run">
+    Materials are reserved from the Inventory location set on the production run. Check that the required raw materials are in stock at that location. If stock is at a different location, run a transfer in Inventory first, or change the source location on the production run.
+  </Accordion>
+  <Accordion title="Finished goods did not appear in Inventory after marking a run as complete">
+    Check the production run's output item and the destination location. If either is blank or set to an incorrect location, the stock update may have gone to an unexpected place. Search for the item across all locations in Inventory → Items to confirm where the stock landed.
+  </Accordion>
+  <Accordion title="I cannot edit a BOM that is in use on an active production run">
+    You cannot modify a BOM while it is assigned to an in-progress run. Either complete or scrap the run first, or create a new BOM version — the new version will not affect the in-progress run, which continues to use the version it was started with.
+  </Accordion>
+  <Accordion title="A quality check failed but I need to continue the production run anyway">
+    Failed quality checks must be resolved before a run can be completed. You have two options: (1) re-perform the check after corrective action and record a pass, or (2) if the issue is acceptable, record it as a conditional pass with a note and override the hold — this requires Admin or Manager role.
+  </Accordion>
+  <Accordion title="The yield variance on a run is unexpectedly high">
+    High variance is usually caused by incorrect BOM quantities (the recipe was under- or over-specified), actual material waste during production, or measurement differences between the BOM unit of measure and how the materials were actually consumed. Review the BOM and the actual quantities used and adjust the BOM quantities if the variance is systematic.
+  </Accordion>
+</AccordionGroup>
 
-**Production runs** — Reserve raw materials, track work-in-progress, and post finished goods back to Inventory on completion.
+---
 
-**Production status** — Track runs through: Planned → In Progress → Quality Check → Completed.
+## FAQ
 
-**Yield tracking** — Record actual vs expected output to identify waste and inefficiencies.
+<AccordionGroup>
+  <Accordion title="Can I have a BOM that uses sub-assemblies made in-house?">
+    Yes. A sub-assembly is simply an Inventory item that is itself produced by its own BOM. Add it as a component on the parent BOM. When you start the parent production run, you will need sufficient sub-assembly stock — or run the sub-assembly production first.
+  </Accordion>
+  <Accordion title="Can I track the cost of a production run?">
+    Yes. Production costs are calculated from raw material costs (pulled from Inventory cost prices) plus any labour time logged against the run's operations. The full cost breakdown is visible on the completed production run record and in Reports → Manufacturing → Cost Analysis.
+  </Accordion>
+  <Accordion title="Can I run multiple production orders simultaneously?">
+    Yes. You can have any number of production runs in progress at the same time. Each run reserves its own raw materials independently — if total reservations exceed available stock, you will be warned at the time of starting the run.
+  </Accordion>
+  <Accordion title="Does Manufacturing support work-in-progress (WIP) accounting?">
+    Yes. When a production run is started, the raw material value is moved from the raw materials account to the WIP account in Finance. On completion, it moves from WIP to finished goods inventory. These entries are posted automatically.
+  </Accordion>
+  <Accordion title="Can I set up production schedules in advance?">
+    Yes. Create production runs with future start dates in **Planned** status. They appear on the production schedule calendar, allowing you to see resource and material requirements for the coming weeks and plan procurement accordingly.
+  </Accordion>
+</AccordionGroup>

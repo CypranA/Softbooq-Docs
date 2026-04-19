@@ -1,21 +1,26 @@
 ---
 title: Compliance
-description: Policies and compliance acknowledgements
+description: Policies, acknowledgements, versioning and audit trails
 icon: shield-halved
 ---
 
-The Compliance module ensures your workforce has read, understood, and formally acknowledged your company's policies — with a full audit trail of who acknowledged what and when.
+The Compliance module ensures your workforce has read, understood, and formally acknowledged your company's policies — with a complete, immutable audit trail of who acknowledged what version and when. Essential for HR disputes, regulatory inspections, and ISO audits.
 
 ## What Compliance owns
 
 - **Policies** — company policy documents distributed to employees
-- **Acknowledgements** — employee sign-off records per policy
+- **Acknowledgements** — employee sign-off records per policy version
+- **Audit trail** — permanent, tamper-proof log of all acknowledgement activity
 
 ## Data flows into Compliance from
 
 | Module | What it sends |
 |--------|--------------|
 | HR | Employee records for policy assignment |
+
+<Note>
+  Acknowledgement records are permanent and cannot be deleted, even by Admins. This is intentional — the immutability of the audit trail is what makes it defensible in legal and regulatory contexts.
+</Note>
 
 ---
 
@@ -26,52 +31,124 @@ The Compliance module ensures your workforce has read, understood, and formally 
 <Steps>
   <Step title="Open Compliance → Policies → New Policy" />
   <Step title="Name the policy">
-    Give it a clear name (e.g. Code of Conduct, Remote Work Policy, Data Protection Policy).
+    Use a clear, official name (e.g. Code of Conduct v1.0, Remote Work Policy, Data Protection and Privacy Policy).
   </Step>
   <Step title="Add the policy content">
-    Write the policy in the rich text editor or upload a PDF document.
+    Write the policy directly in the rich text editor, or upload a PDF document. Both are supported — the uploaded PDF is what employees read, while the rich text version serves as the searchable record.
+  </Step>
+  <Step title="Set an effective date">
+    Enter the date from which this policy is in force. Employees see this date when reading the policy.
   </Step>
   <Step title="Assign to employees">
-    Choose **All employees** or select specific departments or roles.
+    Choose **All employees**, or select specific departments, locations, or roles. New employees added after publication in the assigned groups will automatically receive the policy.
+  </Step>
+  <Step title="Set an acknowledgement deadline (optional)">
+    Specify by when employees must have acknowledged. Employees who miss the deadline are escalated to overdue status.
   </Step>
   <Step title="Publish">
-    Click **Publish**. Each assigned employee receives a notification to read and acknowledge the policy.
+    Click **Publish**. Each assigned employee receives a notification to read and acknowledge the policy. Managers can see their team's acknowledgement status in real time.
   </Step>
 </Steps>
 
-### Track acknowledgements
+### Track and chase acknowledgements
 
 <Steps>
   <Step title="Open Compliance → Policies → select the policy" />
-  <Step title="View the acknowledgement status">
-    The policy record shows a list of all assigned employees with their status: Acknowledged, Pending, or Overdue.
+  <Step title="View acknowledgement status">
+    The policy overview shows a summary: total assigned, acknowledged, pending, and overdue. Below is a per-employee list with their current status.
+  </Step>
+  <Step title="Filter by status">
+    Filter to Pending or Overdue to see only the employees who have not yet acknowledged.
   </Step>
   <Step title="Send reminders">
-    Select all pending employees and click **Send Reminder** to nudge them by email.
+    Select all pending or overdue employees and click **Send Reminder**. Each receives an email with a direct link to the policy. You can send reminders as many times as needed.
+  </Step>
+  <Step title="Escalate persistent non-acknowledgement">
+    If an employee continues to not acknowledge, their manager is automatically notified after the deadline passes. Managers can follow up directly or flag it as a formal HR matter.
   </Step>
 </Steps>
 
-### Update a policy
+### Update a policy to a new version
 
 <Steps>
   <Step title="Open the existing policy → click Edit" />
   <Step title="Make your changes" />
-  <Step title="Save as new version">
-    Click **Publish New Version**. All previously assigned employees are required to re-acknowledge the updated policy.
+  <Step title="Click Publish New Version">
+    You will be asked to confirm this is a new version — not an edit of the existing version. Once published, the previous version is locked and cannot be changed.
   </Step>
-  <Step title="Previous acknowledgements are retained">
-    The audit trail preserves all historical acknowledgements against the version they applied to.
+  <Step title="All assigned employees must re-acknowledge">
+    Publishing a new version resets acknowledgement status for all assigned employees. Previous acknowledgements are preserved against the version they applied to.
+  </Step>
+  <Step title="Add a version note (optional)">
+    Briefly describe what changed (e.g. "Updated section 3.2 to reflect new remote work entitlements"). This note is visible in the version history.
+  </Step>
+</Steps>
+
+### Run a compliance audit report
+
+<Steps>
+  <Step title="Open Compliance → Reports → Audit Report" />
+  <Step title="Select the policy and date range" />
+  <Step title="Review">
+    The report shows every acknowledgement event: employee name, policy name and version, acknowledgement date and time, and IP address. This is the report to present during regulatory audits or HR investigations.
+  </Step>
+  <Step title="Export">
+    Download as PDF or CSV. The PDF version is formatted for formal presentation.
+  </Step>
+</Steps>
+
+### Assign a policy to a new employee during onboarding
+
+<Steps>
+  <Step title="When creating a new employee in HR, complete the onboarding checklist setup" />
+  <Step title="Policy acknowledgements are assigned automatically">
+    If the new employee's department, role, or location matches the assignment criteria of a published policy, they will automatically receive it — no manual assignment needed.
+  </Step>
+  <Step title="Monitor from the onboarding checklist">
+    Policy acknowledgements appear as items on the employee's onboarding checklist. Their manager can see completion status in real time.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Policy management** — Upload PDFs or write policies in rich text. Assign to all staff or specific departments.
+<AccordionGroup>
+  <Accordion title="An employee says they did not receive the policy notification">
+    Check that the employee has a valid system login and that their account is active. Notifications are only sent to active user accounts — employees without a login cannot receive them. Also check **Settings → Notifications** to confirm that compliance notification emails are enabled.
+  </Accordion>
+  <Accordion title="An employee acknowledged the policy but it still shows as Pending">
+    Ask the employee to confirm which link they used. If they opened the policy but did not click the **I Acknowledge** button at the end, it will not register. Acknowledgement requires an explicit action — reading alone is not recorded. Ask them to return to the policy and complete the acknowledgement.
+  </Accordion>
+  <Accordion title="I published a new version but previous acknowledgements are now gone">
+    Previous acknowledgements are not deleted — they are archived against the previous version. To see them, open the policy → Version History → select the older version → view its acknowledgements. The current version shows only the acknowledgements for that version.
+  </Accordion>
+  <Accordion title="I need to assign a policy to a single employee, not a whole department">
+    When publishing or editing a policy's assignment, switch from department/role selection to **Individual Employees** and search for the specific employee. This is useful for policies that apply only to certain roles or for late joiners.
+  </Accordion>
+  <Accordion title="The audit report is missing some acknowledgements from a specific date">
+    The audit report covers all acknowledgements recorded in the system. If entries appear missing, they may have been made on the previous version of the policy. Run the report filtering to **All versions** rather than the current version only.
+  </Accordion>
+</AccordionGroup>
 
-**Acknowledgement tracking** — Real-time completion rates by department. Send reminders to outstanding employees in one click.
+---
 
-**Audit trail** — Every acknowledgement is timestamped and immutable — defensible in audits, regulatory inspections, or HR disputes.
+## FAQ
 
-**Policy versioning** — Updates require re-acknowledgement. Full history of every version and who signed each one.
+<AccordionGroup>
+  <Accordion title="Can employees read and acknowledge policies on mobile?">
+    Yes. The employee-facing compliance interface is fully mobile-responsive. Employees can read the policy and submit their acknowledgement from any device, including smartphones.
+  </Accordion>
+  <Accordion title="How long are acknowledgement records retained?">
+    Acknowledgement records are retained indefinitely. They cannot be deleted by any user, including Admins. If your company has a data retention policy that requires deletion, contact support — this requires a formal legal hold review.
+  </Accordion>
+  <Accordion title="Can I see a single employee's compliance status across all policies?">
+    Yes. Open the employee's record in HR → Compliance tab. This shows all policies assigned to them, the version they acknowledged, and the date. It is the fastest way to check an individual employee's compliance standing.
+  </Accordion>
+  <Accordion title="Can I require employees to complete a short quiz before acknowledging?">
+    Not currently. Acknowledgement is a declaration that the employee has read and understood the policy — there is no quiz component at present. If comprehension testing is required, this is typically handled outside the system as part of the HR onboarding process.
+  </Accordion>
+  <Accordion title="What is the difference between Pending and Overdue?">
+    Pending means the employee has been assigned the policy but has not yet acknowledged it, and the deadline (if set) has not passed. Overdue means the acknowledgement deadline has passed without acknowledgement. Both receive reminder emails — Overdue employees are additionally escalated to their manager.
+  </Accordion>
+</AccordionGroup>

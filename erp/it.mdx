@@ -1,10 +1,10 @@
 ---
 title: IT & Helpdesk
-description: IT assets and support ticket management
+description: IT assets, support tickets and SLA management
 icon: desktop
 ---
 
-The IT & Helpdesk module tracks your company's technology assets and manages internal support requests — giving your IT team visibility over the full hardware estate and a structured queue for resolving issues.
+The IT & Helpdesk module tracks your company's technology assets and manages internal support requests — giving your IT team full visibility over the hardware estate and a structured queue for resolving issues with SLA tracking.
 
 ## What IT & Helpdesk owns
 
@@ -15,7 +15,7 @@ The IT & Helpdesk module tracks your company's technology assets and manages int
 
 | Module | What it sends |
 |--------|--------------|
-| Assets | IT asset records for the fixed asset register |
+| Assets | IT asset records synced to the fixed asset register |
 
 ---
 
@@ -26,16 +26,19 @@ The IT & Helpdesk module tracks your company's technology assets and manages int
 <Steps>
   <Step title="Open IT & Helpdesk → Assets → New Asset" />
   <Step title="Enter asset details">
-    Fill in the device type, make, model, and serial number.
+    Fill in the device type (Laptop, Desktop, Phone, Tablet, Peripheral), make, model, and serial number.
   </Step>
   <Step title="Set purchase details">
-    Enter the purchase date, cost, and warranty expiry date.
+    Enter the purchase date, cost, supplier, and warranty expiry date. Warranty expiry is monitored — you will receive an alert before it expires.
+  </Step>
+  <Step title="Set the asset status">
+    Choose: In Use, In Storage, Under Repair, or Retired.
   </Step>
   <Step title="Assign to an employee">
-    Link the asset to the employee it is assigned to. They are notified of the assignment.
+    Link the asset to the employee it is assigned to. They receive a notification of the assignment. The asset appears on their profile.
   </Step>
-  <Step title="Sync to Assets module">
-    Click **Add to Asset Register** to create a corresponding fixed asset record in the Assets module for depreciation tracking.
+  <Step title="Sync to the Assets module (optional)">
+    Click **Add to Asset Register** to create a corresponding fixed asset record in the Assets module. This enables depreciation tracking and includes the item in the company's fixed asset register.
   </Step>
 </Steps>
 
@@ -44,39 +47,122 @@ The IT & Helpdesk module tracks your company's technology assets and manages int
 <Steps>
   <Step title="Open IT & Helpdesk → Tickets → New Ticket" />
   <Step title="Describe the issue">
-    Write a clear description of the problem. Be specific — include the device or system affected.
+    Write a clear, specific description of the problem. Include: what device or system is affected, what you were trying to do, and what error or symptom you see.
   </Step>
-  <Step title="Set category and priority">
-    Choose a category (Hardware, Software, Network, Access) and a priority level.
+  <Step title="Select the affected asset (optional)">
+    If the issue is with a specific device, link it to the ticket. The device's specs and history are then visible to the IT team without them having to ask.
+  </Step>
+  <Step title="Set category">
+    Choose: Hardware, Software, Network, Access, or Other. Category is used to route the ticket to the right team member.
+  </Step>
+  <Step title="Set priority">
+    Choose: Low, Medium, High, or Critical. Critical tickets are escalated to all IT staff immediately. Be honest — misusing Critical slows down genuinely urgent issues.
   </Step>
   <Step title="Submit">
-    The ticket is created and your IT team is notified. You can track its status in real time.
+    The ticket is created and your IT team is notified. You can track its status and add comments from your dashboard.
   </Step>
 </Steps>
 
 ### Assign and resolve a ticket (IT team)
 
 <Steps>
-  <Step title="Open IT & Helpdesk → Tickets and find the ticket" />
+  <Step title="Open IT & Helpdesk → Tickets and filter by status or priority">
+    Unassigned tickets are listed first. Critical tickets are highlighted.
+  </Step>
+  <Step title="Open the ticket and review it">
+    Read the description, check the linked asset's history, and review any previous tickets from this user for context.
+  </Step>
   <Step title="Assign to a team member">
-    Select the IT team member responsible for resolving this issue.
+    Select the IT team member responsible. They receive a notification immediately.
   </Step>
   <Step title="Update status as work progresses">
-    Move the ticket through: Open → In Progress → Awaiting User → Resolved.
+    Move the ticket through: Open → In Progress → Awaiting User → Awaiting Parts → Resolved.
   </Step>
-  <Step title="Close the ticket">
-    Once resolved, click **Close Ticket**. The requester receives a notification and can reopen if the issue persists.
+  <Step title="Add internal notes">
+    Log your investigation steps and findings in the internal notes field. These are visible only to the IT team — not to the requester.
+  </Step>
+  <Step title="Resolve the ticket">
+    Once resolved, add a resolution summary explaining what was done and why. Click **Resolve**. The requester is notified and can reopen the ticket within 48 hours if the issue persists.
+  </Step>
+</Steps>
+
+### Track a warranty and schedule asset retirement
+
+<Steps>
+  <Step title="Open IT & Helpdesk → Assets">
+    Filter by **Warranty Expiring** to see all devices whose warranty expires within the next 90 days.
+  </Step>
+  <Step title="Decide on renewal or retirement">
+    For each expiring asset, decide whether to renew the warranty or retire the device. Consider age, repair history, and replacement cost.
+  </Step>
+  <Step title="Schedule retirement">
+    For devices to be retired, set the status to **Scheduled for Retirement** and enter the planned retirement date. The assignee is notified in advance to prepare for a replacement.
+  </Step>
+  <Step title="Process retirement">
+    On the retirement date, set the status to **Retired**. If the device is on the fixed asset register, open the linked Assets record and process a disposal.
+  </Step>
+</Steps>
+
+### Handle an employee offboarding (IT perspective)
+
+<Steps>
+  <Step title="When HR initiates offboarding, IT is automatically notified">
+    An IT task is created in the offboarding checklist: retrieve all assigned assets from the departing employee.
+  </Step>
+  <Step title="Open IT & Helpdesk → Assets and filter by the employee">
+    View all assets assigned to them.
+  </Step>
+  <Step title="Mark assets as retrieved">
+    Once each device is physically collected, update the status to **In Storage** and remove the employee assignment.
+  </Step>
+  <Step title="Wipe and reset devices">
+    Log a note on each asset confirming the device was wiped and reset to factory settings before reassignment.
+  </Step>
+  <Step title="Reassign or retire">
+    Reassign the device to another employee or set it to Retired if it is end-of-life.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**IT asset tracking** — Serial number, assigned employee, purchase date, warranty expiry, and current status per device.
+<AccordionGroup>
+  <Accordion title="A ticket was submitted but no one in IT received a notification">
+    Check that IT team members have notifications enabled for new tickets under **Settings → Notifications**. Also confirm that the submitter's ticket was not accidentally saved as a Draft — only submitted tickets trigger notifications.
+  </Accordion>
+  <Accordion title="An asset assigned to an employee does not appear on their profile">
+    The assignment must be saved correctly on the IT asset record. Open the asset, confirm the employee is listed in the Assigned To field, and save. The asset should appear on the employee's profile within a few seconds of saving.
+  </Accordion>
+  <Accordion title="A ticket was marked as resolved but the issue has come back">
+    The requester can reopen a ticket within 48 hours of resolution by clicking **Reopen** on the resolved ticket. After 48 hours, the ticket is permanently closed and a new ticket must be submitted. The IT team can link the new ticket to the original for context.
+  </Accordion>
+  <Accordion title="SLA timers are not showing on tickets">
+    SLA timers appear on tickets only when SLA rules are configured in **Settings → IT & Helpdesk → SLA Rules**. If no rules are set, no timers show. Add rules with response and resolution targets per priority level.
+  </Accordion>
+  <Accordion title="I cannot add an IT asset to the fixed asset register">
+    The **Add to Asset Register** button requires the purchase cost field to be filled in. If the cost is blank, the system cannot create a valid fixed asset record. Add the purchase cost on the IT asset record and try again.
+  </Accordion>
+</AccordionGroup>
 
-**Support tickets** — Structured queue with categories, priorities, assignees, and SLA timers for response and resolution.
+---
 
-**Ticket queues** — Organise by category, priority, and assignee. SLA tracking ensures nothing falls through the cracks.
+## FAQ
 
-**Asset assignment** — When an employee leaves (via HR), their assigned IT assets are flagged for retrieval.
+<AccordionGroup>
+  <Accordion title="Can employees submit support tickets themselves, or only IT staff?">
+    Any user can submit a support ticket. Employees submit them from their dashboard — they do not need to contact IT directly. The ticket goes into the IT queue and is assigned by the IT team.
+  </Accordion>
+  <Accordion title="Can I set SLA response targets per ticket priority?">
+    Yes. Go to **Settings → IT & Helpdesk → SLA Rules** and define response and resolution targets for each priority level. For example: Critical — 1 hour response, 4 hour resolution; High — 4 hour response, 8 hour resolution. Tickets breaching SLA are highlighted in red.
+  </Accordion>
+  <Accordion title="Can I track software licences in IT & Helpdesk?">
+    Software licence tracking is on the product roadmap. Currently, IT & Helpdesk tracks physical hardware assets. Software licences can be documented as notes on the relevant device's asset record as a workaround.
+  </Accordion>
+  <Accordion title="What happens to an employee's IT assets when they leave?">
+    When an employee is offboarded in HR, their assigned IT assets are automatically flagged for retrieval and appear on the IT offboarding checklist. The IT team is notified to collect and reassign or retire the devices.
+  </Accordion>
+  <Accordion title="Can I run reports on ticket volume and resolution times?">
+    Yes. Go to Reports → IT & Helpdesk to see ticket volume by period, average resolution time by priority, SLA breach rate, and top issue categories. These reports are useful for justifying IT headcount and identifying recurring problems.
+  </Accordion>
+</AccordionGroup>

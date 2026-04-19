@@ -1,16 +1,17 @@
 ---
 title: Contracts
-description: Contract lifecycle, milestones, amendments and signatures
+description: Contract lifecycle, milestones, amendments and e-signatures
 icon: file-contract
 ---
 
-The Contracts module manages the full lifecycle of customer and supplier contracts — from drafting and e-signature through to milestone tracking, amendments, and renewal alerts.
+The Contracts module manages the full lifecycle of customer and supplier contracts — from drafting and e-signature through to milestone billing, amendments, and automatic renewal alerts. Contract value flows into Finance for revenue recognition.
 
 ## What Contracts owns
 
 - **Contracts** — the master contract record with parties, value, and dates
 - **Milestones** — payment or delivery milestones linked to contract terms
 - **Signatures** — e-signature requests and signed document storage
+- **Amendments** — formal record of changes to active contracts
 
 ## Data flows into Contracts from
 
@@ -22,7 +23,11 @@ The Contracts module manages the full lifecycle of customer and supplier contrac
 
 | Module | What it sends |
 |--------|--------------|
-| Finance | Contract value for revenue recognition |
+| Finance | Contract value and milestone invoices |
+
+<Note>
+  Contracts approaching expiry trigger an alert 30 days before the end date. Ensure renewal or termination decisions are made before this date to avoid gaps in contracted coverage.
+</Note>
 
 ---
 
@@ -32,17 +37,20 @@ The Contracts module manages the full lifecycle of customer and supplier contrac
 
 <Steps>
   <Step title="Open Contracts → New Contract" />
-  <Step title="Link to a customer">
-    Select the customer from your CRM. Their details pre-populate the contract.
+  <Step title="Choose the contract type">
+    Select Customer (you are supplying) or Supplier (you are the buyer).
+  </Step>
+  <Step title="Link to a customer or supplier">
+    Select from CRM (for customers) or Procurement (for suppliers). Their details pre-populate the contract header.
   </Step>
   <Step title="Set contract terms">
-    Enter start date, end date, contract value, payment terms, and renewal conditions.
+    Enter start date, end date, total contract value, payment terms, and renewal conditions (auto-renew, manual renewal, or one-off).
   </Step>
-  <Step title="Upload the contract document">
-    Attach the contract PDF or draft the terms directly in the rich text editor.
+  <Step title="Upload the contract document or draft in the editor">
+    Upload the signed PDF, or draft the terms directly in the rich text editor. Both can coexist — the typed terms serve as the data source for milestones and alerts, while the uploaded PDF is the legal document of record.
   </Step>
   <Step title="Save">
-    The contract is active and you will receive an alert before it expires.
+    The contract is active. You will receive a renewal alert 30 days before the end date.
   </Step>
 </Steps>
 
@@ -51,25 +59,49 @@ The Contracts module manages the full lifecycle of customer and supplier contrac
 <Steps>
   <Step title="Open the contract → click Request Signature" />
   <Step title="Add signatories">
-    Enter the email addresses of everyone who needs to sign.
+    Enter the email addresses and names of everyone who needs to sign. You can add multiple internal and external signatories. Set the signing order if signatures must be sequential.
+  </Step>
+  <Step title="Add signing instructions (optional)">
+    Include any guidance for signatories (e.g. "Please review clause 4.2 before signing").
   </Step>
   <Step title="Send">
-    Each signatory receives an email with a secure link to review and sign the document electronically.
+    Each signatory receives an email with a secure, unique link to review and sign the document electronically. No account is required for the signatory to sign.
   </Step>
-  <Step title="Track status">
-    The contract record shows who has signed and who is outstanding in real time.
+  <Step title="Track signature status">
+    The contract record shows in real time who has signed and who is outstanding. You can send a reminder to any outstanding signatory with one click.
+  </Step>
+  <Step title="On completion">
+    Once all parties have signed, the signed document is stored permanently against the contract and each signatory receives a copy.
   </Step>
 </Steps>
 
-### Add a milestone
+### Add a payment milestone
 
 <Steps>
   <Step title="Open the contract → Milestones tab → New Milestone" />
-  <Step title="Set the milestone details">
-    Enter the milestone name, due date, and the amount due on completion.
+  <Step title="Name the milestone">
+    Give it a clear name that both parties will recognise (e.g. Project Kickoff Payment, Delivery Phase 1, Final Completion).
+  </Step>
+  <Step title="Set the due date and amount">
+    Enter the date the milestone payment is due and the amount. Multiple milestones can add up to the total contract value, or you can use milestones for partial billing throughout a long contract.
   </Step>
   <Step title="Enable auto-invoicing (optional)">
-    Toggle **Auto-create invoice** to have Finance automatically generate an invoice when this milestone is marked complete.
+    Toggle **Auto-create invoice** to have Finance automatically generate and send the invoice when this milestone is marked complete. The invoice is pre-filled with the milestone name and amount.
+  </Step>
+  <Step title="Save">
+    The milestone appears in the contract timeline. You will receive a reminder before its due date.
+  </Step>
+</Steps>
+
+### Mark a milestone complete and invoice it
+
+<Steps>
+  <Step title="Open the contract → Milestones tab → click the milestone" />
+  <Step title="Click Mark Complete">
+    Confirm the completion date.
+  </Step>
+  <Step title="Invoice">
+    If auto-invoicing is on, the invoice is generated automatically in Finance. If not, click **Create Invoice** from the milestone to generate it manually. The milestone is then marked as Invoiced.
   </Step>
 </Steps>
 
@@ -78,24 +110,73 @@ The Contracts module manages the full lifecycle of customer and supplier contrac
 <Steps>
   <Step title="Open the contract → click Add Amendment" />
   <Step title="Describe the change">
-    Write a summary of what is being amended and why.
+    Write a summary of what is being amended and why (e.g. scope increase, price adjustment, extension of term).
   </Step>
-  <Step title="Update the contract terms if needed">
-    Change any relevant fields (value, dates, terms).
+  <Step title="Update the contract fields if needed">
+    Change the end date, contract value, or payment terms to reflect the amended terms.
+  </Step>
+  <Step title="Re-request signatures if required">
+    If the amendment requires formal agreement from both parties, use Request Signature again on the amendment document.
   </Step>
   <Step title="Save">
-    The amendment is stored with a timestamp. The full history of changes is visible in the contract's audit trail.
+    The amendment is stored with a timestamp. The full version history is visible in the contract's audit trail. Amendments cannot be deleted — only subsequent amendments can reverse them.
+  </Step>
+</Steps>
+
+### Renew or terminate a contract
+
+<Steps>
+  <Step title="Open the contract nearing expiry">
+    A renewal alert will appear in your notification feed 30 days before the end date.
+  </Step>
+  <Step title="To renew">
+    Click **Renew Contract**. Enter the new end date, updated value if applicable, and any changed terms. A new version is created with the original terms plus amendments. Re-request signatures if required.
+  </Step>
+  <Step title="To terminate">
+    Click **Terminate Contract**. Enter the termination date and reason. If there is a termination clause or notice period in the contract, ensure the termination date complies. The contract is archived with full history retained.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Contract management** — Full lifecycle from draft to signed to expired. Renewal alerts before contracts lapse.
+<AccordionGroup>
+  <Accordion title="A signatory says they did not receive the e-signature email">
+    Check the email address entered for that signatory is correct. Use **Resend** on the signature request to send it again. Also ask the signatory to check their spam folder — e-signature emails are sometimes routed there. If the issue persists, check your email provider connection under **Settings → Email**.
+  </Accordion>
+  <Accordion title="A milestone invoice was not generated automatically">
+    Check that the milestone has **Auto-create invoice** toggled on. Also confirm the milestone is linked to a customer contract (not a supplier contract — supplier contracts do not generate customer invoices). If both conditions are met and it still did not fire, manually create the invoice from the milestone.
+  </Accordion>
+  <Accordion title="I cannot edit a contract that has been signed">
+    Signed contracts are locked to preserve the integrity of the agreed document. To make changes, add a formal Amendment. If the original contract had an error before signing, contact support — reverting a signed document requires admin intervention and an audit log entry.
+  </Accordion>
+  <Accordion title="The renewal alert did not fire for an expiring contract">
+    Renewal alerts fire 30 days before the contract end date. Check the end date on the contract — it may be set incorrectly. Also check **Settings → Notifications** to ensure contract renewal alerts are enabled for your account.
+  </Accordion>
+  <Accordion title="A contract shows as expired but should have auto-renewed">
+    Auto-renew extends the contract automatically only if the **Auto-renew** option was selected in the contract's renewal conditions and the system is configured to do so. Check the renewal conditions field on the contract. If it shows Manual, no auto-renewal was set up — create a renewal manually.
+  </Accordion>
+</AccordionGroup>
 
-**Milestones** — Break contracts into payment or delivery milestones. Optionally auto-generate invoices in Finance on completion.
+---
 
-**E-signatures** — Send for electronic signature directly from the platform. Signed documents stored securely.
+## FAQ
 
-**Amendments** — Formal amendment records with a complete, immutable audit trail.
+<AccordionGroup>
+  <Accordion title="Can I use my own contract template?">
+    Yes. Go to **Settings → Contracts → Templates** to upload your standard contract templates as Word or PDF documents. When creating a new contract, select a template as the starting point. Variable fields (customer name, dates, value) are merged automatically.
+  </Accordion>
+  <Accordion title="Are e-signatures legally binding?">
+    Yes, in most jurisdictions. Softbooq e-signatures comply with eIDAS (EU), ESIGN Act (US), and equivalent regulations in most markets. Each signature is timestamped, IP-logged, and stored with an audit certificate. For contracts requiring a qualified electronic signature (QES), consult a legal advisor.
+  </Accordion>
+  <Accordion title="Can I have both customer and supplier contracts in the same view?">
+    Yes. The Contracts list shows all contracts by default. Use the **Type** filter to view only Customer or only Supplier contracts.
+  </Accordion>
+  <Accordion title="How many signatories can I add to a contract?">
+    There is no limit. You can add multiple internal and external signatories. Set the signing order if a specific sequence is required (e.g. internal approval before external signature).
+  </Accordion>
+  <Accordion title="Can I attach related documents to a contract (e.g. specifications, SOW)?">
+    Yes. Open the contract → Documents tab to attach any number of supporting files. These are stored alongside the contract and visible to all users with access to the contract record.
+  </Accordion>
+</AccordionGroup>

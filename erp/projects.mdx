@@ -4,7 +4,7 @@ description: Project tracking, tasks, time entries and budgets
 icon: diagram-project
 ---
 
-The Projects module gives your team a structured way to plan, execute, and bill client work — with full integration into Finance for billable time and Procurement for project-specific purchases.
+The Projects module gives your team a structured way to plan, execute, and bill client work — with full integration into Finance for billable time, Procurement for project-specific purchases, and HR for resource allocation.
 
 ## What Projects owns
 
@@ -21,6 +21,13 @@ The Projects module gives your team a structured way to plan, execute, and bill 
 | Procurement | Project purchase orders |
 | Reports | Project data |
 
+## Data flows into Projects from
+
+| Module | What it sends |
+|--------|--------------|
+| CRM | Customer records for project linking |
+| HR | Employee records for team assignment |
+
 ---
 
 ## Common tasks
@@ -30,31 +37,37 @@ The Projects module gives your team a structured way to plan, execute, and bill 
 <Steps>
   <Step title="Open Projects → New Project" />
   <Step title="Name the project and link a customer">
-    Select the customer from your CRM. This links the project to the customer record and enables billing.
+    Select the customer from CRM. This links the project to the customer record and enables billable time to be invoiced directly from the project.
   </Step>
   <Step title="Set the budget">
-    Enter the total project budget. The system will track actual spend against this in real time.
+    Enter the total project budget in your home currency. The system tracks actual spend against this in real time. You will receive an alert when spend reaches 80% of budget.
+  </Step>
+  <Step title="Set the billing type">
+    Choose: Fixed Price (invoice a set amount regardless of hours), Time & Materials (invoice logged hours at a rate), or Non-billable (internal project, no invoicing).
   </Step>
   <Step title="Assign team members">
-    Add the employees working on this project. They can then log time against it.
+    Add the employees working on this project. They can then log time against it and see the project's tasks.
   </Step>
   <Step title="Set the status and dates">
-    Set the start date, expected end date, and initial status (e.g. In Progress).
+    Set the start date, expected end date, and initial status (Planned, In Progress, or On Hold).
   </Step>
 </Steps>
 
-### Add tasks
+### Add and manage tasks
 
 <Steps>
   <Step title="Open the project → Tasks tab → New Task" />
   <Step title="Name the task and assign it">
-    Give the task a clear name and assign it to a team member.
+    Give the task a specific, actionable name and assign it to a team member. Unassigned tasks will not send reminders.
   </Step>
   <Step title="Set priority and due date">
-    Choose a priority level (Low, Medium, High) and set the due date.
+    Choose a priority level (Low, Medium, High) and a due date. Overdue tasks are highlighted in red across all views.
   </Step>
-  <Step title="Save">
-    The assignee receives a notification. The task appears in their task list and in the project board.
+  <Step title="Add a description and attachments (optional)">
+    Write detailed requirements or instructions. Attach reference files or designs directly to the task.
+  </Step>
+  <Step title="Track progress">
+    Use the Kanban board (drag cards between columns) or the List view (update status from the dropdown). Columns map to your configured statuses: To Do → In Progress → In Review → Done.
   </Step>
 </Steps>
 
@@ -62,10 +75,20 @@ The Projects module gives your team a structured way to plan, execute, and bill 
 
 <Steps>
   <Step title="Open the task or go to Projects → Time Entries → New Entry" />
-  <Step title="Select the project and task" />
-  <Step title="Enter hours worked and the date" />
+  <Step title="Select the project and task">
+    If logging from the Time Entries screen, select the project first and then the specific task.
+  </Step>
+  <Step title="Enter hours worked and the date">
+    Enter the duration in hours. You can log time retroactively for past dates.
+  </Step>
+  <Step title="Add a description">
+    Briefly describe the work done in this session. This description appears on the invoice when the time is billed to the client.
+  </Step>
   <Step title="Mark as billable if applicable">
-    Billable time entries flow into Finance and can be included on the next client invoice.
+    Toggle **Billable** on to include this entry in the next client invoice. Leave it off for internal time that should not be charged.
+  </Step>
+  <Step title="Save">
+    The entry is added to the project's time log. Total logged hours update on the project overview.
   </Step>
 </Steps>
 
@@ -75,21 +98,87 @@ The Projects module gives your team a structured way to plan, execute, and bill 
   <Step title="Open Finance → Invoices → New Invoice" />
   <Step title="Select the customer" />
   <Step title="Click Add Billable Time">
-    The system lists all unbilled time entries for this customer. Select the entries to include.
+    The system lists all unbilled time entries for this customer across all projects. Select the entries you want to include in this invoice.
+  </Step>
+  <Step title="Review the line items">
+    Each time entry becomes a line item on the invoice. You can group all time entries into a single line or keep them individual — the setting is in the invoice options.
   </Step>
   <Step title="Send the invoice">
-    Time entries are marked as billed and will not appear on future invoices.
+    Click **Send Invoice**. The included time entries are marked as billed and will not appear on future invoices.
+  </Step>
+</Steps>
+
+### Track budget vs actual spend
+
+<Steps>
+  <Step title="Open the project → Budget tab">
+    The budget overview shows: total budget, amount spent to date (including logged time at billing rate and any linked purchase orders), remaining budget, and percentage consumed.
+  </Step>
+  <Step title="Review the cost breakdown">
+    Costs are split by type: labour (time entries), materials (linked procurement POs), and other expenses. Drill into any category to see individual entries.
+  </Step>
+  <Step title="Adjust the budget if needed">
+    If the project scope has changed, update the budget here. The change is logged in the project audit trail.
+  </Step>
+</Steps>
+
+### Close a project
+
+<Steps>
+  <Step title="Ensure all tasks are completed or cancelled">
+    The system will warn you if open tasks remain. Review them and either complete or cancel before closing.
+  </Step>
+  <Step title="Invoice any remaining unbilled time">
+    Go to Finance → Invoices and check for unbilled time entries. Bill these before closing so no revenue is lost.
+  </Step>
+  <Step title="Set status to Completed">
+    Open the project and change the status to **Completed**. Set the actual end date.
+  </Step>
+  <Step title="Review final margins">
+    The budget tab shows the final summary: budgeted vs actual, total billed, and final margin. Export this for project review records.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Project management** — Create projects linked to CRM customers. Set budgets, assign team members, and track progress through configurable stages.
+<AccordionGroup>
+  <Accordion title="Billable time entries are not appearing when creating an invoice">
+    Check three things: (1) the time entry is marked as **Billable**, (2) the time entry is linked to a project that belongs to the same customer as the invoice, and (3) the time entry has not already been billed on a previous invoice. Billed entries are marked with a checkmark in the time log.
+  </Accordion>
+  <Accordion title="A team member cannot see or log time on a project">
+    The employee must be added as a project member. Open the project → Members tab and add them. Employees can only log time on projects they are members of.
+  </Accordion>
+  <Accordion title="The budget alert triggered but the project is not over budget">
+    The alert fires at 80% of budget, not 100%. This is intentional — the warning gives you time to review scope and billing before the budget is fully consumed. If you want to dismiss it, increase the budget or confirm the current spend is expected.
+  </Accordion>
+  <Accordion title="A time entry was logged on the wrong project">
+    Open the time entry and change the project and task fields. If the entry has already been included on a sent invoice, you cannot move it — contact your Finance team to issue a correction.
+  </Accordion>
+  <Accordion title="Tasks are not showing on the assignee's dashboard">
+    Tasks only appear on the assignee's dashboard when the task status is active (To Do or In Progress) and the due date is within the next 30 days. Completed and cancelled tasks are hidden from the dashboard by default. Check the task status and due date.
+  </Accordion>
+</AccordionGroup>
 
-**Task management** — Kanban and list views. Tasks have assignees, due dates, and priority levels.
+---
 
-**Time tracking** — Log time against tasks. Feeds into Finance for client billing and Reports for utilisation analysis.
+## FAQ
 
-**Budget tracking** — Real-time actual vs planned spend. Alerts when approaching budget threshold.
+<AccordionGroup>
+  <Accordion title="Can I have multiple billing rates for different team members on the same project?">
+    Yes. Set each team member's default billable rate on their HR employee record. When time is logged, the rate is pulled from their record. You can override the rate on individual time entries if a specific project has different agreed rates.
+  </Accordion>
+  <Accordion title="Can I create project templates to reuse across similar projects?">
+    Yes. When closing or viewing any project, use **Save as Template** to save the task structure, milestone layout, and team configuration. When creating a new project, select **From Template** to pre-populate these fields.
+  </Accordion>
+  <Accordion title="Can clients see project progress?">
+    Yes, if you enable Client Portal access for the customer. Clients can view project status, milestones, and shared documents — but not internal tasks, time entries, or budget figures unless specifically enabled.
+  </Accordion>
+  <Accordion title="How does Projects integrate with Procurement?">
+    When raising a purchase order in Procurement, you can link it to a project. The PO cost then appears in the project's budget under Materials, giving you a complete view of all project costs — not just labour.
+  </Accordion>
+  <Accordion title="Can I track non-billable internal projects?">
+    Yes. Set the billing type to **Non-billable** when creating the project. Time can still be logged for internal reporting purposes, and the budget tracker still works — it is just not connected to Finance invoicing.
+  </Accordion>
+</AccordionGroup>

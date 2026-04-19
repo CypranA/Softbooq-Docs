@@ -1,27 +1,28 @@
 ---
 title: Maintenance
-description: Maintenance logs, requests and technician management
+description: Maintenance logs, requests, schedules and technician management
 icon: wrench
 ---
 
-The Maintenance module manages the upkeep of your physical assets — logging maintenance activities, handling repair requests, and ordering parts through Procurement when needed.
+The Maintenance module manages the upkeep of your physical assets — logging maintenance activities, handling repair requests, scheduling preventive maintenance, and ordering parts through Procurement when needed.
 
 ## What Maintenance owns
 
-- **Maintenance logs** — records of completed maintenance activities per asset
 - **Maintenance requests** — reported issues and repair requests from staff
+- **Maintenance logs** — records of completed maintenance activities per asset
+- **Preventive maintenance schedules** — recurring tasks auto-created on a time or usage trigger
 
 ## Data flows into Maintenance from
 
 | Module | What it sends |
 |--------|--------------|
-| Assets | Asset records for maintenance tracking |
+| Assets | Asset records available for maintenance tracking |
 
 ## Data flows out of Maintenance to
 
 | Module | What it sends |
 |--------|--------------|
-| Procurement | Parts orders |
+| Procurement | Parts purchase orders |
 
 ---
 
@@ -32,34 +33,39 @@ The Maintenance module manages the upkeep of your physical assets — logging ma
 <Steps>
   <Step title="Open Maintenance → Requests → New Request" />
   <Step title="Select the asset">
-    Choose the asset that needs attention from the Assets register.
+    Choose the asset that needs attention from the Assets register. If the asset is not listed, it has not been added to the asset register yet — add it in Assets first.
   </Step>
   <Step title="Describe the issue">
-    Write a clear description of the fault or required work.
+    Write a clear, specific description of the fault or required work. Include any symptoms, error codes, or relevant context that will help the technician diagnose the issue quickly.
+  </Step>
+  <Step title="Attach photos (optional)">
+    Upload a photo of the fault. A clear image often saves significant time during diagnosis.
   </Step>
   <Step title="Set priority">
-    Choose a priority level: Low, Medium, High, or Critical.
+    Choose a priority level: Low, Medium, High, or Critical. Critical requests are flagged to all maintenance staff immediately.
   </Step>
   <Step title="Submit">
-    The request is queued and a notification is sent to your maintenance team.
+    The request is queued and a notification is sent to your maintenance team. You can track its status in real time from your notification feed.
   </Step>
 </Steps>
 
-### Assign and complete a request
+### Assign and complete a maintenance request
 
 <Steps>
-  <Step title="Open Maintenance → Requests and find the request" />
+  <Step title="Open Maintenance → Requests and find the request">
+    Filter by priority or status to find the most urgent open requests.
+  </Step>
   <Step title="Assign to a technician">
-    Select the technician responsible for this repair. They will be notified.
+    Select the technician responsible for this repair. They receive a notification immediately.
   </Step>
   <Step title="Order parts if needed">
-    If parts are required, click **Order Parts** to raise a Procurement request directly from the maintenance record.
+    If parts are required before work can begin, click **Order Parts** to raise a Procurement requisition directly from the maintenance record. The requisition is pre-filled with the asset and request reference.
+  </Step>
+  <Step title="Update the status">
+    Move the request through: Open → In Progress → Awaiting Parts (if applicable) → Completed.
   </Step>
   <Step title="Log the work done">
-    Once completed, click **Mark Complete** and enter what was done, parts used, time spent, and cost.
-  </Step>
-  <Step title="Save">
-    A maintenance log entry is created against the asset record.
+    Once completed, click **Mark Complete** and fill in: work performed, parts used and quantities, labour time spent, and total cost. This creates a permanent maintenance log entry on the asset record.
   </Step>
 </Steps>
 
@@ -67,23 +73,92 @@ The Maintenance module manages the upkeep of your physical assets — logging ma
 
 <Steps>
   <Step title="Open an asset record → Maintenance tab → New Schedule" />
-  <Step title="Set the recurrence">
-    Choose how often maintenance should occur (e.g. every 3 months, every 500 hours of use).
+  <Step title="Name the scheduled task">
+    Give it a clear name (e.g. Annual Service, Filter Replacement, Safety Inspection).
   </Step>
-  <Step title="Assign a default technician (optional)" />
+  <Step title="Set the recurrence trigger">
+    Choose: **Time-based** (e.g. every 3 months) or **Usage-based** (e.g. every 500 operating hours, if the asset has usage tracking enabled).
+  </Step>
+  <Step title="Set the lead time">
+    Enter how many days in advance the maintenance request should be auto-created before the due date. This gives your team time to prepare and order parts.
+  </Step>
+  <Step title="Assign a default technician (optional)">
+    If one person always handles this type of maintenance, assign them here so the request is auto-assigned when created.
+  </Step>
   <Step title="Save">
-    Maintenance requests are automatically created on schedule and appear in the maintenance queue.
+    Maintenance requests are automatically created on schedule and appear in the maintenance queue. You will receive a notification each time a scheduled request is created.
+  </Step>
+</Steps>
+
+### Review maintenance history for an asset
+
+<Steps>
+  <Step title="Open the asset record in Assets → select the Maintenance tab">
+    The tab shows a full chronological history of all maintenance requests and completed logs for this asset.
+  </Step>
+  <Step title="Review cost and downtime">
+    Total maintenance cost and total time out of service are summarised at the top. Drill into individual entries for details.
+  </Step>
+  <Step title="Use this for asset lifecycle decisions">
+    If an asset has recurring failures or high cumulative maintenance cost, this history supports the decision to replace rather than continue repairing.
+  </Step>
+</Steps>
+
+### Order parts from within a maintenance request
+
+<Steps>
+  <Step title="Open the maintenance request → click Order Parts" />
+  <Step title="Add the parts required">
+    Enter the part name or select from the Inventory catalogue. Add the quantity needed and any supplier preference.
+  </Step>
+  <Step title="Submit the requisition">
+    The requisition is sent for approval (if required) and can then be converted to a purchase order in Procurement.
+  </Step>
+  <Step title="Link back to the maintenance request">
+    When the parts arrive and the PO is received, the maintenance request is automatically updated to show parts received — signalling the technician can proceed.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Maintenance requests** — Staff submit requests for faulty equipment. Assigned to technicians and tracked through to resolution.
+<AccordionGroup>
+  <Accordion title="An asset is not appearing in the maintenance request asset dropdown">
+    Only assets recorded in the Assets module appear in Maintenance. If the asset is missing, add it to Assets first, then return to create the maintenance request.
+  </Accordion>
+  <Accordion title="A preventive maintenance schedule created a duplicate request">
+    This can happen if the schedule was saved twice or the previous request was not marked complete before the next one was auto-generated. Mark the duplicate as Cancelled and ensure the completed request has been properly closed before the next trigger date.
+  </Accordion>
+  <Accordion title="A completed maintenance request is not showing in the asset's maintenance history">
+    A request only creates a log entry when it is formally marked as **Complete** with the work details filled in. If a request was closed without completing the log fields, reopen it, fill in the work details, and mark it complete again.
+  </Accordion>
+  <Accordion title="Parts were ordered but the maintenance request status has not updated">
+    The status update to **Awaiting Parts** is manual. Open the request and change the status once you have raised the parts order. The system does not automatically link PO delivery status to maintenance request status.
+  </Accordion>
+  <Accordion title="I cannot find a critical request that was submitted">
+    Check the Requests queue filter — it may be set to show only your assigned requests. Remove the assignee filter or search by asset name to find requests assigned to other technicians or currently unassigned.
+  </Accordion>
+</AccordionGroup>
 
-**Maintenance logs** — Every activity logged per asset: date, technician, work performed, parts used, and cost.
+---
 
-**Preventive maintenance** — Recurring schedules based on time intervals or usage thresholds.
+## FAQ
 
-**Parts ordering** — Raise a Procurement parts order directly from within a maintenance request.
+<AccordionGroup>
+  <Accordion title="Can non-technical staff submit maintenance requests?">
+    Yes. Any user with an Employee role or higher can submit a maintenance request. Submission only requires describing the issue and selecting the asset — no technical knowledge is needed. The assigned technician handles the rest.
+  </Accordion>
+  <Accordion title="Can I set SLA timers for maintenance response and resolution?">
+    Yes. SLA targets are configured per priority level under **Settings → Maintenance → SLA Rules**. For example: Critical must be responded to within 2 hours, resolved within 8 hours. Requests that breach SLA are highlighted in red in the queue.
+  </Accordion>
+  <Accordion title="How does usage-based preventive maintenance work?">
+    For assets with usage tracking enabled (e.g. a machine with an hour meter), you can log usage readings periodically. The system triggers a maintenance request when cumulative usage since the last service reaches the configured threshold.
+  </Accordion>
+  <Accordion title="Can I track maintenance costs per asset over time?">
+    Yes. Open any asset record → Maintenance tab to see total maintenance cost over any date range. Reports → Maintenance → Cost by Asset gives a cross-asset comparison, useful for identifying assets that cost more to maintain than replace.
+  </Accordion>
+  <Accordion title="Can I attach warranties or service manuals to an asset?">
+    Yes. Open the asset record → Documents tab and upload PDFs or images. These are available to technicians when working on the asset without needing to hunt through filing cabinets or shared drives.
+  </Accordion>
+</AccordionGroup>

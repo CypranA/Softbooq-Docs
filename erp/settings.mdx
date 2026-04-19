@@ -1,15 +1,17 @@
 ---
 title: Settings
-description: Tenant configuration, integrations and billing
+description: Tenant configuration, integrations, security and billing
 icon: gear
 ---
 
-Settings is the configuration layer for your entire Softbooq workspace. Everything from your company profile and fiscal year to email providers, payment integrations, and subscription billing is managed here.
+Settings is the configuration layer for your entire Softbooq workspace. Everything from your company profile and fiscal year to email providers, payment integrations, user roles, and subscription billing is managed here.
 
 ## What Settings owns
 
 - **Tenant configuration** — company profile, branding, currency, timezone, fiscal year
 - **Integrations** — connected third-party services (email, payments, banks)
+- **Users & Roles** — user accounts, role assignments, and permissions
+- **Security** — 2FA enforcement, session timeout, IP allowlists
 - **Billing** — your Softbooq subscription plan and usage
 
 ---
@@ -21,29 +23,36 @@ Settings is the configuration layer for your entire Softbooq workspace. Everythi
 <Steps>
   <Step title="Open Settings → Company Profile" />
   <Step title="Fill in your company details">
-    Enter company name, registered address, VAT/tax number, default currency, and timezone.
+    Enter company name, registered address, VAT or tax number, default currency, and timezone. These appear on all invoices, quotes, and emails sent from Softbooq.
   </Step>
   <Step title="Upload your logo">
-    Upload your company logo. It will appear on all invoices, quotes, and emails sent from Softbooq.
+    Upload a PNG or SVG (recommended). Your logo appears on all outgoing documents and in the client portal header.
   </Step>
   <Step title="Set your fiscal year">
-    Choose your accounting period start month. This is required before you can run any financial reports.
+    Choose the month your accounting year starts (e.g. January for a calendar year, April for a UK tax year). This is required before you can run financial reports or post depreciation.
   </Step>
   <Step title="Save" />
 </Steps>
+
+<Note>
+  Finance reports, depreciation runs, and some HR payroll calculations depend on the fiscal year being set correctly. Complete this before activating Finance or Assets.
+</Note>
 
 ### Connect your email provider
 
 <Steps>
   <Step title="Open Settings → Email → Connect Provider" />
   <Step title="Choose your provider">
-    Select from Microsoft 365, Google Workspace, SMTP, SendGrid, Mailgun, or Postmark.
+    Select from: Microsoft 365, Google Workspace, SMTP, SendGrid, Mailgun, or Postmark.
   </Step>
   <Step title="Authenticate">
-    Follow the provider-specific flow (OAuth for Microsoft/Google, API key for SendGrid/Mailgun/Postmark, credentials for SMTP).
+    Microsoft 365 and Google Workspace use OAuth — you will be redirected to the provider's consent screen. SendGrid, Mailgun, and Postmark use an API key. SMTP requires hostname, port, username, and password.
+  </Step>
+  <Step title="Set the from name and address">
+    Enter the name and email address that will appear in the **From** field of all emails sent from Softbooq (e.g. "Softbooq Invoices" and invoices@yourdomain.com).
   </Step>
   <Step title="Send a test email">
-    Click **Send Test** to verify the connection is working before going live.
+    Click **Send Test** to verify the connection is working before going live. If the test email does not arrive, recheck the credentials or OAuth consent.
   </Step>
 </Steps>
 
@@ -53,10 +62,26 @@ Settings is the configuration layer for your entire Softbooq workspace. Everythi
   <Step title="Open Settings → Users & Roles → Invite User" />
   <Step title="Enter their email address" />
   <Step title="Assign a role">
-    Choose: Admin, Manager, Employee, Viewer, or Client. See [Quickstart](/quickstart) for a role breakdown.
+    Choose: Admin (full access), Manager (manage team, approve requests), Employee (self-service only), Viewer (read-only), or Client (portal access only). See the [Quickstart](/quickstart) for a full role breakdown.
+  </Step>
+  <Step title="Link to an employee record (optional)">
+    If this person is an employee in HR, link their user account to the HR employee record. This enables leave requests, payslip access, and expense submissions.
   </Step>
   <Step title="Send the invite">
-    They receive an email to set their password and access the workspace.
+    They receive an email with a secure link to set their password and access the workspace. The invite expires after 48 hours — use **Resend Invite** if needed.
+  </Step>
+</Steps>
+
+### Change a user's role or deactivate them
+
+<Steps>
+  <Step title="Open Settings → Users & Roles" />
+  <Step title="Find the user and click their row" />
+  <Step title="Change role">
+    Select the new role from the dropdown and save. The change takes effect on their next page load — active sessions are not immediately affected.
+  </Step>
+  <Step title="Deactivate">
+    Click **Deactivate**. Their login is revoked immediately. All their data is retained. You can reactivate at any time.
   </Step>
 </Steps>
 
@@ -65,10 +90,31 @@ Settings is the configuration layer for your entire Softbooq workspace. Everythi
 <Steps>
   <Step title="Open Settings → Security" />
   <Step title="Toggle Require 2FA">
-    When enabled, all users in your workspace must set up 2FA on their next login.
+    When enabled, all users in your workspace must set up an authenticator app on their next login. Users who do not set it up within the grace period are locked out.
+  </Step>
+  <Step title="Set the grace period">
+    Choose how many days users have to set up 2FA before it becomes mandatory (recommended: 7 days).
   </Step>
   <Step title="Save">
-    Existing sessions are not affected immediately — users are prompted at next login.
+    Existing sessions are not disrupted immediately — users are prompted at next login.
+  </Step>
+</Steps>
+
+### Configure payment providers
+
+<Steps>
+  <Step title="Open Settings → Payments" />
+  <Step title="Choose a provider">
+    Currently supported: Wise and Revolut for outbound payment runs and bank reconciliation.
+  </Step>
+  <Step title="Connect with API credentials">
+    Enter your Wise or Revolut API key. You can find this in your provider's developer settings. Store the key securely — it is saved in an encrypted vault, not in plain text.
+  </Step>
+  <Step title="Test the connection">
+    Click **Test Connection** to verify the credentials are valid.
+  </Step>
+  <Step title="Select the default account">
+    If your provider account has multiple currency accounts, select the default for outbound payment runs.
   </Step>
 </Steps>
 
@@ -77,25 +123,77 @@ Settings is the configuration layer for your entire Softbooq workspace. Everythi
 <Steps>
   <Step title="Open Settings → Subscription & Billing" />
   <Step title="View your current plan">
-    See your active plan, usage metrics (users, storage, modules), and next billing date.
+    See your active plan, the features included, current usage metrics (users, storage, modules), and the next billing date.
   </Step>
-  <Step title="Upgrade or downgrade">
-    Click **Change Plan** to switch tiers. Upgrades take effect immediately. Downgrades apply at the next billing cycle.
+  <Step title="Upgrade">
+    Click **Change Plan → Upgrade**. Select the new plan. The upgrade takes effect immediately and you are billed a prorated amount for the remainder of the billing cycle.
+  </Step>
+  <Step title="Downgrade">
+    Click **Change Plan → Downgrade**. The downgrade applies at the start of the next billing cycle — you retain current plan features until then.
+  </Step>
+  <Step title="Update billing details">
+    Go to the Billing tab to update your payment card or billing address. Changes apply to the next billing cycle.
+  </Step>
+</Steps>
+
+### Set up IP allowlisting
+
+<Steps>
+  <Step title="Open Settings → Security → IP Allowlist" />
+  <Step title="Add allowed IP addresses or ranges">
+    Enter your office IP address, VPN IP, or CIDR range (e.g. 203.0.113.0/24). Users can only log in from listed IP addresses.
+  </Step>
+  <Step title="Add your current IP first">
+    Always add your own IP before enabling allowlisting — locking yourself out requires a support ticket to resolve.
+  </Step>
+  <Step title="Enable">
+    Toggle **Enable IP Allowlist** and save. New login attempts from unlisted IPs are blocked immediately.
   </Step>
 </Steps>
 
 ---
 
-## Key sections
+## Troubleshooting
 
-**Company profile** — Name, logo, address, currency, timezone. Appears on all outgoing documents.
+<AccordionGroup>
+  <Accordion title="A user's invite expired before they could accept it">
+    Invites expire after 48 hours. Go to Settings → Users & Roles, find the user (they show as **Invite Pending**), and click **Resend Invite**. A new 48-hour invite is sent.
+  </Accordion>
+  <Accordion title="The test email is not arriving after connecting an email provider">
+    Check the credentials entered — especially OAuth scope for Microsoft/Google (it must include Mail.Send permission). For SMTP, verify the port (587 for TLS, 465 for SSL) and that the server allows relaying from your IP. Also check your spam folder — test emails sometimes land there on first send.
+  </Accordion>
+  <Accordion title="I enabled 2FA enforcement and now a user cannot log in">
+    If a user cannot complete the 2FA setup (e.g. they lost access to their authenticator), an Admin can temporarily disable 2FA for that user from Settings → Users & Roles → user record → Reset 2FA. The user must set it up again on next login.
+  </Accordion>
+  <Accordion title="I cannot change a user's role — the option is greyed out">
+    You cannot change the role of another Admin if you are the only Admin in the workspace. Softbooq requires at least one Admin at all times. Promote another user to Admin first, then change the original user's role.
+  </Accordion>
+  <Accordion title="My logo is not appearing on invoices after uploading it">
+    Check the file format and size. PNG and SVG are recommended; JPEG is supported but may lose quality when scaled. Maximum file size is 2 MB. If the file meets these requirements, try clearing your browser cache and reloading the invoice preview.
+  </Accordion>
+  <Accordion title="IP allowlisting is enabled and I've locked myself out">
+    If you are locked out due to IP allowlisting, contact Softbooq support. Identity verification is required to make changes to IP security settings outside the platform.
+  </Accordion>
+</AccordionGroup>
 
-**Email** — Connect your email provider. Supports Microsoft 365, Google Workspace, SMTP, SendGrid, Mailgun, and Postmark.
+---
 
-**Payments** — Configure Wise or Revolut for outbound payment runs and bank reconciliation.
+## FAQ
 
-**Users & Roles** — Invite team members, assign roles, and manage permissions.
-
-**Security** — Two-factor authentication requirements, session timeout, and IP allowlists.
-
-**Subscription & Billing** — View your plan, usage, and billing history. Upgrade or downgrade at any time.
+<AccordionGroup>
+  <Accordion title="Can I have multiple email providers connected at the same time?">
+    No. Only one email provider is active at a time. To switch providers, disconnect the current one and connect the new one. During the switchover, queued emails may be delayed — avoid switching during a busy sending period (e.g. end-of-month invoicing).
+  </Accordion>
+  <Accordion title="What is the difference between Admin and Manager roles?">
+    Admins have access to all modules, all settings, and all data in the workspace — including billing and user management. Managers can access most operational modules and approve team requests (leave, expenses, requisitions) but cannot access billing, change roles, or modify security settings.
+  </Accordion>
+  <Accordion title="Can I have different settings for different departments or subsidiaries?">
+    Settings apply workspace-wide. If you require different configurations per entity (e.g. different currencies, different fiscal years), you will need separate Softbooq workspaces. Contact support for multi-entity account options.
+  </Accordion>
+  <Accordion title="How is my data backed up?">
+    Softbooq automatically backs up all workspace data daily to geographically redundant storage. Backups are retained for 30 days on Standard plans and 90 days on Plus and Pro plans. Point-in-time restore is available on Pro plans. Contact support to request a restore.
+  </Accordion>
+  <Accordion title="Can I export all my data if I want to leave?">
+    Yes. Go to Settings → Data → Export All Data to download a full export of your workspace data in CSV format. This includes all modules, all records, and all documents. You can do this at any time — you are not locked in.
+  </Accordion>
+</AccordionGroup>

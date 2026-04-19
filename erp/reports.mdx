@@ -1,25 +1,30 @@
 ---
 title: Reports
-description: Analytics and reporting across all modules
+description: Financial, HR, inventory and project analytics
 icon: chart-bar
 ---
 
-The Reports module provides pre-built and customisable reports drawing data from Finance, HR, Inventory, and Projects — giving you a single place to analyse business performance without exporting to spreadsheets.
+The Reports module provides pre-built and filterable reports drawing live data from Finance, HR, Inventory, and Projects — giving you a single place to analyse business performance without exporting to spreadsheets.
 
 ## What Reports owns
 
 - **Financial reports** — P&L, balance sheet, cash flow, aged receivables/payables
 - **HR reports** — headcount, payroll summary, leave balances, attendance
 - **Inventory reports** — stock valuation, movement history, low stock alerts
+- **Project reports** — utilisation, budget vs actual, billable hours
 
 ## Data flows into Reports from
 
 | Module | What it sends |
 |--------|--------------|
-| Finance | Financial data |
-| HR | Workforce data |
-| Inventory | Stock data |
-| Projects | Project data |
+| Finance | All financial transactions |
+| HR | Workforce and payroll data |
+| Inventory | Stock quantities and valuations |
+| Projects | Time entries and budget data |
+
+<Note>
+  All financial reports require your fiscal year to be configured in **Settings → Company Profile**. Without it, reports cannot calculate period-based comparisons or year-to-date figures.
+</Note>
 
 ---
 
@@ -30,13 +35,31 @@ The Reports module provides pre-built and customisable reports drawing data from
 <Steps>
   <Step title="Open Reports → Financial → Profit & Loss" />
   <Step title="Set the date range">
-    Choose a start and end date, or select a preset period (This Month, This Quarter, This Year).
+    Choose a custom start and end date, or select a preset period: This Month, Last Month, This Quarter, Last Quarter, This Year, Last Year.
   </Step>
   <Step title="Apply filters (optional)">
-    Filter by department or cost centre to see a segmented P&L.
+    Filter by department or cost centre to see a segmented P&L — useful for understanding which part of the business is profitable.
   </Step>
-  <Step title="View or export">
-    Review the report on screen, or click **Export** to download as PDF or CSV.
+  <Step title="Enable comparison (optional)">
+    Toggle **Compare to** and select a prior period. The report adds a comparison column showing variance in both amount and percentage.
+  </Step>
+  <Step title="Review on screen or export">
+    Drill into any line to see the underlying transactions. Click **Export** to download as PDF (formatted) or CSV (for further analysis).
+  </Step>
+</Steps>
+
+### Run a Balance Sheet
+
+<Steps>
+  <Step title="Open Reports → Financial → Balance Sheet" />
+  <Step title="Set the as-at date">
+    The balance sheet shows your financial position at a single point in time. Choose the date — typically the last day of a financial period.
+  </Step>
+  <Step title="Review assets, liabilities, and equity">
+    The report is structured in standard accounting format: Current Assets, Non-current Assets, Current Liabilities, Non-current Liabilities, and Equity.
+  </Step>
+  <Step title="Verify the balance">
+    Total Assets must equal Total Liabilities plus Equity. If the sheet is out of balance, there is an unreconciled journal entry — contact your accountant.
   </Step>
 </Steps>
 
@@ -45,13 +68,16 @@ The Reports module provides pre-built and customisable reports drawing data from
 <Steps>
   <Step title="Open Reports → Financial → Aged Receivables" />
   <Step title="Set the as-at date">
-    Choose the date you want to see outstanding balances as of.
+    Choose the date you want to see outstanding customer balances as of. This is typically today or the last day of the month.
   </Step>
   <Step title="Review">
-    The report groups outstanding invoices by age bucket: 0–30 days, 31–60 days, 61–90 days, 90+ days.
+    The report groups all outstanding invoices by age bucket: Current (not yet due), 1–30 days overdue, 31–60 days, 61–90 days, and 90+ days.
   </Step>
-  <Step title="Export or act">
-    Export for your accounting records, or click through to any invoice to send a payment reminder.
+  <Step title="Act on overdue invoices">
+    Click through to any customer to see their specific invoices, or click an invoice directly to send a payment reminder.
+  </Step>
+  <Step title="Export">
+    Download as CSV for your credit control team or as PDF for management review.
   </Step>
 </Steps>
 
@@ -59,37 +85,104 @@ The Reports module provides pre-built and customisable reports drawing data from
 
 <Steps>
   <Step title="Open Reports → HR → Payroll Summary" />
-  <Step title="Select the period" />
-  <Step title="Review">
-    See total gross pay, deductions, and net pay by department and per employee.
+  <Step title="Select the period">
+    Choose a specific payroll period (e.g. March 2025) or a date range spanning multiple periods.
+  </Step>
+  <Step title="Review totals">
+    See total gross pay, total deductions (broken down by type: tax, pension, etc.), and total net pay. View by department and per employee.
   </Step>
   <Step title="Export">
-    Download as CSV for your payroll records or finance team.
+    Download as CSV for your accountant or for uploading to your bank's bulk payment portal.
   </Step>
 </Steps>
 
-### Check stock valuation
+### Run a stock valuation report
 
 <Steps>
   <Step title="Open Reports → Inventory → Stock Valuation" />
   <Step title="Set the as-at date (optional)">
-    Defaults to today. Change to see a historical snapshot.
+    Defaults to today. Change to a historical date to see a snapshot (e.g. end of the quarter for balance sheet purposes).
   </Step>
+  <Step title="Filter by category or location (optional)" />
   <Step title="Review">
-    See the current value of your entire inventory, broken down by item and location.
+    See the current quantity on hand and total value for each item, broken down by location. Total inventory value is shown at the top.
+  </Step>
+  <Step title="Export">
+    Download as CSV or PDF for your finance team or auditor.
+  </Step>
+</Steps>
+
+### Run a project utilisation report
+
+<Steps>
+  <Step title="Open Reports → Projects → Utilisation" />
+  <Step title="Set the date range and select team members (optional)" />
+  <Step title="Review">
+    See total hours logged per person, broken down into billable and non-billable. The utilisation percentage shows what proportion of available hours were billable.
+  </Step>
+  <Step title="Identify over- and under-utilised staff">
+    Consistently high utilisation may indicate burnout risk or need for additional headcount. Low utilisation may indicate capacity for more work.
+  </Step>
+</Steps>
+
+### Build a custom report
+
+<Steps>
+  <Step title="Open Reports → Custom → New Report" />
+  <Step title="Select the data source">
+    Choose Finance, HR, Inventory, or Projects as the primary data source.
+  </Step>
+  <Step title="Select fields">
+    Choose the columns you want in the report. Drag to reorder them.
+  </Step>
+  <Step title="Add filters and grouping">
+    Filter rows by any field (e.g. customer, department, date range). Group by a dimension (e.g. group by month, group by category).
+  </Step>
+  <Step title="Save and schedule">
+    Save the report for reuse. Optionally schedule it to run automatically (daily, weekly, monthly) and be emailed to specific recipients.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Financial reports** — P&L, Balance Sheet, Cash Flow Statement, Aged Receivables, Aged Payables — generated in real time from live Finance data.
+<AccordionGroup>
+  <Accordion title="My P&L shows figures I do not recognise">
+    Finance aggregates data from all modules automatically. Unexpected figures are usually caused by payroll postings from HR, depreciation entries from Assets, or expense reimbursements from Travel & Expense. Open Finance → Journal Entries, filter by the date range, and sort by source to identify the origin of any unusual entries.
+  </Accordion>
+  <Accordion title="The Balance Sheet is not balancing">
+    An imbalanced balance sheet means there is at least one journal entry where debits and credits are not equal — this should not be possible if entries were created through the normal workflow. If you entered manual journal entries, review them in Finance → Journal Entries. Contact your accountant if you cannot identify the cause.
+  </Accordion>
+  <Accordion title="The aged receivables report shows invoices that have been paid">
+    The report uses the as-at date to determine outstanding balances. If the payment was recorded after the as-at date you selected, the invoice will appear as outstanding as of that date — which is correct. Change the as-at date to today to see current outstanding balances only.
+  </Accordion>
+  <Accordion title="A scheduled custom report is not arriving by email">
+    Check that the recipients' email addresses are entered correctly on the report schedule. Also confirm that your email provider is connected and working under **Settings → Email**. Send a test email to verify the connection.
+  </Accordion>
+  <Accordion title="The stock valuation does not match my accounting records">
+    Discrepancies are typically caused by the costing method (FIFO vs average cost) or by stock adjustments that were posted without a corresponding Finance journal entry. Go to Inventory → Adjustments and check for any adjustments without a linked Finance entry. Ensure your Settings → Inventory costing method matches what your accountant expects.
+  </Accordion>
+</AccordionGroup>
 
-**HR reports** — Headcount by department, monthly payroll summary, leave balances, and attendance analysis.
+---
 
-**Inventory reports** — Stock valuation, movement history, slow-moving items, and low-stock alerts.
+## FAQ
 
-**Custom date ranges** — All reports support custom date ranges, comparative periods, and department/project filters.
-
-**Export** — Every report exports to PDF or CSV with one click.
+<AccordionGroup>
+  <Accordion title="Can I schedule reports to be emailed automatically?">
+    Yes. When saving any report, toggle **Schedule** and set the frequency (daily, weekly, monthly) and the recipients. The report runs at the scheduled time and is emailed as a PDF or CSV attachment.
+  </Accordion>
+  <Accordion title="Can I export reports to Excel?">
+    Every report exports to CSV, which opens directly in Excel. For formatted reports with charts and layout, use the PDF export. CSV is better for further data manipulation; PDF is better for sharing with stakeholders.
+  </Accordion>
+  <Accordion title="Can I see a consolidated report across multiple departments?">
+    Yes. All financial reports support a consolidated view by default. Use the department filter to drill down to a specific department, or leave it unfiltered for the full company view.
+  </Accordion>
+  <Accordion title="How current is the data in reports?">
+    All reports pull live data at the time you run them. There is no data warehouse or overnight refresh delay — if a payment was recorded 30 seconds ago, it is in the report now. The only exception is HR leave balances, which update every 15 minutes.
+  </Accordion>
+  <Accordion title="Can I create reports that combine data from multiple modules?">
+    Yes, using Custom Reports. Select a primary data source and add related fields from other modules. For example, a Project Profitability report might combine billable hours from Projects with invoice amounts from Finance and payroll costs from HR.
+  </Accordion>
+</AccordionGroup>

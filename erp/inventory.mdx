@@ -1,14 +1,15 @@
 ---
 title: Inventory
-description: Stock items, transfers, adjustments and service packages
+description: Stock items, locations, transfers, adjustments and reorder rules
 icon: boxes-stacked
 ---
 
-The Inventory module tracks every physical item your business holds — from raw materials and finished goods to spare parts and service packages — across one or multiple warehouse locations.
+The Inventory module tracks every physical item your business holds — from raw materials and finished goods to spare parts and service packages — across one or multiple warehouse locations. Stock levels update automatically from sales, procurement receipts, and manufacturing completions.
 
 ## What Inventory owns
 
 - **Stock items** — the product and material catalogue with quantities and valuations
+- **Locations** — warehouses, bays, or storage areas your stock is held in
 - **Transfers** — movement of stock between locations
 - **Adjustments** — manual stock corrections and write-offs
 - **Service packages** — bundled service offerings that include physical components
@@ -19,14 +20,14 @@ The Inventory module tracks every physical item your business holds — from raw
 |--------|--------------|
 | Sales & POS | Stock depletion on confirmed orders |
 | Procurement | Stock receipts on delivery |
-| Manufacturing | Finished goods |
+| Manufacturing | Finished goods added to stock |
 
 ## Data flows out of Inventory to
 
 | Module | What it sends |
 |--------|--------------|
-| Manufacturing | Raw materials |
-| Reports | Stock data |
+| Manufacturing | Raw materials consumed in production |
+| Reports | Stock valuation and movement data |
 
 ---
 
@@ -37,16 +38,19 @@ The Inventory module tracks every physical item your business holds — from raw
 <Steps>
   <Step title="Open Inventory → Items → New Item" />
   <Step title="Enter item details">
-    Set the item name, SKU, unit of measure, and category.
+    Set the item name, SKU (stock keeping unit), barcode (if applicable), unit of measure (each, kg, litre, etc.), and category.
   </Step>
   <Step title="Set the opening stock level">
-    Enter the quantity currently on hand and the warehouse location.
+    Enter the quantity currently on hand and the warehouse location it is stored in. If stock is spread across multiple locations, add an entry per location.
   </Step>
-  <Step title="Set cost and reorder rules">
-    Enter the unit cost and set a minimum stock level. When stock falls below this, you'll receive an alert.
+  <Step title="Set cost and sale price">
+    Enter the unit cost (what you pay) and, if used in Sales, the default sale price. The cost method (FIFO, average cost, or standard cost) is set at the system level under **Settings → Inventory**.
+  </Step>
+  <Step title="Set reorder rules">
+    Enter a minimum stock level (reorder point) and an optional reorder quantity. When stock falls below the minimum, you will receive a low-stock alert and can raise a PO with one click.
   </Step>
   <Step title="Save">
-    The item is now available to select in Sales orders, Procurement POs, and Manufacturing BOMs.
+    The item is now available in Sales orders, Procurement POs, Manufacturing BOMs, and Inventory reports.
   </Step>
 </Steps>
 
@@ -54,39 +58,124 @@ The Inventory module tracks every physical item your business holds — from raw
 
 <Steps>
   <Step title="Open Inventory → Transfers → New Transfer" />
-  <Step title="Select source and destination locations" />
+  <Step title="Select source and destination locations">
+    Choose where the stock is moving from and where it is going to.
+  </Step>
   <Step title="Add items and quantities">
-    Choose the items to move and how many of each.
+    Search for and add each item being moved. Enter the quantity to transfer.
+  </Step>
+  <Step title="Set the transfer date and reference (optional)">
+    Enter a reference number (e.g. your internal transfer order number) for traceability.
   </Step>
   <Step title="Confirm the transfer">
-    Click **Confirm**. Stock is deducted from the source and added to the destination. A full transfer record is logged.
+    Click **Confirm**. Stock is immediately deducted from the source location and added to the destination. A permanent transfer record is logged.
   </Step>
 </Steps>
 
-### Adjust stock after a physical count
+### Perform a stock count and adjust
 
 <Steps>
   <Step title="Open Inventory → Adjustments → New Adjustment" />
   <Step title="Select the item and location" />
   <Step title="Enter the counted quantity">
-    The system shows the expected quantity. Enter what you actually counted.
+    The system shows the current expected quantity on the system. Enter what you physically counted.
   </Step>
   <Step title="Add a reason">
-    Choose a reason (e.g. Stock Count, Damaged Goods, Write-off) for the audit log.
+    Choose a reason: Stock Count, Damaged Goods, Expired Items, Write-off, Found Stock, or Other. The reason is required for the audit log.
   </Step>
   <Step title="Save">
-    Stock levels update immediately and the adjustment is recorded permanently.
+    Stock levels update immediately. The adjustment is permanently recorded with the date, user, and reason. It cannot be deleted — only a subsequent counter-adjustment can reverse it.
+  </Step>
+</Steps>
+
+### Set up a reorder rule and create a reorder PO
+
+<Steps>
+  <Step title="Open an item record → Reorder Rules tab" />
+  <Step title="Set the minimum stock level">
+    Enter the quantity at which you want to be alerted. When stock falls to or below this level, a low-stock alert is triggered.
+  </Step>
+  <Step title="Set the reorder quantity">
+    Enter how much you typically order when restocking. This pre-fills the PO quantity when you raise a reorder.
+  </Step>
+  <Step title="Assign a preferred supplier (optional)">
+    The preferred supplier pre-fills on the reorder PO automatically.
+  </Step>
+  <Step title="Reorder from a low-stock alert">
+    When the alert fires, open it and click **Create PO**. A purchase order is pre-filled with the item, quantity, and preferred supplier. Review and send.
+  </Step>
+</Steps>
+
+### Run a stock valuation
+
+<Steps>
+  <Step title="Open Reports → Inventory → Stock Valuation" />
+  <Step title="Set the as-at date">
+    Default is today. Change to a historical date to see the value at a point in the past (e.g. end of last quarter for balance sheet purposes).
+  </Step>
+  <Step title="Review by item and location">
+    See the quantity on hand and total value for each item, broken down by warehouse location.
+  </Step>
+  <Step title="Export">
+    Download as CSV or PDF for your accounts team or auditor.
+  </Step>
+</Steps>
+
+### Manage multiple warehouse locations
+
+<Steps>
+  <Step title="Open Settings → Inventory → Locations → New Location" />
+  <Step title="Name the location">
+    Use a clear name (e.g. Warehouse A, Store 1, Workshop, Van Stock).
+  </Step>
+  <Step title="Set the location type">
+    Choose Internal (you own it) or External (third-party, e.g. a bonded warehouse or 3PL partner).
+  </Step>
+  <Step title="Save">
+    The location is now available in all Inventory operations: item stock levels, transfers, and adjustments.
   </Step>
 </Steps>
 
 ---
 
-## Key features
+## Troubleshooting
 
-**Stock management** — Real-time stock levels per item and per location. Automatic updates from sales, procurement, and manufacturing.
+<AccordionGroup>
+  <Accordion title="Stock levels look wrong after a sale">
+    Stock depletes when a sales order is confirmed, not when it is invoiced. If a sale was recorded but stock did not change, check the order status. Draft orders do not affect stock — only Confirmed orders do. If the order is confirmed and stock still has not moved, check that the item on the order is the same SKU as the item you are checking in Inventory.
+  </Accordion>
+  <Accordion title="I received goods on a PO but stock did not increase">
+    Stock updates when you click **Receive Goods** on the purchase order and confirm the quantities. If you only created the vendor bill without processing the goods receipt, stock will not have updated. Go back to the PO and complete the goods receipt step.
+  </Accordion>
+  <Accordion title="An item shows negative stock">
+    Negative stock occurs when a sale is confirmed for more units than are on hand. This is usually caused by a stock level discrepancy — the system did not catch the shortfall because stock was recorded incorrectly. Run an adjustment to set the correct quantity, then investigate how the discrepancy occurred (missing receipts, unrecorded transfers, or a duplicate sale).
+  </Accordion>
+  <Accordion title="The low-stock alert for an item is not firing">
+    Check that a minimum stock level (reorder point) is set on the item's Reorder Rules tab. If the field is blank or zero, no alert will trigger. Alerts fire daily — if you just set the threshold and the item is already below it, the alert will fire at the next nightly check.
+  </Accordion>
+  <Accordion title="Stock valuations look inconsistent month to month">
+    Inconsistencies are usually caused by cost changes on items. If the unit cost of an item was updated, it affects the valuation of all stock held at the new cost. Check the item's cost history and ensure the cost method (FIFO, average, standard) set in Settings → Inventory matches your accounting requirements.
+  </Accordion>
+</AccordionGroup>
 
-**Transfers** — Move stock between warehouses with pending, in-transit, and completed states.
+---
 
-**Adjustments** — Correct stock levels after physical counts or write off damaged goods. Every adjustment is logged.
+## FAQ
 
-**Reorder rules** — Minimum stock thresholds with automatic low-stock alerts.
+<AccordionGroup>
+  <Accordion title="Can I track stock in multiple warehouses?">
+    Yes. You can create unlimited locations (warehouses, storage areas, vehicles) under **Settings → Inventory → Locations**. Every item's stock level is tracked per location, and transfers between locations are fully logged.
+  </Accordion>
+  <Accordion title="What costing methods are supported?">
+    Softbooq supports FIFO (First In First Out), Weighted Average Cost, and Standard Cost. The method is set at the system level in **Settings → Inventory** and applies to all items. Changing the costing method after items have been transacted requires a stock revaluation — consult your accountant before doing this.
+  </Accordion>
+  <Accordion title="Can I import a product catalogue from a spreadsheet?">
+    Yes. Go to Inventory → Items → Import and download the template CSV. Fill in the required columns (item name, SKU, unit of measure) plus optional fields, then upload. Existing items are matched by SKU — duplicates will not be created.
+  </Accordion>
+  <Accordion title="Does Inventory support serial number or batch tracking?">
+    Yes. Enable serial number tracking or batch/lot tracking per item in the item settings. When stock is received or shipped, the system prompts for the serial number or batch number. This gives full traceability of individual units from receipt to sale.
+  </Accordion>
+  <Accordion title="Can I set different prices for different customers?">
+    Yes. Customer-specific pricing is set on the customer's CRM record under **Pricing**. A customer price list overrides the default catalogue price when creating sales orders or quotes for that customer.
+  </Accordion>
+</AccordionGroup>
