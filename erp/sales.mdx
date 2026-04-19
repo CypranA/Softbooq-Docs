@@ -4,11 +4,12 @@ description: Sales orders, returns and point-of-sale
 icon: cash-register
 ---
 
-The Sales module handles the full order-to-cash cycle — from creating sales orders and quotes to processing returns and running a point-of-sale terminal.
+The Sales module handles the full order-to-cash cycle — from creating quotes and sales orders to processing returns and running a point-of-sale terminal.
 
 ## What Sales owns
 
 - **Sales orders** — create and manage customer orders
+- **Quotes** — send pricing proposals and convert them to orders on approval
 - **Returns** — process customer return requests and refunds
 - **Point of sale** — in-person sales terminal for retail or counter operations
 
@@ -20,16 +21,66 @@ The Sales module handles the full order-to-cash cycle — from creating sales or
 | Inventory | Stock depletion on confirmed orders |
 | Dashboard | Sales metrics |
 
+---
+
+## Common tasks
+
+### Create a sales order
+
+<Steps>
+  <Step title="Open Sales → Orders → New Order" />
+  <Step title="Select the customer">
+    Choose from your CRM customer list. Delivery address and payment terms auto-populate.
+  </Step>
+  <Step title="Add line items">
+    Add products from your Inventory catalogue. Quantities, unit prices, and totals calculate automatically.
+  </Step>
+  <Step title="Set delivery date">
+    Enter the expected delivery or fulfilment date.
+  </Step>
+  <Step title="Confirm the order">
+    Click **Confirm**. Stock is reserved in Inventory and the order status changes to **Confirmed**.
+  </Step>
+</Steps>
+
+### Send a quote and convert to order
+
+<Steps>
+  <Step title="Open Sales → Quotes → New Quote" />
+  <Step title="Build the quote">
+    Add the customer, line items, and any applicable discounts or notes.
+  </Step>
+  <Step title="Send to customer">
+    Click **Send Quote**. The quote is emailed for the customer to review.
+  </Step>
+  <Step title="Convert on approval">
+    Once the customer accepts, open the quote and click **Convert to Order**. The sales order is created instantly with all the same line items.
+  </Step>
+</Steps>
+
+### Process a return
+
+<Steps>
+  <Step title="Open the original sales order" />
+  <Step title="Click Process Return">
+    Select the items being returned and the quantity for each.
+  </Step>
+  <Step title="Choose the outcome">
+    Select **Refund** to issue a credit note in Finance, or **Exchange** to create a replacement order.
+  </Step>
+  <Step title="Confirm">
+    Stock is automatically added back to Inventory and the credit note is generated in Finance.
+  </Step>
+</Steps>
+
+---
+
 ## Key features
 
-### Sales orders
-Create orders from CRM deals or from scratch. Add line items, apply discounts, set delivery dates, and convert to invoices in one click.
+**Sales orders** — Create from CRM deals or from scratch. Convert to invoices in one click.
 
-### Quotes
-Generate professional quotes and send to customers for approval. Convert approved quotes directly to sales orders.
+**Quotes** — Professional quote templates sent directly from the platform. One-click conversion to order on customer approval.
 
-### Returns
-Process full or partial returns against original orders. Automatically triggers stock adjustments in Inventory and credit notes in Finance.
+**Returns** — Full or partial returns with automatic stock and finance adjustments.
 
-### Point of sale
-A streamlined POS interface for counter and retail sales. Supports cash, card, and split payments.
+**Point of sale** — Streamlined POS interface for counter and retail sales. Supports cash, card, and split payments.

@@ -23,16 +23,66 @@ The Manufacturing module manages the conversion of raw materials into finished g
 |--------|--------------|
 | Inventory | Finished goods added to stock |
 
+---
+
+## Common tasks
+
+### Create a bill of materials
+
+<Steps>
+  <Step title="Open Manufacturing → Bills of Materials → New BOM" />
+  <Step title="Select the finished product">
+    Choose the item from your Inventory catalogue that this BOM will produce.
+  </Step>
+  <Step title="Add components">
+    Add each raw material or sub-assembly required, with the quantity needed per unit of output.
+  </Step>
+  <Step title="Set yield">
+    Enter the expected output quantity per production run (e.g. 1 BOM produces 100 units).
+  </Step>
+  <Step title="Save">
+    The BOM is now available to use when creating production runs.
+  </Step>
+</Steps>
+
+### Start a production run
+
+<Steps>
+  <Step title="Open Manufacturing → Production Runs → New Run" />
+  <Step title="Select the BOM">
+    Choose the bill of materials for the product you are manufacturing.
+  </Step>
+  <Step title="Set the quantity">
+    Enter how many units you want to produce in this run.
+  </Step>
+  <Step title="Confirm">
+    Click **Start Production**. Raw materials are reserved from Inventory automatically.
+  </Step>
+  <Step title="Track progress">
+    Move the run through stages: Planned → In Progress → Quality Check → Completed.
+  </Step>
+</Steps>
+
+### Complete a production run
+
+<Steps>
+  <Step title="Open the production run → click Mark Complete" />
+  <Step title="Enter actual output">
+    Record how many finished units were produced. If this differs from the planned quantity, the yield variance is calculated.
+  </Step>
+  <Step title="Confirm">
+    Finished goods are automatically added to Inventory. Raw materials consumed are deducted.
+  </Step>
+</Steps>
+
+---
+
 ## Key features
 
-### Bills of materials
-Define the components, quantities, and sub-assemblies required to manufacture each product. BOMs are versioned so you can track changes over time.
+**Bills of materials** — Define components and quantities needed to produce each product. BOMs are versioned to track changes over time.
 
-### Production runs
-Create a production run against a BOM. The system reserves raw materials from Inventory, tracks work-in-progress, and posts finished goods back to Inventory on completion.
+**Production runs** — Reserve raw materials, track work-in-progress, and post finished goods back to Inventory on completion.
 
-### Production status
-Track production runs through stages: planned, in progress, quality check, and completed.
+**Production status** — Track runs through: Planned → In Progress → Quality Check → Completed.
 
-### Yield tracking
-Record actual output against expected output to identify waste and inefficiencies in the production process.
+**Yield tracking** — Record actual vs expected output to identify waste and inefficiencies.

@@ -19,7 +19,6 @@ The Procurement module manages everything on the buying side of your business �
 |--------|--------------|
 | Inventory | Stock receipts on delivery |
 | Finance | Vendor bills |
-| Notifications | PO alerts |
 
 ## Data flows into Procurement from
 
@@ -28,16 +27,61 @@ The Procurement module manages everything on the buying side of your business �
 | Projects | Project purchase orders |
 | Maintenance | Parts orders |
 
+---
+
+## Common tasks
+
+### Add a supplier
+
+<Steps>
+  <Step title="Open Procurement → Suppliers → New Supplier" />
+  <Step title="Enter supplier details">
+    Fill in company name, primary contact, email, and address.
+  </Step>
+  <Step title="Set payment terms">
+    Choose the default payment terms for this supplier (e.g. Net 30). These will pre-fill on every PO raised for them.
+  </Step>
+  <Step title="Save">
+    The supplier is now available when creating purchase orders and RFQs.
+  </Step>
+</Steps>
+
+### Raise a purchase order
+
+<Steps>
+  <Step title="Open Procurement → Purchase Orders → New PO" />
+  <Step title="Select the supplier" />
+  <Step title="Add line items">
+    Add the items you are ordering, quantities, and agreed unit prices.
+  </Step>
+  <Step title="Link to a project (optional)">
+    If this PO is for a specific project, link it here so costs are tracked against the project budget.
+  </Step>
+  <Step title="Send to supplier">
+    Click **Send PO**. The supplier receives the order by email and the PO status changes to **Sent**.
+  </Step>
+</Steps>
+
+### Receive goods and record the vendor bill
+
+<Steps>
+  <Step title="Open the purchase order when goods arrive" />
+  <Step title="Click Receive Goods">
+    Confirm the quantities received. Stock is automatically added to Inventory.
+  </Step>
+  <Step title="Record the vendor bill">
+    Click **Create Vendor Bill**. The bill is pre-filled from the PO and appears in Finance → Vendor Bills for payment.
+  </Step>
+</Steps>
+
+---
+
 ## Key features
 
-### Purchase orders
-Create POs from approved requisitions or directly. Track status from draft through to received and billed.
+**Purchase orders** — Create from approved requisitions or directly. Track status from draft through to received and billed.
 
-### Supplier management
-Maintain a central supplier directory with contacts, payment terms, and purchase history.
+**Supplier management** — Central directory with contacts, payment terms, and full purchase history per supplier.
 
-### Requisitions
-Team members raise internal purchase requests. Managers approve before a PO is issued, maintaining spend control.
+**Requisitions** — Internal purchase requests that require manager approval before a PO is issued.
 
-### RFQs
-Send quote requests to multiple suppliers simultaneously. Compare responses and convert the winning quote to a purchase order.
+**RFQs** — Send quote requests to multiple suppliers simultaneously. Compare responses and convert the winning quote to a PO.

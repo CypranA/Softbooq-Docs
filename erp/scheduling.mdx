@@ -11,22 +11,68 @@ The Scheduling module manages bookable resources — rooms, equipment, staff tim
 - **Resources** — bookable assets or people with defined availability
 - **Bookings** — confirmed reservations against a resource's schedule
 
-## Data flows out of Scheduling to
+---
 
-| Module | What it sends |
-|--------|--------------|
-| HR | Resource scheduling data |
+## Common tasks
+
+### Add a bookable resource
+
+<Steps>
+  <Step title="Open Scheduling → Resources → New Resource" />
+  <Step title="Name the resource">
+    Give it a clear name (e.g. Meeting Room A, Service Bay 2, John Smith – Consultant).
+  </Step>
+  <Step title="Set availability">
+    Define the days and hours this resource is available (e.g. Mon–Fri, 09:00–17:00).
+  </Step>
+  <Step title="Set buffer time (optional)">
+    Add a buffer between bookings to allow for setup or travel (e.g. 15 minutes).
+  </Step>
+  <Step title="Set booking rules">
+    Choose the minimum and maximum booking duration and how far in advance bookings can be made.
+  </Step>
+  <Step title="Save">
+    The resource is now bookable by your team and, if enabled, by clients via the client portal.
+  </Step>
+</Steps>
+
+### Create a booking
+
+<Steps>
+  <Step title="Open Scheduling → Bookings → New Booking" />
+  <Step title="Select the resource" />
+  <Step title="Choose date and time">
+    The calendar shows available slots in real time. Unavailable times are greyed out.
+  </Step>
+  <Step title="Link to a customer or employee (optional)">
+    Attach the booking to a CRM customer or HR employee for context.
+  </Step>
+  <Step title="Confirm">
+    The booking is confirmed. The resource calendar updates immediately and a confirmation notification is sent.
+  </Step>
+</Steps>
+
+### Block time on a resource
+
+<Steps>
+  <Step title="Open the resource calendar" />
+  <Step title="Click on the time slot you want to block" />
+  <Step title="Select Block Time">
+    Enter a reason (e.g. Maintenance, Out of Office, Reserved).
+  </Step>
+  <Step title="Save">
+    The slot is blocked and cannot be booked by anyone until the block is removed.
+  </Step>
+</Steps>
+
+---
 
 ## Key features
 
-### Resource management
-Define bookable resources — meeting rooms, equipment, service bays, consultants — and set their availability windows, buffer times, and booking rules.
+**Resource management** — Define availability windows, buffer times, and booking rules per resource.
 
-### Bookings
-Internal staff or customers (via the client portal) can book available slots. Bookings are confirmed instantly and the resource calendar updates in real time.
+**Bookings** — Instant confirmation. Resource calendar updates in real time. Accessible from the client portal if enabled.
 
-### Availability calendar
-A visual calendar showing booked, available, and blocked time slots per resource. Supports day, week, and month views.
+**Availability calendar** — Day, week, and month views. Booked, available, and blocked slots clearly visible.
 
-### Conflict prevention
-The system prevents double-bookings automatically. If a slot is taken, the next available slot is suggested.
+**Conflict prevention** — Double-bookings are blocked automatically. Next available slot is suggested.

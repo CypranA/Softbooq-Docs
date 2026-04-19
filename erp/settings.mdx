@@ -12,22 +12,90 @@ Settings is the configuration layer for your entire Softbooq workspace. Everythi
 - **Integrations** — connected third-party services (email, payments, banks)
 - **Billing** — your Softbooq subscription plan and usage
 
+---
+
+## Common tasks
+
+### Complete your company profile
+
+<Steps>
+  <Step title="Open Settings → Company Profile" />
+  <Step title="Fill in your company details">
+    Enter company name, registered address, VAT/tax number, default currency, and timezone.
+  </Step>
+  <Step title="Upload your logo">
+    Upload your company logo. It will appear on all invoices, quotes, and emails sent from Softbooq.
+  </Step>
+  <Step title="Set your fiscal year">
+    Choose your accounting period start month. This is required before you can run any financial reports.
+  </Step>
+  <Step title="Save" />
+</Steps>
+
+### Connect your email provider
+
+<Steps>
+  <Step title="Open Settings → Email → Connect Provider" />
+  <Step title="Choose your provider">
+    Select from Microsoft 365, Google Workspace, SMTP, SendGrid, Mailgun, or Postmark.
+  </Step>
+  <Step title="Authenticate">
+    Follow the provider-specific flow (OAuth for Microsoft/Google, API key for SendGrid/Mailgun/Postmark, credentials for SMTP).
+  </Step>
+  <Step title="Send a test email">
+    Click **Send Test** to verify the connection is working before going live.
+  </Step>
+</Steps>
+
+### Invite a team member
+
+<Steps>
+  <Step title="Open Settings → Users & Roles → Invite User" />
+  <Step title="Enter their email address" />
+  <Step title="Assign a role">
+    Choose: Admin, Manager, Employee, Viewer, or Client. See [Quickstart](/quickstart) for a role breakdown.
+  </Step>
+  <Step title="Send the invite">
+    They receive an email to set their password and access the workspace.
+  </Step>
+</Steps>
+
+### Enable two-factor authentication
+
+<Steps>
+  <Step title="Open Settings → Security" />
+  <Step title="Toggle Require 2FA">
+    When enabled, all users in your workspace must set up 2FA on their next login.
+  </Step>
+  <Step title="Save">
+    Existing sessions are not affected immediately — users are prompted at next login.
+  </Step>
+</Steps>
+
+### Manage your subscription
+
+<Steps>
+  <Step title="Open Settings → Subscription & Billing" />
+  <Step title="View your current plan">
+    See your active plan, usage metrics (users, storage, modules), and next billing date.
+  </Step>
+  <Step title="Upgrade or downgrade">
+    Click **Change Plan** to switch tiers. Upgrades take effect immediately. Downgrades apply at the next billing cycle.
+  </Step>
+</Steps>
+
+---
+
 ## Key sections
 
-### Company profile
-Set your company name, logo, registered address, default currency, and timezone. This information appears on all outgoing invoices, quotes, and emails.
+**Company profile** — Name, logo, address, currency, timezone. Appears on all outgoing documents.
 
-### Email
-Connect your email provider to send invoices, quotes, and notifications from your own domain. Supports Microsoft 365, Google Workspace, SMTP, SendGrid, Mailgun, and Postmark.
+**Email** — Connect your email provider. Supports Microsoft 365, Google Workspace, SMTP, SendGrid, Mailgun, and Postmark.
 
-### Payments
-Configure outbound payment providers (Wise, Revolut) for batch payment runs and connect your bank for automated reconciliation.
+**Payments** — Configure Wise or Revolut for outbound payment runs and bank reconciliation.
 
-### Users & Roles
-Invite team members, assign roles, and manage permissions. Available roles: Admin, Manager, Employee, Viewer, and Client.
+**Users & Roles** — Invite team members, assign roles, and manage permissions.
 
-### Security
-Configure two-factor authentication requirements, session timeout, and IP allowlists.
+**Security** — Two-factor authentication requirements, session timeout, and IP allowlists.
 
-### Subscription & Billing
-View your current plan, usage metrics, and billing history. Upgrade or downgrade your subscription.
+**Subscription & Billing** — View your plan, usage, and billing history. Upgrade or downgrade at any time.

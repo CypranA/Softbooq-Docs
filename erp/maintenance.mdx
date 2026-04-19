@@ -23,16 +23,67 @@ The Maintenance module manages the upkeep of your physical assets — logging ma
 |--------|--------------|
 | Procurement | Parts orders |
 
+---
+
+## Common tasks
+
+### Submit a maintenance request
+
+<Steps>
+  <Step title="Open Maintenance → Requests → New Request" />
+  <Step title="Select the asset">
+    Choose the asset that needs attention from the Assets register.
+  </Step>
+  <Step title="Describe the issue">
+    Write a clear description of the fault or required work.
+  </Step>
+  <Step title="Set priority">
+    Choose a priority level: Low, Medium, High, or Critical.
+  </Step>
+  <Step title="Submit">
+    The request is queued and a notification is sent to your maintenance team.
+  </Step>
+</Steps>
+
+### Assign and complete a request
+
+<Steps>
+  <Step title="Open Maintenance → Requests and find the request" />
+  <Step title="Assign to a technician">
+    Select the technician responsible for this repair. They will be notified.
+  </Step>
+  <Step title="Order parts if needed">
+    If parts are required, click **Order Parts** to raise a Procurement request directly from the maintenance record.
+  </Step>
+  <Step title="Log the work done">
+    Once completed, click **Mark Complete** and enter what was done, parts used, time spent, and cost.
+  </Step>
+  <Step title="Save">
+    A maintenance log entry is created against the asset record.
+  </Step>
+</Steps>
+
+### Schedule preventive maintenance
+
+<Steps>
+  <Step title="Open an asset record → Maintenance tab → New Schedule" />
+  <Step title="Set the recurrence">
+    Choose how often maintenance should occur (e.g. every 3 months, every 500 hours of use).
+  </Step>
+  <Step title="Assign a default technician (optional)" />
+  <Step title="Save">
+    Maintenance requests are automatically created on schedule and appear in the maintenance queue.
+  </Step>
+</Steps>
+
+---
+
 ## Key features
 
-### Maintenance requests
-Staff submit maintenance requests for faulty or damaged equipment. Requests are assigned to technicians and tracked through to resolution.
+**Maintenance requests** — Staff submit requests for faulty equipment. Assigned to technicians and tracked through to resolution.
 
-### Maintenance logs
-Every maintenance activity is logged against the asset record — date, technician, work performed, parts used, and cost.
+**Maintenance logs** — Every activity logged per asset: date, technician, work performed, parts used, and cost.
 
-### Preventive maintenance
-Schedule recurring maintenance tasks for assets based on time intervals or usage thresholds.
+**Preventive maintenance** — Recurring schedules based on time intervals or usage thresholds.
 
-### Parts ordering
-When a repair requires parts not in stock, raise a parts order directly to Procurement from within the maintenance request.
+**Parts ordering** — Raise a Procurement parts order directly from within a maintenance request.

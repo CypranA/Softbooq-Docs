@@ -17,24 +17,68 @@ The Assets module tracks your company's fixed assets — equipment, vehicles, fu
 | Module | What it sends |
 |--------|--------------|
 | Finance | Depreciation entries |
-| Maintenance | Asset maintenance logs |
+| Maintenance | Asset records for maintenance tracking |
 
-## Data flows into Assets from
+---
 
-| Module | What it sends |
-|--------|--------------|
-| IT & Helpdesk | IT asset tracking |
+## Common tasks
+
+### Add a fixed asset
+
+<Steps>
+  <Step title="Open Assets → New Asset" />
+  <Step title="Enter asset details">
+    Fill in the asset name, category (e.g. Vehicles, IT Equipment, Furniture), serial number, and location.
+  </Step>
+  <Step title="Set acquisition details">
+    Enter the purchase date, purchase cost, and supplier.
+  </Step>
+  <Step title="Configure depreciation">
+    Choose the depreciation method (Straight-line or Declining balance), useful life in years, and residual value.
+  </Step>
+  <Step title="Assign to an employee (optional)">
+    Link the asset to the employee responsible for it.
+  </Step>
+  <Step title="Save">
+    The asset is added to your register. Depreciation will post to Finance automatically on schedule.
+  </Step>
+</Steps>
+
+### Run depreciation
+
+<Steps>
+  <Step title="Open Assets → Depreciation → Run Depreciation" />
+  <Step title="Select the period">
+    Choose the month/year to depreciate. The system calculates the depreciation amount for every active asset.
+  </Step>
+  <Step title="Review">
+    Check the depreciation schedule. Any asset approaching full depreciation is flagged.
+  </Step>
+  <Step title="Post to Finance">
+    Click **Post**. Journal entries are created in Finance automatically for the total depreciation amount.
+  </Step>
+</Steps>
+
+### Dispose of an asset
+
+<Steps>
+  <Step title="Open the asset record → click Dispose" />
+  <Step title="Enter disposal details">
+    Set the disposal date, method (Sale or Write-off), and sale proceeds if applicable.
+  </Step>
+  <Step title="Confirm">
+    The system calculates the gain or loss on disposal and posts the entry to Finance. The asset is marked as Disposed and removed from the active register.
+  </Step>
+</Steps>
+
+---
 
 ## Key features
 
-### Asset register
-Maintain a complete record of every fixed asset including purchase date, cost, location, assigned employee, and depreciation method.
+**Asset register** — Complete record per asset: purchase date, cost, location, assigned employee, depreciation method, and current book value.
 
-### Depreciation
-Choose straight-line or declining balance depreciation. The system calculates and posts depreciation entries to Finance automatically on schedule.
+**Depreciation** — Straight-line or declining balance. Posts to Finance automatically on schedule with no manual intervention.
 
-### Asset categories
-Group assets by category (vehicles, equipment, IT hardware, etc.) for reporting and bulk depreciation configuration.
+**Asset categories** — Group assets for reporting and bulk depreciation configuration.
 
-### Disposals
-Record the sale or write-off of an asset. Automatically calculates gain or loss and posts the disposal entry to Finance.
+**Disposals** — Records sale or write-off with automatic gain/loss calculation and Finance journal entry.

@@ -13,14 +13,6 @@ The Inventory module tracks every physical item your business holds — from raw
 - **Adjustments** — manual stock corrections and write-offs
 - **Service packages** — bundled service offerings that include physical components
 
-## Data flows out of Inventory to
-
-| Module | What it sends |
-|--------|--------------|
-| Manufacturing | Raw materials |
-| Reports | Stock data |
-| Dashboard | Stock levels |
-
 ## Data flows into Inventory from
 
 | Module | What it sends |
@@ -29,16 +21,72 @@ The Inventory module tracks every physical item your business holds — from raw
 | Procurement | Stock receipts on delivery |
 | Manufacturing | Finished goods |
 
+## Data flows out of Inventory to
+
+| Module | What it sends |
+|--------|--------------|
+| Manufacturing | Raw materials |
+| Reports | Stock data |
+
+---
+
+## Common tasks
+
+### Add a stock item
+
+<Steps>
+  <Step title="Open Inventory → Items → New Item" />
+  <Step title="Enter item details">
+    Set the item name, SKU, unit of measure, and category.
+  </Step>
+  <Step title="Set the opening stock level">
+    Enter the quantity currently on hand and the warehouse location.
+  </Step>
+  <Step title="Set cost and reorder rules">
+    Enter the unit cost and set a minimum stock level. When stock falls below this, you'll receive an alert.
+  </Step>
+  <Step title="Save">
+    The item is now available to select in Sales orders, Procurement POs, and Manufacturing BOMs.
+  </Step>
+</Steps>
+
+### Transfer stock between locations
+
+<Steps>
+  <Step title="Open Inventory → Transfers → New Transfer" />
+  <Step title="Select source and destination locations" />
+  <Step title="Add items and quantities">
+    Choose the items to move and how many of each.
+  </Step>
+  <Step title="Confirm the transfer">
+    Click **Confirm**. Stock is deducted from the source and added to the destination. A full transfer record is logged.
+  </Step>
+</Steps>
+
+### Adjust stock after a physical count
+
+<Steps>
+  <Step title="Open Inventory → Adjustments → New Adjustment" />
+  <Step title="Select the item and location" />
+  <Step title="Enter the counted quantity">
+    The system shows the expected quantity. Enter what you actually counted.
+  </Step>
+  <Step title="Add a reason">
+    Choose a reason (e.g. Stock Count, Damaged Goods, Write-off) for the audit log.
+  </Step>
+  <Step title="Save">
+    Stock levels update immediately and the adjustment is recorded permanently.
+  </Step>
+</Steps>
+
+---
+
 ## Key features
 
-### Stock management
-Real-time stock levels per item and per location. Automatic updates triggered by sales, procurement receipts, and manufacturing outputs.
+**Stock management** — Real-time stock levels per item and per location. Automatic updates from sales, procurement, and manufacturing.
 
-### Transfers
-Move stock between warehouse locations with a full transfer record. Supports pending, in-transit, and completed states.
+**Transfers** — Move stock between warehouses with pending, in-transit, and completed states.
 
-### Adjustments
-Correct stock levels after a physical count or write off damaged goods. Every adjustment is logged for audit purposes.
+**Adjustments** — Correct stock levels after physical counts or write off damaged goods. Every adjustment is logged.
 
-### Reorder rules
-Set minimum stock thresholds per item. Automatic alerts when stock falls below reorder point.
+**Reorder rules** — Minimum stock thresholds with automatic low-stock alerts.
