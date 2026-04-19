@@ -1,0 +1,56 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Softbooq",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#6366f1",
+    "light": "#a5b4fc",
+    "dark": "#4f46e5"
+  },
+  "topbarLinks": [
+    {
+      "name": "Go to App",
+      "url": "https://app.softbooq.com"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Get Started",
+    "url": "https://app.softbooq.com/signup"
+  },
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["introduction", "quickstart"]
+    },
+    {
+      "group": "ERP",
+      "pages": [
+        "erp/overview",
+        "erp/finance",
+        "erp/crm",
+        "erp/sales",
+        "erp/hr",
+        "erp/projects",
+        "erp/procurement",
+        "erp/inventory",
+        "erp/assets",
+        "erp/maintenance",
+        "erp/manufacturing",
+        "erp/contracts",
+        "erp/scheduling",
+        "erp/compliance",
+        "erp/travel",
+        "erp/it",
+        "erp/reports",
+        "erp/settings"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "website": "https://softbooq.com"
+  }
+}

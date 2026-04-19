@@ -1,0 +1,37 @@
+---
+title: Manufacturing
+description: Production runs and bills of materials
+---
+
+The Manufacturing module manages the conversion of raw materials into finished goods — tracking production runs, bills of materials, and feeding completed output back into Inventory.
+
+## What Manufacturing owns
+
+- **Production runs** — individual manufacturing orders with status and output tracking
+- **Bills of materials (BOM)** — the recipe of components required to produce each finished product
+
+## Data flows into Manufacturing from
+
+| Module | What it sends |
+|--------|--------------|
+| Inventory | Raw materials consumed in production |
+
+## Data flows out of Manufacturing to
+
+| Module | What it sends |
+|--------|--------------|
+| Inventory | Finished goods added to stock |
+
+## Key features
+
+### Bills of materials
+Define the components, quantities, and sub-assemblies required to manufacture each product. BOMs are versioned so you can track changes over time.
+
+### Production runs
+Create a production run against a BOM. The system reserves raw materials from Inventory, tracks work-in-progress, and posts finished goods back to Inventory on completion.
+
+### Production status
+Track production runs through stages: planned, in progress, quality check, and completed.
+
+### Yield tracking
+Record actual output against expected output to identify waste and inefficiencies in the production process.
