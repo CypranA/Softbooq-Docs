@@ -1,37 +1,122 @@
 ---
 title: Quickstart
-description: Get your Softbooq account set up in minutes
+description: Get your Softbooq workspace set up and your first module running in under 15 minutes
+icon: rocket
 ---
 
-## 1. Create your account
+<Steps>
 
-Go to [app.softbooq.com](https://app.softbooq.com) and sign up. During onboarding you will be asked to:
+  <Step title="Create your account">
+    Go to [app.softbooq.com/signup](https://app.softbooq.com/signup) and create your account.
 
-- Enter your company name and industry
-- Invite your first team members
-- Select the modules you want to activate
+    During onboarding you will be asked to:
+    - Choose a workspace name (this becomes your subdomain)
+    - Select your industry
+    - Pick the modules you want to activate — you can change this later
 
-## 2. Configure your workspace
+    <Tip>
+      Use your work email. Softbooq ties your workspace to your domain, which makes it easier to invite teammates.
+    </Tip>
+  </Step>
 
-Once inside the app, head to **Settings** to complete your workspace setup:
+  <Step title="Complete your company profile">
+    Go to **Settings → Company Profile** and fill in:
 
-- **Company profile** — logo, address, currency, timezone
-- **Fiscal year** — set your accounting period start date
-- **Email** — connect your email provider for sending invoices and quotes
-- **Users & Roles** — invite team members and assign permissions
+    | Field | Why it matters |
+    |-------|---------------|
+    | Company name & logo | Appears on all outgoing invoices, quotes, and emails |
+    | Registered address | Required for legally compliant invoices |
+    | Default currency | Sets the base currency across Finance and Sales |
+    | Timezone | Affects scheduling, timestamps, and reports |
+    | Fiscal year start | Required before you can run financial reports |
 
-## 3. Activate your first module
+    <Note>
+      You cannot generate invoices or run reports until your company profile and fiscal year are saved.
+    </Note>
+  </Step>
 
-Start with the module most relevant to your immediate workflow:
+  <Step title="Connect your email">
+    Go to **Settings → Email** and connect your email provider. This lets Softbooq send invoices, quotes, and notifications from your own domain.
 
-| Goal | Start here |
-|------|------------|
-| Send invoices and track payments | [Finance](/erp/finance) |
-| Manage customers and deals | [CRM](/erp/crm) |
-| Track employees and payroll | [HR](/erp/hr) |
-| Manage stock and warehouses | [Inventory](/erp/inventory) |
-| Run projects and track time | [Projects](/erp/projects) |
+    <CardGroup cols={3}>
+      <Card title="Microsoft 365" icon="microsoft">
+        Sign in with your Microsoft account. Requires admin consent for your organisation.
+      </Card>
+      <Card title="Google Workspace" icon="google">
+        Sign in with Google. Works with any Google Workspace account.
+      </Card>
+      <Card title="SMTP / Other" icon="envelope">
+        Supports SendGrid, Mailgun, Postmark, or any custom SMTP server.
+      </Card>
+    </CardGroup>
+  </Step>
 
-## 4. Explore how modules connect
+  <Step title="Invite your team">
+    Go to **Settings → Users & Roles** and invite your first team members.
 
-Visit the **System Map** inside the app (sidebar, bottom) to see a visual diagram of how every module connects and how data flows across your ERP.
+    Available roles:
+
+    | Role | What they can do |
+    |------|----------------|
+    | **Admin** | Full access to all modules and settings |
+    | **Manager** | Access to all modules, cannot change billing or security settings |
+    | **Employee** | Access to assigned modules only |
+    | **Viewer** | Read-only access across all modules |
+    | **Client** | Access to the client portal only — cannot see the ERP |
+
+    <Tip>
+      Start with one Admin and one Manager. You can fine-tune permissions after your first week.
+    </Tip>
+  </Step>
+
+  <Step title="Activate your first module">
+    Pick the module that solves your most immediate problem and set it up first. Come back and activate others once you are comfortable.
+
+    <CardGroup cols={2}>
+      <Card title="Send invoices and get paid" icon="file-invoice" href="/erp/finance">
+        Set up Finance first. Create your first invoice in under 2 minutes.
+      </Card>
+      <Card title="Manage customers and close deals" icon="users" href="/erp/crm">
+        Add your first customer in CRM and track your pipeline.
+      </Card>
+      <Card title="Track employees and run payroll" icon="briefcase" href="/erp/hr">
+        Add your first employee, set up pay grades, and run your first payroll.
+      </Card>
+      <Card title="Manage stock and warehouses" icon="boxes-stacked" href="/erp/inventory">
+        Add your first product, set stock levels, and create a warehouse.
+      </Card>
+      <Card title="Run projects and track time" icon="diagram-project" href="/erp/projects">
+        Create your first project, add tasks, and start logging time.
+      </Card>
+      <Card title="Raise purchase orders" icon="cart-shopping" href="/erp/procurement">
+        Add a supplier and raise your first purchase order.
+      </Card>
+    </CardGroup>
+  </Step>
+
+  <Step title="Explore how everything connects">
+    Open the **System Map** in the app sidebar (at the bottom) to see a live diagram of every module and how data flows between them — for example, how a sales order in CRM flows into Finance as an invoice, or how payroll in HR posts to the Finance ledger.
+
+    This is the fastest way to understand the full platform and plan which modules to activate next.
+  </Step>
+
+</Steps>
+
+---
+
+## What to do next
+
+<CardGroup cols={2}>
+  <Card title="ERP Overview" icon="layer-group" href="/erp/overview">
+    Understand the full module map and how the ERP is structured.
+  </Card>
+  <Card title="Finance" icon="chart-pie" href="/erp/finance">
+    Invoicing, expenses, payments, and your chart of accounts.
+  </Card>
+  <Card title="Settings" icon="gear" href="/erp/settings">
+    Integrations, security, billing, and workspace configuration.
+  </Card>
+  <Card title="HR" icon="briefcase" href="/erp/hr">
+    Employees, payroll, leave, attendance, and onboarding.
+  </Card>
+</CardGroup>
