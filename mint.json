@@ -8,9 +8,9 @@
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#6366f1",
-    "light": "#a5b4fc",
-    "dark": "#4f46e5"
+    "primary": "#a4011e",
+    "light": "#d4425a",
+    "dark": "#a4011e"
   },
   "metadata": {
     "og:title": "Softbooq Docs",
@@ -35,6 +35,13 @@
       "pages": ["introduction", "quickstart"]
     },
     {
+      "group": "Files",
+      "icon": "folder-open",
+      "pages": [
+        "files/overview"
+      ]
+    },
+    {
       "group": "Public & Portals",
       "icon": "globe",
       "pages": [
@@ -49,6 +56,7 @@
       "icon": "layer-group",
       "pages": [
         "erp/overview",
+        "erp/ai",
         "erp/finance",
         "erp/crm",
         "erp/sales",
