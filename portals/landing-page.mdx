@@ -1,0 +1,129 @@
+---
+title: Landing Page
+description: Your public-facing business profile page
+icon: house
+---
+
+Every Softbooq workspace gets a public landing page at `yourdomain.com/{handle}` — a branded, fully customisable profile page that links to your store, careers page, and contact details. It is the public face of your business and the first thing customers, partners, or job applicants see.
+
+## What the landing page shows
+
+- **Hero section** — your company name, a headline, subtitle, and a primary CTA button
+- **Services section** — cards linking to your Store and Careers page (shown only if those features are active)
+- **About section** — a paragraph about your company
+- **Contact section** — your email and phone number
+- **Trust bar** — custom badges for certifications, compliance marks, or key facts
+- **Footer** — social links, privacy policy, terms, legal notice
+
+---
+
+## Common tasks
+
+### Configure your landing page
+
+<Steps>
+  <Step title="Open Settings → Company Profile → Landing Page" />
+  <Step title="Set your hero content">
+    Enter a headline (e.g. "Building the future, together") and a subtitle. These replace the default company name and tagline in the hero section.
+  </Step>
+  <Step title="Set your primary CTA">
+    Enter the button text and destination URL. Common options: link to your shop (`/{handle}/shop`), careers page (`/{handle}/careers`), or scroll to contact (`#contact`).
+  </Step>
+  <Step title="Write your About text">
+    Add a paragraph describing your company, what you do, and who you serve. This appears in the About section below the hero.
+  </Step>
+  <Step title="Add contact details">
+    Enter the public-facing email and phone number displayed in the Contact section.
+  </Step>
+  <Step title="Save">
+    Changes are live immediately at `yourdomain.com/{handle}`.
+  </Step>
+</Steps>
+
+### Enable or disable sections
+
+<Steps>
+  <Step title="Open Settings → Company Profile → Landing Page → Sections" />
+  <Step title="Toggle sections on or off">
+    Available sections: Store, Careers, About, Contact, Trust Bar. Each can be independently shown or hidden.
+  </Step>
+  <Step title="Save">
+    Hidden sections are removed from the page immediately. The layout reflows automatically.
+  </Step>
+</Steps>
+
+### Add trust badges
+
+<Steps>
+  <Step title="Open Settings → Company Profile → Landing Page → Trust Bar" />
+  <Step title="Add a trust item">
+    Enter a title (e.g. "ISO 27001 Certified"), a short description, and an icon character (emoji or a short symbol).
+  </Step>
+  <Step title="Add up to 6 items">
+    The trust bar displays items in a horizontal row on desktop and wraps on mobile.
+  </Step>
+  <Step title="Save">
+    The trust bar appears as a dark full-width strip between the services section and the about section.
+  </Step>
+</Steps>
+
+### Add social links
+
+<Steps>
+  <Step title="Open Settings → Company Profile → Landing Page → Social Links" />
+  <Step title="Add your links">
+    Paste full URLs for: Website, LinkedIn, Facebook, and Twitter/X. Only the links you add will appear as icons in the footer.
+  </Step>
+  <Step title="Save" />
+</Steps>
+
+### Set your online/offline status
+
+<Steps>
+  <Step title="Open Settings → Company Profile → Landing Page" />
+  <Step title="Toggle the Online/Offline switch">
+    When set to Online, a green pulsing dot appears in the hero with your status text (e.g. "Open for business"). When set to Offline, the dot is grey.
+  </Step>
+  <Step title="Customise the status text (optional)">
+    Replace the default text with something specific (e.g. "Open Mon–Fri 9am–6pm").
+  </Step>
+  <Step title="Save" />
+</Steps>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="My landing page shows the wrong company name or logo">
+    The landing page uses your company name and logo from **Settings → Company Profile**. Update those fields and the landing page will reflect the changes immediately.
+  </Accordion>
+  <Accordion title="The Careers card is not showing in the Services section">
+    The Careers card only appears if (1) the Careers section is enabled in Landing Page settings, and (2) your subscription plan includes the HR module. If HR is not on your plan, the card is hidden automatically.
+  </Accordion>
+  <Accordion title="The Store card is not showing">
+    Check that the Store section is enabled under Landing Page → Sections. Also confirm that at least one item in your Inventory catalogue has been marked as visible in the storefront.
+  </Accordion>
+  <Accordion title="My custom CTA link is not working">
+    If the CTA links to an internal page (e.g. `/{handle}/shop`), use the full path starting from `/`. If it links to an external URL, include the full URL starting with `https://`. Internal anchor links (e.g. `#contact`) scroll to the section with that ID on the same page.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What is my landing page URL?">
+    Your landing page is at `{your-domain}/{public-handle}`. Your public handle is set in **Settings → Company Profile → Public Handle** — it is the short identifier used across all your public pages (store, careers, landing).
+  </Accordion>
+  <Accordion title="Can I use a custom domain for my landing page?">
+    Custom domain support is available on Plus and Pro plans. Contact support to configure a custom domain that points to your landing page.
+  </Accordion>
+  <Accordion title="Can I add more sections or a custom layout?">
+    The available sections (Hero, Services, About, Contact, Trust Bar) are fixed. Custom layout design is not available in the current version. You can show or hide each section but cannot reorder them.
+  </Accordion>
+  <Accordion title="Is the landing page indexed by search engines?">
+    Yes. The landing page is publicly accessible and will be crawled by search engines. The page title uses your company name and the hero subtitle is used as the meta description. There is no option to noindex the page currently.
+  </Accordion>
+</AccordionGroup>

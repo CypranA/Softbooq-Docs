@@ -35,6 +35,16 @@
       "pages": ["introduction", "quickstart"]
     },
     {
+      "group": "Public & Portals",
+      "icon": "globe",
+      "pages": [
+        "portals/landing-page",
+        "portals/storefront",
+        "portals/client-portal",
+        "portals/careers"
+      ]
+    },
+    {
       "group": "ERP",
       "icon": "layer-group",
       "pages": [

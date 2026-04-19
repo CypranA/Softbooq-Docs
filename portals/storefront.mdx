@@ -1,0 +1,160 @@
+---
+title: Online Storefront
+description: Sell products and book services online
+icon: store
+---
+
+The Online Storefront gives every Softbooq business a fully functional public e-commerce store at `yourdomain.com/{handle}/shop` — no separate platform required. Products and services from your Inventory catalogue are available to customers to browse, add to cart, and purchase or request a quote.
+
+## What the storefront includes
+
+- **Product catalogue** — browsable grid of physical products with image carousel and Quick View
+- **Services & bookings** — bookable service items with real-time slot availability
+- **Cart** — persistent cart (survives page refresh), with quantity controls
+- **Checkout** — Stripe card payment or Request Quote (email-based order), customer's choice
+- **Multi-currency** — live FX rate conversion to any major world currency
+- **Multi-language** — EN, ES, FR, DE
+- **Dark/light mode** — visitor-controlled theme toggle
+
+---
+
+## Common tasks
+
+### Add items to your storefront
+
+<Steps>
+  <Step title="Open Inventory → Items → select an item or create a new one" />
+  <Step title="Ensure the item has a name, price, and category">
+    These appear on the storefront card.
+  </Step>
+  <Step title="Add an image">
+    Upload a product image. You can upload multiple images — they display as a swipeable carousel on the product card and in the Quick View modal.
+  </Step>
+  <Step title="Add a description">
+    Write a product description. It appears in the Quick View modal when the customer clicks on the product.
+  </Step>
+  <Step title="Set the item type">
+    **Product** items go into the Products section with Add to Cart. **Service** items go into the Services section with Book Now.
+  </Step>
+  <Step title="Set an online price (optional)">
+    If you want a different price on the storefront than your internal sale price, enable **Distinct Online Price** and enter the storefront-specific price.
+  </Step>
+  <Step title="Save">
+    The item appears on the storefront immediately.
+  </Step>
+</Steps>
+
+### Set up bookable services
+
+<Steps>
+  <Step title="Ensure resources are configured in the Scheduling module">
+    Only resources marked as publicly bookable appear in the service booking flow.
+  </Step>
+  <Step title="Open Scheduling → Resources → select a resource" />
+  <Step title="Enable client portal booking">
+    Toggle **Enable client portal booking**. The resource now appears in the booking slot picker when a customer clicks Book Now on a service.
+  </Step>
+  <Step title="Set availability and buffer time">
+    Ensure the resource has availability windows set. Time slots are shown in 30-minute increments from 09:00 to 18:00. Taken slots are greyed out in real time.
+  </Step>
+  <Step title="Create a Service item in Inventory">
+    Add the service as an Inventory item with type **Service** and a price. The booking flow attaches the selected time slot to the cart item.
+  </Step>
+</Steps>
+
+### Configure checkout options
+
+<Steps>
+  <Step title="Open Settings → Storefront → Checkout Mode" />
+  <Step title="Choose a checkout mode">
+    **Request Only** — customers submit their details and you fulfil the order manually. No payment taken online. Best for B2B, custom orders, or businesses not yet set up for online payments.
+
+    **Stripe Only** — customers pay by card at checkout. Requires Stripe Connect to be configured in Settings → Payments.
+
+    **Both** — customers choose between requesting a quote or paying immediately. This is the most flexible option.
+  </Step>
+  <Step title="Save" />
+</Steps>
+
+### Connect Stripe for online payments
+
+<Steps>
+  <Step title="Open Settings → Payments → Stripe Connect" />
+  <Step title="Click Connect with Stripe">
+    You are redirected to Stripe's onboarding. Complete the business verification steps.
+  </Step>
+  <Step title="Return to Softbooq">
+    Once connected, Stripe Connect is active. Online payments on the storefront are processed directly to your Stripe account.
+  </Step>
+  <Step title="Set checkout mode to Stripe or Both">
+    Go to Settings → Storefront and enable the payment checkout option.
+  </Step>
+</Steps>
+
+### Preview the storefront as an admin
+
+<Steps>
+  <Step title="Open Inventory or Settings → Storefront → Preview" />
+  <Step title="Click Preview Storefront">
+    The storefront opens in preview mode with an admin banner at the top. You are seeing exactly what customers see.
+  </Step>
+  <Step title="Click Return to Admin in the banner to exit preview" />
+</Steps>
+
+### Handle an incoming order request
+
+<Steps>
+  <Step title="Open Sales → Orders">
+    Orders placed via the storefront (both Stripe-paid and Quote requests) appear here automatically as new orders.
+  </Step>
+  <Step title="Review the order">
+    Each order shows the customer's name, contact details, items ordered, and checkout method.
+  </Step>
+  <Step title="Confirm and fulfil">
+    For Quote requests: contact the customer to confirm, then mark the order as Confirmed. For Stripe payments: the payment is already collected — proceed directly to fulfilment.
+  </Step>
+</Steps>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Items from Inventory are not appearing on the storefront">
+    Check two things: (1) the item has a price set — items with no price are hidden from the storefront. (2) the item is not marked as hidden. Open the item in Inventory and confirm it is set to active and has a price.
+  </Accordion>
+  <Accordion title="Service booking slots are all showing as unavailable">
+    Booking slots are only shown for resources that are marked as publicly bookable. Open Scheduling → Resources, find the relevant resource, and confirm that **Enable client portal booking** is toggled on. Also check that the resource has availability windows configured for the selected day.
+  </Accordion>
+  <Accordion title="Stripe payment is failing at checkout">
+    Confirm that Stripe Connect is fully set up and verified in Settings → Payments. If the Stripe account verification is incomplete (e.g. additional documents required by Stripe), payments will be declined. Log in to your Stripe dashboard to check the account status.
+  </Accordion>
+  <Accordion title="The customer's cart disappeared after they refreshed the page">
+    Carts persist in the customer's browser local storage, keyed by your workspace ID. If local storage is cleared or the customer is using a private browser session, the cart will not persist. This is a browser behaviour limitation — there is no server-side cart persistence for guest visitors.
+  </Accordion>
+  <Accordion title="Currency conversion looks inaccurate">
+    The storefront uses live mid-market exchange rates fetched at the time the customer switches currency. Rates are not guaranteed — they are indicative. If you need to charge a specific rate, the safest approach is to set prices in your home currency only and use the Stripe payment flow, which handles currency conversion at payment time.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="What is the storefront URL?">
+    Your storefront is at `{your-domain}/{public-handle}/shop`. Share this link on your website, social media, or in email campaigns to drive traffic directly to your store.
+  </Accordion>
+  <Accordion title="Can I have products that are only available in-store (not on the storefront)?">
+    Yes. Items without a price set, or items explicitly hidden, do not appear on the storefront. Your full Inventory catalogue is independent of what is publicly visible.
+  </Accordion>
+  <Accordion title="Can I set a different price for online vs. in-store?">
+    Yes. Enable **Distinct Online Price** on any item in Inventory. The online price is used on the storefront while the regular price is used in internal Sales orders and POS.
+  </Accordion>
+  <Accordion title="Can customers create an account on the storefront?">
+    The public storefront is a guest experience — customers do not need an account to browse or place orders. If you want customers to have a persistent account with order history, project visibility, and invoice access, set them up as a Client user — they access that through the Client Portal.
+  </Accordion>
+  <Accordion title="How are booking payments handled?">
+    If checkout mode includes Stripe, the booking service item is paid like any product — the customer pays at checkout and the booking is confirmed. If checkout mode is Request Only, the booking request is submitted without payment and you confirm it manually.
+  </Accordion>
+</AccordionGroup>

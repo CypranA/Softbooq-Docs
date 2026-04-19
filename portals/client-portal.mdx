@@ -1,0 +1,162 @@
+---
+title: Client Portal
+description: Secure self-service access for your customers
+icon: circle-user
+---
+
+The Client Portal gives your customers a secure, branded login experience where they can view their invoices, track project progress, pay outstanding balances online, and raise support tickets — without needing to contact you directly for routine information.
+
+## What clients can do
+
+- **Dashboard** — outstanding balance, active project count, open ticket count at a glance
+- **Invoices** — view all invoices, download as PDF, pay online with a card (if Stripe is connected)
+- **Projects** — view project status and progress percentage for projects linked to their account
+- **Support** — raise support tickets, track status, reply in thread, rate resolved tickets (1–5 stars)
+- **Help** — browse your published knowledge base articles
+
+<Note>
+  Clients access the portal at `portal.{your-domain}`. To give a customer portal access, create a user account for them in **Settings → Users & Roles** with the **Client** role and link it to their CRM customer record.
+</Note>
+
+---
+
+## Common tasks
+
+### Give a customer portal access
+
+<Steps>
+  <Step title="Open Settings → Users & Roles → Invite User" />
+  <Step title="Enter the customer's email address" />
+  <Step title="Assign the Client role" />
+  <Step title="Link to CRM customer record">
+    In the **Linked Customer** field, search for and select the customer record from CRM. This is the critical step — without it, the portal will show no data (no invoices, projects, or tickets).
+  </Step>
+  <Step title="Send the invite">
+    The customer receives an email with a link to set their password and access the portal.
+  </Step>
+</Steps>
+
+### View what a specific client sees
+
+<Steps>
+  <Step title="Open CRM → select the customer" />
+  <Step title="Check that the customer has a linked user account">
+    The customer record shows whether a portal user is linked. If not, create one via Settings → Users & Roles.
+  </Step>
+  <Step title="Confirm the data linked to their account">
+    The portal shows invoices, projects, and tickets that match the customer's CRM ID. Check Finance → Invoices and Projects to confirm the data is linked to the right customer.
+  </Step>
+</Steps>
+
+### Manage invoice visibility in the portal
+
+<Steps>
+  <Step title="Ensure invoices are linked to the correct customer in Finance">
+    Open Finance → Invoices and verify each invoice has the correct customer selected. Invoices linked to a different customer will not appear in that customer's portal.
+  </Step>
+  <Step title="Check invoice status">
+    All invoices (Sent, Overdue, Paid, Partially Paid) are visible in the portal. Draft invoices are not shown.
+  </Step>
+</Steps>
+
+### Enable online invoice payment in the portal
+
+<Steps>
+  <Step title="Connect Stripe Connect in Settings → Payments">
+    Online payments in the portal require Stripe Connect to be set up and verified.
+  </Step>
+  <Step title="Confirm the customer can pay">
+    In the portal, each outstanding invoice shows a **Pay Now** button. The customer enters their card details in a Stripe-hosted element and pays directly. You receive the payment in your Stripe account.
+  </Step>
+  <Step title="Payments are recorded automatically">
+    Once paid, the invoice status in Finance updates to Paid automatically. No manual payment entry required.
+  </Step>
+</Steps>
+
+### Respond to a client support ticket
+
+<Steps>
+  <Step title="Open IT & Helpdesk → Tickets and filter by source: Portal">
+    Tickets raised from the client portal are tagged with the source "Portal" and linked to the customer's CRM record.
+  </Step>
+  <Step title="Review and assign">
+    Assign the ticket to the appropriate team member. The client is notified when the ticket is assigned and when its status changes.
+  </Step>
+  <Step title="Reply in the thread">
+    Add a public reply to the ticket. The client sees your reply in real time in their portal Support tab.
+  </Step>
+  <Step title="Resolve the ticket">
+    Click **Resolve**. The client is prompted to rate the experience (CSAT 1–5 stars) when they next view the ticket.
+  </Step>
+</Steps>
+
+### Publish knowledge base articles for clients
+
+<Steps>
+  <Step title="Open IT & Helpdesk → Knowledge Base → New Article" />
+  <Step title="Write the article">
+    Use the rich text editor. Add a clear title and relevant tags — tags are used for ticket deflection (when a client types a support ticket subject, matching articles are suggested before they submit).
+  </Step>
+  <Step title="Set visibility to Public">
+    Articles must have **Visibility: Public** to appear in the client portal Help tab. Internal articles are only visible to your team.
+  </Step>
+  <Step title="Set status to Published">
+    Draft articles are not shown. Publish when the article is ready.
+  </Step>
+</Steps>
+
+### Revoke a client's portal access
+
+<Steps>
+  <Step title="Open Settings → Users & Roles" />
+  <Step title="Find the client user and click Deactivate">
+    Their login is revoked immediately. Their data (invoices, tickets, project records) is not affected — only the login is disabled.
+  </Step>
+  <Step title="Reactivate if needed">
+    Reactivation restores their login with the same linked customer record and access rights.
+  </Step>
+</Steps>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A client logged in but sees no invoices or projects">
+    The most common cause is a missing or incorrect customer link. Open Settings → Users & Roles, find the client user, and confirm the **Linked Customer** field is set to their CRM record. Then check that invoices and projects in Finance and Projects are assigned to that same customer.
+  </Accordion>
+  <Accordion title="The Pay Now button is not showing on the client's invoices">
+    Pay Now requires Stripe Connect to be fully set up and verified. Go to Settings → Payments → Stripe Connect and check the connection status. If the Stripe account has any outstanding verification requirements, payments will be blocked until they are resolved.
+  </Accordion>
+  <Accordion title="A client's ticket is not appearing in IT & Helpdesk">
+    Portal tickets are created in the tickets table with the source "Portal". Check IT & Helpdesk → Tickets and remove any source filters that might be hiding portal tickets. If the ticket is truly missing, check Supabase logs for any insert errors.
+  </Accordion>
+  <Accordion title="A client cannot log in — they receive no invite email">
+    Check that your email provider is connected under **Settings → Email**. Also confirm the invite was sent to the correct email address. Go to Settings → Users & Roles and find the user — if they show as **Invite Pending**, use **Resend Invite**.
+  </Accordion>
+  <Accordion title="CSAT ratings are not showing in reports">
+    CSAT data is submitted per ticket when the client rates the resolved issue. Reports → IT & Helpdesk → CSAT shows aggregated scores. If a ticket was resolved but not yet rated, it will not appear in the CSAT data until the client submits their rating.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can a client have access to multiple organisations' portals?">
+    Yes. If a client user is linked to customer records in multiple Softbooq workspaces, they can switch between them from the portal header using the organisation dropdown.
+  </Accordion>
+  <Accordion title="Can clients download their invoices as PDF?">
+    Yes. Every invoice in the portal has a Download PDF button. The PDF uses your company logo, address, and branding from Settings → Company Profile.
+  </Accordion>
+  <Accordion title="Can I control which invoices or projects a client sees?">
+    Visibility is controlled by data linkage, not explicit permissions. Invoices and projects assigned to the client's CRM customer ID are visible. To hide something from a client, do not link it to their customer record — or create a separate customer record for the data you want to keep internal.
+  </Accordion>
+  <Accordion title="What happens to the client portal data if I delete the customer from CRM?">
+    Deleting a CRM customer with a linked portal user is blocked — you must deactivate the portal user first. This prevents accidental data orphaning.
+  </Accordion>
+  <Accordion title="Can clients update their own contact details in the portal?">
+    Clients can update their name and email from their profile settings within the portal. They cannot edit the underlying CRM customer record — that must be done by your team in CRM.
+  </Accordion>
+</AccordionGroup>

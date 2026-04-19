@@ -1,0 +1,147 @@
+---
+title: Careers Portal
+description: Public job listings and online applications
+icon: briefcase
+---
+
+The Careers Portal publishes your open job listings at `yourdomain.com/{handle}/careers` — a branded, public-facing page where candidates can browse roles, view full job descriptions, and submit their application with a CV, cover letter, and any custom questions you configure.
+
+## What the careers portal includes
+
+- **Job listings** — all active openings with title, department, location, job type, and salary range
+- **Search** — instant filter by job title or department
+- **Application modal** — split view: job description and requirements on the left, application form on the right
+- **Custom application forms** — different question sets per role (standard, technical, or custom)
+- **File uploads** — CV/resume upload (PDF or Word, up to 10 MB) plus additional document uploads
+- **GDPR consent** — built-in consent declaration at submission
+
+<Note>
+  The careers portal is only active if your subscription includes the HR module. If HR is not on your plan, the careers page shows a "not available" message.
+</Note>
+
+---
+
+## Common tasks
+
+### Post a job opening
+
+<Steps>
+  <Step title="Open HR → Recruitment → Job Openings → New Job Opening" />
+  <Step title="Enter the job details">
+    Fill in: job title, department, location, employment type (Full-time, Part-time, Contract, Remote), and a clear job description.
+  </Step>
+  <Step title="Add requirements (optional)">
+    List the key requirements as bullet points. These appear as a bulleted list in the application modal alongside the description.
+  </Step>
+  <Step title="Set a salary range (optional)">
+    Enter minimum and maximum salary. This is shown on the job card on the careers page — candidates strongly prefer to see salary ranges upfront.
+  </Step>
+  <Step title="Select an application form template">
+    Choose: **Standard General** (name, email, phone, CV, cover letter, portfolio, start date) or **Technical Role** (adds GitHub URL, primary languages, years of experience, technical project question). You can also use a custom template.
+  </Step>
+  <Step title="Set status to Active">
+    Only jobs with **Status: Active** appear on the public careers page.
+  </Step>
+  <Step title="Save">
+    The job appears on the careers portal immediately.
+  </Step>
+</Steps>
+
+### Create a custom application form
+
+<Steps>
+  <Step title="Open HR → Recruitment → Application Templates → New Template" />
+  <Step title="Name the template" />
+  <Step title="Add questions">
+    Add questions with the following field types: Text (short answer), Long Text (paragraph), Number, Date, Dropdown (select from options), Multiple Select, Yes/No (boolean), and File Upload.
+  </Step>
+  <Step title="Mark required questions">
+    Toggle **Required** on questions the applicant must answer to submit.
+  </Step>
+  <Step title="Set question order">
+    Drag to reorder. Name and email fields always appear first — custom questions appear after.
+  </Step>
+  <Step title="Save">
+    The template is available when creating or editing a job opening.
+  </Step>
+</Steps>
+
+### Review incoming applications
+
+<Steps>
+  <Step title="Open HR → Recruitment → Candidates">
+    All submitted applications appear here, linked to their job opening.
+  </Step>
+  <Step title="Filter by job">
+    Use the Job filter to see only applicants for a specific role.
+  </Step>
+  <Step title="Open an application">
+    View the candidate's answers, download their CV, and review any attached documents.
+  </Step>
+  <Step title="Update the candidate status">
+    Move candidates through your pipeline: Applied → Screening → Interview → Offer → Hired or Rejected.
+  </Step>
+</Steps>
+
+### Share a direct application link
+
+<Steps>
+  <Step title="Open the job opening record in HR → Recruitment" />
+  <Step title="Copy the direct application link">
+    Each job has a unique URL in the format `/{handle}/careers?jobId={jobCode}`. Sharing this link opens the careers page with the application modal for that specific job already open — ideal for sharing in job boards, LinkedIn posts, or email campaigns.
+  </Step>
+</Steps>
+
+### Close a job opening
+
+<Steps>
+  <Step title="Open the job opening in HR → Recruitment" />
+  <Step title="Change status to Closed or Filled">
+    Closed and Filled jobs are immediately removed from the public careers page. Existing applications are retained.
+  </Step>
+  <Step title="Save" />
+</Steps>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The careers page shows 'Careers Not Available' instead of my jobs">
+    This means the HR module is not included in your current subscription plan. Upgrade to a plan that includes HR to enable the careers portal. If HR is on your plan, check that at least one job opening has **Status: Active**.
+  </Accordion>
+  <Accordion title="A job I posted is not appearing on the careers page">
+    Only jobs with **Status: Active** are shown publicly. Open the job opening and confirm the status. Also check the workspace public handle is correct in Settings → Company Profile — the careers URL is based on it.
+  </Accordion>
+  <Accordion title="A candidate submitted an application but it is not appearing in HR → Candidates">
+    Check the Supabase candidates table for the application. If it is there but not showing, the job opening ID on the application may not match any active job — this can happen if the job was deleted after submission. Contact support for data recovery.
+  </Accordion>
+  <Accordion title="A candidate's uploaded CV is not downloadable">
+    CVs are stored in secure storage under `resumes/{tenantId}/`. They are not publicly accessible — only authenticated Admin and Manager users can download them. If the download link fails, the file may have been stored with an incorrect path. Check the candidate record for the resume URL.
+  </Accordion>
+  <Accordion title="The application form is asking for fields I did not add">
+    Name and email are always included — they are built into the form and cannot be removed. If you are seeing unexpected questions, check the application form template assigned to the job opening. You may have selected a template with more questions than intended.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Can I have different application forms for different roles?">
+    Yes. Each job opening can have its own application form template. Assign the Standard template to most roles and a Technical template to engineering roles, or create fully custom templates with exactly the questions you need.
+  </Accordion>
+  <Accordion title="Are candidate CVs stored securely?">
+    Yes. CVs are uploaded to secure private storage — they are not publicly accessible. Only authenticated Admin and Manager users in your workspace can access them. Candidates do not receive a copy of their uploaded file.
+  </Accordion>
+  <Accordion title="Can I accept applications from external job boards?">
+    The careers portal URL can be posted anywhere — LinkedIn, Indeed, your own website, anywhere. When candidates click the link, they see your branded careers page and apply directly. Applications always land in HR → Recruitment → Candidates.
+  </Accordion>
+  <Accordion title="Is GDPR consent built in?">
+    Yes. Every application form includes a GDPR consent declaration that the candidate must check before submitting. The consent text references your privacy policy at `/{handle}/privacy`. You can set up your privacy policy content under Settings → Legal.
+  </Accordion>
+  <Accordion title="Can I move hired candidates directly to HR as employees?">
+    Yes. Once a candidate is marked as **Hired**, click **Create Employee** on the candidate record. An HR employee record is pre-filled with their name, email, and application details. Complete the remaining fields (salary, department, start date) to finalise onboarding.
+  </Accordion>
+</AccordionGroup>
