@@ -29,7 +29,7 @@
     },
     {
       "group": "ERP",
-      "icon": "building-columns",
+      "icon": "layer-group",
       "pages": [
         "erp/overview",
         "erp/finance",
