@@ -15,7 +15,8 @@
   "metadata": {
     "og:title": "Softbooq Docs",
     "og:description": "Official documentation for the Softbooq platform — ERP, Files, and AI tools for growing businesses.",
-    "og:site_name": "Softbooq Docs"
+    "og:site_name": "Softbooq Docs",
+    "og:image": "/images/og-image.svg"
   },
   "topbarLinks": [
     {
@@ -59,6 +60,10 @@
     }
   ],
   "footerSocials": {
-    "website": "https://softbooq.com"
+    "website": "https://softbooq.com",
+    "linkedin": "https://linkedin.com/company/softbooq",
+    "x": "https://x.com/softbooq",
+    "facebook": "https://facebook.com/softbooq",
+    "instagram": "https://instagram.com/softbooq"
   }
 }
