@@ -24,10 +24,12 @@
   "navigation": [
     {
       "group": "Getting Started",
+      "icon": "rocket",
       "pages": ["introduction", "quickstart"]
     },
     {
       "group": "ERP",
+      "icon": "building-columns",
       "pages": [
         "erp/overview",
         "erp/finance",
