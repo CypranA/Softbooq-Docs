@@ -14,7 +14,7 @@
   },
   "metadata": {
     "og:title": "Softbooq Docs",
-    "og:description": "Official documentation for the Softbooq platform — ERP, Files, and AI tools for growing businesses.",
+    "og:description": "Official documentation for the Softbooq platform: ERP, Files, Accounts, AI, and the integrations that connect them.",
     "og:site_name": "Softbooq Docs",
     "og:image": "/images/og-image.svg"
   },
@@ -33,6 +33,16 @@
       "group": "Getting Started",
       "icon": "rocket",
       "pages": ["introduction", "quickstart"]
+    },
+    {
+      "group": "Platform Apps",
+      "icon": "grid",
+      "pages": [
+        "platform/accounts",
+        "platform/ai",
+        "platform/console",
+        "platform/admin"
+      ]
     },
     {
       "group": "Files",
@@ -74,6 +84,28 @@
         "erp/it",
         "erp/reports",
         "erp/settings"
+      ]
+    },
+    {
+      "group": "Integrations",
+      "icon": "plug",
+      "pages": [
+        "integrations/overview",
+        "integrations/shopify",
+        "integrations/woocommerce",
+        "integrations/xero",
+        "integrations/hubspot",
+        "integrations/bank-feeds",
+        "integrations/payments",
+        "integrations/email"
+      ]
+    },
+    {
+      "group": "Billing & Credits",
+      "icon": "credit-card",
+      "pages": [
+        "billing/subscription",
+        "billing/ai-credits"
       ]
     }
   ],

@@ -9,10 +9,13 @@ Settings is the configuration layer for your entire Softbooq workspace. Everythi
 ## What Settings owns
 
 - **Tenant configuration** — company profile, branding, currency, timezone, fiscal year
-- **Integrations** — connected third-party services (email, payments, banks)
+- **Integrations** — connected third-party services (Shopify, WooCommerce, Xero, HubSpot, Bank Feeds, email, payments)
 - **Users & Roles** — user accounts, role assignments, and permissions
-- **Security** — 2FA enforcement, session timeout, IP allowlists
-- **Billing** — your Softbooq subscription plan and usage
+- **Security** — MFA enforcement, session timeout, IP allowlists, password complexity
+- **Audit Log** — append-only record of every state-changing action in the workspace
+- **Sales Channels** — channel definitions for cross-channel inventory and reporting
+- **AI** — AI assistant toggle, credit wallet, per-user caps
+- **Billing** — your Softbooq subscription plan, AI credit packs, and Stripe-managed invoicing
 
 ---
 
@@ -85,30 +88,48 @@ Settings is the configuration layer for your entire Softbooq workspace. Everythi
   </Step>
 </Steps>
 
-### Enable two-factor authentication
+### Enable multi-factor authentication
 
 <Steps>
   <Step title="Open Settings → Security" />
-  <Step title="Toggle Require 2FA">
+  <Step title="Toggle Require MFA">
     When enabled, all users in your workspace must set up an authenticator app on their next login. Users who do not set it up within the grace period are locked out.
   </Step>
   <Step title="Set the grace period">
-    Choose how many days users have to set up 2FA before it becomes mandatory (recommended: 7 days).
+    Choose how many days users have to set up MFA before it becomes mandatory (recommended: 7 days).
+  </Step>
+  <Step title="Choose recovery options">
+    Backup codes are issued automatically on enrolment (10 codes per user, single-use). Optionally, allow Admins to reset a user's MFA via the Users & Roles page.
   </Step>
   <Step title="Save">
-    Existing sessions are not disrupted immediately — users are prompted at next login.
+    Existing sessions are not disrupted immediately, users are prompted at next login.
   </Step>
 </Steps>
+
+### Tighten the Security Policy
+
+The Security Policy tab consolidates workspace-wide controls beyond MFA:
+
+| Control | Default | Purpose |
+|---------|---------|---------|
+| Session timeout | 8 hours | How long an inactive session stays valid |
+| Password minimum length | 12 chars | Enforced on every set-password event |
+| Password complexity | upper+lower+digit | Mix required |
+| IP allowlist | off | Restrict sign-in to specific CIDR ranges |
+| SSO restriction | off | Allow only specific identity providers (e.g. Microsoft 365 only) |
+| Bot challenge | on | Cloudflare Turnstile on sign-in and signup |
+
+Changes to security policy apply to new sessions immediately. Existing sessions are subject to the new policy on their next refresh.
 
 ### Configure payment providers
 
 <Steps>
   <Step title="Open Settings → Payments" />
   <Step title="Choose a provider">
-    Currently supported: Wise and Revolut for outbound payment runs and bank reconciliation.
+    Currently supported: Wise and Revolut for outbound payment runs and bank reconciliation. See [Outbound Payments](/integrations/payments) for full setup steps.
   </Step>
   <Step title="Connect with API credentials">
-    Enter your Wise or Revolut API key. You can find this in your provider's developer settings. Store the key securely — it is saved in an encrypted vault, not in plain text.
+    Enter your Wise or Revolut API key. You can find this in your provider's developer settings. Store the key securely, it is saved in an encrypted vault, not in plain text.
   </Step>
   <Step title="Test the connection">
     Click **Test Connection** to verify the credentials are valid.
@@ -118,6 +139,72 @@ Settings is the configuration layer for your entire Softbooq workspace. Everythi
   </Step>
 </Steps>
 
+### Connect bank feeds
+
+Live transaction feeds via Enable Banking (PSD2 / Open Banking) bring your bank account into Softbooq for automatic reconciliation. See the dedicated [Bank Feeds](/integrations/bank-feeds) page for the full flow, including the 180-day consent renewal model and the auto-reconciliation engine.
+
+### Connect e-commerce and accounting integrations
+
+Each integration has its own connect flow. The most common ones:
+
+- [Shopify](/integrations/shopify) — full two-way product/order/inventory sync via OAuth
+- [WooCommerce](/integrations/woocommerce) — pull-based sync via merchant API keys
+- [Xero](/integrations/xero) — push invoices and contacts to Xero
+- [HubSpot](/integrations/hubspot) — bidirectional CRM contact sync
+- [Email providers](/integrations/email) — Microsoft 365, Google Workspace, SendGrid, Mailgun, Postmark, generic SMTP
+
+All integrations live under Settings → Integrations.
+
+### Manage Sales Channels
+
+<a id="sales-channels" />
+Sales Channels are the lens used by Channel Performance reporting and multi-channel inventory. Each connected ecommerce integration registers its own channel automatically (Shopify, WooCommerce). You can add manual channels for in-store, B2B telephone sales, marketplaces, etc.
+
+<Steps>
+  <Step title="Open Settings → Sales Channels" />
+  <Step title="Add a manual channel">
+    Click **New Channel**. Give it a name (e.g. "In-Store", "Wholesale B2B", "Amazon Marketplace") and an icon. Optionally set a default location and a default tax component.
+  </Step>
+  <Step title="Tag historical orders (optional)">
+    Bulk-tag past orders to a channel using the bulk-edit action on the Sales Orders list. This makes the Channel Performance report retroactive.
+  </Step>
+  <Step title="View per-channel performance">
+    Reports → Channel Performance gives revenue, orders, AOV per channel, with side-by-side comparison.
+  </Step>
+</Steps>
+
+### Manage AI credits and caps
+
+<Steps>
+  <Step title="Open Settings → AI" />
+  <Step title="View wallet balance">
+    The current credit balance is shown at the top, with recent transactions below.
+  </Step>
+  <Step title="Buy credit packs">
+    Click **Buy Credits** and pick Starter (50), Standard (250) or Power (1,000). Charged to the card on file via Stripe.
+  </Step>
+  <Step title="Set per-user caps (optional)">
+    Under **Caps**, set a daily credit cap per user, a per-request cap, or restrict AI access to specific roles. See the [AI Credits](/billing/ai-credits) page for the full economics.
+  </Step>
+</Steps>
+
+### View the Audit Log
+
+<Steps>
+  <Step title="Open Settings → Audit Log" />
+  <Step title="Filter">
+    Filter by user, by entity type (e.g. only finance.invoice events), date range, or source IP.
+  </Step>
+  <Step title="Drill into an entry">
+    Each row shows: who, what, when, before/after values, source IP. Entries cannot be edited or deleted.
+  </Step>
+  <Step title="Export for compliance">
+    Click **Export CSV** to download a filtered set for an external auditor.
+  </Step>
+</Steps>
+
+Retention follows your plan: 1 year on Standard, 3 years on Plus, 7 years on Pro. The audit log also surfaces operator impersonation events from Softbooq support, with operator email, reason and duration, see [Operator Console](/platform/console).
+
 ### Manage your subscription
 
 <Steps>
@@ -126,15 +213,17 @@ Settings is the configuration layer for your entire Softbooq workspace. Everythi
     See your active plan, the features included, current usage metrics (users, storage, modules), and the next billing date.
   </Step>
   <Step title="Upgrade">
-    Click **Change Plan → Upgrade**. Select the new plan. The upgrade takes effect immediately and you are billed a prorated amount for the remainder of the billing cycle.
+    Click **Change Plan → Upgrade**. Select the new plan. The upgrade takes effect immediately and you are billed a Stripe-prorated amount for the remainder of the billing cycle.
   </Step>
   <Step title="Downgrade">
-    Click **Change Plan → Downgrade**. The downgrade applies at the start of the next billing cycle — you retain current plan features until then.
+    Click **Change Plan → Downgrade**. The downgrade applies at the start of the next billing cycle, you retain current plan features until then.
   </Step>
   <Step title="Update billing details">
     Go to the Billing tab to update your payment card or billing address. Changes apply to the next billing cycle.
   </Step>
 </Steps>
+
+Mid-cycle plan changes and per-user changes are prorated automatically by Stripe. Adding a user mid-cycle charges a prorated per-user amount; removing a user issues a prorated credit on the next invoice. See [Subscription](/billing/subscription) for the full proration model and plan tiers.
 
 ### Set up IP allowlisting
 

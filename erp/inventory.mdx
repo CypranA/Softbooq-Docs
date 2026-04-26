@@ -13,6 +13,9 @@ The Inventory module tracks every physical item your business holds — from raw
 - **Transfers** — movement of stock between locations
 - **Adjustments** — manual stock corrections and write-offs
 - **Service packages** — bundled service offerings that include physical components
+- **Reorder Radar** — AI-driven demand forecasting and reorder recommendations
+- **Barcode scanning** — receive, transfer and pick stock by scanning barcodes on web or mobile
+- **Channel inventory** — total stock split across in-store, Shopify, WooCommerce, and other connected sales channels
 
 ## Data flows into Inventory from
 
@@ -120,6 +123,54 @@ The Inventory module tracks every physical item your business holds — from raw
     Download as CSV or PDF for your accounts team or auditor.
   </Step>
 </Steps>
+
+### Use Reorder Radar (AI demand forecasting)
+
+Reorder Radar is an AI-driven view that combines historical sales velocity, current stock levels, supplier lead times and seasonal patterns to recommend what to reorder and when. Unlike the static reorder-point alerts (which fire when stock falls below a fixed minimum), Reorder Radar models forward demand and triggers earlier on items with rising velocity.
+
+<Steps>
+  <Step title="Open Inventory → Reorder Radar" />
+  <Step title="Review the recommendation table">
+    Each item shows: current stock, projected days of cover, recommended order quantity, and a confidence score. Items below 14 days cover are surfaced first.
+  </Step>
+  <Step title="Read the AI narration (optional)">
+    Click any row to expand the Gemini-generated explanation: why this quantity, what trend the model spotted, what suppliers are recommended.
+  </Step>
+  <Step title="Create a PO directly from the row">
+    Click **Create PO** to launch a pre-filled purchase order with the recommended supplier and quantity. Edit before sending.
+  </Step>
+</Steps>
+
+<Note>
+  The forecasting model refreshes nightly via a Postgres-scheduled job. New velocity data takes effect the next morning. The narration is generated on-demand only when you expand a row, to avoid burning AI credits unnecessarily.
+</Note>
+
+### Receive and pick stock with a barcode scanner
+
+Softbooq supports barcode scanning on the web (using your laptop camera or a USB scanner) and on the mobile app. Scanning replaces typing for the four most common operations: receiving from a PO, transferring between locations, picking for a sale, and counting during a stock take.
+
+<Steps>
+  <Step title="Make sure each item has a barcode">
+    Set the barcode on the item's record (Inventory → Items). Most ecommerce-imported items already have one (Shopify and WooCommerce sync the barcode field).
+  </Step>
+  <Step title="On the relevant screen, click Scan">
+    Receive Goods, Transfer, Pick or Adjustment screens all have a Scan button.
+  </Step>
+  <Step title="Scan items into the list">
+    Each scan adds the item with quantity 1; scanning the same item again increments the quantity. Use a USB scanner for batch operations or your phone camera for ad-hoc scans.
+  </Step>
+  <Step title="Confirm">
+    Review the list, edit quantities if needed, and confirm. Stock updates as it would for a typed entry.
+  </Step>
+</Steps>
+
+### Multi-channel inventory
+
+If you connect Shopify, WooCommerce, or any other sales channel, your total on-hand stock is split across channels conceptually. The Inventory item record shows: total on hand, total reserved, total available, and a breakdown per channel.
+
+The Channel Performance report (Reports → Channel Performance) uses this breakdown to compare sell-through and stock-out rates per channel, which helps you decide where to allocate scarce inventory.
+
+To add or rename channels, see [Sales Channels](/erp/settings#sales-channels) in Settings.
 
 ### Manage multiple warehouse locations
 

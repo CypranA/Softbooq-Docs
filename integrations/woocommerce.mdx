@@ -1,0 +1,101 @@
+---
+title: WooCommerce
+description: Connect a WordPress WooCommerce store to Softbooq with merchant-managed API keys
+icon: store
+---
+
+The WooCommerce integration connects a WordPress + WooCommerce store to Softbooq using the WooCommerce REST API. Unlike Shopify it does not use OAuth: the merchant generates a Consumer Key / Consumer Secret in their WordPress admin and pastes it into Softbooq.
+
+## What you can sync
+
+| Entity | Direction | Notes |
+|--------|-----------|-------|
+| Products | Inbound only | Imported as Inventory items |
+| Orders | Inbound | Imported as Sales orders + invoices |
+| Customers | Inbound | Imported as CRM customers |
+| Stock | Outbound (planned) | Currently inbound at import time only |
+
+---
+
+## Connect WooCommerce
+
+<Steps>
+  <Step title="Generate API keys in WooCommerce">
+    In your WordPress admin, go to **WooCommerce → Settings → Advanced → REST API → Add Key**. Set permissions to **Read/Write**. Copy the generated Consumer Key and Consumer Secret immediately, they are not shown again.
+  </Step>
+  <Step title="Open Settings → Integrations → WooCommerce → Connect in Softbooq" />
+  <Step title="Enter your store URL and keys">
+    Use the full https URL of your WordPress site (e.g. `https://shop.yourcompany.com`). Paste in the Consumer Key and Consumer Secret.
+  </Step>
+  <Step title="Test the connection">
+    Click **Test Connection**. Softbooq calls the WooCommerce health endpoint to verify the keys and store URL. A green tick confirms the connection is live.
+  </Step>
+  <Step title="Run the initial import">
+    Choose a date range and pick the entities to import (products, orders, customers). The import runs in the background; you can leave the page.
+  </Step>
+</Steps>
+
+<Note>
+  The merchant owns the API keys, not Softbooq. You can revoke them at any time in WooCommerce; doing so immediately stops sync.
+</Note>
+
+---
+
+## How sync runs
+
+WooCommerce does not push webhooks to Softbooq by default. A nightly cron pulls new and updated orders, products and customers from your store. If you need lower-latency sync, click **Sync now** on the integration page after a high-priority order to pull it in immediately.
+
+---
+
+## Sales channel attribution
+
+WooCommerce orders are tagged with the **WooCommerce** sales channel and contribute to the Channel Performance report. See [Sales Channels](/erp/settings#sales-channels) in Settings to manage channel definitions.
+
+---
+
+## Disconnect
+
+<Steps>
+  <Step title="Open Settings → Integrations → WooCommerce → Disconnect" />
+  <Step title="Confirm">
+    The Consumer Key and Secret are removed from the Softbooq Vault. Sync stops. Imported data is retained.
+  </Step>
+  <Step title="Revoke keys in WooCommerce (recommended)">
+    Go back to WooCommerce → Settings → Advanced → REST API and revoke the keys to ensure the stored credentials cannot be used elsewhere.
+  </Step>
+</Steps>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Test Connection returns 401 Unauthorised">
+    The Consumer Key or Secret is wrong, or the WooCommerce REST API is disabled on your site. Regenerate the keys in WooCommerce and try again. Confirm that **Enable the REST API** is on under WooCommerce → Settings → Advanced → REST API.
+  </Accordion>
+  <Accordion title="Test Connection returns 404 or HTML">
+    Your store URL is wrong, or WordPress permalinks are not set to a value other than Plain. Open WordPress Admin → Settings → Permalinks and select any non-Plain option (e.g. Post name), then save.
+  </Accordion>
+  <Accordion title="Orders are not appearing">
+    WooCommerce sync is pull-based, not push-based. Click **Sync now** on the integration page to fetch immediately. If a specific order is still missing, check that it is not in `pending` status, those are skipped by default.
+  </Accordion>
+  <Accordion title="HTTPS certificate errors">
+    Softbooq requires a valid TLS certificate on your WordPress site. Self-signed certs are rejected. Use a free Let's Encrypt certificate via your hosting provider if you do not have one.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Shopify" icon="shopify" href="/integrations/shopify">
+    The other supported e-commerce integration with full webhook sync.
+  </Card>
+  <Card title="Sales & POS" icon="cart-shopping" href="/erp/sales">
+    Imported WooCommerce orders appear in Sales.
+  </Card>
+  <Card title="Channel Performance" icon="chart-bar" href="/erp/reports">
+    Compare revenue across all sales channels.
+  </Card>
+</CardGroup>

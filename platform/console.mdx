@@ -1,0 +1,91 @@
+---
+title: Operator Console
+description: Internal Softbooq operations dashboard at console.softbooq.com
+icon: terminal
+---
+
+The Operator Console at `console.softbooq.com` is an internal tool for Softbooq staff. It is not available to customer tenants. It exists so support, billing, and engineering teams can investigate and fix tenant issues without granting access to a customer's actual workspace.
+
+<Note>
+  This page documents the Console for staff and for security-conscious customers who want to know what Softbooq operators can and cannot see. Customer admins do not have access to the Console; they manage their workspace via Settings inside their ERP.
+</Note>
+
+---
+
+## Who can sign in
+
+Only accounts with the `is_system_admin` flag set on their identity record (held in the central `accounts` schema, not in any tenant) can reach console.softbooq.com. The flag is granted manually by senior engineering leads and is auditable.
+
+If you sign in to console.softbooq.com without the flag, you land on a "you don't have access" page; no error message reveals whether the URL is real.
+
+---
+
+## What an operator can do
+
+| Capability | Scope | Audit |
+|------------|-------|-------|
+| List tenants | All tenants | Logged |
+| View tenant metadata | All tenants | Logged |
+| Suspend a tenant | Any tenant | Logged + reason required |
+| Resend Stripe invoices | Any tenant | Logged |
+| View AI usage aggregates | All tenants | Aggregated only |
+| Impersonate a workspace | Tenant by tenant, time-boxed, requires reason | Logged + visible in tenant audit log |
+
+Impersonation is the only operation that grants per-tenant access. It is time-boxed (default 30 minutes), requires a written reason, and is shown in the impacted tenant's own audit log so customers can see when an operator was inside their workspace and why. The impersonation banner is visible to anyone in the tenant during the session.
+
+Operators **cannot**:
+
+- Read any tenant data without an active impersonation session
+- Edit any tenant data without an active impersonation session
+- Disable audit logging on a tenant
+- Hide their own actions from a tenant's audit log
+
+---
+
+## Impersonation flow
+
+<Steps>
+  <Step title="Operator opens console.softbooq.com → Tenants → finds the tenant" />
+  <Step title="Click Impersonate">
+    A modal asks for a reason (free text, minimum 10 chars) and a duration (max 4 hours).
+  </Step>
+  <Step title="The action lands in the tenant's audit log immediately">
+    The tenant sees: timestamp, operator email, reason, expected duration.
+  </Step>
+  <Step title="Operator enters the workspace">
+    A persistent banner across the top says "Impersonating tenant — Operator: Jane Doe — Reason: investigating webhook error". It cannot be dismissed.
+  </Step>
+  <Step title="Session ends automatically at duration or on click">
+    The banner disappears, the operator is signed out of the impersonated tenant. The audit log records the actual end time.
+  </Step>
+</Steps>
+
+---
+
+## Suspend a tenant
+
+If a tenant violates terms (chargeback abuse, evident illegal use, unpaid invoices after a grace period), an operator can suspend them. Suspension immediately blocks sign-in for all users in that workspace; data is preserved. The tenant Admin sees a clear error page with a "contact support" link.
+
+Suspension is reversible. Lifting suspension restores normal sign-in.
+
+---
+
+## Status visibility
+
+The Console exposes platform-wide status: ongoing migrations, edge function health, queue depth, error rate. This is read-only and aggregated; no tenant-specific data is shown without impersonation.
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Admin Portal" icon="user-shield" href="/platform/admin">
+    Customer-facing equivalent for tenant admins (lives inside their ERP).
+  </Card>
+  <Card title="Settings" icon="gear" href="/erp/settings">
+    Where customer admins manage their workspace.
+  </Card>
+  <Card title="Accounts" icon="id-card" href="/platform/accounts">
+    The shared identity layer Console operators sign in via.
+  </Card>
+</CardGroup>

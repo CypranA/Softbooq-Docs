@@ -1,0 +1,88 @@
+---
+title: Admin Portal
+description: Tenant administration tools inside the ERP
+icon: user-shield
+---
+
+The Admin Portal is the part of the ERP that only Admin-role users see. It contains the controls for managing your whole Softbooq workspace: users, security policy, audit logging, billing, integrations, and AI caps. Everything is accessible through the **Settings** module, but several admin-only views surface across other modules too.
+
+## Admin-only screens
+
+| Screen | Where it lives | What it does |
+|--------|----------------|--------------|
+| Users & Roles | Settings → Users & Roles | Invite, deactivate, change role, link to HR record |
+| Security Policy | Settings → Security | MFA enforcement, IP allowlist, session timeout, password complexity |
+| Audit Log | Settings → Audit Log | Append-only log of every user action for compliance |
+| AI Caps | Settings → AI → Caps | Per-user daily / per-request credit limits |
+| Subscription | Settings → Subscription & Billing | Upgrade, downgrade, cancel, view invoices |
+| Integrations | Settings → Integrations | All third-party connections |
+| Channels | Settings → Sales Channels | Sales channel definitions for cross-channel reporting |
+| Data Export | Settings → Data → Export | Full workspace export in CSV |
+| Tenant Profile | Settings → Company Profile | Branding, currency, fiscal year |
+
+## What only Admins can see
+
+- Billing data and Stripe invoices
+- Audit log entries (Managers can see entries on records they own; only Admins see all)
+- All users' AI usage on Reports → AI Usage
+- API keys and webhook secrets stored in the Vault
+- Other admins' MFA status
+
+Manager-role users have wide operational access but are blocked from the above. Employee, Viewer and Client roles are blocked further per the role matrix in [Quickstart](/quickstart).
+
+---
+
+## Audit log
+
+Every state-changing action in the ERP writes a row to the audit log: who, what, when, before/after values, source IP. The log is append-only — entries cannot be edited or deleted, even by Admins. Retention follows your plan: 1 year on Standard, 3 years on Plus, 7 years on Pro.
+
+Filter the log by user, by entity (e.g. only finance.invoice events), by date range, or by source IP. Export to CSV for compliance audits.
+
+The audit log surfaces operator impersonation events too (see [Operator Console](/platform/console)) so customers always have a record of when Softbooq staff entered their workspace.
+
+---
+
+## Promote, demote, and suspend users
+
+<Steps>
+  <Step title="Open Settings → Users & Roles" />
+  <Step title="Find the user, open their row" />
+  <Step title="Change role">
+    Pick from Admin / Manager / Employee / Viewer / Client. The change applies on next page load.
+  </Step>
+  <Step title="Or click Deactivate">
+    Their session is revoked immediately. Their data is retained. Reactivate at any time.
+  </Step>
+</Steps>
+
+You cannot demote yourself if you are the only Admin in the workspace; promote another Admin first. This is enforced at the database level, not just the UI.
+
+---
+
+## Security Policy
+
+The Security tab consolidates workspace-wide security controls:
+
+- **MFA enforcement** — require MFA for all users with a configurable grace period before lockout
+- **Session timeout** — set how long an inactive session stays valid (default 8 hours)
+- **IP allowlist** — only allow sign-in from listed CIDR ranges
+- **Password complexity** — minimum length and character mix
+- **SSO restrictions** — restrict sign-in to specific identity providers (e.g. only Microsoft 365 for your domain)
+
+Changing security policy applies to new sessions immediately. Existing sessions are not disrupted but are subject to the new policy on next refresh.
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Settings" icon="gear" href="/erp/settings">
+    All admin controls live under Settings.
+  </Card>
+  <Card title="Accounts" icon="id-card" href="/platform/accounts">
+    User identity and per-account security.
+  </Card>
+  <Card title="Subscription" icon="credit-card" href="/billing/subscription">
+    Plan tiers, upgrades, downgrades.
+  </Card>
+</CardGroup>

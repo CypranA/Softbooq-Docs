@@ -1,0 +1,124 @@
+---
+title: Xero
+description: Push invoices and contacts from Softbooq to Xero
+icon: chart-line
+---
+
+The Xero integration mirrors selected Softbooq data into your Xero general ledger. Contacts and invoices are pushed on creation; you can also run a backfill of historical records. The integration uses Xero's OAuth 2.0 flow and its standard Accounting API.
+
+## What it pushes
+
+| Entity | Direction | Trigger |
+|--------|-----------|---------|
+| Contacts | Outbound | On CRM customer create or update |
+| Invoices | Outbound | On Finance invoice issued |
+| Payments | Outbound (planned) | Currently push-on-invoice only |
+
+<Note>
+  Xero remains your source of truth for tax reporting and ledger balances. Softbooq pushes transactional records to Xero so your accountant has the same view of revenue and AR as your operations team.
+</Note>
+
+---
+
+## Connect Xero
+
+<Steps>
+  <Step title="Open Settings → Integrations → Xero → Connect" />
+  <Step title="Sign in to Xero">
+    You are redirected to Xero's OAuth screen. Sign in with the email tied to the Xero organisation you want to connect.
+  </Step>
+  <Step title="Choose the organisation">
+    If you manage multiple Xero organisations, pick the one to connect. You can only connect one Xero organisation per Softbooq tenant.
+  </Step>
+  <Step title="Approve scopes">
+    Approve the requested scopes: `accounting.contacts`, `accounting.transactions`, and `offline_access`. The offline_access scope is needed so Softbooq can refresh the token without you having to re-sign-in every 30 minutes.
+  </Step>
+  <Step title="Map your Softbooq accounts to Xero accounts">
+    On the post-connect mapping screen, link your Softbooq income, sales tax and bank accounts to the equivalent codes in Xero. Default mapping uses code 200 (Sales) and the standard tax components, but you can override.
+  </Step>
+</Steps>
+
+---
+
+## How invoices are pushed
+
+When you click **Send Invoice** on a Finance invoice, Softbooq:
+
+1. Looks up the customer in Xero by email; if not found, creates a Xero contact.
+2. Builds a Xero invoice with the same line items, currency, due date and reference.
+3. Posts it as Authorised (Approved status) so it is immediately part of your Xero AR.
+
+If the push fails (invalid mapping, Xero down, scope removed), the Softbooq invoice is still issued normally. The failure is logged on the invoice's Activity tab and you can retry the push manually.
+
+---
+
+## Multi-currency
+
+If a Softbooq invoice is in a foreign currency, Xero must have that currency enabled (Xero requires explicit per-currency activation under Settings → Currencies). If the currency is not enabled in Xero the push is rejected and a warning is logged. Enable the currency in Xero, then click **Retry push** on the Softbooq invoice.
+
+---
+
+## Backfill historical invoices
+
+<Steps>
+  <Step title="Open Settings → Integrations → Xero → Backfill" />
+  <Step title="Choose the date range">
+    Pick the start date for invoices you want to push. Default is the start of the current fiscal year.
+  </Step>
+  <Step title="Run">
+    The job runs in the background. Each invoice push appears in the sync log. Pushed invoices are tagged in Softbooq so they are not pushed twice.
+  </Step>
+</Steps>
+
+<Note>
+  Backfilling beyond the start of your current Xero financial year may post into a closed period. Xero will reject pushes into closed periods. Check your Xero lock dates first.
+</Note>
+
+---
+
+## Disconnect
+
+<Steps>
+  <Step title="Open Settings → Integrations → Xero → Disconnect" />
+  <Step title="Confirm">
+    The OAuth refresh token is removed. No further pushes will occur.
+  </Step>
+  <Step title="Revoke from Xero (recommended)">
+    Go to your Xero account's My Apps and revoke the Softbooq connection there as well, so the access cannot be re-established by anyone with old tokens.
+  </Step>
+</Steps>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="An invoice push failed with InvalidAccountCode">
+    Your account mapping uses a code that does not exist in your Xero chart of accounts. Open Settings → Integrations → Xero → Account Mapping and pick a valid code.
+  </Accordion>
+  <Accordion title="A push failed with TaxRateNotFound">
+    The tax component on the Softbooq invoice does not have an equivalent tax rate set up in Xero. Either create the tax rate in Xero (Settings → Tax Rates) or change the Softbooq invoice's tax component to one that maps cleanly.
+  </Accordion>
+  <Accordion title="The integration shows Auth Failed">
+    Xero refresh tokens last 60 days of inactivity. If no push has run in that window the token expires. Click Reconnect to start the OAuth flow again.
+  </Accordion>
+  <Accordion title="The same invoice was pushed twice">
+    This happens if the first push errored after Xero accepted but before Softbooq recorded the success. Open the invoice in Xero and void the duplicate. Softbooq's idempotency keys prevent this on retry, but a network blip during Xero's response can break it.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Finance" icon="chart-pie" href="/erp/finance">
+    Source of all invoices and contacts pushed to Xero.
+  </Card>
+  <Card title="Reports" icon="chart-bar" href="/erp/reports">
+    Aged receivables and P&L, the same numbers your accountant sees in Xero.
+  </Card>
+  <Card title="HubSpot" icon="bullseye" href="/integrations/hubspot">
+    Bidirectional contact sync if you also use HubSpot for marketing.
+  </Card>
+</CardGroup>

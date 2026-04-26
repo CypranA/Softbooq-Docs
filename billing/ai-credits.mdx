@@ -1,0 +1,154 @@
+---
+title: AI Credits
+description: How Softbooq AI usage is metered, billed, and capped
+icon: coins
+---
+
+Softbooq AI is metered in **credits**. Every chat message, suggestion-button question, and proactive AI feature consumes credits from your tenant's wallet. This page explains how the wallet works, what packs cost, what trials get for free, and how credits are bounded so an unusually heavy question can never bankrupt your account.
+
+## The wallet at a glance
+
+Each tenant has one AI credit wallet. The wallet's current balance is shown in the chip at the top of the AI panel. Credits are consumed as you use the assistant and replenished when you buy a pack or when a new billing period starts (if your plan includes a monthly grant).
+
+| Tier | Pack size | Price per pack | Effective per-credit cost |
+|------|-----------|----------------|---------------------------|
+| Starter | 50 credits | €25 | €0.50 |
+| Standard | 250 credits | €100 | €0.40 |
+| Power | 1,000 credits | €300 | €0.30 |
+
+Packs do not expire. Buy as many as you like; the credits stack.
+
+---
+
+## How credits are deducted
+
+Most messages cost exactly **1 credit**. A heavier message that triggers multiple back-end tool calls (for example, a question that pulls cash flow + receivables + inventory + payroll all at once) is billed by **token usage**: the number of credits charged is calculated from the actual Anthropic token usage of the underlying request.
+
+The formula:
+
+```
+credits = max(1, ceil((input_tokens × $3 + output_tokens × $15) / 1,000,000 / $0.25))
+```
+
+That is, every $0.25 of underlying API cost rounds up to one credit, with a one-credit minimum. The $0.25 baseline gives a margin buffer of around 22% even at the lowest-priced credit pack tier, so we can absorb FX drift and Anthropic price changes without changing your pricing.
+
+For most questions, the typical breakdown:
+
+- Light question (no tool calls): 1 credit
+- Medium question (1–2 tool calls): 1 credit
+- Heavy question (3+ tool rounds, big tables): 2–5 credits
+- Runaway question (would have spent over $3.20 of API cost): aborted at **10 credits** with a refund
+
+---
+
+## Per-request hard caps
+
+Even on the heaviest possible request, your wallet is protected by hard caps:
+
+- Maximum **3 tool-call rounds** per request (95% of useful queries finish in ≤2)
+- Maximum **2,048 output tokens** per round
+- Maximum **6,000 cumulative output tokens** per request
+- Maximum **10 credits** per request for paid tenants
+- Maximum **3 credits** per request for trialing tenants
+
+Hit any cap and the request aborts mid-flight with a partial answer plus a 402 response, and the credit hold is refunded. You can never accidentally spend more than 10 credits on one question.
+
+---
+
+## Trial tenants
+
+New tenants on the 30-day trial receive **2 free AI credits** (not the full plan tier bonus) to try the assistant. The full tier signup bonus (5/20/50 credits depending on plan) is granted when your trial converts to paid via Stripe.
+
+Trialing tenants also have tighter guardrails:
+
+- Per-request cap is **3 credits**, not 10
+- For ad-hoc (typed) messages, tools are **disabled** and the request is single-shot. Suggestion-chip questions on the empty state still allow tools because they are pre-scoped and predictable.
+- This caps a worst-case trial chat at roughly $0.05 of underlying API cost
+
+These limits keep trial AI use enjoyable for honest evaluation while bounding our exposure if a 10,000-tenant trial wave hit at once. After conversion, the per-request cap relaxes to 10 credits and tools are re-enabled for all message types.
+
+---
+
+## Buy more credits
+
+<Steps>
+  <Step title="Open Settings → AI → Credit Wallet" />
+  <Step title="Click Buy Credits">
+    Pick a pack: Starter (50), Standard (250) or Power (1,000).
+  </Step>
+  <Step title="Pay via Stripe">
+    The pack is charged to the card on file. If you have no card on file you'll be prompted to add one.
+  </Step>
+  <Step title="Credits arrive within seconds">
+    The wallet balance updates after the Stripe webhook confirms payment. Your next message uses the new credits.
+  </Step>
+</Steps>
+
+---
+
+## Plans with a monthly credit grant
+
+Some plans include a monthly AI credit grant (e.g. Plus = 50 credits/month). Granted credits arrive at the start of each billing cycle and are spent first; bought packs are spent only after the grant is exhausted. Unused grant credits do not roll over; unused pack credits do.
+
+---
+
+## Settlement and refunds
+
+Each message holds 1 credit at the start. After the request completes, settlement reconciles the hold against the actual token cost:
+
+- **Cost ≤ 1 credit**: hold is the final charge, no extra deduction.
+- **Cost > 1 credit**: a settlement transaction deducts the difference. Logged on the message's metadata as `settlement`.
+- **Wallet drained mid-request**: if your balance is exhausted before settlement (you had exactly 1 credit left and the request cost 4), the engine drains your remaining balance to zero and logs the shortfall as `settlement_partial`. The answer was already produced; we cannot refund a completed API call.
+- **Per-request cap hit**: if the request would cross 10 credits (or 3 for trialing), it aborts mid-loop, the hold is refunded in full, and you receive a partial answer with a 402.
+
+You can audit every transaction at Settings → AI → Wallet History. The history shows holds, settlements, refunds, and any partial drains.
+
+---
+
+## What an Admin can do
+
+- View current balance and recent transactions
+- Buy credit packs
+- Disable AI for the whole workspace, or for specific roles
+- Set a per-user daily cap or per-user credit cap (under Settings → AI → Caps)
+- See the top spenders in the workspace under Reports → AI Usage
+
+Standard role users can use AI but cannot buy credits or change caps.
+
+---
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Why is one message charging more than 1 credit?">
+    The message triggered a heavy multi-tool query against your live data. The credit count matches the actual token cost of the underlying API call, rounded up. Open Wallet History to see the input/output token split.
+  </Accordion>
+  <Accordion title="Can I disable AI billing entirely and pay a flat rate?">
+    Not currently. Heavy AI usage on a flat rate does not work economically; the credit model means light users pay almost nothing while heavy users pay proportionally.
+  </Accordion>
+  <Accordion title="Do credits roll over month to month?">
+    Bought pack credits do, indefinitely. Granted credits (from a plan that includes a monthly amount) reset each cycle.
+  </Accordion>
+  <Accordion title="What happens when I run out?">
+    The next message returns a 402 with the message "Insufficient credits, please top up". Buy a pack and retry.
+  </Accordion>
+  <Accordion title="Are AI credits separate from the ERP subscription?">
+    Yes. The ERP subscription pays for users, modules and storage. AI credits are a separate wallet. You can pay for one without the other (though most plans bundle a small monthly grant of credits).
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Softbooq AI" icon="sparkles" href="/erp/ai">
+    What the assistant can do, how to ask it questions.
+  </Card>
+  <Card title="Subscription" icon="credit-card" href="/billing/subscription">
+    The ERP subscription plan tiers and what they include.
+  </Card>
+  <Card title="AI App" icon="robot" href="/platform/ai">
+    The standalone AI app at ai.softbooq.com.
+  </Card>
+</CardGroup>

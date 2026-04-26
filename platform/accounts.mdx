@@ -1,0 +1,115 @@
+---
+title: Softbooq Accounts
+description: The shared identity, profile, and security hub for all Softbooq apps
+icon: id-card
+---
+
+Softbooq Accounts at `accounts.softbooq.com` is the identity layer that all other Softbooq apps share. Sign in once and every app (ERP, Files, AI, Operator Console) recognises you instantly, with no separate login.
+
+## What Accounts is for
+
+- **Profile management** — name, email, avatar, language, timezone
+- **Password and MFA** — change password, set up authenticator app, manage backup codes
+- **Connected sessions** — view and revoke active sessions across all devices
+- **Workspace switcher** — if you belong to multiple Softbooq workspaces, switch between them here
+- **Linked accounts** — manage connections to Microsoft, Google, etc. for SSO
+
+## How SSO works
+
+When you sign in at accounts.softbooq.com, Softbooq sets a shared session cookie (`sbq-auth-token`) on the `.softbooq.com` domain. Every Softbooq app reads this cookie:
+
+- app.softbooq.com (ERP) reads it on first load and resolves your tenant context
+- files.softbooq.com (Files) reads it and resolves your storage permissions
+- ai.softbooq.com (AI app) reads it and connects to your tenant's AI wallet
+- console.softbooq.com (Operator Console, internal use) reads it and checks operator role
+
+Sign out at any one app and the cookie is cleared everywhere.
+
+<Note>
+  The cookie is HttpOnly and Secure. It cannot be read or modified by JavaScript on any page, which protects against session hijacking via XSS. The cookie is invalidated server-side on sign-out, not just deleted client-side, so a stolen cookie is useless after sign-out.
+</Note>
+
+---
+
+## Sign in
+
+<Steps>
+  <Step title="Open accounts.softbooq.com or click Sign In on any Softbooq app" />
+  <Step title="Enter your email and password">
+    Or click a social provider (Microsoft, Google) if you have linked one.
+  </Step>
+  <Step title="Complete the bot challenge">
+    Cloudflare Turnstile runs a low-friction bot check. Most users see no challenge at all; suspicious sessions get a click-to-confirm.
+  </Step>
+  <Step title="Complete MFA if enrolled">
+    If your workspace requires MFA, enter the code from your authenticator app. Backup codes can be used in place of the live code.
+  </Step>
+  <Step title="Land on your last-used app">
+    The session cookie is set and you are returned to wherever you started, or to app.softbooq.com if you came in directly.
+  </Step>
+</Steps>
+
+---
+
+## Multi-factor authentication
+
+Set up an authenticator app at Accounts → Security → Add MFA Device. Softbooq supports TOTP (Google Authenticator, 1Password, Authy, Microsoft Authenticator, etc.). On enrolment you are also given 10 backup codes; store them somewhere safe.
+
+If your workspace's Admin enforces MFA, you have a configurable grace period (default 7 days) to enrol after sign-in. After the grace period MFA is mandatory and unenrolled users are locked out until they enrol via the recovery email flow.
+
+Lost your authenticator app? Use a backup code, or contact your workspace Admin who can reset MFA for your account.
+
+---
+
+## Switch workspaces
+
+If your email is invited to multiple Softbooq workspaces, the workspace switcher in the top-right of any Softbooq app lets you jump between them without signing out. Each workspace maintains its own data, integrations, and AI wallet; switching changes the tenant context everywhere at once.
+
+---
+
+## Sessions
+
+Every active sign-in is listed at Accounts → Security → Active Sessions. You see the device, browser, IP, last-active time, and city (best-effort from IP geolocation). Click **Revoke** to sign out a specific session immediately, or **Revoke all other sessions** to keep only your current one active.
+
+Server-side revocation means a revoked session is immediately invalidated, even if the cookie is still on the device. The next request that device makes lands at the sign-in screen.
+
+---
+
+## Delete account
+
+Account deletion is handled per-workspace by the Admin (Settings → Users & Roles → Deactivate, then Permanently Delete after 30 days). If you only belong to a single workspace and want to delete your identity entirely, contact support.
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="I keep getting bounced back to the sign-in page">
+    The session cookie is not being set or persisted. Check that third-party cookies are allowed for `.softbooq.com` in your browser. Safari's strict cross-site cookie policy can also cause this; use Chrome or Edge if Safari blocks the cookie.
+  </Accordion>
+  <Accordion title="The Turnstile challenge will not complete">
+    Turnstile depends on Cloudflare's bot-detection service. If you are behind a corporate VPN or proxy that's been flagged, you may see persistent challenges. Try without VPN, or contact your IT team.
+  </Accordion>
+  <Accordion title="I lost my authenticator app and my backup codes">
+    Contact your workspace Admin via Settings → Users & Roles → Reset MFA. They can reset your MFA so you can re-enrol on next sign-in. If you are the only Admin or your account is the workspace owner, contact support@softbooq.com with proof of identity.
+  </Accordion>
+  <Accordion title="I changed my email and now nothing works">
+    Email changes require re-verification via a confirmation link sent to the new address. Check spam. The change does not take effect until you click the link.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="ERP" icon="layer-group" href="/erp/overview">
+    The main app you sign into via Accounts.
+  </Card>
+  <Card title="Files" icon="folder-open" href="/files/overview">
+    Cloud file management, signed in via the same session.
+  </Card>
+  <Card title="AI App" icon="robot" href="/platform/ai">
+    Standalone AI chat at ai.softbooq.com.
+  </Card>
+</CardGroup>

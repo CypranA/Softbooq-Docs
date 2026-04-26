@@ -1,0 +1,102 @@
+---
+title: HubSpot
+description: Bidirectional CRM contact sync between Softbooq and HubSpot
+icon: bullseye
+---
+
+The HubSpot integration keeps your Softbooq CRM customer list and HubSpot contacts list in sync. Contacts created in either system flow to the other, and updates are reconciled on a nightly cron plus an on-create push for low-latency sync of new records.
+
+## What syncs
+
+| Entity | Direction | Trigger |
+|--------|-----------|---------|
+| Contacts | Bidirectional | On-create push + nightly reconcile cron |
+| Companies | Inbound (planned) | Currently mapped from contact `company` field |
+| Deals | Not synced | HubSpot deals stay separate from Softbooq sales orders |
+
+<Note>
+  HubSpot deals and Softbooq sales orders are kept separate by design. Marketing-qualified leads belong in HubSpot until they convert; once they convert to a paying customer, the contact sync brings them across.
+</Note>
+
+---
+
+## Connect HubSpot
+
+<Steps>
+  <Step title="Open Settings → Integrations → HubSpot → Connect" />
+  <Step title="Sign in via HubSpot OAuth">
+    You are redirected to HubSpot's OAuth screen. Sign in with an account that has access to the HubSpot portal you want to connect.
+  </Step>
+  <Step title="Approve scopes">
+    Approve the read/write contacts scope. Softbooq does not request access to deals, tickets or marketing campaigns.
+  </Step>
+  <Step title="Choose the contact lifecycle stage filter">
+    Pick which HubSpot lifecycle stages should sync into Softbooq. Default: Customer and Subscriber. Leads and Marketing-Qualified-Leads are excluded by default to keep your CRM clean of unqualified records.
+  </Step>
+  <Step title="Run the initial reconcile">
+    The first reconcile pulls every matching contact into Softbooq and pushes any Softbooq customer that is missing from HubSpot. This may take a few minutes for large lists.
+  </Step>
+</Steps>
+
+---
+
+## Conflict resolution
+
+When the same email address exists in both HubSpot and Softbooq with different field values, the integration applies a "most-recently-updated wins" rule per field. The HubSpot `lastmodifieddate` and the Softbooq `updated_at` timestamp are compared at the field level. This avoids whole-record overwrites and preserves edits made in either system.
+
+If a record is created with the same email in both systems within a few seconds of each other, the deduplication step picks the older record as canonical and merges into it.
+
+---
+
+## Lifecycle stage and segmentation
+
+The HubSpot lifecycle stage flows into Softbooq as a CRM tag, so you can filter your customer list by stage (Customer, Evangelist, Other). Custom HubSpot properties are not synced by default; contact support if you need a specific custom property mapped.
+
+---
+
+## Disconnect
+
+<Steps>
+  <Step title="Open Settings → Integrations → HubSpot → Disconnect" />
+  <Step title="Confirm">
+    The OAuth token is revoked. The nightly cron stops running and on-create pushes are halted.
+  </Step>
+  <Step title="Imported contacts are retained">
+    Softbooq does not delete contacts on disconnect. They remain in your CRM as static records.
+  </Step>
+</Steps>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A new HubSpot contact is not appearing in Softbooq">
+    The HubSpot lifecycle stage filter may be excluding it. Check Settings → Integrations → HubSpot → Lifecycle Stages and confirm the stage is included. Then run **Reconcile now** to fetch immediately.
+  </Accordion>
+  <Accordion title="Softbooq updates are not pushing to HubSpot">
+    Check the integration sync log for the most recent push attempt. Common causes: the OAuth token was revoked in HubSpot, the contact's email is invalid, or HubSpot rate limits were hit (uncommon, the integration backs off automatically).
+  </Accordion>
+  <Accordion title="Two contacts in Softbooq have the same email after the import">
+    This indicates a Softbooq dedupe failure during the initial import. Open both records, identify the canonical one, and use the **Merge** action on the duplicate. Future imports will not create new duplicates because the email index now has a single match.
+  </Accordion>
+  <Accordion title="The lifecycle stage filter is not applying to records that already imported">
+    The filter applies on import only. Records already in Softbooq stay there even if their HubSpot stage no longer matches the filter. To remove them, archive them in Softbooq's CRM.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="CRM" icon="handshake" href="/erp/crm">
+    Where synced HubSpot contacts live in Softbooq.
+  </Card>
+  <Card title="Xero" icon="chart-line" href="/integrations/xero">
+    For pushing converted contacts to your accounting ledger as Xero contacts.
+  </Card>
+  <Card title="Email Providers" icon="envelope" href="/integrations/email">
+    Connect your sending email separately. HubSpot does not send emails on Softbooq's behalf.
+  </Card>
+</CardGroup>

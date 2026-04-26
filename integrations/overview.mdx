@@ -1,0 +1,82 @@
+---
+title: Integrations Overview
+description: Connect Softbooq to your stores, accounting tools, banks, CRMs and email providers
+icon: plug
+---
+
+Softbooq connects to the third-party tools your business already runs on. Every integration is configured under **Settings → Integrations** in the ERP and operates on your live tenant data, so changes flow both ways automatically.
+
+## What you can connect
+
+<CardGroup cols={2}>
+  <Card title="Shopify" icon="shopify" href="/integrations/shopify">
+    Two-way sync of products, orders, customers and inventory. Full webhook coverage.
+  </Card>
+  <Card title="WooCommerce" icon="store" href="/integrations/woocommerce">
+    Product, order and customer sync via merchant API keys (no OAuth).
+  </Card>
+  <Card title="Xero" icon="chart-line" href="/integrations/xero">
+    Push invoices and contacts to Xero on creation. OAuth-based.
+  </Card>
+  <Card title="HubSpot" icon="bullseye" href="/integrations/hubspot">
+    Bidirectional contact sync. Nightly cron + on-create push.
+  </Card>
+  <Card title="Bank Feeds" icon="building-columns" href="/integrations/bank-feeds">
+    Live bank transactions via Enable Banking (PSD2 across the EU + UK).
+  </Card>
+  <Card title="Outbound Payments" icon="money-bill-transfer" href="/integrations/payments">
+    Pay vendor bills in batches via Wise or Revolut. BYOK API keys.
+  </Card>
+  <Card title="Email Providers" icon="envelope" href="/integrations/email">
+    Microsoft 365, Google Workspace, SendGrid, Mailgun, Postmark, generic SMTP.
+  </Card>
+  <Card title="Travel Booking" icon="plane" href="/erp/travel">
+    Travelpayouts-powered flight, hotel and car search inside the Travel module.
+  </Card>
+</CardGroup>
+
+---
+
+## How integrations work
+
+Every integration follows the same pattern:
+
+1. **Connect** under Settings → Integrations. OAuth flows redirect to the provider; key-based integrations take an API token.
+2. **Choose the data direction**. Most integrations support both inbound (provider to Softbooq) and outbound (Softbooq to provider). You toggle which entities sync.
+3. **Run an initial backfill**. Imports historical data with date-range and per-entity filters so you do not flood Softbooq with stale records.
+4. **Live sync**. Webhooks (where supported) keep things current within seconds. A nightly cron catches anything that webhook delivery missed.
+5. **Disconnect** any time. Disconnect removes the access token and stops sync but does not delete data already imported.
+
+<Note>
+  Integration credentials are stored in the Supabase Vault, encrypted at rest. They are never visible in the UI after they are entered.
+</Note>
+
+---
+
+## Multi-tenant safety
+
+Every integration is scoped to a single Softbooq tenant. Data from one tenant never crosses to another. This is enforced by row-level security in the database and by tenant context resolution in every Edge Function that handles an integration callback.
+
+If you operate multiple Softbooq workspaces, each one connects its own integrations independently.
+
+---
+
+## Trial and plan limits
+
+Some integrations require a paid plan. Check the per-integration page for details. Free trial tenants can connect Shopify and email providers; Xero, HubSpot, WooCommerce and Bank Feeds require a Standard plan or above.
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Settings" icon="gear" href="/erp/settings">
+    All integration toggles live under Settings → Integrations.
+  </Card>
+  <Card title="Subscription" icon="credit-card" href="/billing/subscription">
+    Plans and which integrations each plan unlocks.
+  </Card>
+  <Card title="Reports" icon="chart-bar" href="/erp/reports">
+    Channel performance, reconciliation and profitability draw on integration data.
+  </Card>
+</CardGroup>

@@ -14,6 +14,7 @@ The Finance module is the financial hub of your ERP. Every monetary transaction 
 - **Journal entries** — manual accounting entries and adjustments
 - **Credit notes** — issue credits against existing invoices
 - **Payments** — record inbound and outbound payments
+- **Bank Feeds** — live bank transaction sync via Enable Banking, with auto-reconciliation
 
 ## Data flows into Finance from
 
@@ -139,6 +140,25 @@ The Finance module is the financial hub of your ERP. Every monetary transaction 
   </Step>
   <Step title="Post">
     The entry is posted to your ledger. Posted entries cannot be deleted — only reversed.
+  </Step>
+</Steps>
+
+### Connect Bank Feeds and reconcile transactions
+
+Bank Feeds bring your business bank account into Softbooq via Enable Banking (PSD2 / Open Banking, covering 2,500+ banks across the EU and UK). Every incoming transaction is automatically matched against your invoices, vendor bills, expenses, and payment runs by the Auto-Reconciliation Engine.
+
+<Steps>
+  <Step title="Connect your bank">
+    Go to Settings → Integrations → Bank Feeds → Connect, pick your bank, and authenticate via your bank's standard login. Softbooq never sees your credentials, the consent flow happens entirely on your bank's domain. See [Bank Feeds](/integrations/bank-feeds) for full setup.
+  </Step>
+  <Step title="Wait for the initial backfill">
+    Up to 90 days of historical transactions pull in. Larger accounts can take a few minutes.
+  </Step>
+  <Step title="Use the Reconciliation Workbench">
+    Open Reports → Reconciliation Workbench. HIGH-confidence matches are auto-applied. MEDIUM and LOW need a one-click confirm. Unmatched stay queued.
+  </Step>
+  <Step title="Renew consent every six months">
+    PSD2 mandates consent renewal every 180 days. You'll get an in-app banner two weeks before expiry, click it and re-authenticate at your bank.
   </Step>
 </Steps>
 

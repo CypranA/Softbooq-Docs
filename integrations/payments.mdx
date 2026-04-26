@@ -1,0 +1,129 @@
+---
+title: Outbound Payments
+description: Pay vendor bills in batches via Wise or Revolut, using your own API keys
+icon: money-bill-transfer
+---
+
+Outbound Payments lets you pay your vendor bills directly from Softbooq using your existing Wise Business or Revolut Business account. It is a BYOK (bring your own key) integration: Softbooq never holds funds, only orchestrates batch payments through your own provider account using API credentials you provide.
+
+## What you can do
+
+- Run **Payment Runs**: select multiple unpaid vendor bills, group by currency, push as a single bulk transfer
+- Pay individual vendor bills inline from Finance → Vendor Bills
+- Reconcile outbound payments against the Bank Feeds integration so the same transaction never gets matched twice
+
+<Note>
+  Wise and Revolut Business are the two providers currently supported. Both are BYOK: you generate the API keys in your provider account and paste them into Softbooq. Softbooq never sees your provider login.
+</Note>
+
+---
+
+## Connect Wise
+
+<Steps>
+  <Step title="Generate an API token in Wise">
+    Sign in to Wise Business → Account Settings → API Tokens → New Token. Set the permissions to **Full Access** (required for sending money). Copy the token, it is shown only once.
+  </Step>
+  <Step title="Open Settings → Integrations → Payments → Wise → Connect in Softbooq" />
+  <Step title="Paste the token">
+    The token is stored encrypted in the Vault. It is never displayed in the UI again.
+  </Step>
+  <Step title="Pick the default profile">
+    If your Wise account has multiple business profiles, choose the default one for payment runs. You can override per run.
+  </Step>
+  <Step title="Pick the default funding account">
+    Pick the multi-currency balance to draw from. Softbooq uses this as the source for all outbound transfers unless you override at run time.
+  </Step>
+</Steps>
+
+---
+
+## Connect Revolut
+
+<Steps>
+  <Step title="Create an API client in Revolut Business">
+    Sign in to Revolut Business → Settings → APIs → Create New Client. Select OAuth 2.0 client credentials. Copy the Client ID, Client Secret, and download the certificate.
+  </Step>
+  <Step title="Open Settings → Integrations → Payments → Revolut → Connect" />
+  <Step title="Paste credentials">
+    Paste the Client ID, Client Secret, and the certificate's contents. Click Test Connection.
+  </Step>
+  <Step title="Approve the connection in Revolut Business">
+    Revolut requires a one-time approval from an account admin. Sign in to Revolut Business and approve the new app under Settings → APIs → Approvals.
+  </Step>
+</Steps>
+
+---
+
+## Run a Payment Run
+
+<Steps>
+  <Step title="Open Procurement → Payment Runs → New Run" />
+  <Step title="Select the bills to pay">
+    Filter by due date, supplier, or currency. Tick the bills to include. The total per currency is shown at the top.
+  </Step>
+  <Step title="Pick the funding source">
+    Choose Wise or Revolut, the profile (Wise) or business account (Revolut), and the currency balance to draw from. If you have several balances, the run can split across them.
+  </Step>
+  <Step title="Review and confirm">
+    The summary screen shows each bill, the supplier's bank details (read from the supplier record), the FX rate where applicable, and the total. Approve.
+  </Step>
+  <Step title="Execute">
+    Softbooq creates a batch transfer in Wise or Revolut. The provider may require a final approval step in their app for high-value batches. Once approved, the transfer is queued and the bills are marked as Paid in Softbooq.
+  </Step>
+</Steps>
+
+---
+
+## Reconciliation
+
+When the bank transactions for an executed payment run come back through Bank Feeds, the Auto-Reconciliation Engine matches them to the run with HIGH confidence (the reference is preserved end-to-end). No manual matching is needed unless the provider modifies the reference.
+
+---
+
+## Disconnect
+
+<Steps>
+  <Step title="Open Settings → Integrations → Payments → Wise/Revolut → Disconnect" />
+  <Step title="Confirm">
+    The API credentials are wiped from the Vault. Sync stops; in-flight payment runs are not affected.
+  </Step>
+  <Step title="Revoke at the provider (recommended)">
+    Go to Wise → API Tokens or Revolut → API Clients and revoke the credentials there as well.
+  </Step>
+</Steps>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A payment run failed at execution">
+    Common causes: insufficient balance in the chosen funding account, supplier bank details malformed (IBAN check digits wrong, missing BIC for non-EU), or 2FA approval was required at Wise/Revolut and the prompt expired. Check the run's Activity tab for the exact provider error.
+  </Accordion>
+  <Accordion title="The supplier's bank details are not on the run">
+    Open the supplier record in Procurement → Suppliers and add bank details. Without them the supplier is excluded from runs by default.
+  </Accordion>
+  <Accordion title="Revolut returns 401 Unauthorised">
+    The Revolut OAuth token expires every 40 minutes; Softbooq refreshes it automatically using the long-lived refresh token. If the refresh token has been revoked (e.g. an admin removed the API client), you'll see 401. Reconnect to generate a new client.
+  </Accordion>
+  <Accordion title="A payment was sent but Softbooq still shows the bill as Unpaid">
+    The webhook from Wise/Revolut may have failed delivery. Click **Refresh status** on the payment run, or wait for the next 4-hourly status sync. If still stuck, check Bank Feeds; the actual bank transaction will eventually arrive and reconcile.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Procurement" icon="cart-shopping" href="/erp/procurement">
+    Where vendor bills come from and where Payment Runs are launched.
+  </Card>
+  <Card title="Bank Feeds" icon="building-columns" href="/integrations/bank-feeds">
+    Live confirmation that the outbound payment cleared.
+  </Card>
+  <Card title="Reconciliation Workbench" icon="check-double" href="/erp/reports">
+    For reviewing matches between payment runs and bank transactions.
+  </Card>
+</CardGroup>

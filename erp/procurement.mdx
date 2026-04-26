@@ -12,6 +12,7 @@ The Procurement module manages everything on the buying side of your business �
 - **Suppliers** — the master supplier directory
 - **Requisitions** — internal purchase requests pending approval
 - **Requests for quote (RFQs)** — competitive quote requests sent to multiple suppliers
+- **Payment Runs** — batch outbound vendor payments via Wise or Revolut
 
 ## Data flows out of Procurement to
 
@@ -122,6 +123,33 @@ The Procurement module manages everything on the buying side of your business �
     Finance will flag the bill if the amounts differ from the PO. Resolve the discrepancy before approving the bill for payment.
   </Step>
 </Steps>
+
+### Run a Payment Run (batch vendor payments)
+
+Payment Runs let you settle multiple vendor bills in one go via a single bulk transfer through Wise Business or Revolut Business. This replaces the manual "log into bank, type 30 transfers, click confirm 30 times" loop.
+
+<Steps>
+  <Step title="Connect Wise or Revolut first">
+    Go to Settings → Integrations → Payments and follow the connect flow. Both are BYOK (you supply API credentials). See [Outbound Payments](/integrations/payments) for setup.
+  </Step>
+  <Step title="Open Procurement → Payment Runs → New Run" />
+  <Step title="Select bills to pay">
+    Filter by due date, supplier, or currency. The total per currency is shown at the top.
+  </Step>
+  <Step title="Pick the funding source">
+    Choose the Wise profile or Revolut business account, and the currency balance to draw from.
+  </Step>
+  <Step title="Review and execute">
+    Each line shows the supplier, bank details, FX rate (if applicable), and amount. Click Execute. Provider may require a final approval in their app for high-value batches.
+  </Step>
+  <Step title="Reconciliation happens automatically">
+    When the bank transactions return through Bank Feeds, the Auto-Reconciliation Engine matches them to the run with HIGH confidence. Bills are marked Paid in Finance without manual entry.
+  </Step>
+</Steps>
+
+<Note>
+  Suppliers must have bank details on their record (IBAN/BIC for EU, account/sort code for UK, etc.) to be included in a run. Suppliers without bank details are filtered out automatically with an inline warning.
+</Note>
 
 ### Manage supplier performance
 

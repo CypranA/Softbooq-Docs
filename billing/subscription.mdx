@@ -1,0 +1,121 @@
+---
+title: Subscription & Plans
+description: Pricing, plan tiers, trials, and how to upgrade or downgrade
+icon: credit-card
+---
+
+Softbooq is a single subscription that covers ERP, Files, Accounts, and Portals for one company. AI credits are a separate wallet (see [AI Credits](/billing/ai-credits)). Subscriptions are billed monthly or annually via Stripe.
+
+## Plan tiers
+
+| Plan | Best for | Modules | Users | Storage |
+|------|----------|---------|-------|---------|
+| Starter | Solo and 2-5 person teams | All ERP modules, Files, Storefront, Client Portal | up to 5 | 25 GB |
+| Standard | Growing teams 5-25 | All Starter plus Manufacturing, Bank Feeds, Xero | up to 25 | 100 GB |
+| Plus | Mid-market 25-100 | All Standard plus HubSpot, multi-warehouse, Channel Performance, monthly AI credit grant | up to 100 | 500 GB |
+| Pro | 100+ users | All Plus plus point-in-time backup restore, custom invoice templates, dedicated support | unlimited | 2 TB |
+
+<Note>
+  All plans include the full security stack (MFA, IP allowlists, audit log) and unlimited number of integrations. Differences are scope (modules + users + storage) and a few tier-locked integrations.
+</Note>
+
+---
+
+## 30-day trial
+
+New tenants get a **30-day free trial** with full Standard-tier feature access. No credit card required to start. During the trial:
+
+- AI is enabled with a tighter per-request cap (3 credits) and 2 free credits to try
+- Storage is capped at 5 GB
+- Email sending is rate-limited to prevent spam abuse from disposable signups
+
+When the trial converts to paid, the rate limits relax, your full tier signup AI bonus is granted, and storage moves to your plan's quota.
+
+---
+
+## Upgrade
+
+<Steps>
+  <Step title="Open Settings → Subscription & Billing → Change Plan" />
+  <Step title="Pick the new plan">
+    The summary shows the prorated charge for the remainder of your current billing cycle.
+  </Step>
+  <Step title="Confirm">
+    Charge is applied immediately. New features unlock without delay. Future cycles bill at the new plan's full rate.
+  </Step>
+</Steps>
+
+---
+
+## Downgrade
+
+<Steps>
+  <Step title="Open Settings → Subscription & Billing → Change Plan → Downgrade" />
+  <Step title="Pick the lower plan">
+    The downgrade is queued; you keep current-plan features until the end of the cycle, then drop to the lower plan.
+  </Step>
+  <Step title="Watch for downgrade-blockers">
+    If your current usage exceeds the lower plan's quotas (e.g. more than 25 users on Standard while downgrading to Starter), you must reduce usage before the downgrade can apply. Softbooq alerts you a week before cycle end.
+  </Step>
+</Steps>
+
+---
+
+## Stripe proration on plan change
+
+Mid-cycle plan changes are prorated automatically by Stripe:
+
+- **Upgrade**: charged the difference between old and new plan, prorated for days remaining in the cycle.
+- **Downgrade**: credit for unused portion of the higher plan goes to your Stripe customer balance and applies to the next invoice.
+
+Proration handles per-user pricing too: if you add a user mid-cycle, you are charged a prorated per-user amount for the remaining days. If you remove a user, you receive a prorated credit.
+
+---
+
+## Cancel
+
+<Steps>
+  <Step title="Open Settings → Subscription & Billing → Cancel" />
+  <Step title="Pick the reason">
+    Optional, used to improve the product.
+  </Step>
+  <Step title="Confirm">
+    The subscription is set to cancel at the end of the current billing cycle. You retain full access until then. After cancellation, your data is retained read-only for 90 days; export at any time during that window.
+  </Step>
+</Steps>
+
+---
+
+## Update billing details
+
+<Steps>
+  <Step title="Open Settings → Subscription & Billing → Billing Details" />
+  <Step title="Update card or billing address">
+    Card details are managed by Stripe via the secure card-update flow. Softbooq never sees your full card number.
+  </Step>
+  <Step title="Save">
+    Changes apply to the next billing cycle. In-flight invoices retry against the new card automatically if a previous attempt failed.
+  </Step>
+</Steps>
+
+---
+
+## Failed payments
+
+If a renewal fails (insufficient funds, expired card), Stripe retries automatically over the next 3 weeks with smart retry logic. During this window you receive in-app and email warnings. If all retries fail, the subscription pauses: you keep read access for 14 days then your workspace is suspended (no data loss; you can resume by adding a working card).
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="AI Credits" icon="coins" href="/billing/ai-credits">
+    How AI usage is metered separately from the ERP subscription.
+  </Card>
+  <Card title="Settings" icon="gear" href="/erp/settings">
+    All subscription controls live under Settings.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    From signup to first invoice in under 10 minutes.
+  </Card>
+</CardGroup>

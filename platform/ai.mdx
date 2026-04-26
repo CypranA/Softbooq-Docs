@@ -1,0 +1,70 @@
+---
+title: Softbooq AI App
+description: The standalone AI workspace at ai.softbooq.com
+icon: robot
+---
+
+Softbooq AI is also available as a standalone app at `ai.softbooq.com`. It is the same assistant as the in-ERP sidebar widget, but with a full-page interface, longer chat history, and side-panel access to suggested questions per module. It signs in with the same Softbooq account and shares the same AI credit wallet as the in-ERP version.
+
+## When to use the standalone AI app
+
+- You want to ask AI questions without opening the ERP UI on the side
+- You are doing a long planning session and need a wider chat surface
+- You want a clean reading view for printing or sharing AI-generated summaries
+- You're on a tablet or phone where the in-ERP sidebar is cramped
+
+For quick "what is this?" questions while you're already in a module, the in-ERP sidebar is faster.
+
+---
+
+## Same credit wallet, same caps
+
+The standalone app reads the same wallet, the same caps, the same tier guardrails. There is no separate billing. See [AI Credits](/billing/ai-credits) for the full economics.
+
+A wallet chip in the top-right of the standalone app shows your current balance, just like the in-ERP version.
+
+---
+
+## Suggested questions
+
+The standalone app shows a curated set of suggested questions when you start a new chat. These are pre-scoped questions that come with tool access enabled (so they remain useful for trial tenants too). Clicking a suggestion fires a "preset" question that bypasses the trial-tenant tools-disabled rule and gives you the full experience.
+
+Typed questions on the standalone app run as regular ad-hoc messages. For trial tenants this means tools are disabled on typed messages until you convert to paid; for paid tenants there is no difference.
+
+---
+
+## Conversation history
+
+Each Softbooq account keeps the last 30 days of standalone AI conversations. Open any prior session from the left rail and continue where you left off; context is restored.
+
+To delete a conversation, open it and click **Delete** in the top-right. Deletion is immediate and permanent.
+
+---
+
+## Citations and sources
+
+When AI answers using your data, the **Based on your data** label appears below the response with the underlying records used. Click it to expand. Each cited record links to its detail page in the ERP, so you can drill in without leaving the AI app.
+
+Same citation behaviour as the in-ERP widget, just rendered in a wider layout.
+
+---
+
+## Permissions
+
+Access to AI is controlled the same way as in the ERP: the workspace must have AI enabled and your role must have AI permission. If you can use AI in the ERP, you can use it in the standalone app. If your role lacks AI permission, ai.softbooq.com shows a "no access" page with instructions to ask your Admin.
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="In-ERP AI Assistant" icon="sparkles" href="/erp/ai">
+    The same AI inside the ERP UI with module-aware suggestions.
+  </Card>
+  <Card title="AI Credits" icon="coins" href="/billing/ai-credits">
+    How wallets, packs, and per-request caps work.
+  </Card>
+  <Card title="Accounts" icon="id-card" href="/platform/accounts">
+    The shared sign-in for the standalone app.
+  </Card>
+</CardGroup>

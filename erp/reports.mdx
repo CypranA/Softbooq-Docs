@@ -12,6 +12,10 @@ The Reports module provides pre-built and filterable reports drawing live data f
 - **HR reports** — headcount, payroll summary, leave balances, attendance
 - **Inventory reports** — stock valuation, movement history, low stock alerts
 - **Project reports** — utilisation, budget vs actual, billable hours
+- **Profitability** — per-order gross margin with auto-captured COGS
+- **Channel Performance** — revenue, orders and AOV broken down by sales channel
+- **Reconciliation Workbench** — bank-transaction-to-record matching with three confidence tiers
+- **AI Usage** — credits spent per user, per request, with tokens captured
 
 ## Data flows into Reports from
 
@@ -124,6 +128,74 @@ The Reports module provides pre-built and filterable reports drawing live data f
     Consistently high utilisation may indicate burnout risk or need for additional headcount. Low utilisation may indicate capacity for more work.
   </Step>
 </Steps>
+
+### Run a Profitability report
+
+The Profitability report calculates per-order gross margin from your sales orders and the cost of goods sold (COGS) captured automatically at the time of the sale. Both Shopify and WooCommerce orders include shipping cost, so margins are accurate end-to-end.
+
+<Steps>
+  <Step title="Open Reports → Profitability" />
+  <Step title="Set the date range and channel filter (optional)">
+    Filter by sales channel (Shopify, WooCommerce, In-store, B2B) to see margin per channel, or leave unfiltered for the full picture.
+  </Step>
+  <Step title="Review the six KPI tiles">
+    Total revenue, total COGS, gross margin %, total shipping cost, average order value, and number of orders.
+  </Step>
+  <Step title="Drill into the per-order table">
+    The table shows every order with its margin %. Sort by margin to find loss-making orders. The table is virtualised, so 100,000 rows render without lag.
+  </Step>
+  <Step title="Export">
+    Download as CSV for further analysis.
+  </Step>
+</Steps>
+
+<Note>
+  COGS is captured automatically by a database trigger when a sales order is confirmed. Items priced using FIFO or weighted-average pull the relevant cost; manually-priced items use the cost field on the item record. If a margin looks wrong, check the item's cost in Inventory.
+</Note>
+
+### Run a Channel Performance report
+
+The Channel Performance report compares revenue, orders, and AOV across all your active sales channels in a single view.
+
+<Steps>
+  <Step title="Open Reports → Channel Performance" />
+  <Step title="Set the date range" />
+  <Step title="Review by channel">
+    Each channel (Shopify, WooCommerce, In-store, B2B, etc.) gets a row showing revenue, order count, AOV, refunds, and net revenue. Variance vs the previous period is shown alongside.
+  </Step>
+  <Step title="Drill into a channel">
+    Click any channel to see its top products, top customers, and per-order list filtered to that channel.
+  </Step>
+</Steps>
+
+To add or rename channels, see [Sales Channels](/erp/settings#sales-channels) in Settings.
+
+### Use the Reconciliation Workbench
+
+The Reconciliation Workbench is where you match bank transactions to invoices, vendor bills, expense claims, and payment runs. The Auto-Reconciliation Engine pre-classifies every transaction:
+
+- **HIGH** — auto-applied. No action needed; this section just shows you what was matched.
+- **MEDIUM** — confirm with one click, or reject.
+- **LOW** — review and confirm or reassign.
+- **Unmatched** — assign manually to an existing record, or create a new entry.
+
+<Steps>
+  <Step title="Open Reports → Reconciliation Workbench" />
+  <Step title="Pick the bank account">
+    Each connected bank account has its own reconciliation queue.
+  </Step>
+  <Step title="Work through MEDIUM and LOW matches first">
+    Click Confirm for ones the engine got right; Reject for ones it did not. The engine learns from your confirmations and improves matching over time.
+  </Step>
+  <Step title="Handle unmatched transactions">
+    Tag with a category, link to a record, or write off. Unmatched transactions stay queued indefinitely until you act on them.
+  </Step>
+  <Step title="Periodic close">
+    At month-end, run the Reconciliation Status report to confirm 100% of bank activity is reconciled before closing the period in Finance.
+  </Step>
+</Steps>
+
+The 3-pass matching engine runs nightly and on every new bank transaction. For details on confidence levels and the matching logic, see the [Bank Feeds](/integrations/bank-feeds) integration page.
 
 ### Build a custom report
 
