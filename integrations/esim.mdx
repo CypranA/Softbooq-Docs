@@ -1,0 +1,112 @@
+---
+title: eSIM (Airalo)
+description: Order travel eSIM data plans directly from the Travel & Expense module
+icon: sim-card
+---
+
+The Airalo eSIM integration lets employees buy international data plans from inside Softbooq without leaving the trip they are planning. Plans are purchased at wholesale rates, expenses are logged automatically, and a GL journal entry is posted on purchase.
+
+## What it does
+
+| Action | Where | Auto-created |
+|--------|-------|-------------|
+| Browse and order eSIM data plans | Travel & Expense → eSIMs | Draft expense, GL journal entry |
+| Order on behalf of an employee | Travel & Expense → eSIMs → Order for Employee | Employee notification, draft expense |
+| View active eSIM codes | Travel & Expense → eSIMs → My eSIMs | — |
+
+<Note>
+Airalo is a platform-level integration. No API key is required from your side — Softbooq manages the Airalo account and wholesale pricing. You see the retail price only; platform credit balances are not visible to tenants.
+</Note>
+
+---
+
+## How to order an eSIM
+
+<Steps>
+  <Step title="Open Travel & Expense → eSIMs" />
+  <Step title="Choose a destination and plan">
+    Filter by country or region. Plans are listed with data allowance, validity in days, and price. Select the plan that fits the trip duration and expected data usage.
+  </Step>
+  <Step title="Set quantity">
+    Default is one plan. Increase the quantity if ordering for multiple travellers or to have a backup plan on a long trip.
+  </Step>
+  <Step title="Complete payment">
+    **Paid plan**: the cost is added as an invoice item on your next Softbooq bill. No card entry is required.
+
+    **Trial plan**: a secure Stripe payment screen collects payment before the eSIM is activated. The eSIM is not issued until payment succeeds.
+  </Step>
+  <Step title="Receive the eSIM QR code">
+    The activation QR code is shown on screen immediately and sent by email. Install it on a supported device by scanning the QR code in the phone's Cellular / Mobile Data settings and selecting Add eSIM.
+  </Step>
+</Steps>
+
+---
+
+## Automatic expense and GL entry
+
+Every Airalo order automatically:
+
+1. Creates a **draft expense** in the ordering employee's Travel & Expense record, categorised as Telephone / Data.
+2. Posts a **GL journal entry**: debit to account 6300 (Communication Expenses) and credit to account 2000 (Accrued Payables) at the net order price.
+
+If the order is linked to a trip, the expense is associated with that trip and appears in the trip's cost breakdown alongside flights and hotels.
+
+---
+
+## Ordering on behalf of an employee
+
+Admins and HR Managers can order eSIMs for employees directly:
+
+<Steps>
+  <Step title="Open Travel & Expense → eSIMs → Order for Employee" />
+  <Step title="Select the employee">
+    The eSIM is linked to their travel profile. The draft expense is created on their record.
+  </Step>
+  <Step title="Choose a plan and confirm" />
+  <Step title="The employee receives a notification">
+    The employee is notified by email and in-app with the QR code and installation instructions.
+  </Step>
+</Steps>
+
+---
+
+## Device compatibility
+
+eSIMs require a device with hardware eSIM support. Most flagship phones manufactured after 2018 support eSIM. Verify device compatibility before ordering — once activated, an eSIM plan cannot be refunded.
+
+Check that the destination country is in the plan's coverage list before confirming. Some plans cover a continent but exclude specific countries.
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The QR code is not working">
+    eSIM QR codes are single-use. If you scanned it on one device you cannot transfer it to another without requesting a new eSIM. Contact support with the order reference if you need a replacement code before activation.
+  </Accordion>
+  <Accordion title="My order shows Awaiting Payment but I completed checkout">
+    If your browser closed before the payment confirmation was processed, the order stays in Awaiting Payment for up to 15 minutes while the system verifies the Stripe payment in the background. If it has been longer than 15 minutes, contact support with the order reference shown on the eSIM screen.
+  </Accordion>
+  <Accordion title="The draft expense was not created on my travel record">
+    The draft expense is created after payment confirmation. Check Finance → Expenses filtered to today's date. If it is still missing after a few minutes, contact support with the Airalo order ID shown on the eSIM detail screen.
+  </Accordion>
+  <Accordion title="The eSIM shows no signal in the destination country">
+    Check the plan's coverage list to confirm your specific country is included. If coverage is confirmed, toggle the eSIM line off and on in your phone's cellular settings. Some carriers take up to two hours to provision the line after first activation.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Travel & Expense" icon="plane" href="/erp/travel">
+    Where eSIM orders and expenses live.
+  </Card>
+  <Card title="Finance" icon="chart-pie" href="/erp/finance">
+    GL journal entries for eSIM purchases post here automatically.
+  </Card>
+  <Card title="HR" icon="briefcase" href="/erp/hr">
+    Travel profiles and ordering on behalf of employees.
+  </Card>
+</CardGroup>

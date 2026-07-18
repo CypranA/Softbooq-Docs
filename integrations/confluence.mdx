@@ -1,0 +1,113 @@
+---
+title: Confluence
+description: Search and push to your Atlassian knowledge base from IT & Helpdesk tickets
+icon: book
+---
+
+The Confluence integration connects your Atlassian Confluence knowledge base to Softbooq's IT & Helpdesk module. Support agents can search and reference KB articles from inside a ticket without switching tabs, and resolved tickets can be saved as new Confluence articles so solutions are captured for the team.
+
+## What it does
+
+| Action | Direction | Trigger |
+|--------|-----------|---------|
+| Search Confluence articles | Inbound | On-demand from ticket detail |
+| Link an article to a ticket | Inbound | Manual, from ticket detail |
+| Push ticket resolution to Confluence | Outbound | Manual, from a resolved ticket |
+
+<Note>
+If you also use the Jira integration, both can share the same Atlassian API token — the credentials are stored and managed separately but you can enter the same values under both integrations.
+</Note>
+
+---
+
+## Connect Confluence
+
+<Steps>
+  <Step title="Open Settings → Integrations → Confluence → Connect" />
+  <Step title="Enter your Atlassian credentials">
+    Provide your Confluence site URL (e.g. yourcompany.atlassian.net/wiki), your Atlassian account email, and an API token generated at id.atlassian.com/manage/api-tokens. Credentials are stored encrypted in the Softbooq Vault.
+  </Step>
+  <Step title="Choose the default space">
+    Select the Confluence space where your IT knowledge base articles live. This is the default search scope when agents look up articles from a ticket.
+  </Step>
+  <Step title="Test the connection">
+    The setup screen fetches a preview of the first few pages from your selected space. If they appear, the connection is working.
+  </Step>
+</Steps>
+
+---
+
+## Searching KB articles from a ticket
+
+<Steps>
+  <Step title="Open a ticket in IT & Helpdesk" />
+  <Step title="Click the Knowledge Base tab in the right panel" />
+  <Step title="Type a search query">
+    Results are pulled from Confluence's full-text search, scoped to the space selected at setup. Related results based on the ticket subject are shown automatically.
+  </Step>
+  <Step title="Preview an article">
+    Click any result title to render the article content inline. Copy a relevant section or click **Open in Confluence** for the full page.
+  </Step>
+  <Step title="Link the article to the ticket (optional)">
+    Click **Link article** to permanently associate it with the ticket. Linked articles appear on the ticket timeline and can be shown to the requesting employee via the client portal if you choose to share them.
+  </Step>
+</Steps>
+
+---
+
+## Pushing a resolved ticket to Confluence
+
+When a ticket is resolved and the solution is not yet documented, agents can create a Confluence draft from the resolution notes:
+
+<Steps>
+  <Step title="Open the resolved ticket" />
+  <Step title="Click Save to Knowledge Base" />
+  <Step title="Review the draft">
+    Softbooq pre-fills the article title from the ticket subject and the body from the resolution notes and key steps. Edit the content as needed before publishing.
+  </Step>
+  <Step title="Choose the target space and parent page">
+    Select where the article should live in Confluence. The default is the space configured at setup.
+  </Step>
+  <Step title="Publish">
+    The article is created in Confluence. A link back to the originating ticket is embedded in the article footer for traceability.
+  </Step>
+</Steps>
+
+<Note>
+Save to Knowledge Base is only available on resolved tickets and is restricted to users with the IT Admin or IT Agent role in Softbooq.
+</Note>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Article search returns no results">
+    Confirm the connected space has published pages and that the API token has read access to it. In Confluence, space permissions are configured under Space Settings → Permissions. The Atlassian account whose token you used must have at least View permission on the space.
+  </Accordion>
+  <Accordion title="The Save to Knowledge Base action is not visible on the ticket">
+    The action only appears on tickets with a Resolved status. It is also restricted to the IT Admin and IT Agent roles.
+  </Accordion>
+  <Accordion title="Publishing to Confluence fails with 403 Forbidden">
+    The API token account does not have Create Page permission in the target space. Update the space permissions in Confluence to include Create under that account, then retry the push.
+  </Accordion>
+  <Accordion title="Articles from a different Confluence space are appearing in search results">
+    The search scope is limited to the space configured at setup. If results from other spaces are appearing, check that the correct space key is set under Settings → Integrations → Confluence → Default space.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="IT & Helpdesk" icon="laptop" href="/erp/it">
+    Where Confluence search and the Save to Knowledge Base action live.
+  </Card>
+  <Card title="Project Tools" icon="list-check" href="/integrations/project-tools">
+    Jira integration for the same Atlassian ecosystem, covering task and issue sync.
+  </Card>
+  <Card title="Files" icon="folder-open" href="/files/overview">
+    Central document storage for files that do not belong in a knowledge base article.
+  </Card>
+</CardGroup>

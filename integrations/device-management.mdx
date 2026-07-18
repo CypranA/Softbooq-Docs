@@ -1,0 +1,124 @@
+---
+title: Device Management (Intune & Jamf)
+description: Pull device inventory and compliance status from Microsoft Intune and Jamf into IT & Helpdesk
+icon: laptop
+---
+
+The device management integrations connect Microsoft Intune (Windows, Android, cross-platform) and Jamf (macOS, iOS) to Softbooq's IT & Helpdesk module. Device records, compliance status, and enrolled-employee mappings flow into Softbooq so your IT team has a single view of asset compliance without switching between consoles.
+
+## What syncs
+
+| Entity | Direction | Trigger |
+|--------|-----------|---------|
+| Device inventory | Inbound | Nightly sync + manual refresh |
+| Compliance status | Inbound | Nightly sync |
+| Enrolled user (employee) mapping | Inbound | Nightly sync; matched by email |
+| Non-compliant device alerts | Inbound | Flagged on nightly sync |
+
+<Note>
+Softbooq reads compliance data from Intune and Jamf. It does not push configuration profiles, MDM policies, or commands to enrolled devices. Your existing MDM console remains the management plane for device control.
+</Note>
+
+---
+
+## Connect Microsoft Intune
+
+Intune is accessed via the Microsoft Graph API using the same Microsoft 365 OAuth token as Admin Sync. If Microsoft 365 is already connected for directory provisioning, no additional OAuth consent is needed.
+
+<Steps>
+  <Step title="Confirm Microsoft 365 is connected under Settings → Integrations → Admin Sync → Microsoft 365">
+    Intune requires the Device.Read.All scope. If you did not approve that scope when connecting Microsoft 365, reconnect and accept the updated consent prompt.
+  </Step>
+  <Step title="Open Settings → Integrations → Device Management → Intune → Enable">
+    Toggle Intune sync on. The first sync runs immediately and imports all enrolled devices.
+  </Step>
+  <Step title="Review the device inventory in IT & Helpdesk → Assets">
+    Imported devices appear with a compliance badge: Compliant, Non-Compliant, or Unknown.
+  </Step>
+</Steps>
+
+---
+
+## Connect Jamf
+
+<Steps>
+  <Step title="Open Settings → Integrations → Device Management → Jamf → Connect" />
+  <Step title="Enter your Jamf Pro URL">
+    Enter the URL of your Jamf Pro instance (e.g. yourcompany.jamfcloud.com). On-premises Jamf servers require a publicly accessible FQDN; Jamf Cloud instances work out of the box.
+  </Step>
+  <Step title="Create a Jamf API role and client credentials">
+    In Jamf Pro, go to Settings → API Roles and Clients. Create an API role with read-only access to Computers and Mobile Devices, then create a client with that role. Copy the Client ID and Client Secret.
+  </Step>
+  <Step title="Enter the credentials in Softbooq">
+    Paste the Client ID and Client Secret. They are stored encrypted in the Vault.
+  </Step>
+  <Step title="Run the initial sync">
+    Click **Sync now** to import the device inventory. Devices are matched to Softbooq employees by the enrolled user's email address in Jamf, which must match the employee's Softbooq account email.
+  </Step>
+</Steps>
+
+---
+
+## Compliance dashboard
+
+After sync, the IT & Helpdesk module's Compliance section shows:
+
+- Total enrolled devices split by Compliant / Non-Compliant / Unknown
+- A per-employee view of which devices are compliant
+- A filterable list of non-compliant devices with the policy failure reason (from Intune) or category (from Jamf)
+
+Non-compliant devices surface as a soft alert on the employee's HR record, visible to HR Admins and IT Admins.
+
+---
+
+## Onboarding and offboarding
+
+When a new employee is provisioned via Admin Sync, Softbooq checks for devices enrolled under their email in both Intune and Jamf. If a device is found, it is attached to their IT Assets record and the onboarding checklist item **Device assigned** is marked complete automatically.
+
+On offboarding (employee deactivated via Admin Sync or manually), their devices are marked **Pending return** in IT Assets. Softbooq does not trigger remote wipe or MDM unenrollment — those actions must be performed in your MDM console.
+
+---
+
+## Disconnect
+
+<Steps>
+  <Step title="Open Settings → Integrations → Device Management → [Intune or Jamf] → Disconnect" />
+  <Step title="Confirm">
+    Sync stops. Existing device records remain in IT & Helpdesk as static records.
+  </Step>
+</Steps>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Devices are importing but not matching to employees">
+    Matching uses the email on the device's enrolled user account in Intune or Jamf. If the device is enrolled under a different email than the employee's Softbooq account email, no match occurs. Update the enrolled user in your MDM console or update the employee's email in Softbooq to align them, then re-sync.
+  </Accordion>
+  <Accordion title="Intune shows Disconnected after connecting Microsoft 365">
+    Intune requires the Device.Read.All scope, which is a separate consent from the basic Microsoft 365 directory scopes. Reconnect Microsoft 365 under Admin Sync and approve the updated permissions on the Microsoft consent screen.
+  </Accordion>
+  <Accordion title="Jamf sync fails with 401 Unauthorized">
+    Jamf API client secrets can be rotated or expired. In Jamf Pro under Settings → API Roles and Clients, generate new credentials for the Softbooq API role, then update them in Softbooq under Settings → Integrations → Device Management → Jamf → Update credentials.
+  </Accordion>
+  <Accordion title="Compliance status shows Unknown for some devices">
+    Unknown means the device is enrolled but has not yet reported a compliance state. This is normal for newly enrolled devices — Intune compliance checks can take up to 24 hours for the first result. For Jamf, Unknown means the device is not in a managed compliance policy.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="IT & Helpdesk" icon="laptop" href="/erp/it">
+    The module where device records, tickets and compliance data live.
+  </Card>
+  <Card title="Admin Sync" icon="users-gear" href="/integrations/admin-sync">
+    Directory provisioning. Intune shares its OAuth token with the Microsoft 365 Admin Sync connection.
+  </Card>
+  <Card title="HR" icon="briefcase" href="/erp/hr">
+    Device assignment and offboarding status surface on the employee's HR record.
+  </Card>
+</CardGroup>

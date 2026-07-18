@@ -1,0 +1,181 @@
+---
+title: Project Tools
+description: Sync tasks and projects with Asana, Trello, Linear, Microsoft Planner and Jira
+icon: list-check
+---
+
+The project tools integrations link Softbooq's Projects module to the task management platform your team already uses. Tasks and projects flow between systems so engineers, designers, or operations staff can work in their preferred tool while project managers and finance see the same data in Softbooq for time tracking, budgeting and billing.
+
+## What syncs
+
+| Entity | Direction | Trigger |
+|--------|-----------|---------|
+| Projects | Bidirectional | On-create push + nightly cron |
+| Tasks / cards / issues | Bidirectional | On-create and on-status-change |
+| Assignees | Inbound | Matched to Softbooq team members by email |
+| Due dates | Bidirectional | Synced on create and update |
+
+<Note>
+Time entries and budgets are Softbooq-native and do not sync to external tools. The external tool is your task management layer; Softbooq is the project-of-record for costing, billing and reporting.
+</Note>
+
+---
+
+## Supported providers
+
+| Provider | Auth method | Scope |
+|----------|-------------|-------|
+| Asana | OAuth 2.0 | Workspace-scoped |
+| Trello | Personal API token | Board-scoped |
+| Linear | OAuth 2.0 | Team-scoped |
+| Microsoft Planner | Microsoft 365 OAuth | Uses your existing Microsoft 365 Admin Sync connection |
+| Jira | API token + workspace URL | Jira Cloud only |
+
+---
+
+## Connect Asana
+
+<Steps>
+  <Step title="Open Settings → Integrations → Project Tools → Asana → Connect" />
+  <Step title="Authorise via Asana OAuth">
+    You are redirected to Asana's authorisation screen. Sign in with an Asana account that has access to the workspace you want to connect.
+  </Step>
+  <Step title="Select the workspace">
+    If you manage multiple Asana workspaces, choose the one to link. One Asana workspace maps to one Softbooq tenant.
+  </Step>
+  <Step title="Map projects">
+    After connecting, go to the Projects module and open any project. Use **Link external project** to associate it with an Asana project in the connected workspace.
+  </Step>
+</Steps>
+
+---
+
+## Connect Trello
+
+<Steps>
+  <Step title="Generate a Trello personal API token">
+    Go to trello.com/app-key, copy your API key, then click **Generate Token** to create a personal token with read/write access.
+  </Step>
+  <Step title="Open Settings → Integrations → Project Tools → Trello → Connect">
+    Enter your API key and personal token. Credentials are stored encrypted in the Softbooq Vault and never shown again.
+  </Step>
+  <Step title="Map boards to projects">
+    In the Projects module, open a project and use **Link Trello board** to associate it with a Trello board. One board maps to one Softbooq project.
+  </Step>
+</Steps>
+
+---
+
+## Connect Linear
+
+<Steps>
+  <Step title="Open Settings → Integrations → Project Tools → Linear → Connect" />
+  <Step title="Authorise via Linear OAuth">
+    You are redirected to Linear's authorisation screen. Approve the requested scopes: read/write issues and projects.
+  </Step>
+  <Step title="Select the team">
+    Choose the Linear team to sync. One Linear team maps to one Softbooq tenant connection.
+  </Step>
+  <Step title="Map projects">
+    In the Projects module, use **Link Linear project** to associate a Softbooq project with a Linear project.
+  </Step>
+</Steps>
+
+---
+
+## Connect Microsoft Planner
+
+<Steps>
+  <Step title="Ensure Microsoft 365 is connected under Settings → Integrations → Admin Sync">
+    Microsoft Planner uses the same Microsoft 365 OAuth token as the directory sync. If Microsoft 365 is already connected, Planner is available without a separate OAuth flow.
+  </Step>
+  <Step title="Open Settings → Integrations → Project Tools → Microsoft Planner → Enable" />
+  <Step title="Map plans to projects">
+    In the Projects module, use **Link Planner plan** to associate a Softbooq project with a Microsoft Planner plan.
+  </Step>
+</Steps>
+
+---
+
+## Connect Jira
+
+<Steps>
+  <Step title="Generate a Jira API token">
+    Log into your Atlassian account at id.atlassian.com/manage/api-tokens and create a new API token. Copy the token value — it is shown only once.
+  </Step>
+  <Step title="Open Settings → Integrations → Project Tools → Jira → Connect">
+    Enter your Jira workspace URL (e.g. yourcompany.atlassian.net), your Atlassian account email, and the API token. Credentials are stored encrypted.
+  </Step>
+  <Step title="Map projects">
+    In the Projects module, use **Link Jira project** to associate a Softbooq project with a Jira project key (e.g. ENG, OPS).
+  </Step>
+</Steps>
+
+---
+
+## How task sync works
+
+When you link a Softbooq project to an external project, the initial sync imports all existing tasks. After that:
+
+- **New tasks created in Softbooq** are pushed to the external tool within seconds.
+- **New tasks created externally** are pulled into Softbooq on a nightly cron. Asana and Linear also push via webhooks for near-real-time inbound sync.
+- **Status changes** propagate in both directions. Completing a task in Softbooq marks it done externally, and vice versa.
+- **Assignees** are matched by email address. If the external assignee's email does not match any Softbooq team member, the task is imported as unassigned.
+
+---
+
+## Sync badges
+
+Each Softbooq task that originates from or is linked to an external tool shows a sync badge with the provider logo. The badge links directly to the record in the external tool and shows the last sync timestamp on hover.
+
+---
+
+## Disconnect a provider
+
+<Steps>
+  <Step title="Open Settings → Integrations → Project Tools → [Provider] → Disconnect" />
+  <Step title="Confirm">
+    The access token or API key is removed. Existing synced tasks remain in Softbooq as static records with no further sync.
+  </Step>
+  <Step title="Unlink project associations (optional)">
+    Open each linked project and click **Unlink** to remove the association. This is not required — unlinked associations simply stop producing sync attempts.
+  </Step>
+</Steps>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A task created externally is not appearing in Softbooq">
+    Webhook delivery is not always instant. Open the linked project in Softbooq and click **Sync now** to pull changes immediately. If the task is still missing after a manual sync, verify that the task is in the exact project or board linked in Softbooq — tasks in a different project in the same workspace are not pulled.
+  </Accordion>
+  <Accordion title="Assignees are showing as Unassigned after sync">
+    The sync matches assignees by email. The assignee's email in the external tool must exactly match their Softbooq account email. If they use different emails, update one of them to match, then run Sync now.
+  </Accordion>
+  <Accordion title="My Trello token stopped working">
+    Trello personal tokens do not expire unless revoked manually. If the token stops working, go to trello.com → Your Account → Power-Ups and Token Permissions and check its status. If revoked, generate a new token and update it in Settings → Integrations → Project Tools → Trello.
+  </Accordion>
+  <Accordion title="Microsoft Planner shows Not connected">
+    Planner uses the Microsoft 365 connection from Admin Sync. If the Microsoft 365 OAuth token has expired (inactive for more than 90 days), reconnect under Settings → Integrations → Admin Sync → Microsoft 365. Planner recovers automatically once the parent connection is active.
+  </Accordion>
+  <Accordion title="Jira tasks sync but comments are not coming across">
+    Comment sync is not currently supported. Task content (title, description, status, assignee, due date) syncs bidirectionally; Jira comments stay in Jira. Softbooq is the project-of-record for cost and billing, not a comment mirror.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Projects" icon="diagram-project" href="/erp/projects">
+    The Softbooq project record that external tasks sync into.
+  </Card>
+  <Card title="Admin Sync" icon="users-gear" href="/integrations/admin-sync">
+    Microsoft Planner shares its OAuth token with the Microsoft 365 Admin Sync connection.
+  </Card>
+  <Card title="Confluence" icon="book" href="/integrations/confluence">
+    Connect your Atlassian knowledge base to the IT Helpdesk module.
+  </Card>
+</CardGroup>

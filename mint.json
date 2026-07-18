@@ -32,7 +32,10 @@
     {
       "group": "Getting Started",
       "icon": "rocket",
-      "pages": ["introduction", "quickstart"]
+      "pages": [
+        "introduction",
+        "quickstart"
+      ]
     },
     {
       "group": "Platform Apps",
@@ -78,6 +81,7 @@
         "erp/maintenance",
         "erp/manufacturing",
         "erp/contracts",
+        "erp/leases",
         "erp/scheduling",
         "erp/compliance",
         "erp/travel",
@@ -91,13 +95,59 @@
       "icon": "plug",
       "pages": [
         "integrations/overview",
-        "integrations/shopify",
-        "integrations/woocommerce",
-        "integrations/xero",
-        "integrations/hubspot",
-        "integrations/bank-feeds",
-        "integrations/payments",
-        "integrations/email"
+        {
+          "group": "Commerce",
+          "pages": [
+            "integrations/shopify",
+            "integrations/woocommerce"
+          ]
+        },
+        {
+          "group": "Accounting & Finance",
+          "pages": [
+            "integrations/xero",
+            "integrations/byok-accounting",
+            "integrations/bank-feeds",
+            "integrations/payments"
+          ]
+        },
+        {
+          "group": "CRM & Marketing",
+          "pages": [
+            "integrations/hubspot"
+          ]
+        },
+        {
+          "group": "Project Management",
+          "pages": [
+            "integrations/project-tools",
+            "integrations/confluence"
+          ]
+        },
+        {
+          "group": "IT & Devices",
+          "pages": [
+            "integrations/device-management"
+          ]
+        },
+        {
+          "group": "Travel & Communications",
+          "pages": [
+            "integrations/esim"
+          ]
+        },
+        {
+          "group": "Identity & Directory",
+          "pages": [
+            "integrations/admin-sync"
+          ]
+        },
+        {
+          "group": "Email",
+          "pages": [
+            "integrations/email"
+          ]
+        }
       ]
     },
     {

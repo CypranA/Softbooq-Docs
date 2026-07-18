@@ -1,0 +1,155 @@
+---
+title: Admin Sync (Google Workspace & Microsoft 365)
+description: Auto-provision users and employees from your Google Workspace or Microsoft 365 directory
+icon: users-gear
+---
+
+The Admin Sync integration reads your company directory from Google Workspace or Microsoft 365 and provisions Softbooq user accounts and employee records automatically. New hires added to the directory appear in Softbooq within the hour; departures are deactivated. SCIM provisioning is also available for identity providers that support it — Okta, OneLogin, Azure AD B2C, and others.
+
+## What it syncs
+
+| Entity | Direction | Trigger |
+|--------|-----------|---------|
+| User accounts | Inbound | Hourly cron + SCIM push events |
+| Employee records | Inbound | Created on first user provision |
+| Account deactivation (offboarding) | Inbound | On directory suspension or SCIM deprovision |
+
+<Note>
+Admin Sync is a one-way provisioning flow. It creates and deactivates Softbooq accounts based on your directory state. It does not push changes from Softbooq back to your directory, and it does not manage passwords — authentication is delegated to your identity provider via SSO.
+</Note>
+
+---
+
+## Connect Google Workspace
+
+<Steps>
+  <Step title="Open Settings → Integrations → Admin Sync → Google Workspace → Connect" />
+  <Step title="Sign in as a Google Workspace Super Admin">
+    The OAuth consent screen requires a Super Admin account to grant read access across the whole directory. Sign in with a Super Admin email.
+  </Step>
+  <Step title="Approve the scopes">
+    Approve read-only Directory API access (admin.directory.user.readonly). Softbooq does not request write access to your Google directory.
+  </Step>
+  <Step title="Choose an organisational unit (optional)">
+    Restrict provisioning to a specific Google OU (e.g. /Staff or /Employees). If left blank, all active users in the directory are eligible.
+  </Step>
+  <Step title="Run the initial sync">
+    Click **Sync now** to import current directory members. Each member who does not already have a Softbooq account receives an invitation email. Existing Softbooq accounts are matched by email and linked to their directory record.
+  </Step>
+</Steps>
+
+---
+
+## Connect Microsoft 365
+
+<Steps>
+  <Step title="Open Settings → Integrations → Admin Sync → Microsoft 365 → Connect" />
+  <Step title="Sign in as a Microsoft 365 Global Admin">
+    The flow requests admin consent on behalf of your entire organisation. Sign in with a Global Admin account and click **Accept** on the Microsoft consent screen.
+  </Step>
+  <Step title="Review the requested scopes">
+    The consent includes User.Read.All (directory read), Group.Read.All (for optional group-based role mapping), and Device.Read.All (required if you enable the Intune device management integration).
+  </Step>
+  <Step title="Choose a security group or sync all users (optional)">
+    Restrict provisioning to members of a specific security group (e.g. SoftbooqUsers). If left blank, all licensed Microsoft 365 users are eligible.
+  </Step>
+  <Step title="Run the initial sync" />
+</Steps>
+
+---
+
+## SSO (Single Sign-On)
+
+Once Google Workspace or Microsoft 365 is connected, employees can sign in to Softbooq with their existing company credentials — no separate Softbooq password needed.
+
+- **Google Workspace**: employees click **Continue with Google** on the Softbooq sign-in page. No additional setup is required after connecting.
+- **Microsoft 365**: employees click **Continue with Microsoft**. This uses the same OAuth application approved during Admin Sync setup.
+
+Admins can enforce SSO — disabling email/password login entirely — under **Settings → Security → Authentication**.
+
+---
+
+## SCIM provisioning
+
+For identity providers other than Google Workspace and Microsoft 365 (Okta, OneLogin, Ping Identity, Azure AD B2C, and others), Softbooq supports SCIM 2.0:
+
+<Steps>
+  <Step title="Open Settings → Integrations → Admin Sync → SCIM → Generate token">
+    Copy the SCIM base URL and bearer token shown. These are entered into your identity provider.
+  </Step>
+  <Step title="Configure your identity provider">
+    Set the SCIM connector endpoint to the Softbooq SCIM base URL and paste the bearer token as the authorisation credential. Enable the SCIM operations Create, Update, and Deactivate.
+  </Step>
+  <Step title="Map IdP attributes to SCIM fields">
+    Required fields: `userName` (email address), `givenName`, `familyName`, `active`. Optional: `title`, `department`, `manager`.
+  </Step>
+  <Step title="Run a test provisioning event from your IdP">
+    Most identity providers include a Test Connection or Push User option. A successful test creates a user in Softbooq and logs the event in the Admin Sync activity log.
+  </Step>
+</Steps>
+
+---
+
+## Automatic offboarding
+
+When a directory user is suspended in Google Workspace or blocked in Microsoft 365, or when a SCIM `PATCH active=false` event is received, Softbooq automatically:
+
+1. Deactivates the employee's Softbooq account so they cannot sign in.
+2. Transfers open task assignments and pending approvals to their reporting manager.
+3. Marks their HR record as inactive.
+4. Releases their billable seat, reducing the active seat count.
+
+Historical data — records, audit entries, documents, and expense reports — is retained with the employee marked inactive. Nothing is deleted.
+
+<Note>
+Seat release on offboarding takes effect immediately in Softbooq. If you are on an annual plan with upfront billing, the released seat reduces your next renewal count but does not generate a prorated refund automatically. Contact support to adjust the seat count mid-term if needed.
+</Note>
+
+---
+
+## Disconnect
+
+<Steps>
+  <Step title="Open Settings → Integrations → Admin Sync → [Provider] → Disconnect" />
+  <Step title="Confirm">
+    Directory sync stops. Existing Softbooq accounts are not deactivated on disconnect — they remain active until deactivated manually or by a future sync if you reconnect.
+  </Step>
+</Steps>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A new hire is not appearing in Softbooq">
+    Syncs run hourly. Wait up to one hour or click **Sync now** to pull immediately. Also confirm the employee is in the OU or security group used to scope the sync, if you applied a restriction at setup.
+  </Accordion>
+  <Accordion title="The Microsoft 365 consent includes Device.Read.All and I do not use Intune">
+    Device.Read.All is requested because the Intune device management integration uses the same OAuth application. You can approve the full consent without enabling Intune — the permission is requested but unused until you turn on Intune sync under Settings → Integrations → Device Management → Intune.
+  </Accordion>
+  <Accordion title="An employee was suspended in the directory but is still active in Softbooq">
+    Deactivation runs on the next hourly sync. For immediate deactivation, click **Sync now** under Admin Sync, or deactivate the user manually under Settings → User Management → [User] → Deactivate.
+  </Accordion>
+  <Accordion title="SCIM provisioning is creating duplicate accounts">
+    Softbooq deduplicates on the `userName` (email) field. Duplicate accounts indicate the same employee has two IdP records with different emails. Consolidate to a single email in your identity provider, then deactivate the duplicate in Softbooq under Settings → User Management.
+  </Accordion>
+  <Accordion title="SSO is not working after connecting">
+    SSO uses the same OAuth application as the directory sync. If the token has expired (OAuth tokens expire after 90 days of inactivity), reconnect under Admin Sync first. Also confirm the employee's email in Softbooq exactly matches their email in the identity provider — any mismatch blocks the SSO account match.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Device Management" icon="laptop" href="/integrations/device-management">
+    Intune and Jamf use the same Microsoft 365 connection for device compliance sync.
+  </Card>
+  <Card title="Project Tools" icon="list-check" href="/integrations/project-tools">
+    Microsoft Planner uses the same Microsoft 365 OAuth connection.
+  </Card>
+  <Card title="HR" icon="briefcase" href="/erp/hr">
+    Employee records created by directory sync are linked to the HR employee profile.
+  </Card>
+</CardGroup>

@@ -1,12 +1,12 @@
 ---
 title: Integrations Overview
-description: Connect Softbooq to your stores, accounting tools, banks, CRMs and email providers
+description: Connect Softbooq to your stores, accounting tools, banks, CRMs, project tools and email providers
 icon: plug
 ---
 
-Softbooq connects to the third-party tools your business already runs on. Every integration is configured under **Settings → Integrations** in the ERP and operates on your live tenant data, so changes flow both ways automatically.
+Softbooq connects to the third-party tools your business already runs on. Every integration is configured under **Settings → Integrations** in the ERP and operates on your live tenant data, so changes flow automatically.
 
-## What you can connect
+## Commerce & e-commerce
 
 <CardGroup cols={2}>
   <Card title="Shopify" icon="shopify" href="/integrations/shopify">
@@ -15,23 +15,90 @@ Softbooq connects to the third-party tools your business already runs on. Every 
   <Card title="WooCommerce" icon="store" href="/integrations/woocommerce">
     Product, order and customer sync via merchant API keys (no OAuth).
   </Card>
+</CardGroup>
+
+---
+
+## Accounting & finance
+
+<CardGroup cols={2}>
   <Card title="Xero" icon="chart-line" href="/integrations/xero">
-    Push invoices and contacts to Xero on creation. OAuth-based.
+    Push invoices and contacts to Xero on creation. OAuth-based with bidirectional contact sync.
   </Card>
-  <Card title="HubSpot" icon="bullseye" href="/integrations/hubspot">
-    Bidirectional contact sync. Nightly cron + on-create push.
+  <Card title="BYOK Accounting Tools" icon="file-invoice" href="/integrations/byok-accounting">
+    Push invoices to lexoffice, sevDesk, Moneybird, Pennylane, Zoho Books or DATEV. API-key based.
   </Card>
   <Card title="Bank Feeds" icon="building-columns" href="/integrations/bank-feeds">
-    Live bank transactions via Enable Banking (PSD2 across the EU + UK).
+    Live bank transactions via Enable Banking (PSD2 across the EU and UK).
   </Card>
   <Card title="Outbound Payments" icon="money-bill-transfer" href="/integrations/payments">
     Pay vendor bills in batches via Wise or Revolut. BYOK API keys.
   </Card>
-  <Card title="Email Providers" icon="envelope" href="/integrations/email">
-    Microsoft 365, Google Workspace, SendGrid, Mailgun, Postmark, generic SMTP.
+</CardGroup>
+
+---
+
+## CRM & marketing
+
+<CardGroup cols={2}>
+  <Card title="HubSpot" icon="bullseye" href="/integrations/hubspot">
+    Bidirectional contact sync. Nightly cron plus on-create push.
+  </Card>
+</CardGroup>
+
+---
+
+## Project management
+
+<CardGroup cols={2}>
+  <Card title="Project Tools" icon="list-check" href="/integrations/project-tools">
+    Sync tasks and projects with Asana, Trello, Linear, Microsoft Planner or Jira.
+  </Card>
+  <Card title="Confluence" icon="book" href="/integrations/confluence">
+    Search your Atlassian knowledge base from IT Helpdesk tickets and push resolutions back to Confluence.
+  </Card>
+</CardGroup>
+
+---
+
+## IT & device management
+
+<CardGroup cols={2}>
+  <Card title="Device Management" icon="laptop" href="/integrations/device-management">
+    Pull device inventory and compliance status from Microsoft Intune and Jamf into IT & Helpdesk.
+  </Card>
+</CardGroup>
+
+---
+
+## Travel & communications
+
+<CardGroup cols={2}>
+  <Card title="eSIM (Airalo)" icon="sim-card" href="/integrations/esim">
+    Order international data plans from inside the Travel & Expense module. Auto-logs expenses and GL entries.
   </Card>
   <Card title="Travel Booking" icon="plane" href="/erp/travel">
     Travelpayouts-powered flight, hotel and car search inside the Travel module.
+  </Card>
+</CardGroup>
+
+---
+
+## Identity & directory
+
+<CardGroup cols={2}>
+  <Card title="Admin Sync" icon="users-gear" href="/integrations/admin-sync">
+    Auto-provision users from Google Workspace or Microsoft 365. SSO and SCIM also available.
+  </Card>
+</CardGroup>
+
+---
+
+## Email & messaging
+
+<CardGroup cols={2}>
+  <Card title="Email Providers" icon="envelope" href="/integrations/email">
+    Microsoft 365, Google Workspace, SendGrid, Mailgun, Postmark, and generic SMTP.
   </Card>
 </CardGroup>
 
@@ -44,11 +111,11 @@ Every integration follows the same pattern:
 1. **Connect** under Settings → Integrations. OAuth flows redirect to the provider; key-based integrations take an API token.
 2. **Choose the data direction**. Most integrations support both inbound (provider to Softbooq) and outbound (Softbooq to provider). You toggle which entities sync.
 3. **Run an initial backfill**. Imports historical data with date-range and per-entity filters so you do not flood Softbooq with stale records.
-4. **Live sync**. Webhooks (where supported) keep things current within seconds. A nightly cron catches anything that webhook delivery missed.
+4. **Live sync**. Webhooks (where supported) keep things current within seconds. A nightly cron catches anything webhook delivery missed.
 5. **Disconnect** any time. Disconnect removes the access token and stops sync but does not delete data already imported.
 
 <Note>
-  Integration credentials are stored in the Supabase Vault, encrypted at rest. They are never visible in the UI after they are entered.
+Integration credentials are stored in the Supabase Vault, encrypted at rest. They are never visible in the UI after they are entered.
 </Note>
 
 ---
@@ -57,13 +124,13 @@ Every integration follows the same pattern:
 
 Every integration is scoped to a single Softbooq tenant. Data from one tenant never crosses to another. This is enforced by row-level security in the database and by tenant context resolution in every Edge Function that handles an integration callback.
 
-If you operate multiple Softbooq workspaces, each one connects its own integrations independently.
+If you operate multiple Softbooq workspaces, each one connects its integrations independently.
 
 ---
 
-## Trial and plan limits
+## Plan limits
 
-Some integrations require a paid plan. Check the per-integration page for details. Free trial tenants can connect Shopify and email providers; Xero, HubSpot, WooCommerce and Bank Feeds require a Standard plan or above.
+Some integrations require a paid plan. Free trial tenants can connect email providers, project tools, and eSIM ordering; Xero, HubSpot, WooCommerce, Bank Feeds and Admin Sync require a Standard plan or above. Check the per-integration page for details.
 
 ---
 

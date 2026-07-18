@@ -141,6 +141,35 @@ The Travel & Expense module manages business travel and employee expense claims 
 
 ---
 
+## eSIM data plans
+
+Employees on international trips can order local data plans directly from the Travel & Expense module without leaving Softbooq. Plans are powered by Airalo and cover most countries worldwide.
+
+### Order an eSIM for a trip
+
+<Steps>
+  <Step title="Open Travel & Expense → eSIMs" />
+  <Step title="Filter by destination country or region">
+    Plans are listed with data allowance, validity in days, and price. Choose the plan that fits the trip duration and expected data usage.
+  </Step>
+  <Step title="Confirm the order">
+    On a paid plan, the cost is added to your next Softbooq bill. On a trial plan, a Stripe payment screen collects payment before the eSIM is activated.
+  </Step>
+  <Step title="Receive the QR code">
+    The eSIM activation QR code is shown immediately on screen and sent by email. Install it by scanning the QR code in your phone's Cellular / Mobile Data → Add eSIM settings.
+  </Step>
+</Steps>
+
+A draft expense (Telephone / Data) and a GL journal entry are created automatically on every order. If the order is linked to a trip, the expense appears in that trip's cost breakdown.
+
+<Note>
+eSIM QR codes are single-use and cannot be transferred between devices after activation. Verify the destination country is in the plan's coverage list before confirming — activated plans cannot be refunded.
+</Note>
+
+For full details on billing paths, ordering on behalf of employees, and troubleshooting, see the [eSIM integration page](/integrations/esim).
+
+---
+
 ## Troubleshooting
 
 <AccordionGroup>
