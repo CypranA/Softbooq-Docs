@@ -157,6 +157,9 @@ The module handles **both directions**:
   <Step title="Add the discount rate and the asset's economic life">
     Both feed the classification test: the discount rate gives the present value of the receipts, the economic life gives the term-to-life ratio.
   </Step>
+  <Step title="Add the unguaranteed residual and any initial direct costs (optional)">
+    For a finance lease these form part of the net investment alongside the rent. The **unguaranteed residual** is what the asset is still worth to you at the end of the term without a guarantee from the tenant — leave it blank for property, set it for vehicles, plant and equipment that come back with real value. **Initial direct costs** are the incremental costs of arranging the lease, such as agent commission. Omitting them understates both the net investment and the finance income earned across the term.
+  </Step>
   <Step title="Flag ownership transfer or a purchase option if either applies" />
   <Step title="Save">
     Softbooq classifies the lease as **operating** or **finance** and saves it as a draft.
@@ -212,26 +215,43 @@ The module handles **both directions**:
 
 ## Accounting treatments
 
-Recognition follows the standard configured for your tenant in **Settings → Accounting**.
+Two separate settings decide how a lease is accounted for, both in **Settings → Accounting**:
 
-| Treatment | Balance sheet | Income statement |
+- Your **accounting standard** decides the *rules* — whether a lease goes on the balance sheet at all.
+- Your **chart of accounts** decides the *account codes* those entries land in.
+
+They are independent. A French business uses the PCG chart with IFRS for SMEs recognition, so rental income posts to `706` rather than `4300` while the recognition logic is the same.
+
+### What each standard does with a lease you hold
+
+| Standard | Goes on balance sheet | Income statement |
 |---|---|---|
-| Off-balance (operating / HGB) | Nothing recognised | Rent expensed as incurred |
-| IFRS 16 | ROU asset + lease liability | Depreciation and interest, shown separately |
-| ASC 842 finance lease | ROU asset + lease liability | Depreciation and interest, shown separately |
-| ASC 842 operating lease | ROU asset + lease liability | A single straight-line lease cost |
-| Local GAAP | Per local rules | Per local rules |
+| **IFRS 16** | Every lease, except short-term and low-value elections | Depreciation and interest, shown separately |
+| **IFRS for SMEs** | Finance leases only (§20.9) | Finance: depreciation and interest. Operating: rent expensed |
+| **US GAAP (ASC 842)** | Finance **and** operating leases both | Finance: depreciation and interest. Operating: one straight-line lease cost |
+| **HGB (Germany)** | Only where you are the economic owner | Otherwise rent expensed as it falls due |
+| **Custom** | Never automatically | You choose the treatment per lease |
 
-For leases you grant:
+Short-term leases stay off balance sheet under every framework. Low-value leases are an IFRS 16 election.
+
+### What each standard does with a lease you grant
+
+Lessor classification is the same under IFRS and US GAAP — the risks-and-rewards test decides finance vs operating, and short-term/low-value elections do not apply to a lessor.
 
 | Classification | Balance sheet | Income statement |
 |---|---|---|
-| Operating | Asset stays and keeps depreciating | Rental income, straight-line |
+| Operating | Asset stays and keeps depreciating | Rental income, spread straight-line |
 | Finance | Asset derecognised, net investment recognised | Finance income as the net investment unwinds, plus any selling profit at commencement |
 
+The one framework difference is **straight-lining**. Under IFRS, IFRS for SMEs and US GAAP, an operating lessor must spread rent evenly across the term, so a stepped or rent-free lease posts an accrued/deferred rent adjustment on top of the invoice. Under HGB, rent is recognised as it falls due and no adjustment is posted.
+
 <Note>
-  Short-term and low-value leases can be kept off balance sheet under both IFRS 16 and ASC 842. Choose **Off-balance** as the treatment and rent is simply expensed.
+  Softbooq only **suggests** a treatment from your standard and the lease terms. The **Lease accounting** dropdown on every lease lets you override it, so a jurisdiction or a lease that needs different handling is never forced.
 </Note>
+
+### If you do not need lease accounting at all
+
+Choose **Off-balance** and no journal entry is ever posted. The module still works as a lease register: schedules, escalations, index-linked reviews, critical dates and reminders all run, and rent still becomes a vendor bill or a customer invoice. Only the recognition engine sits out.
 
 ---
 
