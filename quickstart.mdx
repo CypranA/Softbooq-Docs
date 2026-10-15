@@ -1,54 +1,44 @@
 ---
 title: Quickstart
-description: Get your Softbooq workspace set up and your first module running in under 15 minutes
+description: Create your workspace, set it up with Jacinta or with the forms, and send your first invoice
 icon: rocket
 ---
 
 <Steps>
 
-  <Step title="Create your account">
-    Go to [app.softbooq.com/signup](https://app.softbooq.com/signup) and create your account.
+  <Step title="Create your workspace">
+    Go to [accounts.softbooq.com/signup](https://accounts.softbooq.com/signup). Sign-up has three steps:
 
-    During onboarding you will be asked to:
-    - Choose a workspace name (this becomes your subdomain)
-    - Select your industry
-    - Pick the modules you want to activate — you can change this later
+    - **Organization**: your company name, a **workspace handle**, your country, and the **currency of your books**
+    - **Account**: your name, email and a password (at least 8 characters)
+    - **Plan**: Softbooq Go, Plus or Pro
 
-    <Tip>
-      Use your work email. Softbooq ties your workspace to your domain, which makes it easier to invite teammates.
-    </Tip>
+    Your handle becomes the address of your public site, `<your-handle>.mysoftbooq.com`, and you can change it later. Your country sets your tax and invoice defaults.
+
+    <Warning>
+      The currency of your books cannot be changed later. Your accounts, reports and invoices are kept in it.
+    </Warning>
+
+    Every workspace starts with a 30-day free trial. Nothing is charged during the trial, and you can switch plans as often as you like. See [Subscription & Plans](/billing/subscription).
   </Step>
 
-  <Step title="Complete your company profile">
-    Go to **Settings → Company Profile** and fill in:
+  <Step title="Set up with Jacinta, or with the forms">
+    When you start setting up, Softbooq asks how you would like to do it:
 
-    | Field | Why it matters |
-    |-------|---------------|
-    | Company name & logo | Appears on all outgoing invoices, quotes, and emails |
-    | Registered address | Required for legally compliant invoices |
-    | Default currency | Sets the base currency across Finance and Sales |
-    | Timezone | Affects scheduling, timestamps, and reports |
-    | Fiscal year start | Required before you can run financial reports |
+    - **Set up with AI**: tell Jacinta about your business in your own words. Your workspace fills in as you talk, and nothing is saved until you confirm it. Setup with Jacinta is free and ends when setup is finished.
+    - **Set up myself with the forms**: about ten minutes.
 
-    <Note>
-      You cannot generate invoices or run reports until your company profile and fiscal year are saved.
-    </Note>
+    Either way you see every answer before it is saved. The setup covers, step by step: **Your books**, **Invoicing**, **Branding**, **Team**, **Sample data**, **Customers and products**, **Bank**, **Opening balances**, **Invoice identity**, **Access**, and **Jacinta**.
   </Step>
 
-  <Step title="Connect your email">
-    Go to **Settings → Email** and connect your email provider. This lets Softbooq send invoices, quotes, and notifications from your own domain.
+  <Step title="Try things in Practice first (optional)">
+    Your **Practice workspace** is a copy of your workspace with example customers, products and invoices in your currency. Try anything there: nothing is real and nothing is sent. Emails it would have sent wait in **Would have been sent**.
 
-    <CardGroup cols={3}>
-      <Card title="Microsoft 365" icon="microsoft">
-        Sign in with your Microsoft account. Requires admin consent for your organisation.
-      </Card>
-      <Card title="Google Workspace" icon="google">
-        Sign in with Google. Works with any Google Workspace account.
-      </Card>
-      <Card title="SMTP / Other" icon="envelope">
-        Supports SendGrid, Mailgun, Postmark, or any custom SMTP server.
-      </Card>
-    </CardGroup>
+    Find it any time in the workspace switcher. It starts again fresh every week, and your real records stay separate.
+  </Step>
+
+  <Step title="Send email from your own domain (optional)">
+    Softbooq sends your invoices, reminders and notifications from its own mail service from day one, within a monthly allowance of free emails. To send from your own domain with no limit, open **Settings → Messaging & Channels → Email Service** and choose a provider: Brevo, SendGrid, Google, Microsoft 365 or Custom SMTP. Then use **Test Connection**.
   </Step>
 
   <Step title="Invite your team">
@@ -68,41 +58,29 @@ icon: rocket
     | **AI User** | Softbooq AI only. Does not use a paid seat |
 
     What each role may do can be adjusted in **User Management → Roles & Permissions**. Customers are not users: they sign in to their [customer account](/portals/customer-account).
-
-    <Tip>
-      Start with one Admin and one Manager. You can fine-tune permissions after your first week.
-    </Tip>
   </Step>
 
-  <Step title="Activate your first module">
-    Pick the module that solves your most immediate problem and set it up first. Come back and activate others once you are comfortable.
+  <Step title="Start with the module you need most">
+    Which modules you have depends on your plan (see [Subscription & Plans](/billing/subscription)). Pick the one that solves your most pressing problem first.
 
     <CardGroup cols={2}>
       <Card title="Send invoices and get paid" icon="file-invoice" href="/erp/finance">
-        Set up Finance first. Create your first invoice in under 2 minutes.
+        Finance: invoices, payments, expenses and your books.
       </Card>
-      <Card title="Manage customers and close deals" icon="users" href="/erp/crm">
-        Add your first customer in CRM and track your pipeline.
+      <Card title="Sell at the counter and online" icon="cash-register" href="/erp/sales">
+        Sales & POS: orders, the register and your online store.
       </Card>
-      <Card title="Track employees and run payroll" icon="briefcase" href="/erp/hr">
-        Add your first employee, set up pay grades, and run your first payroll.
+      <Card title="Keep track of stock" icon="boxes-stacked" href="/erp/inventory">
+        Products & Services: products, stock and transfers.
       </Card>
-      <Card title="Manage stock and warehouses" icon="boxes-stacked" href="/erp/inventory">
-        Add your first product, set stock levels, and create a warehouse.
-      </Card>
-      <Card title="Run projects and track time" icon="diagram-project" href="/erp/projects">
-        Create your first project, add tasks, and start logging time.
-      </Card>
-      <Card title="Raise purchase orders" icon="cart-shopping" href="/erp/procurement">
-        Add a supplier and raise your first purchase order.
+      <Card title="Buy from suppliers" icon="cart-shopping" href="/erp/procurement">
+        Procurement: suppliers and purchase orders.
       </Card>
     </CardGroup>
   </Step>
 
-  <Step title="Explore how everything connects">
-    Open the **System Map** in the app sidebar (at the bottom) to see a live diagram of every module and how data flows between them — for example, how a sales order in CRM flows into Finance as an invoice, or how payroll in HR posts to the Finance ledger.
-
-    This is the fastest way to understand the full platform and plan which modules to activate next.
+  <Step title="See how everything connects">
+    Open **System Map** at the bottom of the sidebar for a live diagram of the modules and how records flow between them.
   </Step>
 
 </Steps>
@@ -112,22 +90,19 @@ icon: rocket
 ## What to do next
 
 <CardGroup cols={2}>
-  <Card title="ERP Overview" icon="layer-group" href="/erp/overview">
-    Understand the full module map and how the ERP is structured.
+  <Card title="Jacinta, your AI assistant" icon="sparkles" href="/erp/ai">
+    Ask about your business in plain words. Fast mode is free.
   </Card>
-  <Card title="Finance" icon="chart-pie" href="/erp/finance">
-    Invoicing, expenses, payments, and your chart of accounts.
+  <Card title="ERP Overview" icon="layer-group" href="/erp/overview">
+    The modules and how they fit together.
   </Card>
   <Card title="Settings" icon="gear" href="/erp/settings">
-    Integrations, security, billing, and workspace configuration.
-  </Card>
-  <Card title="HR" icon="briefcase" href="/erp/hr">
-    Employees, payroll, leave, attendance, and onboarding.
+    Your business details, banking, integrations and security.
   </Card>
   <Card title="Softbooq Files" icon="folder-open" href="/files/overview">
-    Connect your cloud storage — SharePoint, Google Drive, OneDrive, and more.
+    Your documents and connected cloud storage.
   </Card>
   <Card title="Public & Portals" icon="globe" href="/portals/landing-page">
-    Set up your landing page, online store, careers page and customer account.
+    Your landing page, online store, careers page and customer account.
   </Card>
 </CardGroup>
