@@ -11,7 +11,7 @@ The Admin Portal is the part of the ERP that only Admin-role users see. It conta
 | Screen | Where it lives | What it does |
 |--------|----------------|--------------|
 | Users & Roles | Settings → Users & Roles | Invite, deactivate, change role, link to HR record |
-| Security Policy | Settings → Security | MFA enforcement, IP allowlist, session timeout, password complexity |
+| Security Policy | User Management → Security Policy | MFA enforcement by role, desktop inactivity lock, workspace access by email domain |
 | Audit Log | Settings → Audit Log | Append-only log of every user action for compliance |
 | AI Caps | Settings → AI → Caps | Per-user daily / per-request credit limits |
 | Subscription | Settings → Subscription & Billing | Upgrade, downgrade, cancel, view invoices |
@@ -61,15 +61,14 @@ You cannot demote yourself if you are the only Admin in the workspace; promote a
 
 ## Security Policy
 
-The Security tab consolidates workspace-wide security controls:
+| Control | What it does |
+|---------|--------------|
+| MFA Enforcement | Choose the roles that must use MFA, and a grace period in days to enrol (0 = immediately) |
+| Session Policy | **Desktop inactivity lock**, from 5 minutes to 2 hours. Phones are never locked by inactivity; the device PIN or Face ID protects them |
+| Workspace Access | Optional: only people with an email address on your own domain can join the workspace |
+| Single Sign-On (SSO) | Available on request: contact us |
 
-- **MFA enforcement** — require MFA for all users with a configurable grace period before lockout
-- **Session timeout** — set how long an inactive session stays valid (default 8 hours)
-- **IP allowlist** — only allow sign-in from listed CIDR ranges
-- **Password complexity** — minimum length and character mix
-- **SSO restrictions** — restrict sign-in to specific identity providers (e.g. only Microsoft 365 for your domain)
-
-Changing security policy applies to new sessions immediately. Existing sessions are not disrupted but are subject to the new policy on next refresh.
+The policy is in **User Management → Security Policy**. Changes apply to everyone in the workspace as soon as you save; nobody is signed out.
 
 ---
 

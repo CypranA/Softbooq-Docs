@@ -60,7 +60,7 @@
       "pages": [
         "portals/landing-page",
         "portals/storefront",
-        "portals/client-portal",
+        "portals/customer-account",
         "portals/careers"
       ]
     },
@@ -165,5 +165,8 @@
     "x": "https://x.com/softbooq",
     "facebook": "https://facebook.com/softbooq",
     "instagram": "https://instagram.com/softbooq"
-  }
+  },
+  "redirects": [
+    { "source": "/portals/client-portal", "destination": "/portals/customer-account" }
+  ]
 }

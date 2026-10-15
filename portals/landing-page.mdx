@@ -4,7 +4,7 @@ description: Your public-facing business profile page
 icon: house
 ---
 
-Every Softbooq workspace gets a public landing page at `yourdomain.com/{handle}` — a branded, fully customisable profile page that links to your store, careers page, and contact details. It is the public face of your business and the first thing customers, partners, or job applicants see.
+Every Softbooq workspace gets a public landing page at `<your-handle>.mysoftbooq.com` — a branded, fully customisable profile page that links to your store, careers page, and contact details. It is the public face of your business and the first thing customers, partners, or job applicants see.
 
 ## What the landing page shows
 
@@ -27,7 +27,7 @@ Every Softbooq workspace gets a public landing page at `yourdomain.com/{handle}`
     Enter a headline (e.g. "Building the future, together") and a subtitle. These replace the default company name and tagline in the hero section.
   </Step>
   <Step title="Set your primary CTA">
-    Enter the button text and destination URL. Common options: link to your shop (`/{handle}/shop`), careers page (`/{handle}/careers`), or scroll to contact (`#contact`).
+    Enter the button text and destination URL. Common options: link to your shop (`/shop`), careers page (`/careers`), or scroll to contact (`#contact`).
   </Step>
   <Step title="Write your About text">
     Add a paragraph describing your company, what you do, and who you serve. This appears in the About section below the hero.
@@ -36,7 +36,7 @@ Every Softbooq workspace gets a public landing page at `yourdomain.com/{handle}`
     Enter the public-facing email and phone number displayed in the Contact section.
   </Step>
   <Step title="Save">
-    Changes are live immediately at `yourdomain.com/{handle}`.
+    Changes are live immediately at `<your-handle>.mysoftbooq.com`.
   </Step>
 </Steps>
 
@@ -105,7 +105,7 @@ Every Softbooq workspace gets a public landing page at `yourdomain.com/{handle}`
     Check that the Store section is enabled under Landing Page → Sections. Also confirm that at least one item in your Inventory catalogue has been marked as visible in the storefront.
   </Accordion>
   <Accordion title="My custom CTA link is not working">
-    If the CTA links to an internal page (e.g. `/{handle}/shop`), use the full path starting from `/`. If it links to an external URL, include the full URL starting with `https://`. Internal anchor links (e.g. `#contact`) scroll to the section with that ID on the same page.
+    If the CTA links to an internal page (e.g. `/shop`), use the full path starting from `/`. If it links to an external URL, include the full URL starting with `https://`. Internal anchor links (e.g. `#contact`) scroll to the section with that ID on the same page.
   </Accordion>
 </AccordionGroup>
 
@@ -115,10 +115,10 @@ Every Softbooq workspace gets a public landing page at `yourdomain.com/{handle}`
 
 <AccordionGroup>
   <Accordion title="What is my landing page URL?">
-    Your landing page is at `{your-domain}/{public-handle}`. Your public handle is set in **Settings → Company Profile → Public Handle** — it is the short identifier used across all your public pages (store, careers, landing).
+    Your landing page is at `<your-handle>.mysoftbooq.com`. Your handle is set in **Settings → Business → Public Page → Public address**, and is used across all your public pages (store, careers, landing). If you change it, the old address stays reserved and keeps working.
   </Accordion>
   <Accordion title="Can I use a custom domain for my landing page?">
-    Custom domain support is available on Plus and Pro plans. Contact support to configure a custom domain that points to your landing page.
+    Not at the moment. Your public site is served at `<your-handle>.mysoftbooq.com`. You can link to it from your own website.
   </Accordion>
   <Accordion title="Can I add more sections or a custom layout?">
     The available sections (Hero, Services, About, Contact, Trust Bar) are fixed. Custom layout design is not available in the current version. You can show or hide each section but cannot reorder them.
@@ -139,7 +139,7 @@ Every Softbooq workspace gets a public landing page at `yourdomain.com/{handle}`
   <Card title="Careers Portal" icon="briefcase" href="/portals/careers">
     Link to your careers page to attract candidates from your landing page.
   </Card>
-  <Card title="Client Portal" icon="circle-user" href="/portals/client-portal">
-    Give customers a direct link to their secure client portal login.
+  <Card title="Customer account" icon="circle-user" href="/portals/customer-account">
+    Where your customers sign in to see their invoices and orders.
   </Card>
 </CardGroup>

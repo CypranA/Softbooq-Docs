@@ -52,17 +52,22 @@ icon: rocket
   </Step>
 
   <Step title="Invite your team">
-    Go to **Settings → Users & Roles** and invite your first team members.
+    Open **User Management** and invite your first team members.
 
-    Available roles:
+    Roles you can give:
 
     | Role | What they can do |
     |------|----------------|
-    | **Admin** | Full access to all modules and settings |
-    | **Manager** | Access to all modules, cannot change billing or security settings |
-    | **Employee** | Access to assigned modules only |
-    | **Viewer** | Read-only access across all modules |
-    | **Client** | Access to the client portal only — cannot see the ERP |
+    | **Admin** | Everything, including billing, users and security |
+    | **Manager** | Runs the business modules, including Finance |
+    | **Employee** | Day-to-day work in the modules their role allows; no Finance |
+    | **Viewer** | Looks without changing anything; no Finance |
+    | **Sales Rep** | CRM and Sales: customers, quotes and orders. Cannot raise an invoice or take payment |
+    | **Cashier** | The register only. Does not use a paid seat |
+    | **Auditor** | Read-only access to the books, for an outside accountant. Does not use a paid seat; at most two |
+    | **AI User** | Softbooq AI only. Does not use a paid seat |
+
+    What each role may do can be adjusted in **User Management → Roles & Permissions**. Customers are not users: they sign in to their [customer account](/portals/customer-account).
 
     <Tip>
       Start with one Admin and one Manager. You can fine-tune permissions after your first week.
@@ -123,6 +128,6 @@ icon: rocket
     Connect your cloud storage — SharePoint, Google Drive, OneDrive, and more.
   </Card>
   <Card title="Public & Portals" icon="globe" href="/portals/landing-page">
-    Set up your storefront, client portal, careers page, and landing page.
+    Set up your landing page, online store, careers page and customer account.
   </Card>
 </CardGroup>

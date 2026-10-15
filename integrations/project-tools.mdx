@@ -26,7 +26,7 @@ Time entries and budgets are Softbooq-native and do not sync to external tools. 
 | Provider | Auth method | Scope |
 |----------|-------------|-------|
 | Asana | OAuth 2.0 | Workspace-scoped |
-| Trello | Personal API token | Board-scoped |
+| Trello | One click: a Trello window opens, you press Allow | Board-scoped |
 | Linear | OAuth 2.0 | Team-scoped |
 | Microsoft Planner | Microsoft 365 OAuth | Uses your existing Microsoft 365 Admin Sync connection |
 | Jira | API token + workspace URL | Jira Cloud only |
@@ -53,14 +53,14 @@ Time entries and budgets are Softbooq-native and do not sync to external tools. 
 ## Connect Trello
 
 <Steps>
-  <Step title="Generate a Trello personal API token">
-    Go to trello.com/app-key, copy your API key, then click **Generate Token** to create a personal token with read/write access.
+  <Step title="Open Settings → Integrations → Project Management → Trello and choose Connect Trello">
+    A Trello window opens. Press **Allow**, and Trello is connected. You do not need an API key.
   </Step>
-  <Step title="Open Settings → Integrations → Project Tools → Trello → Connect">
-    Enter your API key and personal token. Credentials are stored encrypted in the Softbooq Vault and never shown again.
+  <Step title="If the window does not work: paste a token instead">
+    Choose **Having trouble? Paste a token instead**, then **Generate your Trello token**, paste it into the field, and choose **Connect with this token**.
   </Step>
-  <Step title="Map boards to projects">
-    In the Projects module, open a project and use **Link Trello board** to associate it with a Trello board. One board maps to one Softbooq project.
+  <Step title="Link boards to projects">
+    In a project, pick a board under **Select Trello board...** and choose **Link**. To link many at once, use **Manage Boards** in Settings. One board maps to one Softbooq project.
   </Step>
 </Steps>
 
@@ -154,7 +154,7 @@ Each Softbooq task that originates from or is linked to an external tool shows a
     The sync matches assignees by email. The assignee's email in the external tool must exactly match their Softbooq account email. If they use different emails, update one of them to match, then run Sync now.
   </Accordion>
   <Accordion title="My Trello token stopped working">
-    Trello personal tokens do not expire unless revoked manually. If the token stops working, go to trello.com → Your Account → Power-Ups and Token Permissions and check its status. If revoked, generate a new token and update it in Settings → Integrations → Project Tools → Trello.
+    The access may have been revoked in Trello (trello.com → your account → Power-Ups and Token Permissions). Disconnect Trello in Settings → Integrations → Project Management, then choose **Connect Trello** again. Your board links are paused on disconnect and your Softbooq tasks stay.
   </Accordion>
   <Accordion title="Microsoft Planner shows Not connected">
     Planner uses the Microsoft 365 connection from Admin Sync. If the Microsoft 365 OAuth token has expired (inactive for more than 90 days), reconnect under Settings → Integrations → Admin Sync → Microsoft 365. Planner recovers automatically once the parent connection is active.

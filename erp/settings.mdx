@@ -11,7 +11,7 @@ Settings is the configuration layer for your entire Softbooq workspace. Everythi
 - **Tenant configuration** — company profile, branding, currency, timezone, fiscal year
 - **Integrations** — connected third-party services (Shopify, WooCommerce, Xero, HubSpot, Bank Feeds, email, payments)
 - **Users & Roles** — user accounts, role assignments, and permissions
-- **Security** — MFA enforcement, session timeout, IP allowlists, password complexity
+- **Security** — MFA enforcement by role, desktop inactivity lock, workspace access by email domain
 - **Audit Log** — append-only record of every state-changing action in the workspace
 - **Sales Channels** — channel definitions for cross-channel inventory and reporting
 - **AI** — AI assistant toggle, credit wallet, per-user caps
@@ -29,7 +29,7 @@ Settings is the configuration layer for your entire Softbooq workspace. Everythi
     Enter company name, registered address, VAT or tax number, default currency, and timezone. These appear on all invoices, quotes, and emails sent from Softbooq.
   </Step>
   <Step title="Upload your logo">
-    Upload a PNG or SVG (recommended). Your logo appears on all outgoing documents and in the client portal header.
+    Upload a PNG or SVG (recommended). Your logo appears on your documents and on your public site.
   </Step>
   <Step title="Set your fiscal year">
     Choose the month your accounting year starts (e.g. January for a calendar year, April for a UK tax year). This is required before you can run financial reports or post depreciation.
@@ -108,18 +108,14 @@ Settings is the configuration layer for your entire Softbooq workspace. Everythi
 
 ### Tighten the Security Policy
 
-The Security Policy tab consolidates workspace-wide controls beyond MFA:
+| Control | What it does |
+|---------|--------------|
+| MFA Enforcement | Choose the roles that must use MFA, and a grace period in days to enrol (0 = immediately) |
+| Session Policy | **Desktop inactivity lock**, from 5 minutes to 2 hours. Phones are never locked by inactivity; the device PIN or Face ID protects them |
+| Workspace Access | Optional: only people with an email address on your own domain can join the workspace |
+| Single Sign-On (SSO) | Available on request: contact us |
 
-| Control | Default | Purpose |
-|---------|---------|---------|
-| Session timeout | 8 hours | How long an inactive session stays valid |
-| Password minimum length | 12 chars | Enforced on every set-password event |
-| Password complexity | upper+lower+digit | Mix required |
-| IP allowlist | off | Restrict sign-in to specific CIDR ranges |
-| SSO restriction | off | Allow only specific identity providers (e.g. Microsoft 365 only) |
-| Bot challenge | on | Cloudflare Turnstile on sign-in and signup |
-
-Changes to security policy apply to new sessions immediately. Existing sessions are subject to the new policy on their next refresh.
+The policy is in **User Management → Security Policy**. Changes apply to everyone in the workspace as soon as you save; nobody is signed out.
 
 ### Configure payment providers
 
@@ -225,21 +221,6 @@ Retention follows your plan: 1 year on Standard, 3 years on Plus, 7 years on Pro
 
 Mid-cycle plan changes and per-user changes are prorated automatically by Stripe. Adding a user mid-cycle charges a prorated per-user amount; removing a user issues a prorated credit on the next invoice. See [Subscription](/billing/subscription) for the full proration model and plan tiers.
 
-### Set up IP allowlisting
-
-<Steps>
-  <Step title="Open Settings → Security → IP Allowlist" />
-  <Step title="Add allowed IP addresses or ranges">
-    Enter your office IP address, VPN IP, or CIDR range (e.g. 203.0.113.0/24). Users can only log in from listed IP addresses.
-  </Step>
-  <Step title="Add your current IP first">
-    Always add your own IP before enabling allowlisting — locking yourself out requires a support ticket to resolve.
-  </Step>
-  <Step title="Enable">
-    Toggle **Enable IP Allowlist** and save. New login attempts from unlisted IPs are blocked immediately.
-  </Step>
-</Steps>
-
 ---
 
 ## Troubleshooting
@@ -259,9 +240,6 @@ Mid-cycle plan changes and per-user changes are prorated automatically by Stripe
   </Accordion>
   <Accordion title="My logo is not appearing on invoices after uploading it">
     Check the file format and size. PNG and SVG are recommended; JPEG is supported but may lose quality when scaled. Maximum file size is 2 MB. If the file meets these requirements, try clearing your browser cache and reloading the invoice preview.
-  </Accordion>
-  <Accordion title="IP allowlisting is enabled and I've locked myself out">
-    If you are locked out due to IP allowlisting, contact Softbooq support. Identity verification is required to make changes to IP security settings outside the platform.
   </Accordion>
 </AccordionGroup>
 
@@ -299,6 +277,6 @@ Mid-cycle plan changes and per-user changes are prorated automatically by Stripe
     Enable and manage the AI assistant for your workspace.
   </Card>
   <Card title="Public & Portals" icon="globe" href="/portals/landing-page">
-    Configure your storefront, client portal, and public landing page.
+    Configure your public site: landing page, online store and customer account.
   </Card>
 </CardGroup>

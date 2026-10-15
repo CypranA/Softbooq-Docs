@@ -32,14 +32,11 @@ The Scheduling module manages bookable resources — rooms, equipment, staff —
   <Step title="Set buffer time (optional)">
     Add a buffer between bookings (e.g. 15 minutes). This prevents back-to-back bookings with no time for setup, travel, or preparation.
   </Step>
-  <Step title="Set booking rules">
-    Choose the minimum and maximum booking duration, and how far in advance bookings can be made or cancelled.
-  </Step>
-  <Step title="Enable client portal booking (optional)">
-    Toggle to allow customers to book this resource directly through the client portal without staff intervention.
+  <Step title="Available for online booking (optional)">
+    Tick **Available for online booking** so customers can pick this resource when booking a service on your online store.
   </Step>
   <Step title="Save">
-    The resource is now bookable by your team and, if enabled, by clients via the client portal.
+    The resource is now bookable by your team and, if ticked, by customers on your online store.
   </Step>
 </Steps>
 
@@ -136,8 +133,8 @@ The Scheduling module manages bookable resources — rooms, equipment, staff —
   <Accordion title="A time slot appears available but I cannot book it">
     The slot may be within a buffer period from an adjacent booking. Check the resource's buffer time setting. If the slot appears immediately before or after another booking, the buffer is blocking it. You can either reduce the buffer time on the resource or find an alternative slot.
   </Accordion>
-  <Accordion title="A customer tried to book via the portal but the resource was not visible">
-    Client portal booking must be enabled per resource. Open the resource record and confirm that **Enable client portal booking** is toggled on. Also check that the customer has active portal access under **Settings → Users & Roles**.
+  <Accordion title="A customer tried to book online but the resource was not visible">
+    Open the resource and confirm that **Available for online booking** is ticked. Then check **Settings → Business → Public Page**, where **Public Booking Resources** lists the resources customers can book in the online store.
   </Accordion>
   <Accordion title="I cannot delete a resource that has upcoming bookings">
     Resources with future bookings cannot be deleted — doing so would orphan the booking records. Cancel all upcoming bookings first, then delete the resource. Alternatively, archive the resource — it will be hidden from new bookings but historical records are preserved.
@@ -156,7 +153,7 @@ The Scheduling module manages bookable resources — rooms, equipment, staff —
 
 <AccordionGroup>
   <Accordion title="Can customers book resources directly without going through a staff member?">
-    Yes. Enable client portal booking on each resource you want to make self-bookable. Customers with portal access will see a booking interface showing availability in real time. You can configure whether bookings require staff confirmation or are instantly confirmed.
+    Yes. Tick **Available for online booking** on each resource you want customers to book, and choose it under **Public Booking Resources**. Customers then book a service with that resource on your online store.
   </Accordion>
   <Accordion title="Can I charge customers for bookings?">
     Yes. Set a booking rate on the resource (e.g. £50 per hour). When a booking is confirmed, a pending invoice is generated in Finance. The invoice is sent automatically or held for manual review depending on your billing settings.

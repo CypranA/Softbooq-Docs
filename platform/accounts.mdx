@@ -26,7 +26,7 @@ When you sign in at accounts.softbooq.com, Softbooq sets a shared session cookie
 Sign out at any one app and the cookie is cleared everywhere.
 
 <Note>
-  The cookie is HttpOnly and Secure. It cannot be read or modified by JavaScript on any page, which protects against session hijacking via XSS. The cookie is invalidated server-side on sign-out, not just deleted client-side, so a stolen cookie is useless after sign-out.
+  The cookie is Secure and SameSite=Lax. It is deliberately not HttpOnly: the apps read the session from JavaScript. The access token inside it lasts one hour and the refresh token is rotated each time it is used.
 </Note>
 
 ---
