@@ -70,6 +70,7 @@
       "pages": [
         "erp/overview",
         "erp/ai",
+        "erp/jacinta-help",
         "erp/finance",
         "erp/crm",
         "erp/sales",
