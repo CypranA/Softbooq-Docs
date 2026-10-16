@@ -1,14 +1,14 @@
 ---
-title: Leases
+title: Leases & Obligations
 description: Leases you hold and leases you grant, with IFRS 16 / ASC 842 accounting
 icon: building
 ---
 
-The Leases module manages leases and recurring commitments in one place. A lease is treated as a general *obligation*: a counterparty, a term, a payment schedule that can escalate over time, and a set of critical dates — break options, rent reviews, renewals — each with its own notice period.
+Leases & Obligations manages leases and other recurring commitments in one place: leases, equipment leases, subscriptions, insurance, service contracts and loans. It is part of Softbooq Plus and Pro. A lease is treated as a general *obligation*: a counterparty, a term, a payment schedule that can escalate over time, and a set of critical dates — break options, rent reviews, renewals — each with its own notice period.
 
 The module handles **both directions**:
 
-- **Leases you hold** (you are the lessee) — you pay rent. Rent becomes a vendor bill you settle through Payment Runs.
+- **Leases you hold** (you are the lessee) — you pay rent. **Generate due payments** turns rent that is due into supplier bills, waiting for approval in **Finance → Purchases → Vendor Bills**, which you then pay through Payment Runs.
 - **Leases you grant** (you are the lessor) — you own an asset and lease it out. Rent becomes a customer invoice your tenant pays.
 
 ## What Leases owns
@@ -33,7 +33,7 @@ The module handles **both directions**:
 
 | Module | What it sends |
 |--------|--------------|
-| Procurement | Vendor bills for rent you owe, which flow into Payment Runs |
+| Finance | Supplier bills for rent you owe (Vendor Bills, then Payment Runs) |
 | Sales / Finance | Customer invoices for rent you are owed |
 | Finance / GL | ROU assets, lease liabilities, depreciation, interest, rental income, finance income, net investment |
 | Assets | Derecognition of an asset granted under a finance lease, and its reinstatement on termination |
@@ -124,7 +124,7 @@ The module handles **both directions**:
     Review the parsed preview and correct anything flagged before committing.
   </Step>
   <Step title="Import">
-    Leases are created with their schedules. Check the rent schedule on a sample before relying on the billing.
+    Leases are created as drafts, with their schedules. Check them, and the rent schedule on a sample, before you activate them.
   </Step>
 </Steps>
 
@@ -215,10 +215,12 @@ The module handles **both directions**:
 
 ## Accounting treatments
 
-Two separate settings decide how a lease is accounted for, both in **Settings → Accounting**:
+Two separate settings decide how a lease is accounted for, both in **Settings → Business → Accounting**:
 
 - Your **accounting standard** decides the *rules* — whether a lease goes on the balance sheet at all.
 - Your **chart of accounts** decides the *account codes* those entries land in.
+
+Each lease's own treatment is chosen on the lease, under **Show advanced options**.
 
 They are independent. A French business uses the PCG chart with IFRS for SMEs recognition, so rental income posts to `706` rather than `4300` while the recognition logic is the same.
 
@@ -326,8 +328,8 @@ Choose **Off-balance** and no journal entry is ever posted. The module still wor
   <Card title="Assets" icon="boxes-stacked" href="/erp/assets">
     The asset register supplies what you lease out, and receives assets back on termination.
   </Card>
-  <Card title="Procurement" icon="cart-shopping" href="/erp/procurement">
-    Rent on a lease you hold becomes a vendor bill and settles through Payment Runs.
+  <Card title="Finance" icon="chart-pie" href="/erp/finance">
+    Rent on a lease you hold becomes a supplier bill and is paid through Payment Runs.
   </Card>
   <Card title="Sales" icon="receipt" href="/erp/sales">
     Rent on a lease you grant becomes a customer invoice and settles through receivables.
