@@ -1,36 +1,29 @@
 ---
 title: Finance
-description: Invoicing, expenses, payments and accounting
+description: Invoices, payments, bills, expenses and your books, in five sections
 icon: chart-pie
 ---
 
-The Finance module is the financial hub of your ERP. Every monetary transaction across all other modules — sales revenue, payroll, vendor bills, project billing, asset depreciation — flows into Finance automatically.
+Finance is where your money is recorded: what customers owe you, what you owe suppliers, and the books behind every report. Sales, purchases, payroll and assets from the other modules post here automatically.
 
-## What Finance owns
+## How Finance is organised
 
-- **Invoices** — create, send, and track customer invoices with payment status
-- **Expenses** — log and categorise company expenses
-- **Vendor bills** — record and manage supplier invoices
-- **Journal entries** — manual accounting entries and adjustments
-- **Credit notes** — issue credits against existing invoices
-- **Payments** — record inbound and outbound payments
-- **Bank Feeds** — live bank transaction sync via Enable Banking, with auto-reconciliation
+Finance has five sections along the top. Each has its own tabs underneath.
 
-## Data flows into Finance from
+| Section | Tabs |
+|---------|------|
+| **Dashboard** | Overview, **Books Health** |
+| **Sales** | Invoices, Recurring Invoices, Credit Notes, Billable Time, Collections, Payments |
+| **Purchases** | Bills, Expenses, Recurring Expenses, Vendor Credits, Reimbursements, Invoice Inbox, Vendor Bills, Payment Runs |
+| **Planning** | Budget, Forecast, Allocation Rules |
+| **Accounting** | Journal Entries, General Ledger, A/P Aging, Chart of Accounts, Cost Centers, Dimensions, Accruals & Amortization, Period End Closing, Reconciliation, Bank Feeds, Books Health |
 
-| Module | What it sends |
-|--------|--------------|
-| CRM | Customer invoices |
-| Sales & POS | Sales revenue |
-| HR | Payroll |
-| Procurement | Vendor bills |
-| Projects | Billable time |
-| Travel & Expense | Reimbursements |
-| Assets | Depreciation |
-| Contracts | Contract value |
+Revenue Recognition, Provisions and Development Costs also appear under Accounting unless advanced accounting is switched off in the Finance settings (the gear).
+
+**Books Health** checks whether your books can be trusted and offers repairs for what it finds. It sits next to your figures under Dashboard, and under Accounting.
 
 <Note>
-  Finance requires your company profile and fiscal year to be configured before you can create invoices or run reports. Set these up under **Settings → Company Profile**.
+  Finance needs the Finance permissions. Admins and Managers have them; Employees and Viewers do not see Finance.
 </Note>
 
 ---
@@ -40,187 +33,57 @@ The Finance module is the financial hub of your ERP. Every monetary transaction 
 ### Create and send an invoice
 
 <Steps>
-  <Step title="Open Finance → Invoices → New Invoice" />
-  <Step title="Select the customer">
-    Choose from your CRM customer list. Billing address and payment terms auto-populate.
+  <Step title="Sales → Invoices → New Invoice" />
+  <Step title="Fill in the invoice">
+    Choose the customer, add the lines, and check the currency, payment terms and status. A new invoice starts as **Draft**.
   </Step>
-  <Step title="Add line items">
-    Add products or services, quantities, and unit prices. Apply a line-level or overall discount if needed.
-  </Step>
-  <Step title="Set the due date">
-    Choose a specific due date or select a payment term (e.g. Net 30) to calculate it automatically.
-  </Step>
-  <Step title="Add notes or payment instructions (optional)">
-    Include bank details, reference numbers, or any custom message for the customer.
-  </Step>
-  <Step title="Click Send Invoice">
-    The invoice is emailed from your connected email provider. Status changes to **Sent**.
+  <Step title="Save Invoice" />
+  <Step title="Send it">
+    In the invoice list, choose **Send Email** on the invoice. Emailing a draft marks it **Sent**.
   </Step>
 </Steps>
 
-### Record a payment against an invoice
+For invoices that repeat, use **Sales → Recurring Invoices → Create Template**: weekly, monthly, quarterly or yearly, and paused or active.
 
-<Steps>
-  <Step title="Open the invoice">
-    Find it under Finance → Invoices. Filter by **Sent** or **Overdue**.
-  </Step>
-  <Step title="Click Record Payment">
-    Enter the amount received, payment date, and payment method (bank transfer, card, cash, etc.).
-  </Step>
-  <Step title="Partial payment">
-    If the customer paid less than the full amount, enter only what was received. The invoice status becomes **Partially Paid** and the outstanding balance is shown.
-  </Step>
-  <Step title="Save">
-    The payment is posted to your accounts. Status updates to **Paid** when fully settled.
-  </Step>
-</Steps>
+### Record a payment
 
-### Pay a vendor bill
+Open the invoice and choose **Record Payment**. Enter the amount, the method and the account it was paid into. If the customer has credit with you, the dialog offers **Apply ... of credit**, and you can tick **Email the customer a receipt**.
 
-<Steps>
-  <Step title="Open Finance → Vendor Bills">
-    Bills arrive automatically when a Procurement PO is received. You can also create them manually.
-  </Step>
-  <Step title="Open the bill and review it">
-    Verify the amount, supplier, and due date match the physical invoice you received.
-  </Step>
-  <Step title="Click Record Payment">
-    Enter the amount paid, date, and payment method.
-  </Step>
-  <Step title="Save">
-    The bill is marked **Paid** and the payment is posted to your accounts payable ledger.
-  </Step>
-</Steps>
+A part payment leaves the invoice **Partially Paid**; full payment makes it **Paid**. A payment larger than the invoice becomes credit for that customer.
+
+### Bills from suppliers
+
+Supplier bills reach **Purchases → Bills** from the **Invoice Inbox** (forwarded or uploaded) and from purchase orders (**Create Bill** in Procurement). Bills move through the stages **Inbox**, **To approve**, **To pay**, **Paid** (or **Rejected**). **Pay** takes you to **Payment Runs**, where you pay several suppliers at once or export a bank file.
 
 ### Log an expense
 
-<Steps>
-  <Step title="Open Finance → Expenses → New Expense" />
-  <Step title="Fill in the details">
-    Enter amount, date, and category (Travel, Software, Office Supplies, Meals, etc.).
-  </Step>
-  <Step title="Attach a receipt">
-    Upload the receipt image or PDF. Required for reimbursable expenses.
-  </Step>
-  <Step title="Assign to a cost centre">
-    Link to a department or project for accurate P&L segmentation.
-  </Step>
-  <Step title="Save">
-    The expense is logged and appears in your expense reports and P&L immediately.
-  </Step>
-</Steps>
+**Purchases → Expenses → Record Expense**. Pick a category, add the amount and, if you like, a cost center or project, and attach the receipt. Expenses that staff paid themselves and want back are under **Reimbursements**.
 
-### Issue a credit note
+### Correct an invoice with a credit note
 
-<Steps>
-  <Step title="Open the original invoice" />
-  <Step title="Click Issue Credit Note">
-    Enter the amount to credit — full or partial.
-  </Step>
-  <Step title="Select a reason">
-    Choose: Return, Dispute, Pricing Error, Goodwill, or Other.
-  </Step>
-  <Step title="Send to customer">
-    The credit note is emailed and the outstanding balance on the original invoice reduces automatically. If the invoice was already paid, the credit sits as a balance on the customer account for future use.
-  </Step>
-</Steps>
+Open the invoice and choose **Correct with a credit note**, or go to **Sales → Credit Notes → New credit note** and pick the invoice. Write the reason in your own words. You can save it as a draft first, and record whether goods came back.
 
-### Create a journal entry
+### Make a journal entry
 
-<Steps>
-  <Step title="Open Finance → Journal Entries → New Entry" />
-  <Step title="Set the date and reference">
-    The date determines which accounting period the entry falls in. Add a reference or description for audit purposes.
-  </Step>
-  <Step title="Add debit and credit lines">
-    Add at least one debit and one credit line. The entry cannot be saved unless debits equal credits.
-  </Step>
-  <Step title="Attach supporting documents (optional)">
-    Upload the supporting document (e.g. bank statement, accountant memo).
-  </Step>
-  <Step title="Post">
-    The entry is posted to your ledger. Posted entries cannot be deleted — only reversed.
-  </Step>
-</Steps>
+**Accounting → Journal Entries → New Journal Entry**. Add the lines, and post when debit and credit balance. To undo a posted entry, use **Reverse entry**: it posts the mirror entry, so the history stays complete.
 
-### Connect Bank Feeds and reconcile transactions
+### Bring in your bank and reconcile
 
-Bank Feeds bring your business bank account into Softbooq via Enable Banking (PSD2 / Open Banking, covering 2,500+ banks across the EU and UK). Every incoming transaction is automatically matched against your invoices, vendor bills, expenses, and payment runs by the Auto-Reconciliation Engine.
-
-<Steps>
-  <Step title="Connect your bank">
-    Go to Settings → Integrations → Bank Feeds → Connect, pick your bank, and authenticate via your bank's standard login. Softbooq never sees your credentials, the consent flow happens entirely on your bank's domain. See [Bank Feeds](/integrations/bank-feeds) for full setup.
-  </Step>
-  <Step title="Wait for the initial backfill">
-    Up to 90 days of historical transactions pull in. Larger accounts can take a few minutes.
-  </Step>
-  <Step title="Use the Reconciliation Workbench">
-    Open Reports → Reconciliation Workbench. HIGH-confidence matches are auto-applied. MEDIUM and LOW need a one-click confirm. Unmatched stay queued.
-  </Step>
-  <Step title="Renew consent every six months">
-    PSD2 mandates consent renewal every 180 days. You'll get an in-app banner two weeks before expiry, click it and re-authenticate at your bank.
-  </Step>
-</Steps>
-
-### Handle a multi-currency invoice
-
-<Steps>
-  <Step title="Create the invoice as normal" />
-  <Step title="Change the currency">
-    Click the currency field and select the billing currency. The exchange rate auto-populates from the current mid-market rate.
-  </Step>
-  <Step title="Override the rate if needed">
-    If you have an agreed rate with the customer, enter it manually.
-  </Step>
-  <Step title="Send">
-    The invoice is displayed in the selected currency. Your accounts record both the foreign currency amount and the home currency equivalent.
-  </Step>
-</Steps>
+Connect your bank in **Settings → Banking → Bank Feeds**, or upload a statement file (OFX, QIF, CAMT.053 or MT940). Transactions appear under **Accounting → Bank Feeds**. To match them to invoices, bills and payments, open **Reports → Recon Workbench** and use **Run Auto-Match**, then confirm or reject each suggested match.
 
 ---
 
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="I can't create an invoice — the button is greyed out">
-    Your company profile or fiscal year is not configured. Go to **Settings → Company Profile**, fill in your company name, address, currency, and fiscal year start month, then save. Return to Finance and try again.
+  <Accordion title="I cannot see New Invoice">
+    Creating invoices needs the Finance management permission. Ask an Admin to check your role in **User Management → Roles & Permissions**.
   </Accordion>
-  <Accordion title="My invoice was sent but the customer says they didn't receive it">
-    Check that your email provider is connected and verified under **Settings → Email**. Send a test email to confirm it's working. Also check your spam/junk folder — some providers route automated emails there on first contact.
+  <Accordion title="A report looks wrong">
+    Open **Books Health**. It shows what is off in the books and, where it can, offers the repair.
   </Accordion>
-  <Accordion title="I recorded a payment but the invoice still shows as outstanding">
-    Open the invoice and check the Payments tab. If the payment appears there but the status hasn't updated, the amount recorded may be less than the invoice total. Check for rounding differences or partial payment amounts.
-  </Accordion>
-  <Accordion title="My P&L shows figures I don't recognise">
-    Finance aggregates data from all modules. Unexpected figures are usually caused by payroll postings from HR, depreciation from Assets, or reimbursements from Travel & Expense. Check the journal entries list filtered by source to identify the origin.
-  </Accordion>
-  <Accordion title="A vendor bill was created twice">
-    This can happen if a PO was received and a bill was also created manually. Open both bills and check the reference number and amount. Delete the duplicate (only possible if it has not been paid) or mark it as a credit against the supplier account.
-  </Accordion>
-  <Accordion title="I need to correct a posted journal entry">
-    Posted entries cannot be edited. Create a reversing entry with the same accounts and amounts but with debits and credits swapped, dated the same period. Then post the correct entry.
-  </Accordion>
-</AccordionGroup>
-
----
-
-## FAQ
-
-<AccordionGroup>
-  <Accordion title="Can I customise the invoice template?">
-    Yes. Go to **Settings → Company Profile** and upload your logo. The invoice layout uses your company name, address, and logo automatically. Custom template design (colours, fonts) is available on Plus and Pro plans.
-  </Accordion>
-  <Accordion title="Can I set up recurring invoices?">
-    Yes. When creating an invoice, toggle **Recurring** and set the frequency (weekly, monthly, quarterly). The system generates and sends the invoice automatically on schedule.
-  </Accordion>
-  <Accordion title="How do I handle an overpayment?">
-    Record the full amount received. The invoice status becomes **Overpaid** and the excess amount is recorded as a credit on the customer account. It can be applied to their next invoice.
-  </Accordion>
-  <Accordion title="What currencies are supported?">
-    All major world currencies. Your home currency is set in **Settings → Company Profile**. You can invoice in any currency and the system converts at the rate you specify.
-  </Accordion>
-  <Accordion title="Can multiple users access Finance?">
-    Yes. Users with Admin or Manager roles have full access. Employee and Viewer roles have read-only access. Client roles have no access to Finance.
+  <Accordion title="The financial year starts in the wrong month">
+    It is set in **Settings → Business → Accounting** and cannot be changed once anything has been posted.
   </Accordion>
 </AccordionGroup>
 
@@ -229,13 +92,13 @@ Bank Feeds bring your business bank account into Softbooq via Enable Banking (PS
 ## See also
 
 <CardGroup cols={3}>
-  <Card title="Sales & POS" icon="cart-shopping" href="/erp/sales">
-    Sales orders that generate invoices automatically in Finance.
+  <Card title="Sales & POS" icon="cash-register" href="/erp/sales">
+    Orders, quotes and the register, which create the invoices.
   </Card>
-  <Card title="Reports" icon="chart-bar" href="/erp/reports">
-    P&L, balance sheet, cash flow, and custom financial reports.
+  <Card title="Reports" icon="chart-line" href="/erp/reports">
+    Financial statements, VAT return and aging.
   </Card>
-  <Card title="CRM" icon="handshake" href="/erp/crm">
-    Convert deals to invoices and track customer payment history.
+  <Card title="Bank feeds" icon="building-columns" href="/integrations/bank-feeds">
+    Connecting your bank.
   </Card>
 </CardGroup>
