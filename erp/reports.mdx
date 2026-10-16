@@ -1,276 +1,61 @@
 ---
 title: Reports
-description: Financial, HR, inventory and project analytics
-icon: chart-bar
+description: Every report, where it is, and how to read and export it
+icon: chart-line
 ---
 
-The Reports module provides pre-built and filterable reports drawing live data from Finance, HR, Inventory, and Projects — giving you a single place to analyse business performance without exporting to spreadsheets.
+Reports collects your figures in one place, straight from your books. Choose a report in the list on the left; the open report stays in the address, so you can share the link.
 
-## What Reports owns
+## The reports
 
-- **Financial reports** — P&L, balance sheet, cash flow, aged receivables/payables
-- **HR reports** — headcount, payroll summary, leave balances, attendance
-- **Inventory reports** — stock valuation, movement history, low stock alerts
-- **Project reports** — utilisation, budget vs actual, billable hours
-- **Profitability** — per-order gross margin with auto-captured COGS
-- **Channel Performance** — revenue, orders and AOV broken down by sales channel
-- **Reconciliation Workbench** — bank-transaction-to-record matching with three confidence tiers
-- **AI Usage** — credits spent per user, per request, with tokens captured
+| Group | Reports |
+|-------|---------|
+| **Overview** | Dashboard |
+| **Financial Statements** | Financial Statements, VAT Return, EC Sales List, P&L by Cost Center, Financials by Dimension, Lease Commitments (IFRS 16), Cash Reconciliation, Recon Workbench |
+| **Receivables & Payables** | AR Aging, AP Aging, Early-Payment Savings, Payment Behaviour, GR/IR Aging, Sales Overview, Top Partners, Profitability, Channel Performance |
+| **Operations** | Inventory, Procurement Spend, Fixed Asset Register, Production Overview |
+| **HR & Payroll** | Workforce Report, Payroll Reports, Billable Hours, Gender Pay Gap |
+| **Advanced Analytics** | Advanced Analytics |
+| **Integrations** | By Integration Source |
 
-## Data flows into Reports from
+The VAT return is named after your tax system, and it has its own page: [VAT return and Before you file](/erp/vat-return).
 
-| Module | What it sends |
-|--------|--------------|
-| Finance | All financial transactions |
-| HR | Workforce and payroll data |
-| Inventory | Stock quantities and valuations |
-| Projects | Time entries and budget data |
+## Financial statements
 
-<Note>
-  All financial reports require your fiscal year to be configured in **Settings → Company Profile**. Without it, reports cannot calculate period-based comparisons or year-to-date figures.
-</Note>
+**Financial Statements** has tabs for the profit and loss statement, the balance sheet, cash flow, tax, equity, the trial balance and the notes. The names follow your accounting standard (for example "Statement of Financial Position" under IFRS).
 
----
+- Pick the period with **MTD**, **QTD**, **YTD**, **FY** or **Custom Range**.
+- Tick **Compare YoY** to see the same period last year beside it.
+- Open any line to see the ledger entries behind it.
 
-## Common tasks
+If a statement cannot be tied back to your ledger, Softbooq does not show figures it cannot stand behind: you see **Report withheld: cannot be reconciled to the ledger**. [Books Health](/erp/books-health) shows what is wrong.
 
-### Run a Profit & Loss report
+## Who owes you, and since when
 
-<Steps>
-  <Step title="Open Reports → Financial → Profit & Loss" />
-  <Step title="Set the date range">
-    Choose a custom start and end date, or select a preset period: This Month, Last Month, This Quarter, Last Quarter, This Year, Last Year.
-  </Step>
-  <Step title="Apply filters (optional)">
-    Filter by department or cost centre to see a segmented P&L — useful for understanding which part of the business is profitable.
-  </Step>
-  <Step title="Enable comparison (optional)">
-    Toggle **Compare to** and select a prior period. The report adds a comparison column showing variance in both amount and percentage.
-  </Step>
-  <Step title="Review on screen or export">
-    Drill into any line to see the underlying transactions. Click **Export** to download as PDF (formatted) or CSV (for further analysis).
-  </Step>
-</Steps>
+**AR Aging** sorts what customers owe into **Not yet due**, **0-30 Days**, **31-60 Days**, **61-90 Days** and **Over 90 Days**, plus **No due date** when an invoice has none. **AP Aging** does the same for what you owe suppliers.
 
-### Run a Balance Sheet
+## Matching the bank
 
-<Steps>
-  <Step title="Open Reports → Financial → Balance Sheet" />
-  <Step title="Set the as-at date">
-    The balance sheet shows your financial position at a single point in time. Choose the date — typically the last day of a financial period.
-  </Step>
-  <Step title="Review assets, liabilities, and equity">
-    The report is structured in standard accounting format: Current Assets, Non-current Assets, Current Liabilities, Non-current Liabilities, and Equity.
-  </Step>
-  <Step title="Verify the balance">
-    Total Assets must equal Total Liabilities plus Equity. If the sheet is out of balance, there is an unreconciled journal entry — contact your accountant.
-  </Step>
-</Steps>
+**Recon Workbench** matches bank lines to invoices, bills and payments. Use **Run Auto-Match**, then confirm or reject each suggested match. **Cash Reconciliation** shows, per bank and cash account, whether it has been reconciled.
 
-### Run an aged receivables report
+## Exporting
 
-<Steps>
-  <Step title="Open Reports → Financial → Aged Receivables" />
-  <Step title="Set the as-at date">
-    Choose the date you want to see outstanding customer balances as of. This is typically today or the last day of the month.
-  </Step>
-  <Step title="Review">
-    The report groups all outstanding invoices by age bucket: Current (not yet due), 1–30 days overdue, 31–60 days, 61–90 days, and 90+ days.
-  </Step>
-  <Step title="Act on overdue invoices">
-    Click through to any customer to see their specific invoices, or click an invoice directly to send a payment reminder.
-  </Step>
-  <Step title="Export">
-    Download as CSV for your credit control team or as PDF for management review.
-  </Step>
-</Steps>
+The **Export** menu at the top offers CSV or PDF, for the reports that provide them.
 
-### Run a payroll summary report
+## Reports on a schedule
 
-<Steps>
-  <Step title="Open Reports → HR → Payroll Summary" />
-  <Step title="Select the period">
-    Choose a specific payroll period (e.g. March 2025) or a date range spanning multiple periods.
-  </Step>
-  <Step title="Review totals">
-    See total gross pay, total deductions (broken down by type: tax, pension, etc.), and total net pay. View by department and per employee.
-  </Step>
-  <Step title="Export">
-    Download as CSV for your accountant or for uploading to your bank's bulk payment portal.
-  </Step>
-</Steps>
-
-### Run a stock valuation report
-
-<Steps>
-  <Step title="Open Reports → Inventory → Stock Valuation" />
-  <Step title="Set the as-at date (optional)">
-    Defaults to today. Change to a historical date to see a snapshot (e.g. end of the quarter for balance sheet purposes).
-  </Step>
-  <Step title="Filter by category or location (optional)" />
-  <Step title="Review">
-    See the current quantity on hand and total value for each item, broken down by location. Total inventory value is shown at the top.
-  </Step>
-  <Step title="Export">
-    Download as CSV or PDF for your finance team or auditor.
-  </Step>
-</Steps>
-
-### Run a project utilisation report
-
-<Steps>
-  <Step title="Open Reports → Projects → Utilisation" />
-  <Step title="Set the date range and select team members (optional)" />
-  <Step title="Review">
-    See total hours logged per person, broken down into billable and non-billable. The utilisation percentage shows what proportion of available hours were billable.
-  </Step>
-  <Step title="Identify over- and under-utilised staff">
-    Consistently high utilisation may indicate burnout risk or need for additional headcount. Low utilisation may indicate capacity for more work.
-  </Step>
-</Steps>
-
-### Run a Profitability report
-
-The Profitability report calculates per-order gross margin from your sales orders and the cost of goods sold (COGS) captured automatically at the time of the sale. Both Shopify and WooCommerce orders include shipping cost, so margins are accurate end-to-end.
-
-<Steps>
-  <Step title="Open Reports → Profitability" />
-  <Step title="Set the date range and channel filter (optional)">
-    Filter by sales channel (Shopify, WooCommerce, In-store, B2B) to see margin per channel, or leave unfiltered for the full picture.
-  </Step>
-  <Step title="Review the six KPI tiles">
-    Total revenue, total COGS, gross margin %, total shipping cost, average order value, and number of orders.
-  </Step>
-  <Step title="Drill into the per-order table">
-    The table shows every order with its margin %. Sort by margin to find loss-making orders. The table is virtualised, so 100,000 rows render without lag.
-  </Step>
-  <Step title="Export">
-    Download as CSV for further analysis.
-  </Step>
-</Steps>
-
-<Note>
-  COGS is captured automatically by a database trigger when a sales order is confirmed. Items priced using FIFO or weighted-average pull the relevant cost; manually-priced items use the cost field on the item record. If a margin looks wrong, check the item's cost in Inventory.
-</Note>
-
-### Run a Channel Performance report
-
-The Channel Performance report compares revenue, orders, and AOV across all your active sales channels in a single view.
-
-<Steps>
-  <Step title="Open Reports → Channel Performance" />
-  <Step title="Set the date range" />
-  <Step title="Review by channel">
-    Each channel (Shopify, WooCommerce, In-store, B2B, etc.) gets a row showing revenue, order count, AOV, refunds, and net revenue. Variance vs the previous period is shown alongside.
-  </Step>
-  <Step title="Drill into a channel">
-    Click any channel to see its top products, top customers, and per-order list filtered to that channel.
-  </Step>
-</Steps>
-
-To add or rename channels, see [Sales Channels](/erp/settings#sales-channels) in Settings.
-
-### Use the Reconciliation Workbench
-
-The Reconciliation Workbench is where you match bank transactions to invoices, vendor bills, expense claims, and payment runs. The Auto-Reconciliation Engine pre-classifies every transaction:
-
-- **HIGH** — auto-applied. No action needed; this section just shows you what was matched.
-- **MEDIUM** — confirm with one click, or reject.
-- **LOW** — review and confirm or reassign.
-- **Unmatched** — assign manually to an existing record, or create a new entry.
-
-<Steps>
-  <Step title="Open Reports → Reconciliation Workbench" />
-  <Step title="Pick the bank account">
-    Each connected bank account has its own reconciliation queue.
-  </Step>
-  <Step title="Work through MEDIUM and LOW matches first">
-    Click Confirm for ones the engine got right; Reject for ones it did not. The engine learns from your confirmations and improves matching over time.
-  </Step>
-  <Step title="Handle unmatched transactions">
-    Tag with a category, link to a record, or write off. Unmatched transactions stay queued indefinitely until you act on them.
-  </Step>
-  <Step title="Periodic close">
-    At month-end, run the Reconciliation Status report to confirm 100% of bank activity is reconciled before closing the period in Finance.
-  </Step>
-</Steps>
-
-The 3-pass matching engine runs nightly and on every new bank transaction. For details on confidence levels and the matching logic, see the [Bank Feeds](/integrations/bank-feeds) integration page.
-
-### Build a custom report
-
-<Steps>
-  <Step title="Open Reports → Custom → New Report" />
-  <Step title="Select the data source">
-    Choose Finance, HR, Inventory, or Projects as the primary data source.
-  </Step>
-  <Step title="Select fields">
-    Choose the columns you want in the report. Drag to reorder them.
-  </Step>
-  <Step title="Add filters and grouping">
-    Filter rows by any field (e.g. customer, department, date range). Group by a dimension (e.g. group by month, group by category).
-  </Step>
-  <Step title="Save and schedule">
-    Save the report for reuse. Optionally schedule it to run automatically (daily, weekly, monthly) and be emailed to specific recipients.
-  </Step>
-</Steps>
-
----
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title="My P&L shows figures I do not recognise">
-    Finance aggregates data from all modules automatically. Unexpected figures are usually caused by payroll postings from HR, depreciation entries from Assets, or expense reimbursements from Travel & Expense. Open Finance → Journal Entries, filter by the date range, and sort by source to identify the origin of any unusual entries.
-  </Accordion>
-  <Accordion title="The Balance Sheet is not balancing">
-    An imbalanced balance sheet means there is at least one journal entry where debits and credits are not equal — this should not be possible if entries were created through the normal workflow. If you entered manual journal entries, review them in Finance → Journal Entries. Contact your accountant if you cannot identify the cause.
-  </Accordion>
-  <Accordion title="The aged receivables report shows invoices that have been paid">
-    The report uses the as-at date to determine outstanding balances. If the payment was recorded after the as-at date you selected, the invoice will appear as outstanding as of that date — which is correct. Change the as-at date to today to see current outstanding balances only.
-  </Accordion>
-  <Accordion title="A scheduled custom report is not arriving by email">
-    Check that the recipients' email addresses are entered correctly on the report schedule. Also confirm that your email provider is connected and working under **Settings → Email**. Send a test email to verify the connection.
-  </Accordion>
-  <Accordion title="The stock valuation does not match my accounting records">
-    Discrepancies are typically caused by the costing method (FIFO vs average cost) or by stock adjustments that were posted without a corresponding Finance journal entry. Go to Inventory → Adjustments and check for any adjustments without a linked Finance entry. Ensure your Settings → Inventory costing method matches what your accountant expects.
-  </Accordion>
-</AccordionGroup>
-
----
-
-## FAQ
-
-<AccordionGroup>
-  <Accordion title="Can I schedule reports to be emailed automatically?">
-    Yes. When saving any report, toggle **Schedule** and set the frequency (daily, weekly, monthly) and the recipients. The report runs at the scheduled time and is emailed as a PDF or CSV attachment.
-  </Accordion>
-  <Accordion title="Can I export reports to Excel?">
-    Every report exports to CSV, which opens directly in Excel. For formatted reports with charts and layout, use the PDF export. CSV is better for further data manipulation; PDF is better for sharing with stakeholders.
-  </Accordion>
-  <Accordion title="Can I see a consolidated report across multiple departments?">
-    Yes. All financial reports support a consolidated view by default. Use the department filter to drill down to a specific department, or leave it unfiltered for the full company view.
-  </Accordion>
-  <Accordion title="How current is the data in reports?">
-    All reports pull live data at the time you run them. There is no data warehouse or overnight refresh delay — if a payment was recorded 30 seconds ago, it is in the report now. The only exception is HR leave balances, which update every 15 minutes.
-  </Accordion>
-  <Accordion title="Can I create reports that combine data from multiple modules?">
-    Yes, using Custom Reports. Select a primary data source and add related fields from other modules. For example, a Project Profitability report might combine billable hours from Projects with invoice amounts from Finance and payroll costs from HR.
-  </Accordion>
-</AccordionGroup>
-
----
+To have a report made for you on a schedule, set up a **Workflow** in the Softbooq AI app. Each run saves the report, with a short commentary from Jacinta on what changed, and notifies you. The figures come from your ledger; a set number of commentaries each month is included in your plan. See [Softbooq AI app](/platform/ai).
 
 ## See also
 
 <CardGroup cols={3}>
+  <Card title="VAT return" icon="receipt" href="/erp/vat-return">
+    Before you file.
+  </Card>
+  <Card title="Books Health" icon="stethoscope" href="/erp/books-health">
+    Why a report is withheld.
+  </Card>
   <Card title="Finance" icon="chart-pie" href="/erp/finance">
-    Source data for P&L, balance sheet, and cash flow reports.
-  </Card>
-  <Card title="HR" icon="briefcase" href="/erp/hr">
-    Headcount, payroll, leave, and attendance analytics.
-  </Card>
-  <Card title="Projects" icon="diagram-project" href="/erp/projects">
-    Project utilisation, budget vs actual, and time tracking reports.
+    Where the figures come from.
   </Card>
 </CardGroup>
