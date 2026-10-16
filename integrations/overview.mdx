@@ -1,149 +1,62 @@
 ---
-title: Integrations Overview
-description: Connect Softbooq to your stores, accounting tools, banks, CRMs, project tools and email providers
+title: Integrations
+description: Everything Softbooq connects to, and where to find each one
 icon: plug
 ---
 
-Softbooq connects to the third-party tools your business already runs on. Every integration is configured under **Settings → Integrations** in the ERP and operates on your live tenant data, so changes flow automatically.
+Softbooq connects to the stores, accounting tools, CRMs, project tools and devices your business already uses. Most connections are in **Settings → Integrations**. Email, messaging and banking have their own places in Settings.
 
-## Commerce & e-commerce
+You need permission to manage Settings to see these screens, and to be an Admin to connect most tools.
 
-<CardGroup cols={2}>
-  <Card title="Shopify" icon="shopify" href="/integrations/shopify">
-    Two-way sync of products, orders, customers and inventory. Full webhook coverage.
-  </Card>
-  <Card title="WooCommerce" icon="store" href="/integrations/woocommerce">
-    Product, order and customer sync via merchant API keys (no OAuth).
-  </Card>
-</CardGroup>
+## In Settings → Integrations
 
----
+| Group | Tools |
+|-------|-------|
+| **Identity & Directory** | Google Workspace Directory, Microsoft Entra ID Directory. See [Directory sync](/integrations/admin-sync) |
+| **Commerce** | [Shopify](/integrations/shopify), [WooCommerce](/integrations/woocommerce) |
+| **Accounting** | [Xero and QuickBooks Online](/integrations/xero), and [lexoffice, Pennylane, Zoho Books, DATEV, sevdesk and MoneyBird](/integrations/byok-accounting) |
+| **CRM** | [HubSpot](/integrations/hubspot), Salesforce, Pipedrive, Zoho CRM |
+| **Project Management** | Microsoft Planner, Asana, Trello, Jira, Linear, Zoho Projects. See [Project tools](/integrations/project-tools). And [Confluence](/integrations/confluence) |
+| **Device Management** | Microsoft Intune, Jamf Pro, Google Workspace Devices. See [Device management](/integrations/device-management) |
+| **Travel** | TravelPerk (needs a TravelPerk Pro subscription), [Airalo eSIMs](/integrations/esim) |
+| **HR** | Personio |
 
-## Accounting & finance
+The chips at the top of the screen filter by group.
 
-<CardGroup cols={2}>
-  <Card title="Xero" icon="chart-line" href="/integrations/xero">
-    Push invoices and contacts to Xero on creation. OAuth-based with bidirectional contact sync.
-  </Card>
-  <Card title="BYOK Accounting Tools" icon="file-invoice" href="/integrations/byok-accounting">
-    Push invoices to lexoffice, sevDesk, Moneybird, Pennylane, Zoho Books or DATEV. API-key based.
-  </Card>
-  <Card title="Bank Feeds" icon="building-columns" href="/integrations/bank-feeds">
-    Live bank transactions via Enable Banking (PSD2 across the EU and UK).
-  </Card>
-  <Card title="Outbound Payments" icon="money-bill-transfer" href="/integrations/payments">
-    Pay vendor bills in batches via Wise or Revolut. BYOK API keys.
-  </Card>
-</CardGroup>
+### Paid add-ons
 
----
+Xero, QuickBooks Online and DATEV are paid add-ons. Click the tile, tell us why you need it and **Submit request**. We review requests within one business day and email you when it is approved.
 
-## CRM & marketing
+## Elsewhere in Settings
 
-<CardGroup cols={2}>
-  <Card title="HubSpot" icon="bullseye" href="/integrations/hubspot">
-    Bidirectional contact sync. Nightly cron plus on-create push.
-  </Card>
-</CardGroup>
+| Where | What |
+|-------|------|
+| **Settings → Messaging & Channels → Email Service** | Who sends your emails: Softbooq, Brevo, SendGrid, Google, Microsoft 365 or your own mail server. See [Sending email](/integrations/email) |
+| **Settings → Messaging & Channels → Instant Messaging** | Text messages through Twilio, and WhatsApp |
+| **Settings → Messaging & Channels → Team Channels** | Notifications to Slack or Microsoft Teams |
+| **Settings → Banking → Bank Feeds** | Your bank transactions, through Enable Banking. See [Bank Feeds](/integrations/bank-feeds) |
+| **Settings → Banking → Receive Payments** | Card payments from your customers through Stripe |
+| **Settings → Banking → Send Payments / Payouts** | Paying suppliers through Wise, Revolut or a bank file. See [Paying suppliers and staff](/integrations/payments) |
 
----
+## In the modules and apps
 
-## Project management
+- **Calendars**: in Resource Scheduling, **My Calendars** connects your Google or Outlook calendar.
+- **Cloud drives**: Softbooq Files connects SharePoint, Google Drive, OneDrive, Dropbox, Box and local folders. See [Softbooq Files](/files/overview).
 
-<CardGroup cols={2}>
-  <Card title="Project Tools" icon="list-check" href="/integrations/project-tools">
-    Sync tasks and projects with Asana, Trello, Linear, Microsoft Planner or Jira.
-  </Card>
-  <Card title="Confluence" icon="book" href="/integrations/confluence">
-    Search your Atlassian knowledge base from IT Helpdesk tickets and push resolutions back to Confluence.
-  </Card>
-</CardGroup>
+## When a connection has a problem
 
----
-
-## IT & device management
-
-<CardGroup cols={2}>
-  <Card title="Device Management" icon="laptop" href="/integrations/device-management">
-    Pull device inventory and compliance status from Microsoft Intune and Jamf into IT & Helpdesk.
-  </Card>
-</CardGroup>
-
----
-
-## Travel & communications
-
-<CardGroup cols={2}>
-  <Card title="eSIM (Airalo)" icon="sim-card" href="/integrations/esim">
-    Order international data plans from inside the Travel & Expense module. Auto-logs expenses and GL entries.
-  </Card>
-  <Card title="Travel Booking" icon="plane" href="/erp/travel">
-    Travelpayouts-powered flight, hotel and car search inside the Travel module.
-  </Card>
-</CardGroup>
-
----
-
-## Identity & directory
-
-<CardGroup cols={2}>
-  <Card title="Admin Sync" icon="users-gear" href="/integrations/admin-sync">
-    Auto-provision users from Google Workspace or Microsoft 365. SSO and SCIM also available.
-  </Card>
-</CardGroup>
-
----
-
-## Email & messaging
-
-<CardGroup cols={2}>
-  <Card title="Email Providers" icon="envelope" href="/integrations/email">
-    Microsoft 365, Google Workspace, SendGrid, Mailgun, Postmark, and generic SMTP.
-  </Card>
-</CardGroup>
-
----
-
-## How integrations work
-
-Every integration follows the same pattern:
-
-1. **Connect** under Settings → Integrations. OAuth flows redirect to the provider; key-based integrations take an API token.
-2. **Choose the data direction**. Most integrations support both inbound (provider to Softbooq) and outbound (Softbooq to provider). You toggle which entities sync.
-3. **Run an initial backfill**. Imports historical data with date-range and per-entity filters so you do not flood Softbooq with stale records.
-4. **Live sync**. Webhooks (where supported) keep things current within seconds. A nightly cron catches anything webhook delivery missed.
-5. **Disconnect** any time. Disconnect removes the access token and stops sync but does not delete data already imported.
-
-<Note>
-Integration credentials are stored in the Supabase Vault, encrypted at rest. They are never visible in the UI after they are entered.
-</Note>
-
----
-
-## Multi-tenant safety
-
-Every integration is scoped to a single Softbooq tenant. Data from one tenant never crosses to another. This is enforced by row-level security in the database and by tenant context resolution in every Edge Function that handles an integration callback.
-
-If you operate multiple Softbooq workspaces, each one connects its integrations independently.
-
----
-
-## Plan limits
-
-Some integrations require a paid plan. Free trial tenants can connect email providers, project tools, and eSIM ordering; Xero, HubSpot, WooCommerce, Bank Feeds and Admin Sync require a Standard plan or above. Check the per-integration page for details.
-
----
+A tile shows **Error** when the last sync failed. Your Dashboard lists the records that could not be sent and why, with buttons to open the integration, its mappings, or reconnect.
 
 ## See also
 
 <CardGroup cols={3}>
   <Card title="Settings" icon="gear" href="/erp/settings">
-    All integration toggles live under Settings → Integrations.
+    Where your workspace is configured.
   </Card>
-  <Card title="Subscription" icon="credit-card" href="/billing/subscription">
-    Plans and which integrations each plan unlocks.
+  <Card title="Softbooq overview" icon="layer-group" href="/erp/overview">
+    The modules and apps.
   </Card>
-  <Card title="Reports" icon="chart-bar" href="/erp/reports">
-    Channel performance, reconciliation and profitability draw on integration data.
+  <Card title="Subscription & Plans" icon="credit-card" href="/billing/subscription">
+    What each plan includes.
   </Card>
 </CardGroup>

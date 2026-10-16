@@ -1,102 +1,70 @@
 ---
 title: HubSpot
-description: Bidirectional CRM contact sync between Softbooq and HubSpot
+description: Keep HubSpot contacts and deals in step with your Softbooq customers and quotes
 icon: bullseye
 ---
 
-The HubSpot integration keeps your Softbooq CRM customer list and HubSpot contacts list in sync. Contacts created in either system flow to the other, and updates are reconciled on a nightly cron plus an on-create push for low-latency sync of new records.
+Connect HubSpot and your contacts and deals stay in step with Softbooq. Customers sync both ways, quotes and deals follow each other through the stages, and a deal marked won in HubSpot becomes an invoice in Softbooq. Your sales team keeps working in HubSpot while the money side stays in Softbooq.
+
+HubSpot is in **Settings → Integrations**, under **CRM**. CRM is part of Softbooq Plus and Pro.
+
+## Connect
+
+Choose **Connect HubSpot** and sign in to HubSpot. The first sync starts straight away, and after that everything syncs every night. You can sync at any time with **Sync Contacts**, **Sync Deals** and **Push Activity**.
+
+## Choose how contacts map
+
+**Sync mode** decides how HubSpot's records become Softbooq customers:
+
+- **Contact per record**: each HubSpot contact becomes a customer
+- **Account + contacts**: each HubSpot company becomes an account, with its contacts under it
 
 ## What syncs
 
-| Entity | Direction | Trigger |
-|--------|-----------|---------|
-| Contacts | Bidirectional | On-create push + nightly reconcile cron |
-| Companies | Inbound (planned) | Currently mapped from contact `company` field |
-| Deals | Not synced | HubSpot deals stay separate from Softbooq sales orders |
+| What | Direction |
+|------|-----------|
+| Contacts | Both ways. HubSpot contacts are matched to your customers, first by their HubSpot link and then by email; customers not yet in HubSpot are added there |
+| Quotes and deals | Both ways, stage by stage (see below). A stage changed in HubSpot reaches Softbooq straight away |
+| Won deals | A deal marked won in HubSpot creates a draft invoice in Softbooq |
+| Activity | Sent and paid invoices and accepted quotes are added as notes on the contact's timeline in HubSpot |
 
-<Note>
-  HubSpot deals and Softbooq sales orders are kept separate by design. Marketing-qualified leads belong in HubSpot until they convert; once they convert to a paying customer, the contact sync brings them across.
-</Note>
+Contacts in HubSpot also receive your Softbooq revenue figures for them, so your sales team can see what each customer has spent.
 
----
+### How quotes and deal stages match
 
-## Connect HubSpot
+| Quote in Softbooq | Deal stage in HubSpot |
+|-------------------|-----------------------|
+| Draft | Presentation scheduled |
+| Sent | Contract sent |
+| Accepted | Closed won |
+| Declined or Expired | Closed lost |
 
-<Steps>
-  <Step title="Open Settings → Integrations → HubSpot → Connect" />
-  <Step title="Sign in via HubSpot OAuth">
-    You are redirected to HubSpot's OAuth screen. Sign in with an account that has access to the HubSpot portal you want to connect.
-  </Step>
-  <Step title="Approve scopes">
-    Approve the read/write contacts scope. Softbooq does not request access to deals, tickets or marketing campaigns.
-  </Step>
-  <Step title="Choose the contact lifecycle stage filter">
-    Pick which HubSpot lifecycle stages should sync into Softbooq. Default: Customer and Subscriber. Leads and Marketing-Qualified-Leads are excluded by default to keep your CRM clean of unqualified records.
-  </Step>
-  <Step title="Run the initial reconcile">
-    The first reconcile pulls every matching contact into Softbooq and pushes any Softbooq customer that is missing from HubSpot. This may take a few minutes for large lists.
-  </Step>
-</Steps>
+## When a contact asks to be deleted
 
----
-
-## Conflict resolution
-
-When the same email address exists in both HubSpot and Softbooq with different field values, the integration applies a "most-recently-updated wins" rule per field. The HubSpot `lastmodifieddate` and the Softbooq `updated_at` timestamp are compared at the field level. This avoids whole-record overwrites and preserves edits made in either system.
-
-If a record is created with the same email in both systems within a few seconds of each other, the deduplication step picks the older record as canonical and merges into it.
-
----
-
-## Lifecycle stage and segmentation
-
-The HubSpot lifecycle stage flows into Softbooq as a CRM tag, so you can filter your customer list by stage (Customer, Evangelist, Other). Custom HubSpot properties are not synced by default; contact support if you need a specific custom property mapped.
-
----
+If a contact is deleted in HubSpot for privacy reasons, Softbooq anonymises the matching customer: the name becomes "Deleted Contact" and the link to HubSpot is removed. Their invoices stay in your books.
 
 ## Disconnect
 
-<Steps>
-  <Step title="Open Settings → Integrations → HubSpot → Disconnect" />
-  <Step title="Confirm">
-    The OAuth token is revoked. The nightly cron stops running and on-create pushes are halted.
-  </Step>
-  <Step title="Imported contacts are retained">
-    Softbooq does not delete contacts on disconnect. They remain in your CRM as static records.
-  </Step>
-</Steps>
+**Disconnect** stops the sync. Contacts already in both systems are not deleted.
 
----
+## Other CRMs
 
-## Troubleshooting
+Salesforce, Pipedrive and Zoho CRM connect from the same **CRM** group:
 
-<AccordionGroup>
-  <Accordion title="A new HubSpot contact is not appearing in Softbooq">
-    The HubSpot lifecycle stage filter may be excluding it. Check Settings → Integrations → HubSpot → Lifecycle Stages and confirm the stage is included. Then run **Reconcile now** to fetch immediately.
-  </Accordion>
-  <Accordion title="Softbooq updates are not pushing to HubSpot">
-    Check the integration sync log for the most recent push attempt. Common causes: the OAuth token was revoked in HubSpot, the contact's email is invalid, or HubSpot rate limits were hit (uncommon, the integration backs off automatically).
-  </Accordion>
-  <Accordion title="Two contacts in Softbooq have the same email after the import">
-    This indicates a Softbooq dedupe failure during the initial import. Open both records, identify the canonical one, and use the **Merge** action on the duplicate. Future imports will not create new duplicates because the email index now has a single match.
-  </Accordion>
-  <Accordion title="The lifecycle stage filter is not applying to records that already imported">
-    The filter applies on import only. Records already in Softbooq stay there even if their HubSpot stage no longer matches the filter. To remove them, archive them in Softbooq's CRM.
-  </Accordion>
-</AccordionGroup>
-
----
+- **Salesforce**: contacts, opportunities and tasks, every night. You can create an invoice automatically when an opportunity is won, and settle differences in **Sync Conflicts** with **Use ERP** or **Use Salesforce**.
+- **Pipedrive**: contacts, deals, activities, leads, products and projects, every hour, with contacts, deals and activities updated as they change.
+- **Zoho CRM**: contacts, deals, activities, leads and products, every hour, with contacts and deals updated as they change.
 
 ## See also
 
 <CardGroup cols={3}>
-  <Card title="CRM" icon="handshake" href="/erp/crm">
-    Where synced HubSpot contacts live in Softbooq.
+  <Card title="CRM" icon="users" href="/erp/crm">
+    Customers and your pipeline in Softbooq.
   </Card>
-  <Card title="Xero" icon="chart-line" href="/integrations/xero">
-    For pushing converted contacts to your accounting ledger as Xero contacts.
+  <Card title="Sales & POS" icon="cash-register" href="/erp/sales">
+    Quotes and orders.
   </Card>
-  <Card title="Email Providers" icon="envelope" href="/integrations/email">
-    Connect your sending email separately. HubSpot does not send emails on Softbooq's behalf.
+  <Card title="Integrations" icon="plug" href="/integrations/overview">
+    Everything Softbooq connects to.
   </Card>
 </CardGroup>
