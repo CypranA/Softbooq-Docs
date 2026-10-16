@@ -1,198 +1,60 @@
 ---
-title: Contracts
-description: Contract lifecycle, milestones, amendments and e-signatures
+title: Contract Management
+description: Contracts with customers and suppliers, e-signatures, milestones, renewals and templates
 icon: file-contract
 ---
 
-The Contracts module manages the full lifecycle of customer and supplier contracts — from drafting and e-signature through to milestone billing, amendments, and automatic renewal alerts. Contract value flows into Finance for revenue recognition.
+Contract Management keeps your contracts with customers and suppliers: their terms, signatures, payment milestones and renewals. It is part of Softbooq Plus and Pro.
 
-## What Contracts owns
+## How it is organised
 
-- **Contracts** — the master contract record with parties, value, and dates
-- **Milestones** — payment or delivery milestones linked to contract terms
-- **Signatures** — e-signature requests and signed document storage
-- **Amendments** — formal record of changes to active contracts
-
-## Data flows into Contracts from
-
-| Module | What it sends |
-|--------|--------------|
-| CRM | Customer data for contract creation |
-
-## Data flows out of Contracts to
-
-| Module | What it sends |
-|--------|--------------|
-| Finance | Contract value and milestone invoices |
-
-<Note>
-  Contracts approaching expiry trigger an alert 30 days before the end date. Ensure renewal or termination decisions are made before this date to avoid gaps in contracted coverage.
-</Note>
+A switch at the top shows **Client** or **Supplier** contracts. Below, the contracts themselves, with their e-signatures, milestones and **Contract Templates**. **AI Smart Scan** reads a signed contract you upload and fills in a new record for you to check.
 
 ---
 
 ## Common tasks
 
-### Create a contract
+### Add a contract
 
-<Steps>
-  <Step title="Open Contracts → New Contract" />
-  <Step title="Choose the contract type">
-    Select Customer (you are supplying) or Supplier (you are the buyer).
-  </Step>
-  <Step title="Link to a customer or supplier">
-    Select from CRM (for customers) or Procurement (for suppliers). Their details pre-populate the contract header.
-  </Step>
-  <Step title="Set contract terms">
-    Enter start date, end date, total contract value, payment terms, and renewal conditions (auto-renew, manual renewal, or one-off).
-  </Step>
-  <Step title="Upload the contract document or draft in the editor">
-    Upload the signed PDF, or draft the terms directly in the rich text editor. Both can coexist — the typed terms serve as the data source for milestones and alerts, while the uploaded PDF is the legal document of record.
-  </Step>
-  <Step title="Save">
-    The contract is active. You will receive a renewal alert 30 days before the end date.
-  </Step>
-</Steps>
+Choose **Create Contract** and pick how it is signed:
 
-### Request an e-signature
+- **Internal (Digital Signature)**: signed in Softbooq.
+- **External (Already Signed)**: it was signed elsewhere, so you attach the signed PDF.
 
-<Steps>
-  <Step title="Open the contract → click Request Signature" />
-  <Step title="Add signatories">
-    Enter the email addresses and names of everyone who needs to sign. You can add multiple internal and external signatories. Set the signing order if signatures must be sequential.
-  </Step>
-  <Step title="Add signing instructions (optional)">
-    Include any guidance for signatories (e.g. "Please review clause 4.2 before signing").
-  </Step>
-  <Step title="Send">
-    Each signatory receives an email with a secure, unique link to review and sign the document electronically. No account is required for the signatory to sign.
-  </Step>
-  <Step title="Track signature status">
-    The contract record shows in real time who has signed and who is outstanding. You can send a reminder to any outstanding signatory with one click.
-  </Step>
-  <Step title="On completion">
-    Once all parties have signed, the signed document is stored permanently against the contract and each signatory receives a copy.
-  </Step>
-</Steps>
+Choose the other party, the start and end dates, the value and the **Billing Frequency** (one-off, monthly, quarterly or yearly). Tick **Enable Auto-Renewal** for a contract that renews by its own term. Depending on your approval policies, it may wait for approval before it becomes active.
 
-### Add a payment milestone
+### Get it signed
 
-<Steps>
-  <Step title="Open the contract → Milestones tab → New Milestone" />
-  <Step title="Name the milestone">
-    Give it a clear name that both parties will recognise (e.g. Project Kickoff Payment, Delivery Phase 1, Final Completion).
-  </Step>
-  <Step title="Set the due date and amount">
-    Enter the date the milestone payment is due and the amount. Multiple milestones can add up to the total contract value, or you can use milestones for partial billing throughout a long contract.
-  </Step>
-  <Step title="Enable auto-invoicing (optional)">
-    Toggle **Auto-create invoice** to have Finance automatically generate and send the invoice when this milestone is marked complete. The invoice is pre-filled with the milestone name and amount.
-  </Step>
-  <Step title="Save">
-    The milestone appears in the contract timeline. You will receive a reminder before its due date.
-  </Step>
-</Steps>
+Choose **Request Signatures** (or **Request E-Signatures** on the signatures tab), add each signer with their role, and **Send Requests**, or create the signing links to send yourself. Requests expire after 14 days. The signatures tab shows who has signed, and why anyone declined.
 
-### Mark a milestone complete and invoice it
+### Bill against milestones
 
-<Steps>
-  <Step title="Open the contract → Milestones tab → click the milestone" />
-  <Step title="Click Mark Complete">
-    Confirm the completion date.
-  </Step>
-  <Step title="Invoice">
-    If auto-invoicing is on, the invoice is generated automatically in Finance. If not, click **Create Invoice** from the milestone to generate it manually. The milestone is then marked as Invoiced.
-  </Step>
-</Steps>
+On **Payment Milestones**, choose **Add Milestone**. A milestone linked to a project task is completed when the task is done. **Generate Invoice** creates a draft invoice for it in Finance.
 
-### Record an amendment
+### Record a change
 
-<Steps>
-  <Step title="Open the contract → click Add Amendment" />
-  <Step title="Describe the change">
-    Write a summary of what is being amended and why (e.g. scope increase, price adjustment, extension of term).
-  </Step>
-  <Step title="Update the contract fields if needed">
-    Change the end date, contract value, or payment terms to reflect the amended terms.
-  </Step>
-  <Step title="Re-request signatures if required">
-    If the amendment requires formal agreement from both parties, use Request Signature again on the amendment document.
-  </Step>
-  <Step title="Save">
-    The amendment is stored with a timestamp. The full version history is visible in the contract's audit trail. Amendments cannot be deleted — only subsequent amendments can reverse them.
-  </Step>
-</Steps>
+**Add New Amendment** records what changed and why. It does not change the contract's dates or value; edit those on the contract itself.
 
-### Renew or terminate a contract
+### Renewals and reminders
 
-<Steps>
-  <Step title="Open the contract nearing expiry">
-    A renewal alert will appear in your notification feed 30 days before the end date.
-  </Step>
-  <Step title="To renew">
-    Click **Renew Contract**. Enter the new end date, updated value if applicable, and any changed terms. A new version is created with the original terms plus amendments. Re-request signatures if required.
-  </Step>
-  <Step title="To terminate">
-    Click **Terminate Contract**. Enter the termination date and reason. If there is a termination clause or notice period in the contract, ensure the termination date complies. The contract is archived with full history retained.
-  </Step>
-</Steps>
+Contracts set to renew automatically renew by their own term every night, catching up on any term that was missed. You are reminded 30, 7 and 1 day before a contract ends.
 
----
+### Templates
 
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title="A signatory says they did not receive the e-signature email">
-    Check the email address entered for that signatory is correct. Use **Resend** on the signature request to send it again. Also ask the signatory to check their spam folder — e-signature emails are sometimes routed there. If the issue persists, check your email provider connection under **Settings → Email**.
-  </Accordion>
-  <Accordion title="A milestone invoice was not generated automatically">
-    Check that the milestone has **Auto-create invoice** toggled on. Also confirm the milestone is linked to a customer contract (not a supplier contract — supplier contracts do not generate customer invoices). If both conditions are met and it still did not fire, manually create the invoice from the milestone.
-  </Accordion>
-  <Accordion title="I cannot edit a contract that has been signed">
-    Signed contracts are locked to preserve the integrity of the agreed document. To make changes, add a formal Amendment. If the original contract had an error before signing, contact support — reverting a signed document requires admin intervention and an audit log entry.
-  </Accordion>
-  <Accordion title="The renewal alert did not fire for an expiring contract">
-    Renewal alerts fire 30 days before the contract end date. Check the end date on the contract — it may be set incorrectly. Also check **Settings → Notifications** to ensure contract renewal alerts are enabled for your account.
-  </Accordion>
-  <Accordion title="A contract shows as expired but should have auto-renewed">
-    Auto-renew extends the contract automatically only if the **Auto-renew** option was selected in the contract's renewal conditions and the system is configured to do so. Check the renewal conditions field on the contract. If it shows Manual, no auto-renewal was set up — create a renewal manually.
-  </Accordion>
-</AccordionGroup>
-
----
-
-## FAQ
-
-<AccordionGroup>
-  <Accordion title="Can I use my own contract template?">
-    Yes. Go to **Settings → Contracts → Templates** to upload your standard contract templates as Word or PDF documents. When creating a new contract, select a template as the starting point. Variable fields (customer name, dates, value) are merged automatically.
-  </Accordion>
-  <Accordion title="Are e-signatures legally binding?">
-    Yes, in most jurisdictions. Softbooq e-signatures comply with eIDAS (EU), ESIGN Act (US), and equivalent regulations in most markets. Each signature is timestamped, IP-logged, and stored with an audit certificate. For contracts requiring a qualified electronic signature (QES), consult a legal advisor.
-  </Accordion>
-  <Accordion title="Can I have both customer and supplier contracts in the same view?">
-    Yes. The Contracts list shows all contracts by default. Use the **Type** filter to view only Customer or only Supplier contracts.
-  </Accordion>
-  <Accordion title="How many signatories can I add to a contract?">
-    There is no limit. You can add multiple internal and external signatories. Set the signing order if a specific sequence is required (e.g. internal approval before external signature).
-  </Accordion>
-  <Accordion title="Can I attach related documents to a contract (e.g. specifications, SOW)?">
-    Yes. Open the contract → Documents tab to attach any number of supporting files. These are stored alongside the contract and visible to all users with access to the contract record.
-  </Accordion>
-</AccordionGroup>
+**Contract Templates** are written in the app, with fields that fill in from the contract.
 
 ---
 
 ## See also
 
 <CardGroup cols={3}>
-  <Card title="CRM" icon="handshake" href="/erp/crm">
-    Contracts are linked to CRM customer records for a full account view.
-  </Card>
   <Card title="Finance" icon="chart-pie" href="/erp/finance">
-    Invoice milestone completions and recurring fees directly from a contract.
+    Where milestone invoices land.
   </Card>
-  <Card title="Projects" icon="diagram-project" href="/erp/projects">
-    Link projects to contracts to track delivery against committed scope.
+  <Card title="Leases & Obligations" icon="building" href="/erp/leases">
+    Leases and other recurring obligations.
+  </Card>
+  <Card title="Customer account" icon="circle-user" href="/portals/customer-account">
+    Where customers see their contracts.
   </Card>
 </CardGroup>
