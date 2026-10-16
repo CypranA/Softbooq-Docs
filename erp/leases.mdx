@@ -4,20 +4,20 @@ description: Leases you hold and leases you grant, with IFRS 16 / ASC 842 accoun
 icon: building
 ---
 
-Leases & Obligations manages leases and other recurring commitments in one place: leases, equipment leases, subscriptions, insurance, service contracts and loans. It is part of Softbooq Plus and Pro. A lease is treated as a general *obligation*: a counterparty, a term, a payment schedule that can escalate over time, and a set of critical dates — break options, rent reviews, renewals — each with its own notice period.
+Leases & Obligations manages leases and other recurring commitments in one place: leases, equipment leases, subscriptions, insurance, service contracts and loans. It is part of Softbooq Plus and Pro. A lease is treated as a general *obligation*: a counterparty, a term, a payment schedule that can escalate over time, and a set of critical dates (break options, rent reviews, renewals), each with its own notice period.
 
 The module handles **both directions**:
 
-- **Leases you hold** (you are the lessee) — you pay rent. **Generate due payments** turns rent that is due into supplier bills, waiting for approval in **Finance → Purchases → Vendor Bills**, which you then pay through Payment Runs.
-- **Leases you grant** (you are the lessor) — you own an asset and lease it out. Rent becomes a customer invoice your tenant pays.
+- **Leases you hold** (you are the lessee): you pay rent. **Generate due payments** turns rent that is due into supplier bills, waiting for approval in **Finance → Purchases → Vendor Bills**, which you then pay through Payment Runs.
+- **Leases you grant** (you are the lessor): you own an asset and lease it out. Rent becomes a customer invoice your tenant pays.
 
 ## What Leases owns
 
-- **Leases** — the master obligation record: counterparty, term, currency, status, and accounting treatment
-- **Schedules** — the rent lines that drive billing, with escalation rules (fixed percentage, stepped, or index-linked)
-- **Options** — break, renewal, extension, rent review, and expiry dates with notice deadlines
-- **Index series** — published index values (CPI, HICP, VPI) that index-linked rent reviews calculate from
-- **Granted leases** — the assets you lease out, their classification, and their income schedules
+- **Leases**: the master obligation record, with its counterparty, term, currency, status, and accounting treatment
+- **Schedules**: the rent lines that drive billing, with escalation rules (fixed percentage, stepped, or index-linked)
+- **Options**: break, renewal, extension, rent review, and expiry dates with notice deadlines
+- **Index series**: published index values (CPI, HICP, VPI) that index-linked rent reviews calculate from
+- **Granted leases**: the assets you lease out, their classification, and their income schedules
 
 ## Data flows into Leases from
 
@@ -70,7 +70,7 @@ The module handles **both directions**:
     Enter the commencement and expiry dates. The term in months is derived from them.
   </Step>
   <Step title="Choose the accounting treatment">
-    Under **Lease accounting**, pick one of: Off-balance (operating / HGB), IFRS 16 (ROU + liability), ASC 842 finance lease, ASC 842 operating lease, or Local GAAP. Softbooq suggests a treatment from your tenant's accounting standard, the term, and the value — you can override it.
+    Under **Lease accounting**, pick one of: Off-balance (operating / HGB), IFRS 16 (ROU + liability), ASC 842 finance lease, ASC 842 operating lease, or Local GAAP. Softbooq suggests a treatment from your tenant's accounting standard, the term, and the value. You can override it.
   </Step>
   <Step title="Enter the discount rate">
     Required for any on-balance treatment. This is the rate implicit in the lease, or your incremental borrowing rate if that is not readily determinable. It drives the present value of the liability.
@@ -91,7 +91,7 @@ The module handles **both directions**:
     Choose a series you have set up on the Indices tab. Rent is recalculated from the published value rather than typed in by hand.
   </Step>
   <Step title="Save">
-    Future rent reflects the escalation immediately — the rent roll shows the current escalated figure, not the original one.
+    Future rent reflects the escalation immediately. The rent roll shows the current escalated figure, not the original one.
   </Step>
 </Steps>
 
@@ -158,7 +158,7 @@ The module handles **both directions**:
     Both feed the classification test: the discount rate gives the present value of the receipts, the economic life gives the term-to-life ratio.
   </Step>
   <Step title="Add the unguaranteed residual and any initial direct costs (optional)">
-    For a finance lease these form part of the net investment alongside the rent. The **unguaranteed residual** is what the asset is still worth to you at the end of the term without a guarantee from the tenant — leave it blank for property, set it for vehicles, plant and equipment that come back with real value. **Initial direct costs** are the incremental costs of arranging the lease, such as agent commission. Omitting them understates both the net investment and the finance income earned across the term.
+    For a finance lease these form part of the net investment alongside the rent. The **unguaranteed residual** is what the asset is still worth to you at the end of the term without a guarantee from the tenant. Leave it blank for property, set it for vehicles, plant and equipment that come back with real value. **Initial direct costs** are the incremental costs of arranging the lease, such as agent commission. Omitting them understates both the net investment and the finance income earned across the term.
   </Step>
   <Step title="Flag ownership transfer or a purchase option if either applies" />
   <Step title="Save">
@@ -186,13 +186,13 @@ The module handles **both directions**:
 <Steps>
   <Step title="Open Leases out → Recognise due income" />
   <Step title="Review what it does">
-    For every active granted lease it raises a customer invoice for each rent period that has fallen due, using your normal invoice numbering, the VAT code on the rent line, and the customer's billing details. It then posts the period's accounting — for a finance lease, the finance income element on top of the invoice.
+    For every active granted lease it raises a customer invoice for each rent period that has fallen due, using your normal invoice numbering, the VAT code on the rent line, and the customer's billing details. It then posts the period's accounting. For a finance lease, the finance income element on top of the invoice.
   </Step>
   <Step title="Check the counts">
     The number of invoices raised is confirmed on screen. Any lease with no customer linked is listed by name so you can fix it.
   </Step>
   <Step title="Run it as often as you like">
-    Both the invoicing and the recognition are idempotent — repeat runs only ever bill newly due periods.
+    Both the invoicing and the recognition are idempotent. Repeat runs only ever bill newly due periods.
   </Step>
 </Steps>
 
@@ -217,7 +217,7 @@ The module handles **both directions**:
 
 Two separate settings decide how a lease is accounted for, both in **Settings → Business → Accounting**:
 
-- Your **accounting standard** decides the *rules* — whether a lease goes on the balance sheet at all.
+- Your **accounting standard** decides the *rules*: whether a lease goes on the balance sheet at all.
 - Your **chart of accounts** decides the *account codes* those entries land in.
 
 Each lease's own treatment is chosen on the lease, under **Show advanced options**.
@@ -238,7 +238,7 @@ Short-term leases stay off balance sheet under every framework. Low-value leases
 
 ### What each standard does with a lease you grant
 
-Lessor classification is the same under IFRS and US GAAP — the risks-and-rewards test decides finance vs operating, and short-term/low-value elections do not apply to a lessor.
+Lessor classification is the same under IFRS and US GAAP. The risks-and-rewards test decides finance vs operating, and short-term/low-value elections do not apply to a lessor.
 
 | Classification | Balance sheet | Income statement |
 |---|---|---|
@@ -261,16 +261,16 @@ Choose **Off-balance** and no journal entry is ever posted. The module still wor
 
 <AccordionGroup>
   <Accordion title="A lease is active but no rent bill or invoice was ever raised">
-    Check the lease has a rent schedule line. A lease with a term but no schedule has nothing to bill. On a granted lease, also check a customer is linked — unlinked leases are reported by name when you run **Recognise due income**.
+    Check the lease has a rent schedule line. A lease with a term but no schedule has nothing to bill. On a granted lease, also check a customer is linked. Unlinked leases are reported by name when you run **Recognise due income**.
   </Accordion>
   <Accordion title="Recognise due income says nothing is due">
-    Income is only recognised for periods that have already fallen due, on leases whose status is **Active**. A draft granted lease is skipped entirely — commence or activate it first.
+    Income is only recognised for periods that have already fallen due, on leases whose status is **Active**. A draft granted lease is skipped entirely. Commence or activate it first.
   </Accordion>
   <Accordion title="I cannot edit the rent or dates on a granted lease">
     Once a granted lease is active it has posted journal entries keyed to its terms, so rewriting them from the UI would put the ledger out of step. Only the name and billing customer stay editable. To end the lease, use **Terminate** rather than editing it.
   </Accordion>
   <Accordion title="I cannot delete a granted lease">
-    Active leases cannot be deleted because they have posted entries that would be orphaned. Terminate the lease instead — that keeps the accounting history intact. Drafts can be deleted freely.
+    Active leases cannot be deleted because they have posted entries that would be orphaned. Terminate the lease instead. That keeps the accounting history intact. Drafts can be deleted freely.
   </Accordion>
   <Accordion title="The rent roll shows a different figure from the lease's rent line">
     The rent roll shows the **current escalated** rent, annualised. If the lease has a fixed-percent, stepped, or index-linked escalation, the figure reflects escalations applied to date, not the original rent.
@@ -279,10 +279,10 @@ Choose **Off-balance** and no journal entry is ever posted. The module still wor
     Entering a value does not retrospectively change leases on its own. Use the refresh action on the Indices tab to queue rent reviews on every lease referencing that series.
   </Accordion>
   <Accordion title="The ROU roll-forward does not match the GL right-of-use account">
-    The roll-forward on the Portfolio tab is derived from the lease schedules and is self-consistent by construction, but it is not reconciled to the GL. It is marked **Preview** for that reason — tie it to your ROU account before using it for statutory filing.
+    The roll-forward on the Portfolio tab is derived from the lease schedules and is self-consistent by construction, but it is not reconciled to the GL. It is marked **Preview** for that reason. Tie it to your ROU account before using it for statutory filing.
   </Accordion>
   <Accordion title="An asset I leased out disappeared from the asset register">
-    A finance lease derecognises the underlying asset at commencement, so it is marked Disposed and stops depreciating. That is the correct treatment — the value now sits in the net investment in the lease. Terminating the lease reinstates the asset.
+    A finance lease derecognises the underlying asset at commencement, so it is marked Disposed and stops depreciating. That is the correct treatment. The value now sits in the net investment in the lease. Terminating the lease reinstates the asset.
   </Accordion>
 </AccordionGroup>
 
@@ -292,19 +292,19 @@ Choose **Off-balance** and no journal entry is ever posted. The module still wor
 
 <AccordionGroup>
   <Accordion title="Is the landlord list the same as my suppliers?">
-    Yes. A landlord is a party you pay, so the dropdown is your supplier list and a landlord created here is a normal supplier with bank details. On a granted lease it is the opposite — the tenant list is your **customers**, because you invoice them.
+    Yes. A landlord is a party you pay, so the dropdown is your supplier list and a landlord created here is a normal supplier with bank details. On a granted lease it is the opposite. The tenant list is your **customers**, because you invoice them.
   </Accordion>
   <Accordion title="Can I lease out something other than property?">
-    Yes. A granted lease points at any record in your asset register — vehicles, machinery, equipment, IT hardware. Nothing about the module is specific to real estate.
+    Yes. A granted lease points at any record in your asset register: vehicles, machinery, equipment, IT hardware. Nothing about the module is specific to real estate.
   </Accordion>
   <Accordion title="Who decides whether a granted lease is operating or finance?">
-    Softbooq classifies it from the risks-and-rewards test: ownership transfer, a purchase option reasonably certain to be exercised, the term against the asset's economic life, and the present value of the receipts against fair value. Fill in the discount rate and economic life to get a meaningful answer — without them the test has less to work with.
+    Softbooq classifies it from the risks-and-rewards test: ownership transfer, a purchase option reasonably certain to be exercised, the term against the asset's economic life, and the present value of the receipts against fair value. Fill in the discount rate and economic life to get a meaningful answer. Without them the test has less to work with.
   </Accordion>
   <Accordion title="Do I need to run recognition manually every month?">
     No. Monthly recognition runs on a schedule for leases you hold. The **Recognise due income** action on Leases out exists so you can bill on demand rather than waiting, and because it is idempotent you can use it freely.
   </Accordion>
   <Accordion title="Can one lease cover several sites or components?">
-    A lease can have multiple schedule lines — base rent, service charge, insurance, property tax, parking, and so on — each with its own frequency and escalation. A lease is attributed to a single site.
+    A lease can have multiple schedule lines (base rent, service charge, insurance, property tax, parking, and so on), each with its own frequency and escalation. A lease is attributed to a single site.
   </Accordion>
   <Accordion title="What happens to rent when a lease is terminated?">
     Billing stops from the termination date. For a lease you hold that ends via a break option, the ROU asset is disposed. For a granted finance lease, the remaining net investment is derecognised and the asset returns to your balance sheet.

@@ -4,17 +4,17 @@ description: Sell products and book services online
 icon: store
 ---
 
-The Online Storefront gives every Softbooq business a fully functional public e-commerce store at `<your-handle>.mysoftbooq.com/shop` — no separate platform required. Products and services from your Inventory catalogue are available to customers to browse, add to cart, and purchase or request a quote.
+The Online Storefront gives every Softbooq business a fully functional public e-commerce store at `<your-handle>.mysoftbooq.com/shop`, with no separate platform required. Products and services from your Inventory catalogue are available to customers to browse, add to cart, and purchase or request a quote.
 
 ## What the storefront includes
 
-- **Product catalogue** — browsable grid of physical products with image carousel and Quick View
-- **Services & bookings** — bookable service items with real-time slot availability
-- **Cart** — persistent cart (survives page refresh), with quantity controls
-- **Checkout** — Stripe card payment or Request Quote (email-based order), customer's choice
-- **Multi-currency** — live FX rate conversion to any major world currency
-- **Multi-language** — EN, ES, FR, DE
-- **Dark/light mode** — visitor-controlled theme toggle
+- **Product catalogue**: browsable grid of physical products with image carousel and Quick View
+- **Services & bookings**: bookable service items with real-time slot availability
+- **Cart**: persistent cart (survives page refresh), with quantity controls
+- **Checkout**: Stripe card payment or Request Quote (email-based order), customer's choice
+- **Multi-currency**: live FX rate conversion to any major world currency
+- **Multi-language**: EN, ES, FR, DE
+- **Dark/light mode**: visitor-controlled theme toggle
 
 ---
 
@@ -28,7 +28,7 @@ The Online Storefront gives every Softbooq business a fully functional public e-
     These appear on the storefront card.
   </Step>
   <Step title="Add an image">
-    Upload a product image. You can upload multiple images — they display as a swipeable carousel on the product card and in the Quick View modal.
+    Upload a product image. You can upload multiple images. They display as a swipeable carousel on the product card and in the Quick View modal.
   </Step>
   <Step title="Add a description">
     Write a product description. It appears in the Quick View modal when the customer clicks on the product.
@@ -112,7 +112,7 @@ The Online Storefront gives every Softbooq business a fully functional public e-
     Each order shows the customer's name, contact details, items ordered, and checkout method.
   </Step>
   <Step title="Confirm and fulfil">
-    For Quote requests: contact the customer to confirm, then mark the order as Confirmed. For Stripe payments: the payment is already collected — proceed directly to fulfilment.
+    For Quote requests: contact the customer to confirm, then mark the order as Confirmed. For Stripe payments: the payment is already collected. Proceed directly to fulfilment.
   </Step>
 </Steps>
 
@@ -122,7 +122,7 @@ The Online Storefront gives every Softbooq business a fully functional public e-
 
 <AccordionGroup>
   <Accordion title="Items from Inventory are not appearing on the storefront">
-    Check two things: (1) the item has a price set — items with no price are hidden from the storefront. (2) the item is not marked as hidden. Open the product in Products & Services and confirm it is listed and has a price.
+    Check two things: (1) the item has a price set. Items with no price are hidden from the storefront. (2) the item is not marked as hidden. Open the product in Products & Services and confirm it is listed and has a price.
   </Accordion>
   <Accordion title="Service booking slots are all showing as unavailable">
     Booking slots are only shown for resources that are marked as publicly bookable. Open Resource Scheduling, edit the resource, and confirm that **Available for online booking** is ticked. Also check that the resource has availability windows configured for the selected day.
@@ -131,10 +131,10 @@ The Online Storefront gives every Softbooq business a fully functional public e-
     Confirm that Stripe is fully set up and verified in **Settings → Banking → Receive Payments**. If the Stripe account verification is incomplete (e.g. additional documents required by Stripe), payments will be declined. Log in to your Stripe dashboard to check the account status.
   </Accordion>
   <Accordion title="The customer's cart disappeared after they refreshed the page">
-    Carts persist in the customer's browser local storage, keyed by your workspace ID. If local storage is cleared or the customer is using a private browser session, the cart will not persist. This is a browser behaviour limitation — there is no server-side cart persistence for guest visitors.
+    Carts persist in the customer's browser local storage, keyed by your workspace ID. If local storage is cleared or the customer is using a private browser session, the cart will not persist. This is a browser behaviour limitation. There is no server-side cart persistence for guest visitors.
   </Accordion>
   <Accordion title="Currency conversion looks inaccurate">
-    The storefront uses live mid-market exchange rates fetched at the time the customer switches currency. Rates are not guaranteed — they are indicative. If you need to charge a specific rate, the safest approach is to set prices in your home currency only and use the Stripe payment flow, which handles currency conversion at payment time.
+    The storefront uses live mid-market exchange rates fetched at the time the customer switches currency. Rates are not guaranteed. They are indicative. If you need to charge a specific rate, the safest approach is to set prices in your home currency only and use the Stripe payment flow, which handles currency conversion at payment time.
   </Accordion>
 </AccordionGroup>
 
@@ -153,10 +153,10 @@ The Online Storefront gives every Softbooq business a fully functional public e-
     Yes. Enable **Distinct Online Price** on any item in Inventory. The online price is used on the storefront while the regular price is used in internal Sales orders and POS.
   </Accordion>
   <Accordion title="Can customers create an account on the storefront?">
-    The public storefront is a guest experience — customers do not need an account to browse or place orders. Customers who want to see their orders and invoices later sign in to their [customer account](/portals/customer-account) with an emailed code.
+    The public storefront is a guest experience. Customers do not need an account to browse or place orders. Customers who want to see their orders and invoices later sign in to their [customer account](/portals/customer-account) with an emailed code.
   </Accordion>
   <Accordion title="How are booking payments handled?">
-    If checkout mode includes Stripe, the booking service item is paid like any product — the customer pays at checkout and the booking is confirmed. If checkout mode is Request Only, the booking request is submitted without payment and you confirm it manually.
+    If checkout mode includes Stripe, the booking service item is paid like any product. The customer pays at checkout and the booking is confirmed. If checkout mode is Request Only, the booking request is submitted without payment and you confirm it manually.
   </Accordion>
 </AccordionGroup>
 
