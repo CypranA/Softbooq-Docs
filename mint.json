@@ -90,7 +90,8 @@
         "erp/it",
         "erp/reports",
         "erp/vat-return",
-        "erp/settings"
+        "erp/settings",
+        "erp/email-delivery"
       ]
     },
     {
