@@ -1,186 +1,54 @@
 ---
-title: Scheduling
-description: Resource bookings, availability and calendar management
-icon: calendar-days
+title: Resource Scheduling
+description: Book rooms, people, equipment and anything else you hand out by the hour
+icon: calendar
 ---
 
-The Scheduling module manages bookable resources — rooms, equipment, staff — and allows your team or customers to make reservations against available slots. All bookings are conflict-checked in real time and visible in unified calendar views.
+Resource Scheduling is one calendar of everything you book: people, rooms, equipment, tables, courts, vehicles and more. Customers can book online too.
 
-## What Scheduling owns
+## How it is organised
 
-- **Resources** — bookable assets or people with defined availability windows
-- **Bookings** — confirmed reservations against a resource's schedule
-- **Availability rules** — working hours, buffer times, and advance booking limits
+One calendar, with the views **Week**, **Day**, **Month** and **Agenda**, your resources down the side, and **Insights** for bookings, no-shows, hours, revenue and how full each resource is. Click a resource to show only its bookings.
 
 ---
 
 ## Common tasks
 
-### Add a bookable resource
+### Add a resource
 
-<Steps>
-  <Step title="Open Scheduling → Resources → New Resource" />
-  <Step title="Name the resource">
-    Give it a specific, recognisable name (e.g. Meeting Room A — 10 Seats, Service Bay 2, John Smith – Senior Consultant).
-  </Step>
-  <Step title="Set the resource type">
-    Choose: Room, Equipment, or Person. The type affects how the resource appears in booking interfaces and reports.
-  </Step>
-  <Step title="Set availability windows">
-    Define the days and hours this resource is available (e.g. Mon–Fri, 09:00–17:00). You can set different hours per day if needed.
-  </Step>
-  <Step title="Set buffer time (optional)">
-    Add a buffer between bookings (e.g. 15 minutes). This prevents back-to-back bookings with no time for setup, travel, or preparation.
-  </Step>
-  <Step title="Available for online booking (optional)">
-    Tick **Available for online booking** so customers can pick this resource when booking a service on your online store.
-  </Step>
-  <Step title="Save">
-    The resource is now bookable by your team and, if ticked, by customers on your online store.
-  </Step>
-</Steps>
+Choose **Add Resource** and pick its type (Employee, Room, Equipment, Staff, Space, Asset, Table, Vehicle, Chair, Desk, Court, Lane, Station, Booth, Bay, or your own). Set its working hours and its capacity, how many bookings it can take at once, for a class or a court.
 
-### Create a booking
+- **Linked employee**: link a person, and their approved leave blocks bookings automatically.
+- **Available for online booking**: customers can pick this resource when booking a service on your online store.
 
-<Steps>
-  <Step title="Open Scheduling → Bookings → New Booking (or click a time slot directly on the calendar)" />
-  <Step title="Select the resource">
-    Choose the room, equipment, or person to book.
-  </Step>
-  <Step title="Choose date and time">
-    The calendar shows available slots in real time. Unavailable times (blocked, already booked, or outside availability) are greyed out.
-  </Step>
-  <Step title="Set duration">
-    Enter the start and end time or select from preset durations if configured.
-  </Step>
-  <Step title="Add booking details">
-    Enter a title or purpose for the booking. Link to a CRM customer or HR employee for context and reporting.
-  </Step>
-  <Step title="Add attendees (optional)">
-    For room or person bookings, list the attendees. They receive a confirmation notification.
-  </Step>
-  <Step title="Confirm">
-    The booking is confirmed instantly. The resource calendar updates in real time and all attendees receive a confirmation notification.
-  </Step>
-</Steps>
+### Make a booking
 
-### Block time on a resource
+Drag across a time on the calendar to open **New Booking**. Choose the resource, the service and customer if there is one, and the status (Confirmed, Pending, Tentative or Cancelled). Tick **Private** to hide the details from colleagues; they see the time as busy.
 
-<Steps>
-  <Step title="Open the resource calendar" />
-  <Step title="Click on the time slot to block" />
-  <Step title="Select Block Time">
-    Enter a reason: Maintenance, Out of Office, Reserved, Public Holiday, or Custom.
-  </Step>
-  <Step title="Set duration">
-    Block a specific slot, a full day, or a recurring period (e.g. every Monday morning for 4 weeks).
-  </Step>
-  <Step title="Save">
-    The slot is blocked and cannot be booked by anyone. Existing bookings within a newly blocked period are flagged and their holders notified.
-  </Step>
-</Steps>
+To repeat it, choose **Weekly**, **Every 2 weeks** or **Monthly**, and when it stops. Dates that clash, or fall on approved leave, are skipped. When you remove a repeated booking you choose **Remove this occurrence** or **Remove this & future**.
 
-### Manage recurring bookings
+Softbooq will not let a resource be booked over its capacity.
 
-<Steps>
-  <Step title="Create a booking as normal" />
-  <Step title="Toggle Recurring">
-    Enable the recurring option and set the pattern: daily, weekly, bi-weekly, or monthly.
-  </Step>
-  <Step title="Set the end date or occurrence count">
-    Choose when the series ends (e.g. after 10 occurrences, or on a specific date).
-  </Step>
-  <Step title="Save">
-    All occurrences are created and visible on the calendar. You can cancel individual occurrences without affecting the rest of the series.
-  </Step>
-</Steps>
+### Afterwards
 
-### View and manage the schedule calendar
+Mark the booking **Attended** or **No-show**. If it has a service, **Bill this booking** creates the sale and its invoice. A cancelled booking stays on record as Cancelled.
 
-<Steps>
-  <Step title="Open Scheduling → Calendar">
-    The calendar shows all resources in a unified view. Switch between Day, Week, and Month views.
-  </Step>
-  <Step title="Filter by resource or resource type">
-    Show only specific rooms, only equipment, or only a specific person's calendar.
-  </Step>
-  <Step title="Drag to reschedule">
-    Drag a booking block to a new time slot to reschedule it. The system checks availability in real time and prevents you from dropping into a conflicting slot.
-  </Step>
-  <Step title="Export the schedule">
-    Download the schedule as PDF for distribution, or sync to an external calendar (Google Calendar, Outlook) using the iCal feed link.
-  </Step>
-</Steps>
+### Sync your own calendar
 
-### Cancel a booking
-
-<Steps>
-  <Step title="Open the booking from the calendar or Bookings list" />
-  <Step title="Click Cancel Booking" />
-  <Step title="Enter a cancellation reason">
-    The reason is sent to all attendees in the cancellation notification.
-  </Step>
-  <Step title="Confirm">
-    The slot is released immediately and becomes available for new bookings.
-  </Step>
-</Steps>
-
----
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title="A time slot appears available but I cannot book it">
-    The slot may be within a buffer period from an adjacent booking. Check the resource's buffer time setting. If the slot appears immediately before or after another booking, the buffer is blocking it. You can either reduce the buffer time on the resource or find an alternative slot.
-  </Accordion>
-  <Accordion title="A customer tried to book online but the resource was not visible">
-    Open the resource and confirm that **Available for online booking** is ticked. Then check **Settings → Business → Public Page**, where **Public Booking Resources** lists the resources customers can book in the online store.
-  </Accordion>
-  <Accordion title="I cannot delete a resource that has upcoming bookings">
-    Resources with future bookings cannot be deleted — doing so would orphan the booking records. Cancel all upcoming bookings first, then delete the resource. Alternatively, archive the resource — it will be hidden from new bookings but historical records are preserved.
-  </Accordion>
-  <Accordion title="The calendar is not showing bookings I know exist">
-    Check the calendar filter — it may be filtering to a specific resource or resource type that excludes the bookings you are looking for. Clear all filters to show all bookings across all resources.
-  </Accordion>
-  <Accordion title="A recurring booking was cancelled but only one occurrence was removed">
-    When cancelling a recurring booking, you are prompted to choose: cancel only this occurrence, or cancel this and all future occurrences. If you chose **This occurrence only**, the rest of the series is unchanged. Open another occurrence to cancel the full series.
-  </Accordion>
-</AccordionGroup>
-
----
-
-## FAQ
-
-<AccordionGroup>
-  <Accordion title="Can customers book resources directly without going through a staff member?">
-    Yes. Tick **Available for online booking** on each resource you want customers to book, and choose it under **Public Booking Resources**. Customers then book a service with that resource on your online store.
-  </Accordion>
-  <Accordion title="Can I charge customers for bookings?">
-    Yes. Set a booking rate on the resource (e.g. £50 per hour). When a booking is confirmed, a pending invoice is generated in Finance. The invoice is sent automatically or held for manual review depending on your billing settings.
-  </Accordion>
-  <Accordion title="Can I sync the schedule with Google Calendar or Outlook?">
-    Yes. Each resource has a unique iCal feed URL under the resource settings. Add this URL to Google Calendar, Outlook, or any calendar application that supports iCal subscriptions. The feed is read-only — changes must still be made in Softbooq.
-  </Accordion>
-  <Accordion title="How does Scheduling prevent double-bookings?">
-    Double-booking prevention is enforced in real time at the database level, not just in the UI. Two users cannot book the same slot simultaneously — the second request will be rejected and prompted to select a different slot.
-  </Accordion>
-  <Accordion title="Can I set different availability for a resource on public holidays?">
-    Yes. Block time on the resource for each public holiday, or use the recurring block feature to mark annual dates. You can also set a custom availability calendar per resource under the resource's advanced settings.
-  </Accordion>
-</AccordionGroup>
+Under **My Calendars**, **Connect** Google or Outlook, and bookings appear in your own calendar.
 
 ---
 
 ## See also
 
 <CardGroup cols={3}>
-  <Card title="CRM" icon="handshake" href="/erp/crm">
-    Bookings are linked to CRM customers for a full account view.
+  <Card title="Online store" icon="store" href="/portals/storefront">
+    Where customers book.
   </Card>
-  <Card title="Online Storefront" icon="store" href="/portals/storefront">
-    Customers can book services directly from your public storefront.
+  <Card title="Human Resources" icon="briefcase" href="/erp/hr">
+    Leave that blocks bookings.
   </Card>
-  <Card title="HR" icon="briefcase" href="/erp/hr">
-    Staff leave and availability feeds into scheduling resource calendars.
+  <Card title="Projects" icon="diagram-project" href="/erp/projects">
+    Bookings tagged to a project.
   </Card>
 </CardGroup>
