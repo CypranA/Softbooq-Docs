@@ -65,13 +65,15 @@ The Online Storefront gives every Softbooq business a fully functional public e-
 ### Configure checkout options
 
 <Steps>
-  <Step title="Open Settings → Storefront → Checkout Mode" />
-  <Step title="Choose a checkout mode">
-    **Request Only** — customers submit their details and you fulfil the order manually. No payment taken online. Best for B2B, custom orders, or businesses not yet set up for online payments.
+  <Step title="Open Settings → Business → Public Page, then Storefront Configuration" />
+  <Step title="Choose the Checkout Mode">
+    **Quote / Order Request**: customers send their order and you take it from there. No payment is taken online. Suits B2B, custom orders, or a business not yet set up for online payments.
 
-    **Stripe Only** — customers pay by card at checkout. Requires Stripe Connect to be configured in Settings → Payments.
+    **Integrated Payments (Stripe)**: customers pay by card at checkout. Needs Stripe connected in **Settings → Banking → Receive Payments**.
 
-    **Both** — customers choose between requesting a quote or paying immediately. This is the most flexible option.
+    **Both (Hybrid)**: customers choose between sending a request and paying straight away.
+
+    **Distinct Store Pricing** lets your online prices differ from your register prices.
   </Step>
   <Step title="Save" />
 </Steps>
@@ -79,7 +81,7 @@ The Online Storefront gives every Softbooq business a fully functional public e-
 ### Connect Stripe for online payments
 
 <Steps>
-  <Step title="Open Settings → Payments → Stripe Connect" />
+  <Step title="Open Settings → Banking → Receive Payments" />
   <Step title="Click Connect with Stripe">
     You are redirected to Stripe's onboarding. Complete the business verification steps.
   </Step>
@@ -87,16 +89,15 @@ The Online Storefront gives every Softbooq business a fully functional public e-
     Once connected, Stripe Connect is active. Online payments on the storefront are processed directly to your Stripe account.
   </Step>
   <Step title="Set checkout mode to Stripe or Both">
-    Go to Settings → Storefront and enable the payment checkout option.
+    In **Settings → Business → Public Page**, under Storefront Configuration, choose **Integrated Payments (Stripe)** or **Both (Hybrid)**.
   </Step>
 </Steps>
 
-### Preview the storefront as an admin
+### See your store as customers do
 
 <Steps>
-  <Step title="Open Inventory or Settings → Storefront → Preview" />
-  <Step title="Click Preview Storefront">
-    The storefront opens in preview mode with an admin banner at the top. You are seeing exactly what customers see.
+  <Step title="Open your store at <your-handle>.mysoftbooq.com/shop">
+    You see what customers see.
   </Step>
   <Step title="Click Return to Admin in the banner to exit preview" />
 </Steps>
@@ -121,13 +122,13 @@ The Online Storefront gives every Softbooq business a fully functional public e-
 
 <AccordionGroup>
   <Accordion title="Items from Inventory are not appearing on the storefront">
-    Check two things: (1) the item has a price set — items with no price are hidden from the storefront. (2) the item is not marked as hidden. Open the item in Inventory and confirm it is set to active and has a price.
+    Check two things: (1) the item has a price set — items with no price are hidden from the storefront. (2) the item is not marked as hidden. Open the product in Products & Services and confirm it is listed and has a price.
   </Accordion>
   <Accordion title="Service booking slots are all showing as unavailable">
     Booking slots are only shown for resources that are marked as publicly bookable. Open Resource Scheduling, edit the resource, and confirm that **Available for online booking** is ticked. Also check that the resource has availability windows configured for the selected day.
   </Accordion>
   <Accordion title="Stripe payment is failing at checkout">
-    Confirm that Stripe Connect is fully set up and verified in Settings → Payments. If the Stripe account verification is incomplete (e.g. additional documents required by Stripe), payments will be declined. Log in to your Stripe dashboard to check the account status.
+    Confirm that Stripe is fully set up and verified in **Settings → Banking → Receive Payments**. If the Stripe account verification is incomplete (e.g. additional documents required by Stripe), payments will be declined. Log in to your Stripe dashboard to check the account status.
   </Accordion>
   <Accordion title="The customer's cart disappeared after they refreshed the page">
     Carts persist in the customer's browser local storage, keyed by your workspace ID. If local storage is cleared or the customer is using a private browser session, the cart will not persist. This is a browser behaviour limitation — there is no server-side cart persistence for guest visitors.

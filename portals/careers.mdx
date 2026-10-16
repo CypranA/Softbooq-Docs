@@ -26,9 +26,9 @@ The Careers Portal publishes your open job listings at `<your-handle>.mysoftbooq
 ### Post a job opening
 
 <Steps>
-  <Step title="Open HR → Recruitment → Job Openings → New Job Opening" />
+  <Step title="Open Human Resources → Talent → Job Openings → Post New Job" />
   <Step title="Enter the job details">
-    Fill in: job title, department, location, employment type (Full-time, Part-time, Contract, Remote), and a clear job description.
+    Fill in: job title, department, location, employment type (Full-time, Part-time, Contract, Intern, Temporary, Freelance), and a clear job description.
   </Step>
   <Step title="Add requirements (optional)">
     List the key requirements as bullet points. These appear as a bulleted list in the application modal alongside the description.
@@ -39,8 +39,8 @@ The Careers Portal publishes your open job listings at `<your-handle>.mysoftbooq
   <Step title="Select an application form template">
     Choose: **Standard General** (name, email, phone, CV, cover letter, portfolio, start date) or **Technical Role** (adds GitHub URL, primary languages, years of experience, technical project question). You can also use a custom template.
   </Step>
-  <Step title="Set status to Active">
-    Only jobs with **Status: Active** appear on the public careers page.
+  <Step title="Set the status to Open">
+    Only jobs with the status **Open** appear on the public careers page. A job can also be Draft, On Hold or Closed.
   </Step>
   <Step title="Save">
     The job appears on the careers portal immediately.
@@ -95,9 +95,9 @@ The Careers Portal publishes your open job listings at `<your-handle>.mysoftbooq
 ### Close a job opening
 
 <Steps>
-  <Step title="Open the job opening in HR → Recruitment" />
-  <Step title="Change status to Closed or Filled">
-    Closed and Filled jobs are immediately removed from the public careers page. Existing applications are retained.
+  <Step title="Open the job in Human Resources → Talent → Job Openings" />
+  <Step title="Change the status to Closed or On Hold">
+    The job disappears from the public careers page straight away. Its applications are kept.
   </Step>
   <Step title="Save" />
 </Steps>
@@ -108,13 +108,13 @@ The Careers Portal publishes your open job listings at `<your-handle>.mysoftbooq
 
 <AccordionGroup>
   <Accordion title="The careers page shows 'Careers Not Available' instead of my jobs">
-    This means the HR module is not included in your current subscription plan. Upgrade to a plan that includes HR to enable the careers portal. If HR is on your plan, check that at least one job opening has **Status: Active**.
+    This means the HR module is not included in your current subscription plan. Upgrade to a plan that includes HR to enable the careers portal. If HR is on your plan, check that at least one job has the status **Open**.
   </Accordion>
   <Accordion title="A job I posted is not appearing on the careers page">
-    Only jobs with **Status: Active** are shown publicly. Open the job opening and confirm the status. Also check the workspace public handle is correct in Settings → Company Profile — the careers URL is based on it.
+    Only jobs with the status **Open** are shown publicly. Open the job and check its status. The careers address is based on your public address, set in **Settings → Business → Public Page**.
   </Accordion>
-  <Accordion title="A candidate submitted an application but it is not appearing in HR → Candidates">
-    Check the Supabase candidates table for the application. If it is there but not showing, the job opening ID on the application may not match any active job — this can happen if the job was deleted after submission. Contact support for data recovery.
+  <Accordion title="A candidate applied but is not in the Candidate Pipeline">
+    The job may have been deleted after they applied, so the application has no job to sit under. Contact support and we will help you find it.
   </Accordion>
   <Accordion title="A candidate's uploaded CV is not downloadable">
     CVs are stored in secure storage under `resumes/{tenantId}/`. They are not publicly accessible — only authenticated Admin and Manager users can download them. If the download link fails, the file may have been stored with an incorrect path. Check the candidate record for the resume URL.
@@ -142,7 +142,7 @@ The Careers Portal publishes your open job listings at `<your-handle>.mysoftbooq
     Yes. Every application form includes a GDPR consent declaration that the candidate must check before submitting. The consent text references your privacy policy at `<your-handle>.mysoftbooq.com/privacy`. You can set up your privacy policy content under Settings → Legal.
   </Accordion>
   <Accordion title="Can I move hired candidates directly to HR as employees?">
-    Yes. Once a candidate is marked as **Hired**, click **Create Employee** on the candidate record. An HR employee record is pre-filled with their name, email, and application details. Complete the remaining fields (salary, department, start date) to finalise onboarding.
+    Yes. Once a candidate is hired, choose **Set up employee profile** on the candidate. Their name, email and application details are filled in; add the rest on their profile.
   </Accordion>
 </AccordionGroup>
 
