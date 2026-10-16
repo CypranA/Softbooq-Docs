@@ -1,87 +1,73 @@
 ---
-title: Admin Portal
-description: Tenant administration tools inside the ERP
+title: Admin Portal and security
+sidebarTitle: Admin Portal
+description: Billing, seats and apps in the Admin Portal; users, roles, security and the audit log in the ERP
 icon: user-shield
 ---
 
-The Admin Portal is the part of the ERP that only Admin-role users see. It contains the controls for managing your whole Softbooq workspace: users, security policy, audit logging, billing, integrations, and AI caps. Everything is accessible through the **Settings** module, but several admin-only views surface across other modules too.
+Running a workspace happens in two places. The **Admin Portal**, at `accounts.softbooq.com/admin`, holds billing, seats and apps. **User Management**, **Audit Logs** and **Settings** in the ERP hold roles, security and everything else about how the workspace works.
 
-## Admin-only screens
+## The Admin Portal
 
-| Screen | Where it lives | What it does |
-|--------|----------------|--------------|
-| Users & Roles | Settings → Users & Roles | Invite, deactivate, change role, link to HR record |
-| Security Policy | User Management → Security Policy | MFA enforcement by role, desktop inactivity lock, workspace access by email domain |
-| Audit Log | Settings → Audit Log | Append-only log of every user action for compliance |
-| AI Caps | Settings → AI → Caps | Per-user daily / per-request credit limits |
-| Subscription | Settings → Subscription & Billing | Upgrade, downgrade, cancel, view invoices |
-| Integrations | Settings → Integrations | All third-party connections |
-| Channels | Settings → Sales Channels | Sales channel definitions for cross-channel reporting |
-| Data Export | Settings → Data → Export | Full workspace export in CSV |
-| Tenant Profile | Settings → Company Profile | Branding, currency, fiscal year |
+Only Admins can open it: from your account page, choose **Admin Portal**, or **Manage** next to a workspace. If you are Admin of several workspaces, pick one under **Workspace**.
 
-## What only Admins can see
+| Section | What is there |
+|---------|---------------|
+| **Billing** | Your plan, its status, seats used and AI credits (**Top Up**). Change plan, monthly or yearly. **Manage Billing** shows your invoices and lets you change the payment method or cancel |
+| **Seats** | Everyone in the workspace, with **Invite User**, **Add Seats**, **Change Role** and **Deactivate**. **Pending Invitations** can be copied, resent or revoked; an invitation link lasts 7 days |
+| **Apps** | The Softbooq apps your workspace uses, such as Files (included free) and Softbooq AI and BI (paid for with credits) |
+| **Settings** | **Billing email**, **VAT / Tax number**, **Country** and your address for invoices. Your company name and timezone are set in the ERP's Settings |
+| **Integrations** | Your requests for paid add-ons such as Xero, QuickBooks Online and DATEV |
 
-- Billing data and Stripe invoices
-- Audit log entries (Managers can see entries on records they own; only Admins see all)
-- All users' AI usage on Reports → AI Usage
-- API keys and webhook secrets stored in the Vault
-- Other admins' MFA status
+## Users and roles in the ERP
 
-Manager-role users have wide operational access but are blocked from the above. Employee, Viewer and Client roles are blocked further per the role matrix in [Quickstart](/quickstart).
+**User Management** in the ERP has three tabs:
 
----
+- **User List**: everyone in the workspace, their role and their active sessions
+- **Roles & Permissions**: what each role can do
+- **Security Policy**: for Admins, see below
 
-## Audit log
+The roles are Admin, Manager, Employee, Viewer, Cashier, Sales Rep, Auditor and AI User. Choosing Admin gives full access to billing and workspace settings.
 
-Every state-changing action in the ERP writes a row to the audit log: who, what, when, before/after values, source IP. The log is append-only — entries cannot be edited or deleted, even by Admins. Retention follows your plan: 1 year on Standard, 3 years on Plus, 7 years on Pro.
+Requests from people who asked to delete their account also arrive in User Management, for you to approve.
 
-Filter the log by user, by entity (e.g. only finance.invoice events), by date range, or by source IP. Export to CSV for compliance audits.
+### View As
 
-The audit log surfaces operator impersonation events too (see [Operator Console](/platform/console)) so customers always have a record of when Softbooq staff entered their workspace.
-
----
-
-## Promote, demote, and suspend users
-
-<Steps>
-  <Step title="Open Settings → Users & Roles" />
-  <Step title="Find the user, open their row" />
-  <Step title="Change role">
-    Pick from Admin / Manager / Employee / Viewer / Client. The change applies on next page load.
-  </Step>
-  <Step title="Or click Deactivate">
-    Their session is revoked immediately. Their data is retained. Reactivate at any time.
-  </Step>
-</Steps>
-
-You cannot demote yourself if you are the only Admin in the workspace; promote another Admin first. This is enforced at the database level, not just the UI.
-
----
+An Admin can choose **View As** on someone in the **User List** to see the ERP as that person sees it, for example to check what a new role can reach. A banner shows **Viewing as** and their name until you choose **Exit**. You stay signed in as yourself, and the start and end are written to the audit log.
 
 ## Security Policy
 
-| Control | What it does |
-|---------|--------------|
-| MFA Enforcement | Choose the roles that must use MFA, and a grace period in days to enrol (0 = immediately) |
-| Session Policy | **Desktop inactivity lock**, from 5 minutes to 2 hours. Phones are never locked by inactivity; the device PIN or Face ID protects them |
-| Workspace Access | Optional: only people with an email address on your own domain can join the workspace |
-| Single Sign-On (SSO) | Available on request: contact us |
+In **User Management → Security Policy**:
 
-The policy is in **User Management → Security Policy**. Changes apply to everyone in the workspace as soon as you save; nobody is signed out.
+- **MFA Enforcement**: choose the **Roles that must use MFA** and a **Grace period (days)**. People in those roles are asked to set up two-factor authentication before they can carry on in the ERP.
+- **Session Policy**: lock the screen on a computer after a period without activity. Phones are never locked for inactivity.
+- **Workspace Access**: limit who can join to email addresses on your own domains, with exceptions you list. Set **Enforcement** to **Off**, **Warn** or **Enforced**.
+- **Single Sign-On (SSO)**: enterprise single sign-on is available on request. Choose **Contact support**.
 
----
+Saving asks you to confirm it is you.
+
+## Audit Logs
+
+**Audit Logs** records who did what in your workspace: records created, changed and deleted, sign-ins and sign-outs, settings and role changes, invitations, payment runs, actions Jacinta took for someone, and every **View As**. Entries cannot be edited or deleted, by anyone.
+
+Filter by **Entity Type**, **Action**, **Performed By** and **Period**, and **Export** as CSV or JSON.
+
+Audit Logs are part of Softbooq Pro. Admins, Managers and Auditors can see them.
+
+## Closing the workspace
+
+In the ERP, **Settings → Billing & Plans → Close this workspace**. Everyone loses access at once, you included, and the subscription is cancelled. Nothing is deleted straight away: the records are kept for 90 days, then the workspace and everything in it is permanently deleted, unless you reopen it first.
 
 ## See also
 
 <CardGroup cols={3}>
-  <Card title="Settings" icon="gear" href="/erp/settings">
-    All admin controls live under Settings.
+  <Card title="Softbooq Accounts" icon="id-card" href="/platform/accounts">
+    Your own sign-in, devices and data.
   </Card>
-  <Card title="Accounts" icon="id-card" href="/platform/accounts">
-    User identity and per-account security.
+  <Card title="Subscription & Plans" icon="credit-card" href="/billing/subscription">
+    What each plan includes.
   </Card>
-  <Card title="Subscription" icon="credit-card" href="/billing/subscription">
-    Plan tiers, upgrades, downgrades.
+  <Card title="Support access" icon="life-ring" href="/platform/console">
+    Letting Softbooq support see your data.
   </Card>
 </CardGroup>
