@@ -1,0 +1,46 @@
+---
+title: Did my email arrive?
+description: Where Softbooq shows whether an invoice, quote or other email reached your customer, and what to do when it did not
+icon: envelope-circle-check
+---
+
+When Softbooq emails something for you, it shows whether it arrived. On an **invoice** or **quote** you see its latest email in one line. On a **customer**, you see emails to their address that did not get through. Every email is listed in **Settings → Messaging & Channels → Email Activity**.
+
+## What the line can say
+
+| It says | What happened |
+|---------|---------------|
+| Delivered | The receiving server accepted it, on the date shown |
+| Waiting to be sent | It is in the queue and goes out within a few minutes |
+| Delayed | The address could not take it yet; delivery is being retried |
+| Did not arrive: the address does not accept email | It bounced; the address is wrong or closed |
+| Did not arrive: refused | The receiving server blocked it or treated it as spam |
+| Not sent: held by this month's free email limit | Your monthly free emails are used up (see below) |
+| Not sent: no email service is set up, or your email service refused the sign-in | Check your email settings |
+| Sent, and whether it arrived shows once the provider reports it | Delivery reports come in after sending |
+| Sent through your own email account | Softbooq cannot see delivery for your own mailbox; a bounce notice arrives in that mailbox |
+
+## Fixing it
+
+The fix is shown next to the problem:
+
+- **Correct the customer's email**, then send it again from the invoice or quote.
+- **Send again** from Email Activity, for example for emails that were held.
+- Open your email settings when no service is set up or your provider refused the sign-in.
+
+To understand what happened, choose **Ask Jacinta** next to it.
+
+## Held emails
+
+Softbooq's own email service includes a set number of free emails each month. When they are used up, further invoices, reminders and notifications are **held**, not lost, until the next month. Customer sign-in codes still go out. To send without a limit, connect your own email provider in **Settings → Messaging & Channels → Email Service**, then use **Send again** in Email Activity.
+
+## See also
+
+<CardGroup cols={2}>
+  <Card title="Settings" icon="gear" href="/erp/settings">
+    Email Service and Email Activity.
+  </Card>
+  <Card title="Email providers" icon="envelope" href="/integrations/email">
+    Connecting your own email provider.
+  </Card>
+</CardGroup>
