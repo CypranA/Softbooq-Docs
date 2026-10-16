@@ -1,209 +1,61 @@
 ---
 title: CRM
-description: Customers, deals, interactions and health scores
+description: Customers and suppliers, contacts, the deal pipeline, tasks and follow-up
 icon: users
 ---
 
-The CRM module manages your entire customer relationship lifecycle — from first contact through to closed deal, active contract, and long-term account health. Every other module that references a customer draws from the CRM master record.
+CRM holds the people and businesses you work with, the deals you are working on, and what you did with them. Customers and suppliers are the same records Sales, Finance and Procurement use. CRM is part of Softbooq Plus and Pro.
 
-## What CRM owns
+## How CRM is organised
 
-- **Customers** — the master customer record shared across the entire ERP
-- **Deals & pipelines** — track opportunities through your sales stages
-- **Interactions** — log calls, meetings, emails, and notes against customers
-- **Health scores** — automated scoring based on activity, spend, and engagement
+Tabs: **Overview**, **Customers & Vendors**, **Contacts**, **Pipeline**, **Interactions**, **Tasks**, **Sequences**, **Lead Forms**, **Performance Analytics**, **Duplicates**.
 
-## Data flows out of CRM to
-
-| Module | What it sends |
-|--------|--------------|
-| Finance | Customer invoices |
-| Sales & POS | Customer data for orders |
-| Contracts | Customer contracts |
-| Dashboard | Customer metrics |
-
-<Note>
-  The customer record is the single source of truth across all modules. Always create the customer in CRM first — do not create customers directly in Finance or Sales.
-</Note>
+Opening a customer shows their **Overview**, **Deals**, **Financials** and **Timeline**, the people who work there, and their **Customer account** (who can sign in to see their invoices and orders).
 
 ---
 
 ## Common tasks
 
-### Add a new customer
+### Add a customer
 
-<Steps>
-  <Step title="Open CRM → Customers → New Customer" />
-  <Step title="Fill in the customer details">
-    Enter company name, primary contact name, email, phone, and billing address. The billing address will pre-fill on every invoice raised for this customer.
-  </Step>
-  <Step title="Set payment terms">
-    Choose the default payment terms (e.g. Net 30). These auto-populate on every invoice for this customer — you can override per invoice if needed.
-  </Step>
-  <Step title="Add a tax or VAT number (optional)">
-    If the customer is VAT-registered, enter their number. This appears on invoices and is required for B2B compliance in many jurisdictions.
-  </Step>
-  <Step title="Save">
-    The customer is immediately available across Finance, Sales, Contracts, and Scheduling.
-  </Step>
-</Steps>
+Open **Customers & Vendors** and choose **Add Customer**. **Check & Create** looks for an existing record with the same details before it creates a new one, so you do not end up with two.
 
-### Create a deal
+### Work a deal
 
-<Steps>
-  <Step title="Open CRM → Deals → New Deal" />
-  <Step title="Link to a customer">
-    Select the customer this deal is for. If they don't exist yet, create them in CRM first.
-  </Step>
-  <Step title="Set deal details">
-    Enter the deal name, expected value, expected close date, and the current pipeline stage.
-  </Step>
-  <Step title="Assign to a team member">
-    Set the deal owner — the person responsible for closing it. They will receive activity reminders.
-  </Step>
-  <Step title="Move through stages">
-    Drag the deal card across your pipeline as it progresses. Each stage change is logged with a timestamp.
-  </Step>
-  <Step title="Close the deal">
-    When the customer confirms, set the stage to **Won** and enter the final deal value. If lost, set to **Lost** and optionally record the reason for reporting.
-  </Step>
-</Steps>
+On **Pipeline**, choose **New Deal**, fill it in and **Launch Deal**. Move it through **Lead**, **Qualified**, **Proposal**, **Negotiation**, then **Won** or **Lost**; the stages are fixed. Closing a deal asks why it was won or lost, and reopening a closed deal asks for a reason too.
 
-### Log an interaction
+A deal does not turn into an invoice. Quotes and orders are made in [Sales & POS](/erp/sales), and invoices come from there.
 
-<Steps>
-  <Step title="Open a customer or deal record" />
-  <Step title="Click Log Interaction">
-    Choose the interaction type: Call, Meeting, Email, or Note.
-  </Step>
-  <Step title="Add details">
-    Write a summary of the conversation, decisions made, and any follow-up actions required.
-  </Step>
-  <Step title="Set a follow-up reminder (optional)">
-    Toggle **Add Reminder** and set a date. You will be notified at that time to follow up.
-  </Step>
-  <Step title="Save">
-    The interaction is timestamped and visible to your entire team on the customer's timeline.
-  </Step>
-</Steps>
+### Record what happened
 
-### Convert a won deal to an invoice
+Use **Log Activity** for a call, meeting, email or note. Follow-ups go on **Tasks**.
 
-<Steps>
-  <Step title="Open the deal → click Convert to Invoice">
-    Available once the deal is in the Won stage.
-  </Step>
-  <Step title="Review the invoice draft">
-    The customer, deal value, and any line items from the deal are pre-filled. Adjust as needed.
-  </Step>
-  <Step title="Set the due date and send">
-    Choose a due date or payment term, then click **Send Invoice**. Finance records it automatically.
-  </Step>
-</Steps>
+### Merge duplicates
 
-### Merge duplicate customer records
+**Duplicates** lists records that look like the same customer. Merge them, swap which one is kept, or choose **Not a duplicate - dismiss**. For contacts, use **Review & merge** on the Contacts tab.
 
-<Steps>
-  <Step title="Open CRM → Customers">
-    Identify two records that represent the same customer (e.g. created via manual entry and via an import).
-  </Step>
-  <Step title="Open the duplicate record → click Merge">
-    Select the record you want to keep as the primary record.
-  </Step>
-  <Step title="Review what will be merged">
-    The system shows all deals, interactions, invoices, and contracts that will be moved to the primary record. The duplicate will be permanently deleted.
-  </Step>
-  <Step title="Confirm">
-    All data is consolidated under the primary record. The merge is logged in the audit trail.
-  </Step>
-</Steps>
+### Import and export
 
-### Export the customer list
-
-<Steps>
-  <Step title="Open CRM → Customers" />
-  <Step title="Apply any filters">
-    Filter by tag, account manager, country, or payment terms to export a specific subset.
-  </Step>
-  <Step title="Click Export → CSV">
-    The export includes all customer fields: name, contact, address, payment terms, and health score.
-  </Step>
-</Steps>
-
-### Customise your pipeline stages
-
-<Steps>
-  <Step title="Open CRM → Deals → Manage Stages">
-    Available to Admin and Manager roles.
-  </Step>
-  <Step title="Add, rename, or reorder stages">
-    Drag to reorder. Changes apply immediately to all existing deals.
-  </Step>
-  <Step title="Mark a stage as Won or Lost">
-    The final positive stage should be marked **Won** and the exit stage **Lost** — these feed the win rate metric on your dashboard.
-  </Step>
-  <Step title="Save" />
-</Steps>
+The **...** menu on Customers & Vendors has **Import** and **Export**.
 
 ---
 
-## Troubleshooting
+## Relationship health
 
-<AccordionGroup>
-  <Accordion title="A customer is not appearing in the Finance or Sales dropdown">
-    The customer may have been created without an email address, which is required for invoicing. Open the customer record in CRM, add a valid email, and save. They should appear in the dropdowns immediately.
-  </Accordion>
-  <Accordion title="The health score has not updated after a new payment">
-    Health scores refresh every 24 hours. If a payment was recorded in Finance today, the score will update on the next overnight refresh. If it still has not updated after 24 hours, check that the invoice is linked to the correct customer in Finance.
-  </Accordion>
-  <Accordion title="A deal is stuck on the wrong pipeline stage">
-    Open the deal and manually drag it to the correct stage, or use the **Stage** dropdown within the deal record. If the stage you need does not exist, go to CRM → Deals → Manage Stages and add it.
-  </Accordion>
-  <Accordion title="I can't delete a customer">
-    Customers with linked invoices, contracts, or open deals cannot be deleted. This protects financial and contractual records. Archive the customer instead — archived customers are hidden from all dropdowns but their historical data is preserved.
-  </Accordion>
-  <Accordion title="Interactions are showing but emails I sent externally aren't logged">
-    CRM does not automatically pull in emails sent from your personal email client. You need to manually log interactions, or use the email provider integration under **Settings → Email** which enables one-click logging from supported clients.
-  </Accordion>
-  <Accordion title="I imported customers from a spreadsheet but some are missing">
-    Import failures are logged in the import results file. Common causes: missing required fields (company name or email), duplicate email addresses, or unsupported special characters. Download the error report from the import screen to see exactly which rows failed and why.
-  </Accordion>
-</AccordionGroup>
-
----
-
-## FAQ
-
-<AccordionGroup>
-  <Accordion title="Can I import customers from a spreadsheet?">
-    Yes. Go to CRM → Customers → Import and download the template CSV. Fill in the required columns (company name, email) plus any optional fields, then upload. Existing customers are matched by email — duplicates will not be created.
-  </Accordion>
-  <Accordion title="How is the health score calculated?">
-    The score is based on four weighted factors: recency of last interaction, payment history (on-time vs overdue), total contract value, and open support ticket volume. The exact weighting is fixed and cannot be customised. A score above 70 is healthy; below 40 is at risk.
-  </Accordion>
-  <Accordion title="Can I create contacts within a customer (e.g. multiple people at the same company)?">
-    Yes. Open a customer record and go to the Contacts tab to add multiple named contacts. Each contact can have their own email and phone. When sending invoices or emails, you can select which contact to address.
-  </Accordion>
-  <Accordion title="Can I customise the pipeline stages?">
-    Yes. Go to CRM → Deals → Manage Stages. You can add, rename, reorder, and delete stages. Deleting a stage requires you to move any existing deals to another stage first.
-  </Accordion>
-  <Accordion title="What happens to a customer's data if I delete the record?">
-    Customers with linked invoices, contracts, deals, or orders cannot be deleted. Archive them instead. If a customer has no linked data, deleting is permanent and cannot be undone. Use Archive unless you are certain the record is a true duplicate with no associated history.
-  </Accordion>
-</AccordionGroup>
+Each customer gets a health score from how recently you were in touch, overdue and paid invoices, deal momentum and active projects. It is kept up to date for you within about a minute of a change.
 
 ---
 
 ## See also
 
 <CardGroup cols={3}>
-  <Card title="Sales & POS" icon="cart-shopping" href="/erp/sales">
-    Convert CRM deals into sales orders and quotes.
+  <Card title="Sales & POS" icon="cash-register" href="/erp/sales">
+    Quotes, orders and invoices.
   </Card>
-  <Card title="Contracts" icon="file-signature" href="/erp/contracts">
-    Create and manage contracts linked to CRM customers.
+  <Card title="Customer account" icon="circle-user" href="/portals/customer-account">
+    What your customers see when they sign in.
   </Card>
-  <Card title="Scheduling" icon="calendar" href="/erp/scheduling">
-    Book resources and appointments for CRM customers.
+  <Card title="HubSpot" icon="hubspot" href="/integrations/hubspot">
+    Syncing with HubSpot.
   </Card>
 </CardGroup>
