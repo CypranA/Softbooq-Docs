@@ -1,235 +1,52 @@
 ---
-title: Inventory
-description: Stock items, locations, transfers, adjustments and reorder rules
+title: Products & Services
+description: What you sell, your stock in each store, transfers, losses and when to reorder
 icon: boxes-stacked
 ---
 
-The Inventory module tracks every physical item your business holds — from raw materials and finished goods to spare parts and service packages — across one or multiple warehouse locations. Stock levels update automatically from sales, procurement receipts, and manufacturing completions.
+Products & Services holds what you sell and the stock you keep: in each store and, if you use them, in warehouses and bins. Sales, purchases and production all move stock here.
 
-## What Inventory owns
+## How it is organised
 
-- **Stock items** — the product and material catalogue with quantities and valuations
-- **Locations** — warehouses, bays, or storage areas your stock is held in
-- **Transfers** — movement of stock between locations
-- **Adjustments** — manual stock corrections and write-offs
-- **Service packages** — bundled service offerings that include physical components
-- **Reorder Radar** — AI-driven demand forecasting and reorder recommendations
-- **Barcode scanning** — receive, transfer and pick stock by scanning barcodes on web or mobile
-- **Channel inventory** — total stock split across in-store, Shopify, WooCommerce, and other connected sales channels
+Tabs: **Products**, **Service Packages**, **Transfers**, **Returns**, **Loss History** and **Reorder Radar**. With warehouse management switched on in **Inventory Settings** (the gear), **Stock Levels** and **Warehouses** appear too.
 
-## Data flows into Inventory from
-
-| Module | What it sends |
-|--------|--------------|
-| Sales & POS | Stock depletion on confirmed orders |
-| Procurement | Stock receipts on delivery |
-| Manufacturing | Finished goods added to stock |
-
-## Data flows out of Inventory to
-
-| Module | What it sends |
-|--------|--------------|
-| Manufacturing | Raw materials consumed in production |
-| Reports | Stock valuation and movement data |
+Your stores and other locations are set up in **Settings → Business → Locations**.
 
 ---
 
 ## Common tasks
 
-### Add a stock item
+### Add a product
 
-<Steps>
-  <Step title="Open Inventory → Items → New Item" />
-  <Step title="Enter item details">
-    Set the item name, SKU (stock keeping unit), barcode (if applicable), unit of measure (each, kg, litre, etc.), and category.
-  </Step>
-  <Step title="Set the opening stock level">
-    Enter the quantity currently on hand and the warehouse location it is stored in. If stock is spread across multiple locations, add an entry per location.
-  </Step>
-  <Step title="Set cost and sale price">
-    Enter the unit cost (what you pay) and, if used in Sales, the default sale price. The cost method (FIFO, average cost, or standard cost) is set at the system level under **Settings → Inventory**.
-  </Step>
-  <Step title="Set reorder rules">
-    Enter a minimum stock level (reorder point) and an optional reorder quantity. When stock falls below the minimum, you will receive a low-stock alert and can raise a PO with one click.
-  </Step>
-  <Step title="Save">
-    The item is now available in Sales orders, Procurement POs, Manufacturing BOMs, and Inventory reports.
-  </Step>
-</Steps>
+Choose **Add Product**, or **Scan Label** to read a product label into a new product. Give it a name and price; for stock you can enter the opening quantity and where it is kept. **Low Stock Alert at** sets the level at which it shows as low. A product can have options such as sizes and colours, each with its own stock, SKU and barcode.
 
-### Transfer stock between locations
+To import many at once, upload a CSV with the columns **name** and **price** (both required), and optionally sku, category, stock and cost.
 
-<Steps>
-  <Step title="Open Inventory → Transfers → New Transfer" />
-  <Step title="Select source and destination locations">
-    Choose where the stock is moving from and where it is going to.
-  </Step>
-  <Step title="Add items and quantities">
-    Search for and add each item being moved. Enter the quantity to transfer.
-  </Step>
-  <Step title="Set the transfer date and reference (optional)">
-    Enter a reference number (e.g. your internal transfer order number) for traceability.
-  </Step>
-  <Step title="Confirm the transfer">
-    Click **Confirm**. Stock is immediately deducted from the source location and added to the destination. A permanent transfer record is logged.
-  </Step>
-</Steps>
+### Change stock
 
-### Perform a stock count and adjust
+Stock is not typed over. It changes when goods are received, sold, returned, produced or moved, and you correct it with:
 
-<Steps>
-  <Step title="Open Inventory → Adjustments → New Adjustment" />
-  <Step title="Select the item and location" />
-  <Step title="Enter the counted quantity">
-    The system shows the current expected quantity on the system. Enter what you physically counted.
-  </Step>
-  <Step title="Add a reason">
-    Choose a reason: Stock Count, Damaged Goods, Expired Items, Write-off, Found Stock, or Other. The reason is required for the audit log.
-  </Step>
-  <Step title="Save">
-    Stock levels update immediately. The adjustment is permanently recorded with the date, user, and reason. It cannot be deleted — only a subsequent counter-adjustment can reverse it.
-  </Step>
-</Steps>
+- **Report Loss**, for stock that is damaged, stolen, expired or wrongly recorded. It is listed under **Loss History**.
+- **Count stock** on a phone: scan a barcode and enter what is on the shelf. See [Softbooq on your phone](/erp/phone).
+- With warehouses on, **Adjust** on a bin under **Stock Levels**.
 
-### Set up a reorder rule and create a reorder PO
+### Move stock between stores
 
-<Steps>
-  <Step title="Open an item record → Reorder Rules tab" />
-  <Step title="Set the minimum stock level">
-    Enter the quantity at which you want to be alerted. When stock falls to or below this level, a low-stock alert is triggered.
-  </Step>
-  <Step title="Set the reorder quantity">
-    Enter how much you typically order when restocking. This pre-fills the PO quantity when you raise a reorder.
-  </Step>
-  <Step title="Assign a preferred supplier (optional)">
-    The preferred supplier pre-fills on the reorder PO automatically.
-  </Step>
-  <Step title="Reorder from a low-stock alert">
-    When the alert fires, open it and click **Create PO**. A purchase order is pre-filled with the item, quantity, and preferred supplier. Review and send.
-  </Step>
-</Steps>
+Choose **New Transfer**, pick where it comes from and where it goes, add the items, and **Create Transfer Request**. The stock moves when the transfer is created; after that its status (Pending, In Transit, Completed) records where the goods are.
 
-### Run a stock valuation
+### Know when to reorder
 
-<Steps>
-  <Step title="Open Reports → Inventory → Stock Valuation" />
-  <Step title="Set the as-at date">
-    Default is today. Change to a historical date to see the value at a point in the past (e.g. end of last quarter for balance sheet purposes).
-  </Step>
-  <Step title="Review by item and location">
-    See the quantity on hand and total value for each item, broken down by warehouse location.
-  </Step>
-  <Step title="Export">
-    Download as CSV or PDF for your accounts team or auditor.
-  </Step>
-</Steps>
+**Reorder Radar** shows, for each product, how fast it sells, how many days of stock are left, how urgent a reorder is, and how much to order. It is worked out from your own sales and lead times; choose **Explain**, then **Generate explanation**, for Jacinta to explain a line in plain words.
 
-### Use Reorder Radar (AI demand forecasting)
+### Track expiry dates
 
-Reorder Radar is an AI-driven view that combines historical sales velocity, current stock levels, supplier lead times and seasonal patterns to recommend what to reorder and when. Unlike the static reorder-point alerts (which fire when stock falls below a fixed minimum), Reorder Radar models forward demand and triggers earlier on items with rising velocity.
-
-<Steps>
-  <Step title="Open Inventory → Reorder Radar" />
-  <Step title="Review the recommendation table">
-    Each item shows: current stock, projected days of cover, recommended order quantity, and a confidence score. Items below 14 days cover are surfaced first.
-  </Step>
-  <Step title="Read the AI narration (optional)">
-    Click any row to expand the Gemini-generated explanation: why this quantity, what trend the model spotted, what suppliers are recommended.
-  </Step>
-  <Step title="Create a PO directly from the row">
-    Click **Create PO** to launch a pre-filled purchase order with the recommended supplier and quantity. Edit before sending.
-  </Step>
-</Steps>
-
-<Note>
-  The forecasting model refreshes nightly via a Postgres-scheduled job. New velocity data takes effect the next morning. The narration is generated on-demand only when you expand a row, to avoid burning AI credits unnecessarily.
-</Note>
-
-### Receive and pick stock with a barcode scanner
-
-Softbooq supports barcode scanning on the web (using your laptop camera or a USB scanner) and on the mobile app. Scanning replaces typing for the four most common operations: receiving from a PO, transferring between locations, picking for a sale, and counting during a stock take.
-
-<Steps>
-  <Step title="Make sure each item has a barcode">
-    Set the barcode on the item's record (Inventory → Items). Most ecommerce-imported items already have one (Shopify and WooCommerce sync the barcode field).
-  </Step>
-  <Step title="On the relevant screen, click Scan">
-    Receive Goods, Transfer, Pick or Adjustment screens all have a Scan button.
-  </Step>
-  <Step title="Scan items into the list">
-    Each scan adds the item with quantity 1; scanning the same item again increments the quantity. Use a USB scanner for batch operations or your phone camera for ad-hoc scans.
-  </Step>
-  <Step title="Confirm">
-    Review the list, edit quantities if needed, and confirm. Stock updates as it would for a typed entry.
-  </Step>
-</Steps>
-
-### Multi-channel inventory
-
-If you connect Shopify, WooCommerce, or any other sales channel, your total on-hand stock is split across channels conceptually. The Inventory item record shows: total on hand, total reserved, total available, and a breakdown per channel.
-
-The Channel Performance report (Reports → Channel Performance) uses this breakdown to compare sell-through and stock-out rates per channel, which helps you decide where to allocate scarce inventory.
-
-To add or rename channels, see [Sales Channels](/erp/settings#sales-channels) in Settings.
-
-### Manage multiple warehouse locations
-
-<Steps>
-  <Step title="Open Settings → Inventory → Locations → New Location" />
-  <Step title="Name the location">
-    Use a clear name (e.g. Warehouse A, Store 1, Workshop, Van Stock).
-  </Step>
-  <Step title="Set the location type">
-    Choose Internal (you own it) or External (third-party, e.g. a bonded warehouse or 3PL partner).
-  </Step>
-  <Step title="Save">
-    The location is now available in all Inventory operations: item stock levels, transfers, and adjustments.
-  </Step>
-</Steps>
+Tick **Track expiry dates** on a product, and its batch number and expiry are asked for when stock is received.
 
 ---
 
-## Troubleshooting
+## How stock is valued
 
-<AccordionGroup>
-  <Accordion title="Stock levels look wrong after a sale">
-    Stock depletes when a sales order is confirmed, not when it is invoiced. If a sale was recorded but stock did not change, check the order status. Draft orders do not affect stock — only Confirmed orders do. If the order is confirmed and stock still has not moved, check that the item on the order is the same SKU as the item you are checking in Inventory.
-  </Accordion>
-  <Accordion title="I received goods on a PO but stock did not increase">
-    Stock updates when you click **Receive Goods** on the purchase order and confirm the quantities. If you only created the vendor bill without processing the goods receipt, stock will not have updated. Go back to the PO and complete the goods receipt step.
-  </Accordion>
-  <Accordion title="An item shows negative stock">
-    Negative stock occurs when a sale is confirmed for more units than are on hand. This is usually caused by a stock level discrepancy — the system did not catch the shortfall because stock was recorded incorrectly. Run an adjustment to set the correct quantity, then investigate how the discrepancy occurred (missing receipts, unrecorded transfers, or a duplicate sale).
-  </Accordion>
-  <Accordion title="The low-stock alert for an item is not firing">
-    Check that a minimum stock level (reorder point) is set on the item's Reorder Rules tab. If the field is blank or zero, no alert will trigger. Alerts fire daily — if you just set the threshold and the item is already below it, the alert will fire at the next nightly check.
-  </Accordion>
-  <Accordion title="Stock valuations look inconsistent month to month">
-    Inconsistencies are usually caused by cost changes on items. If the unit cost of an item was updated, it affects the valuation of all stock held at the new cost. Check the item's cost history and ensure the cost method (FIFO, average, standard) set in Settings → Inventory matches your accounting requirements.
-  </Accordion>
-</AccordionGroup>
-
----
-
-## FAQ
-
-<AccordionGroup>
-  <Accordion title="Can I track stock in multiple warehouses?">
-    Yes. You can create unlimited locations (warehouses, storage areas, vehicles) under **Settings → Inventory → Locations**. Every item's stock level is tracked per location, and transfers between locations are fully logged.
-  </Accordion>
-  <Accordion title="What costing methods are supported?">
-    Softbooq supports FIFO (First In First Out), Weighted Average Cost, and Standard Cost. The method is set at the system level in **Settings → Inventory** and applies to all items. Changing the costing method after items have been transacted requires a stock revaluation — consult your accountant before doing this.
-  </Accordion>
-  <Accordion title="Can I import a product catalogue from a spreadsheet?">
-    Yes. Go to Inventory → Items → Import and download the template CSV. Fill in the required columns (item name, SKU, unit of measure) plus optional fields, then upload. Existing items are matched by SKU — duplicates will not be created.
-  </Accordion>
-  <Accordion title="Does Inventory support serial number or batch tracking?">
-    Yes. Enable serial number tracking or batch/lot tracking per item in the item settings. When stock is received or shipped, the system prompts for the serial number or batch number. This gives full traceability of individual units from receipt to sale.
-  </Accordion>
-  <Accordion title="Can I set different prices for different customers?">
-    Yes. Customer-specific pricing is set on the customer's CRM record under **Pricing**. A customer price list overrides the default catalogue price when creating sales orders or quotes for that customer.
-  </Accordion>
-</AccordionGroup>
+Choose the costing method in **Inventory Settings**: FIFO, LIFO, Weighted Average or Standard. Changing it needs a reason, and past entries are not restated. A product's cost cannot be edited while stock is held: use **Revalue stock**, which posts the change to your books.
 
 ---
 
@@ -237,12 +54,12 @@ To add or rename channels, see [Sales Channels](/erp/settings#sales-channels) in
 
 <CardGroup cols={3}>
   <Card title="Procurement" icon="cart-shopping" href="/erp/procurement">
-    Raise purchase orders to restock inventory from suppliers.
+    Buying stock from suppliers.
   </Card>
-  <Card title="Manufacturing" icon="industry" href="/erp/manufacturing">
-    Consume stock items as components in production runs.
+  <Card title="Sales & POS" icon="cash-register" href="/erp/sales">
+    Selling it.
   </Card>
-  <Card title="Online Storefront" icon="store" href="/portals/storefront">
-    Publish inventory items for sale on your public storefront.
+  <Card title="Reports" icon="chart-line" href="/erp/reports">
+    Inventory and its valuation.
   </Card>
 </CardGroup>
