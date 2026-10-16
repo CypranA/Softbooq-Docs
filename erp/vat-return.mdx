@@ -1,0 +1,46 @@
+---
+title: VAT return and Before you file
+description: The checks Softbooq runs on a VAT return before you file it, and where each fix is made
+icon: receipt
+---
+
+Your VAT return is in **Reports → Financial Statements → VAT Return**. Its name follows your tax system, for example a GST or sales tax return. Before you file, Softbooq checks the period and shows the result under **Before you file**.
+
+Softbooq prepares the return. It does not file it for you.
+
+## What Before you file checks
+
+- **Documents not in your ledger yet.** Invoices, supplier bills, register sales, returns or expenses in the period that never reached your accounts. Until they do, the return and your accounts will not agree.
+- **A rate with no tax code.** Documents charge a rate that no tax code has, so the tax cannot be posted to its own account.
+- **A tax code whose account is missing.** The tax code posts to an account that is not in your chart of accounts.
+- **Reverse-charge bills.** A bill with no rate, so neither side is in the return, or a bill with only one side in the ledger. Both the tax owed and the tax reclaimed belong there.
+- **A box far off the previous period.** A figure much higher or lower than last time, worth a look before filing.
+
+When nothing needs attention it says so: every document of the period is in your ledger, and every rate has its tax code.
+
+## Where the fixes are made
+
+Each finding links to the screen that fixes it:
+
+- **Post them in Books Health** (or **Review in Books Health**) for documents that are missing from the ledger. See [Books Health](/erp/books-health).
+- **Open tax settings** for rates and tax codes: **Settings → Business → Tax & VAT**.
+
+To understand a finding, choose **Ask Jacinta**. On the VAT return she only explains: she never files and never changes a figure.
+
+## Set up VAT
+
+In **Settings → Business → Tax & VAT**, say whether your business charges VAT/GST, what you can reclaim, and your **Tax codes**. Each rate you charge needs a tax code, and each tax code posts to an account in your chart.
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Books Health" icon="stethoscope" href="/erp/books-health">
+    Missing entries and their repairs.
+  </Card>
+  <Card title="Reports" icon="chart-line" href="/erp/reports">
+    The rest of your reports.
+  </Card>
+  <Card title="Jacinta on problem screens" icon="life-ring" href="/erp/jacinta-help">
+    Plain-word explanations.
+  </Card>
+</CardGroup>

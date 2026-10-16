@@ -89,6 +89,7 @@
         "erp/travel",
         "erp/it",
         "erp/reports",
+        "erp/vat-return",
         "erp/settings"
       ]
     },
