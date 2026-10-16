@@ -4,84 +4,58 @@ description: What is free, what uses credits, what the packs cost, and how admin
 icon: coins
 ---
 
-Jacinta, Softbooq's AI assistant, has two modes. **Fast** is free. **Advanced** uses credits from your workspace's AI wallet. One wallet is shared across Softbooq, the Softbooq AI app, Softbooq BI and Softbooq Files.
+Jacinta, Softbooq AI's assistant, has two engines. **Fast** is free. **Advanced**, which can compare across your records, prepare work for you and take actions, uses AI credits. Credits are bought in packs by your workspace, never expire, and are shared between Softbooq AI and Softbooq BI.
 
-## Fast and Advanced
+## What is free
 
-You choose the mode in the chat panel, next to your credit balance.
+- **Fast** answers: finding your records and telling you your totals. A workspace can ask up to 200 Fast questions a day; the count resets at midnight UTC.
+- **Jacinta on problem screens**, such as Books Health or a payment run that will not go through: 20 included conversations a day per workspace. When the problem is a fault in Softbooq rather than in your books, it is always free.
+- **Workflow commentaries**: 5 a month per workspace.
 
-| Mode | What it does | Cost |
-|------|--------------|------|
-| Fast | Finds your records and answers your totals | Free, on every plan |
-| Advanced | Filters, compares and prepares work for you | Usually 1 credit per message |
+## What Advanced costs
 
-An Advanced message is charged by the work it actually needed. Most cost 1 credit. A heavy question that pulls a lot of data can cost a few more, and one message can **never cost more than 10 credits** (3 during a trial). **Deep analysis** in the Softbooq AI app digs further for questions like "why did margin fall?" and is capped at 30 credits; it is not available during a trial.
+Each Advanced message costs at least 1 credit. A long or complicated request costs more, depending on how much work it takes, up to 10 credits. **Deep analysis**, which investigates across many steps, can cost up to 30. If a request would cost more than that, it stops and the credit is refunded, and Jacinta asks you to make the question more specific.
 
-If a message would go over its cap, it stops, the credits it held are refunded, and you get the part of the answer it had.
+During a free trial, an Advanced message costs at most 3 credits, and Deep analysis is not available.
 
----
-
-## Credit packs
+## Packs
 
 | Pack | Credits | Price |
-|------|---------|-------|
+|------|--------:|------:|
 | Starter | 10 | €5 / $5 |
 | Standard | 30 | €12 / $12 |
 | Business | 100 | €35 / $35 |
 | Power | 300 | €90 / $90 |
 
-Only workspace Admins can buy credits. In **Settings → Softbooq AI**, choose **Top up credits**.
+There is no monthly allowance. Each workspace gets a one-time bonus: 5 credits on Softbooq Go, 20 on Plus, 50 on Pro. A workspace on its free trial gets 2 of them at once and the rest when its first payment clears.
 
----
+## Buy credits and see your balance
 
-## Credits that come with your plan
+Only Admins can buy credits.
 
-- During the 30-day trial your workspace gets **2 credits** to try Advanced. During a trial Jacinta answers but does not take actions.
-- When you subscribe, you get a one-time bonus: **5 credits** on Softbooq Go, **20** on Softbooq Plus, **50** on Softbooq Pro.
-
----
+- In Softbooq AI, **Wallet** shows your **Current balance**, what has been bought and used, and **Recent transactions**. **Top up** opens the packs.
+- In the Admin Portal, **Billing** shows the **AI Credits** available, with **Top Up**.
 
 ## Keeping spending in check
 
-In **Settings → Softbooq AI**, Admins set the **AI credit policy**:
+Each person can use up to 10 credits a day, to start with. Admins can change that per person in Softbooq AI's **Usage** page (a **Daily cap** and a **Monthly cap**), and set the default under the ERP's **Settings → Softbooq AI**.
 
-- **Daily limit per user**: recommended, so one long session cannot drain the shared wallet.
-- **Monthly budget per user**: optional; 0 means no monthly cap.
-- **Set individual caps and see usage** for a single person.
+When someone reaches their limit, Jacinta tells them, and their allowance comes back at midnight UTC (or next month, for the monthly cap).
 
-When someone reaches their limit or the wallet is empty, they can **Request more credits**. Admins see these under **Pending AI credit requests** and choose **Approve** or **Deny**: approving a limit request lifts that person's cap; a workspace top-up needs a payment (**Top up**).
+## When credits run out
 
----
-
-## FAQ
-
-<AccordionGroup>
-  <Accordion title="Is Fast really free?">
-    Yes, on every plan. Fast finds records and answers totals without using credits.
-  </Accordion>
-  <Accordion title="Why did one Advanced message use more than 1 credit?">
-    It needed more work than a usual question, for example comparing several modules at once. It still cannot go over 10 credits.
-  </Accordion>
-  <Accordion title="What happens when the wallet is empty?">
-    Fast keeps working. Advanced asks you to top up, or to request more credits from your admins.
-  </Accordion>
-  <Accordion title="Are AI credits part of my plan price?">
-    No. Your plan is priced per user. Credits are a separate wallet, and the free Fast mode needs none.
-  </Accordion>
-</AccordionGroup>
-
----
+Advanced stops until someone tops up. In the ERP, people can choose **Request more credits** to let their Admins know. Fast keeps working.
 
 ## See also
 
 <CardGroup cols={3}>
-  <Card title="Jacinta in Softbooq" icon="sparkles" href="/erp/ai">
-    What the assistant can do and how to ask.
+  <Card title="Jacinta" icon="sparkles" href="/erp/ai">
+    The assistant in every module.
   </Card>
-  <Card title="Subscription" icon="credit-card" href="/billing/subscription">
-    The three plans and what each includes.
+  <Card title="Softbooq AI" icon="robot" href="/platform/ai">
+    Jacinta in a full-page app.
   </Card>
-  <Card title="Softbooq AI app" icon="robot" href="/platform/ai">
-    The standalone AI app at ai.softbooq.com.
+  <Card title="Subscription & Plans" icon="credit-card" href="/billing/subscription">
+    The plans and what they include.
   </Card>
 </CardGroup>
