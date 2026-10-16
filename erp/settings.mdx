@@ -1,267 +1,92 @@
 ---
 title: Settings
-description: Tenant configuration, integrations, security and billing
+description: Where your workspace is configured, tab by tab, and where the things that moved out of Settings now live
 icon: gear
 ---
 
-Settings is the configuration layer for your entire Softbooq workspace. Everything from your company profile and fiscal year to email providers, payment integrations, user roles, and subscription billing is managed here.
+Settings holds your workspace's configuration. Everyone sees **My Profile** and **Notifications**; the other tabs need the permission to manage settings (Admins have it).
 
-## What Settings owns
+## The Settings tabs
 
-- **Tenant configuration** — company profile, branding, currency, timezone, fiscal year
-- **Integrations** — connected third-party services (Shopify, WooCommerce, Xero, HubSpot, Bank Feeds, email, payments)
-- **Users & Roles** — user accounts, role assignments, and permissions
-- **Security** — MFA enforcement by role, desktop inactivity lock, workspace access by email domain
-- **Audit Log** — append-only record of every state-changing action in the workspace
-- **Sales Channels** — channel definitions for cross-channel inventory and reporting
-- **AI** — AI assistant toggle, credit wallet, per-user caps
-- **Billing** — your Softbooq subscription plan, AI credit packs, and Stripe-managed invoicing
+| Tab | What it holds |
+|-----|---------------|
+| My Profile | Your own details, sign-in security and sessions |
+| Notifications | Which alerts reach you |
+| Business | Six sections: **Business Profile**, **Accounting**, **Tax & VAT**, **Locations**, **Documents**, **Public Page** |
+| Legal & Compliance | Your privacy policy, terms and legal notice, legal hold, and support access |
+| Softbooq AI | Switch AI on for the workspace, the AI credit policy, usage, and how long conversations are kept |
+| Automations | Scheduled alerts: low stock, contracts ending, overdue invoices, and a weekly digest. They only notify you; they never message customers or change data |
+| Messaging & Channels | **Email Service** (who sends your email), instant messaging, and **Email Activity** (what was sent and whether it arrived) |
+| Email Templates | The wording of the emails Softbooq sends for you |
+| Billing & Plans | Your plan, the Admin Portal, Manage Billing, and exporting your accounting records |
+| Banking | **My Accounts**, **Receive Payments**, **Send Payments / Payouts**, **Bank Feeds** |
+| Integrations | Connected services, grouped: Identity & Directory, Commerce, Accounting, CRM, Project Management, Device Management, Travel, HR |
+| API keys | Keys that let your own tools read your data. A key can only read, only what you choose, and never more than you can see yourself |
+| Preferences | Workspace defaults (language, date format, work week) that each person can override |
+| Recycle Bin | Records deleted in the last 30 days, which you can put back |
+
+### Moved out of Settings
+
+| Looking for | It is now in |
+|-------------|--------------|
+| Users, roles and permissions | The **User Management** module: User List, Roles & Permissions, Security Policy |
+| Security policy (MFA, inactivity lock) | **User Management → Security Policy** |
+| Audit log | The **Audit Logs** module (Softbooq Pro) |
+| Sales channels | **Reports → Channel Performance → Manage channels** |
+| Changing plan or seats | **Billing & Plans → Open Admin Portal** |
 
 ---
 
 ## Common tasks
 
-### Complete your company profile
+### Set up your business details and logo
 
 <Steps>
-  <Step title="Open Settings → Company Profile" />
+  <Step title="Open Settings → Business → Business Profile" />
   <Step title="Fill in your company details">
-    Enter company name, registered address, VAT or tax number, default currency, and timezone. These appear on all invoices, quotes, and emails sent from Softbooq.
+    Your company name, address and registration details appear on your documents.
   </Step>
   <Step title="Upload your logo">
-    Upload a PNG or SVG (recommended). Your logo appears on your documents and on your public site.
-  </Step>
-  <Step title="Set your fiscal year">
-    Choose the month your accounting year starts (e.g. January for a calendar year, April for a UK tax year). This is required before you can run financial reports or post depreciation.
-  </Step>
-  <Step title="Save" />
-</Steps>
-
-<Note>
-  Finance reports, depreciation runs, and some HR payroll calculations depend on the fiscal year being set correctly. Complete this before activating Finance or Assets.
-</Note>
-
-### Connect your email provider
-
-<Steps>
-  <Step title="Open Settings → Email → Connect Provider" />
-  <Step title="Choose your provider">
-    Select from: Microsoft 365, Google Workspace, SMTP, SendGrid, Mailgun, or Postmark.
-  </Step>
-  <Step title="Authenticate">
-    Microsoft 365 and Google Workspace use OAuth — you will be redirected to the provider's consent screen. SendGrid, Mailgun, and Postmark use an API key. SMTP requires hostname, port, username, and password.
-  </Step>
-  <Step title="Set the from name and address">
-    Enter the name and email address that will appear in the **From** field of all emails sent from Softbooq (e.g. "Softbooq Invoices" and invoices@yourdomain.com).
-  </Step>
-  <Step title="Send a test email">
-    Click **Send Test** to verify the connection is working before going live. If the test email does not arrive, recheck the credentials or OAuth consent.
+    Up to 2 MB. It appears on your documents and on your public site.
   </Step>
 </Steps>
 
-### Invite a team member
+### Set the start of your financial year
 
-<Steps>
-  <Step title="Open Settings → Users & Roles → Invite User" />
-  <Step title="Enter their email address" />
-  <Step title="Assign a role">
-    Choose: Admin (full access), Manager (manage team, approve requests), Employee (self-service only), Viewer (read-only), or Client (portal access only). See the [Quickstart](/quickstart) for a full role breakdown.
-  </Step>
-  <Step title="Link to an employee record (optional)">
-    If this person is an employee in HR, link their user account to the HR employee record. This enables leave requests, payslip access, and expense submissions.
-  </Step>
-  <Step title="Send the invite">
-    They receive an email with a secure link to set their password and access the workspace. The invite expires after 48 hours — use **Resend Invite** if needed.
-  </Step>
-</Steps>
+In **Settings → Business → Accounting**, choose **Fiscal Year Start Month**. Set it before you post anything: it defines every period, close and period lock, and it cannot be changed once anything has been posted.
 
-### Change a user's role or deactivate them
+### Set up VAT or sales tax
 
-<Steps>
-  <Step title="Open Settings → Users & Roles" />
-  <Step title="Find the user and click their row" />
-  <Step title="Change role">
-    Select the new role from the dropdown and save. The change takes effect on their next page load — active sessions are not immediately affected.
-  </Step>
-  <Step title="Deactivate">
-    Click **Deactivate**. Their login is revoked immediately. All their data is retained. You can reactivate at any time.
-  </Step>
-</Steps>
+In **Settings → Business → Tax & VAT**, say whether your business charges VAT/GST, what you can reclaim, and your **Tax codes**.
 
-### Enable multi-factor authentication
+### Send email from your own domain
 
-<Steps>
-  <Step title="Open Settings → Security" />
-  <Step title="Toggle Require MFA">
-    When enabled, all users in your workspace must set up an authenticator app on their next login. Users who do not set it up within the grace period are locked out.
-  </Step>
-  <Step title="Set the grace period">
-    Choose how many days users have to set up MFA before it becomes mandatory (recommended: 7 days).
-  </Step>
-  <Step title="Choose recovery options">
-    Backup codes are issued automatically on enrolment (10 codes per user, single-use). Optionally, allow Admins to reset a user's MFA via the Users & Roles page.
-  </Step>
-  <Step title="Save">
-    Existing sessions are not disrupted immediately, users are prompted at next login.
-  </Step>
-</Steps>
+Softbooq sends your email from its own service from day one, within a monthly allowance of free emails; after that, emails are held until the next month. To send from your own domain with no limit, open **Settings → Messaging & Channels → Email Service**, choose **Brevo**, **SendGrid**, **Google**, **Microsoft 365** or **Custom SMTP**, then use **Test Connection**. **Email Activity** shows every email sent and whether it was delivered, bounced or held.
 
-### Tighten the Security Policy
+### Connect payments and your bank
 
-| Control | What it does |
-|---------|--------------|
-| MFA Enforcement | Choose the roles that must use MFA, and a grace period in days to enrol (0 = immediately) |
-| Session Policy | **Desktop inactivity lock**, from 5 minutes to 2 hours. Phones are never locked by inactivity; the device PIN or Face ID protects them |
-| Workspace Access | Optional: only people with an email address on your own domain can join the workspace |
-| Single Sign-On (SSO) | Available on request: contact us |
+Open **Settings → Banking**. **Receive Payments** connects Stripe so customers can pay online. **Send Payments / Payouts** connects Wise or Revolut for paying suppliers. **Bank Feeds** brings in your bank transactions.
 
-The policy is in **User Management → Security Policy**. Changes apply to everyone in the workspace as soon as you save; nobody is signed out.
+### Require two-factor sign-in
 
-### Configure payment providers
-
-<Steps>
-  <Step title="Open Settings → Payments" />
-  <Step title="Choose a provider">
-    Currently supported: Wise and Revolut for outbound payment runs and bank reconciliation. See [Outbound Payments](/integrations/payments) for full setup steps.
-  </Step>
-  <Step title="Connect with API credentials">
-    Enter your Wise or Revolut API key. You can find this in your provider's developer settings. Store the key securely, it is saved in an encrypted vault, not in plain text.
-  </Step>
-  <Step title="Test the connection">
-    Click **Test Connection** to verify the credentials are valid.
-  </Step>
-  <Step title="Select the default account">
-    If your provider account has multiple currency accounts, select the default for outbound payment runs.
-  </Step>
-</Steps>
-
-### Connect bank feeds
-
-Live transaction feeds via Enable Banking (PSD2 / Open Banking) bring your bank account into Softbooq for automatic reconciliation. See the dedicated [Bank Feeds](/integrations/bank-feeds) page for the full flow, including the 180-day consent renewal model and the auto-reconciliation engine.
-
-### Connect e-commerce and accounting integrations
-
-Each integration has its own connect flow. The most common ones:
-
-- [Shopify](/integrations/shopify) — full two-way product/order/inventory sync via OAuth
-- [WooCommerce](/integrations/woocommerce) — pull-based sync via merchant API keys
-- [Xero](/integrations/xero) — push invoices and contacts to Xero
-- [HubSpot](/integrations/hubspot) — bidirectional CRM contact sync
-- [Email providers](/integrations/email) — Microsoft 365, Google Workspace, SendGrid, Mailgun, Postmark, generic SMTP
-
-All integrations live under Settings → Integrations.
-
-### Manage Sales Channels
-
-<a id="sales-channels" />
-Sales Channels are the lens used by Channel Performance reporting and multi-channel inventory. Each connected ecommerce integration registers its own channel automatically (Shopify, WooCommerce). You can add manual channels for in-store, B2B telephone sales, marketplaces, etc.
-
-<Steps>
-  <Step title="Open Settings → Sales Channels" />
-  <Step title="Add a manual channel">
-    Click **New Channel**. Give it a name (e.g. "In-Store", "Wholesale B2B", "Amazon Marketplace") and an icon. Optionally set a default location and a default tax component.
-  </Step>
-  <Step title="Tag historical orders (optional)">
-    Bulk-tag past orders to a channel using the bulk-edit action on the Sales Orders list. This makes the Channel Performance report retroactive.
-  </Step>
-  <Step title="View per-channel performance">
-    Reports → Channel Performance gives revenue, orders, AOV per channel, with side-by-side comparison.
-  </Step>
-</Steps>
-
-### Manage AI credits and caps
-
-<Steps>
-  <Step title="Open Settings → AI" />
-  <Step title="View wallet balance">
-    The current credit balance is shown at the top, with recent transactions below.
-  </Step>
-  <Step title="Buy credit packs">
-    Click **Buy Credits** and pick Starter (50), Standard (250) or Power (1,000). Charged to the card on file via Stripe.
-  </Step>
-  <Step title="Set per-user caps (optional)">
-    Under **Caps**, set a daily credit cap per user, a per-request cap, or restrict AI access to specific roles. See the [AI Credits](/billing/ai-credits) page for the full economics.
-  </Step>
-</Steps>
-
-### View the Audit Log
-
-<Steps>
-  <Step title="Open Settings → Audit Log" />
-  <Step title="Filter">
-    Filter by user, by entity type (e.g. only finance.invoice events), date range, or source IP.
-  </Step>
-  <Step title="Drill into an entry">
-    Each row shows: who, what, when, before/after values, source IP. Entries cannot be edited or deleted.
-  </Step>
-  <Step title="Export for compliance">
-    Click **Export CSV** to download a filtered set for an external auditor.
-  </Step>
-</Steps>
-
-Retention follows your plan: 1 year on Standard, 3 years on Plus, 7 years on Pro. The audit log also surfaces operator impersonation events from Softbooq support, with operator email, reason and duration, see [Operator Console](/platform/console).
-
-### Manage your subscription
-
-<Steps>
-  <Step title="Open Settings → Subscription & Billing" />
-  <Step title="View your current plan">
-    See your active plan, the features included, current usage metrics (users, storage, modules), and the next billing date.
-  </Step>
-  <Step title="Upgrade">
-    Click **Change Plan → Upgrade**. Select the new plan. The upgrade takes effect immediately and you are billed a Stripe-prorated amount for the remainder of the billing cycle.
-  </Step>
-  <Step title="Downgrade">
-    Click **Change Plan → Downgrade**. The downgrade applies at the start of the next billing cycle, you retain current plan features until then.
-  </Step>
-  <Step title="Update billing details">
-    Go to the Billing tab to update your payment card or billing address. Changes apply to the next billing cycle.
-  </Step>
-</Steps>
-
-Mid-cycle plan changes and per-user changes are prorated automatically by Stripe. Adding a user mid-cycle charges a prorated per-user amount; removing a user issues a prorated credit on the next invoice. See [Subscription](/billing/subscription) for the full proration model and plan tiers.
+Open **User Management → Security Policy → MFA Enforcement**, choose the roles that must use MFA, and a grace period in days to enrol (0 = immediately). The same screen has the **Desktop inactivity lock** and **Workspace Access** (only people with an email address on your domain can join).
 
 ---
 
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="A user's invite expired before they could accept it">
-    Invites expire after 48 hours. Go to Settings → Users & Roles, find the user (they show as **Invite Pending**), and click **Resend Invite**. A new 48-hour invite is sent.
+  <Accordion title="I cannot see most Settings tabs">
+    Only My Profile and Notifications are open to everyone. The other tabs need the permission to manage settings; ask an Admin.
   </Accordion>
-  <Accordion title="The test email is not arriving after connecting an email provider">
-    Check the credentials entered — especially OAuth scope for Microsoft/Google (it must include Mail.Send permission). For SMTP, verify the port (587 for TLS, 465 for SSL) and that the server allows relaying from your IP. Also check your spam folder — test emails sometimes land there on first send.
+  <Accordion title="I cannot change the start of the financial year">
+    It is locked once anything has been posted, because moving it would re-slice periods that are already closed.
   </Accordion>
-  <Accordion title="I enabled 2FA enforcement and now a user cannot log in">
-    If a user cannot complete the 2FA setup (e.g. they lost access to their authenticator), an Admin can temporarily disable 2FA for that user from Settings → Users & Roles → user record → Reset 2FA. The user must set it up again on next login.
+  <Accordion title="Emails are not going out">
+    Open **Settings → Messaging & Channels → Email Activity**. If the monthly free emails are used up, emails are held until next month; connect your own email provider and send them again from there.
   </Accordion>
-  <Accordion title="I cannot change a user's role — the option is greyed out">
-    You cannot change the role of another Admin if you are the only Admin in the workspace. Softbooq requires at least one Admin at all times. Promote another user to Admin first, then change the original user's role.
-  </Accordion>
-  <Accordion title="My logo is not appearing on invoices after uploading it">
-    Check the file format and size. PNG and SVG are recommended; JPEG is supported but may lose quality when scaled. Maximum file size is 2 MB. If the file meets these requirements, try clearing your browser cache and reloading the invoice preview.
-  </Accordion>
-</AccordionGroup>
-
----
-
-## FAQ
-
-<AccordionGroup>
-  <Accordion title="Can I have multiple email providers connected at the same time?">
-    No. Only one email provider is active at a time. To switch providers, disconnect the current one and connect the new one. During the switchover, queued emails may be delayed — avoid switching during a busy sending period (e.g. end-of-month invoicing).
-  </Accordion>
-  <Accordion title="What is the difference between Admin and Manager roles?">
-    Admins have access to all modules, all settings, and all data in the workspace — including billing and user management. Managers can access most operational modules and approve team requests (leave, expenses, requisitions) but cannot access billing, change roles, or modify security settings.
-  </Accordion>
-  <Accordion title="Can I have different settings for different departments or subsidiaries?">
-    Settings apply workspace-wide. If you require different configurations per entity (e.g. different currencies, different fiscal years), you will need separate Softbooq workspaces. Contact support for multi-entity account options.
-  </Accordion>
-  <Accordion title="How is my data backed up?">
-    Softbooq automatically backs up all workspace data daily to geographically redundant storage. Backups are retained for 30 days on Standard plans and 90 days on Plus and Pro plans. Point-in-time restore is available on Pro plans. Contact support to request a restore.
-  </Accordion>
-  <Accordion title="Can I export all my data if I want to leave?">
-    Yes. Go to Settings → Data → Export All Data to download a full export of your workspace data in CSV format. This includes all modules, all records, and all documents. You can do this at any time — you are not locked in.
+  <Accordion title="I deleted something by mistake">
+    Open **Settings → Recycle Bin**. Records deleted in the last 30 days can be put back.
   </Accordion>
 </AccordionGroup>
 
@@ -270,13 +95,13 @@ Mid-cycle plan changes and per-user changes are prorated automatically by Stripe
 ## See also
 
 <CardGroup cols={3}>
-  <Card title="ERP Overview" icon="layer-group" href="/erp/overview">
-    Understand how all modules connect before configuring integrations.
+  <Card title="Subscription & Plans" icon="credit-card" href="/billing/subscription">
+    Plans, seats and the Admin Portal.
   </Card>
-  <Card title="Softbooq AI" icon="sparkles" href="/erp/ai">
-    Enable and manage the AI assistant for your workspace.
+  <Card title="Integrations" icon="plug" href="/integrations/overview">
+    Every connected service and how it syncs.
   </Card>
   <Card title="Public & Portals" icon="globe" href="/portals/landing-page">
-    Configure your public site: landing page, online store and customer account.
+    Your public site: landing page, online store and customer account.
   </Card>
 </CardGroup>
