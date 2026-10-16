@@ -1,134 +1,85 @@
 ---
 title: Shopify
-description: Two-way sync of products, orders, customers, and inventory between Softbooq and Shopify
+description: Bring your Shopify products, orders and customers into Softbooq, and keep stock in step
 icon: shopify
 ---
 
-The Shopify integration connects a Shopify store to Softbooq with full bidirectional sync. Products, orders, customers, refunds and inventory all stay in step automatically. Webhooks deliver changes within seconds; a 6-hourly cron catches anything that webhook delivery missed.
+Connect your Shopify store and Softbooq imports its products, orders and customers, then keeps them up to date as they change in Shopify. Shopify orders arrive in Sales & POS as online orders, and stock you change in Softbooq is sent back to Shopify.
 
-## What you can sync
+## Connect your store
 
-| Entity | Inbound (Shopify to Softbooq) | Outbound (Softbooq to Shopify) |
-|--------|-------------------------------|-------------------------------|
-| Products | Imported as Inventory items | Stock levels pushed every 2 minutes when changed |
-| Orders | Imported as Sales orders + invoices | Order fulfilment status pushed back |
-| Customers | Imported as CRM customers | Customer creation pushed back |
-| Refunds | Imported as Credit Notes | Not pushed |
-| Inventory | Read at import only | Live push on stock change (queue triggered) |
-
----
-
-## Connect Shopify
+You need to be an Admin.
 
 <Steps>
-  <Step title="Open Settings → Integrations → Shopify → Connect" />
-  <Step title="Enter your Shopify store URL">
-    Format: `your-store.myshopify.com`. The custom domain (e.g. shop.yourcompany.com) is not accepted at this step; use the .myshopify.com address.
+  <Step title="Open Settings → Integrations">
+    Under **Commerce**, find the **Shopify** tile.
   </Step>
-  <Step title="Authorise via Shopify OAuth">
-    You are redirected to Shopify and asked to approve the read/write scopes that Softbooq needs (products, orders, customers, inventory, fulfilments). Click **Install App**.
+  <Step title="Choose Connect Shopify">
+    Enter your store's address. The short name is enough: `my-store` works as well as `my-store.myshopify.com`.
   </Step>
-  <Step title="Confirm webhook registration">
-    Softbooq registers four webhook families on your store automatically: orders, products, customers and refunds. Verify the green status indicator on each row.
-  </Step>
-  <Step title="Run the initial import">
-    Choose a start date (default: 90 days back) and tick which entities to import. You can re-run the import later with a different date range or different entity selection without breaking the live sync.
+  <Step title="Choose Continue to Shopify">
+    Shopify asks you to approve the connection. Once you do, you come back to Softbooq and the tile shows your store as connected.
   </Step>
 </Steps>
 
-<Note>
-  The OAuth scopes Softbooq requests are the minimum required for two-way sync. You can review them in your Shopify admin under **Settings → Apps and sales channels → Softbooq**.
-</Note>
+## Your first import
 
----
+After connecting, choose **Import options** (or **Choose** on the **First import?** banner) to open **Import from Shopify**:
 
-## Outbound stock push
+- **What to import**: **Products**, **Orders** and **Customers**, all ticked to start with
+- **How far back**: **All history**, **Last 12 months**, **Last 90 days** (the default), **Last 30 days** or **Only new from now**
 
-When inventory changes in Softbooq (a sale is confirmed, a transfer is made, a manufacturing run completes, an adjustment is recorded), the affected SKU is queued for push to Shopify. A 2-minute cron drains the queue and pushes the new on-hand quantity. This keeps your storefront stock accurate without the lag of a nightly job.
+Then choose **Start import**. Each run brings in up to 12,500 products, 12,500 orders and 12,500 customers. If your store has more, the tile says **Partial sync**, and running **Sync products** (or orders, or customers) again fetches the next batch.
 
-To enable, toggle **Push stock updates to Shopify** in the integration settings. To force a full resync of every SKU at once, click **Resync inventory** on the integration page.
+## What stays in step
 
-<Note>
-  Stock is pushed per-location. If you have multiple Softbooq warehouses but a single Shopify location, the total available across all warehouses is pushed. To map a specific warehouse to Shopify, use the location mapping panel in the integration settings.
-</Note>
+| What | How it moves |
+|------|--------------|
+| Products | From Shopify, as they are created, changed or deleted |
+| Orders | From Shopify, as they are placed and updated. They appear in Sales & POS with the store shown as **Online** |
+| Draft orders | From Shopify, as quotes. A deleted draft order cancels its quote |
+| Customers | From Shopify, as they are created, changed or deleted. Softbooq does not send customers to Shopify |
+| Stock changed in Shopify | Recorded in Softbooq as a stock movement |
+| Stock changed in Softbooq | Sent to Shopify within 2 minutes, while **Auto-push on** is set |
 
----
+Shopify tells Softbooq about each change as it happens. As a safety net, Softbooq also checks products, orders and customers every 6 hours, so nothing is missed if a message from Shopify is lost.
 
-## Sales channel attribution
+A product deleted in Shopify is removed from your product list in Softbooq.
 
-When a Shopify order is imported it is tagged with the sales channel **Shopify**. This drives the Channel Performance report (Reports → Channel Performance) so you can compare Shopify revenue against in-store, B2B and other channels at a glance. See the [Sales Channels](/erp/settings#sales-channels) section in Settings for how to add new channels.
+### Stock sent to Shopify
 
----
+Under **Outbound stock push**, **Auto-push on** sends the quantity you hold in Softbooq to Shopify, in whole units, at one Shopify location. Turn it to **Auto-push off** if Shopify should stay the place you manage stock. **Location mappings** decide which Softbooq store receives stock changes that come from each Shopify location.
 
-## Refunds and returns
+## Fulfilling and returning Shopify orders
 
-Shopify refunds are imported as Credit Notes against the original Softbooq invoice. The refunded SKUs are added back to stock automatically. Partial refunds reduce the invoice balance. Full refunds zero it out.
+- **Fulfil**: open a paid Shopify order in Sales & POS and use **Fulfill in Shopify**. Add the **Tracking #**, **Carrier** and **Tracking URL** if you have them, then choose **Mark as Fulfilled**. Shopify notifies the customer with the tracking details.
+- **Return**: processing a return on a Shopify order records the returned items in Shopify and puts them back in stock there. Refund the money itself in Shopify. Items count as restocked in Softbooq only when Shopify says they were restocked.
 
-If a return creates a Shopify gift card or store credit instead of a refund, Softbooq logs the credit balance against the customer's CRM record so you can track outstanding store credit.
+## Sync conflicts
 
----
+If a product or customer was edited in Softbooq after the last sync and Shopify then sends a different value, Softbooq does not overwrite your edit. The **Sync conflicts** panel lists each one, with the field, its value **In ERP** and its value **From Shopify**. Choose **Use Shopify** or **Keep ERP** for each.
 
-## Order import filters
-
-Use the import-selection UI on the integration page to control what gets pulled in:
-
-- **Date range** — import orders from a specific window only
-- **Order status** — include or exclude unpaid, unfulfilled, archived orders
-- **Per-entity toggles** — import products without orders, or vice versa
-
-These filters apply to backfill imports. The live webhook stream is unfiltered: every event Shopify sends is processed.
-
----
-
-## Profitability
-
-Imported Shopify orders include the `shipping_cost` field, which feeds the Per-order Profitability report (Reports → Profitability). Combined with the auto-COGS trigger that captures cost of goods sold at the time of sale, every Shopify order has an accurate margin calculated against you in Softbooq without any manual reconciliation.
-
----
-
-## Disconnect
-
-<Steps>
-  <Step title="Open Settings → Integrations → Shopify → Disconnect" />
-  <Step title="Confirm">
-    Disconnecting revokes the access token, removes the registered webhooks from your Shopify store, and stops live sync.
-  </Step>
-  <Step title="Imported data is retained">
-    Products, orders, customers and credit notes already imported into Softbooq are not deleted. Only the connection is removed.
-  </Step>
-</Steps>
-
----
-
-## Troubleshooting
+## FAQ
 
 <AccordionGroup>
-  <Accordion title="An order on Shopify is not appearing in Softbooq">
-    The webhook may have failed or your sync may be paused. Check Settings → Integrations → Shopify → Sync log for the most recent webhook events. If the order is older than your import date range, run a backfill with an earlier start date.
+  <Accordion title="Which plan do I need?">
+    Shopify works on every plan. Customers are imported into CRM, which is part of Softbooq Plus and Pro.
   </Accordion>
-  <Accordion title="Stock levels in Shopify do not match Softbooq">
-    Click **Resync inventory** on the integration page to push every SKU's current Softbooq quantity to Shopify in one batch. If discrepancies persist, check that the Shopify location mapping is set correctly and that the SKUs in Softbooq match the SKUs in Shopify exactly (case-sensitive).
-  </Accordion>
-  <Accordion title="A product in Shopify is not in my Softbooq Inventory">
-    Products are only created in Softbooq during the initial import or when an order containing them comes through. To pull a newly created Shopify product immediately, run **Resync products** on the integration page.
-  </Accordion>
-  <Accordion title="The connection shows Auth Failed">
-    OAuth tokens can expire if you uninstall the Softbooq app from Shopify or if the store owner's session is revoked. Click **Reconnect** to start the OAuth flow again. No data is lost.
+  <Accordion title="Who can fulfil and return Shopify orders?">
+    Admins, Managers and Employees.
   </Accordion>
 </AccordionGroup>
-
----
 
 ## See also
 
 <CardGroup cols={3}>
-  <Card title="Sales & POS" icon="cart-shopping" href="/erp/sales">
-    Imported Shopify orders appear here as Sales Orders.
+  <Card title="WooCommerce" icon="store" href="/integrations/woocommerce">
+    The same for a WooCommerce store.
   </Card>
-  <Card title="Inventory" icon="boxes-stacked" href="/erp/inventory">
-    Stock levels and SKUs that sync with Shopify.
+  <Card title="Sales & POS" icon="cash-register" href="/erp/sales">
+    Where online orders arrive.
   </Card>
-  <Card title="Channel Performance" icon="chart-bar" href="/erp/reports">
-    Compare Shopify revenue with your other sales channels.
+  <Card title="Products & Services" icon="boxes-stacked" href="/erp/inventory">
+    Products and stock.
   </Card>
 </CardGroup>

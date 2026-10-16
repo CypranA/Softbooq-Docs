@@ -1,101 +1,88 @@
 ---
 title: WooCommerce
-description: Connect a WordPress WooCommerce store to Softbooq with merchant-managed API keys
+description: Bring your WooCommerce products, orders and customers into Softbooq, and keep stock in step
 icon: store
 ---
 
-The WooCommerce integration connects a WordPress + WooCommerce store to Softbooq using the WooCommerce REST API. Unlike Shopify it does not use OAuth: the merchant generates a Consumer Key / Consumer Secret in their WordPress admin and pastes it into Softbooq.
+Connect your WooCommerce store and Softbooq imports its products, orders and customers, then keeps them up to date as they change. WooCommerce orders arrive in Sales & POS as online orders, and stock you change in Softbooq is sent back to your store.
 
-## What you can sync
+## Connect your store
 
-| Entity | Direction | Notes |
-|--------|-----------|-------|
-| Products | Inbound only | Imported as Inventory items |
-| Orders | Inbound | Imported as Sales orders + invoices |
-| Customers | Inbound | Imported as CRM customers |
-| Stock | Outbound (planned) | Currently inbound at import time only |
-
----
-
-## Connect WooCommerce
+You need to be an Admin, and a REST API key from WooCommerce.
 
 <Steps>
-  <Step title="Generate API keys in WooCommerce">
-    In your WordPress admin, go to **WooCommerce → Settings → Advanced → REST API → Add Key**. Set permissions to **Read/Write**. Copy the generated Consumer Key and Consumer Secret immediately, they are not shown again.
+  <Step title="Create an API key in WooCommerce">
+    In your WordPress admin, open WooCommerce's **Settings → Advanced → REST API** and add a key with **Read/Write** access. Keep the page open: the secret is shown only once.
   </Step>
-  <Step title="Open Settings → Integrations → WooCommerce → Connect in Softbooq" />
-  <Step title="Enter your store URL and keys">
-    Use the full https URL of your WordPress site (e.g. `https://shop.yourcompany.com`). Paste in the Consumer Key and Consumer Secret.
+  <Step title="Open Settings → Integrations">
+    Under **Commerce**, find the **WooCommerce** tile and choose **Connect WooCommerce**.
   </Step>
-  <Step title="Test the connection">
-    Click **Test Connection**. Softbooq calls the WooCommerce health endpoint to verify the keys and store URL. A green tick confirms the connection is live.
-  </Step>
-  <Step title="Run the initial import">
-    Choose a date range and pick the entities to import (products, orders, customers). The import runs in the background; you can leave the page.
+  <Step title="Enter your store's details">
+    Fill in **Store URL** (for example `https://my-store.com`), **Consumer Key** and **Consumer Secret**, then choose **Connect**. Softbooq checks the key with your store straight away and tells you if it does not work.
   </Step>
 </Steps>
 
-<Note>
-  The merchant owns the API keys, not Softbooq. You can revoke them at any time in WooCommerce; doing so immediately stops sync.
-</Note>
+## Your first import
 
----
+Open **Import from WooCommerce**:
 
-## How sync runs
+- **What to import**: products, orders and customers
+- **How far back**: **All history**, **Last 12 months**, **Last 90 days** (the default), **Last 30 days** or **Only new from now**
 
-WooCommerce does not push webhooks to Softbooq by default. A nightly cron pulls new and updated orders, products and customers from your store. If you need lower-latency sync, click **Sync now** on the integration page after a high-priority order to pull it in immediately.
+Each run brings in up to 5,000 products, 5,000 orders and 5,000 customers. For a larger store, run **Sync products**, **Sync orders** or **Sync customers** again to fetch the next batch.
 
----
+## What stays in step
 
-## Sales channel attribution
+| What | How it moves |
+|------|--------------|
+| Products | From WooCommerce, as they are created, changed or deleted |
+| Orders | From WooCommerce, in every status, as they are placed and updated. They appear in Sales & POS with the store shown as **Online** |
+| Customers | From WooCommerce, as they are created, changed or deleted |
+| Stock changed in Softbooq | Sent to WooCommerce within 2 minutes, while **Auto-push on** is set |
 
-WooCommerce orders are tagged with the **WooCommerce** sales channel and contribute to the Channel Performance report. See [Sales Channels](/erp/settings#sales-channels) in Settings to manage channel definitions.
+Your store tells Softbooq about each change as it happens, and Softbooq also checks every 6 hours so nothing is missed. **Resync all stock to WooCommerce** sends every product's stock again, which is useful after a large stock count.
 
----
+### How order statuses arrive
 
-## Disconnect
+| In WooCommerce | In Softbooq |
+|----------------|-------------|
+| Pending payment, On hold | Pending |
+| Processing, not yet paid | Pending |
+| Processing, paid | Paid |
+| Completed | Completed |
+| Cancelled, Failed | Cancelled |
+| Refunded | Refunded |
 
-<Steps>
-  <Step title="Open Settings → Integrations → WooCommerce → Disconnect" />
-  <Step title="Confirm">
-    The Consumer Key and Secret are removed from the Softbooq Vault. Sync stops. Imported data is retained.
-  </Step>
-  <Step title="Revoke keys in WooCommerce (recommended)">
-    Go back to WooCommerce → Settings → Advanced → REST API and revoke the keys to ensure the stored credentials cannot be used elsewhere.
-  </Step>
-</Steps>
+## Fulfilling and returning WooCommerce orders
 
----
+- **Fulfil**: open a paid WooCommerce order in Sales & POS and use **Fulfill in WooCommerce**, then **Mark as Fulfilled**. WooCommerce marks the order as completed.
+- **Return**: processing a return on a WooCommerce order records the refund in your store and puts the items back in stock there. Pay the money back through your payment provider or in WooCommerce.
 
-## Troubleshooting
+## Sync conflicts
+
+If a product or customer was edited in Softbooq after the last sync and your store then sends a different value, Softbooq does not overwrite your edit. The **Sync conflicts** panel lists each one: choose **Use WooCommerce** or **Keep ERP**. On a phone, conflicts are resolved on a computer.
+
+## FAQ
 
 <AccordionGroup>
-  <Accordion title="Test Connection returns 401 Unauthorised">
-    The Consumer Key or Secret is wrong, or the WooCommerce REST API is disabled on your site. Regenerate the keys in WooCommerce and try again. Confirm that **Enable the REST API** is on under WooCommerce → Settings → Advanced → REST API.
+  <Accordion title="Which plan do I need?">
+    WooCommerce works on every plan. Customers are imported into CRM, which is part of Softbooq Plus and Pro.
   </Accordion>
-  <Accordion title="Test Connection returns 404 or HTML">
-    Your store URL is wrong, or WordPress permalinks are not set to a value other than Plain. Open WordPress Admin → Settings → Permalinks and select any non-Plain option (e.g. Post name), then save.
-  </Accordion>
-  <Accordion title="Orders are not appearing">
-    WooCommerce sync is pull-based, not push-based. Click **Sync now** on the integration page to fetch immediately. If a specific order is still missing, check that it is not in `pending` status, those are skipped by default.
-  </Accordion>
-  <Accordion title="HTTPS certificate errors">
-    Softbooq requires a valid TLS certificate on your WordPress site. Self-signed certs are rejected. Use a free Let's Encrypt certificate via your hosting provider if you do not have one.
+  <Accordion title="The connection was refused. What should I check?">
+    That the **Store URL** is your store's public address, and that the key was created with **Read/Write** access. A key with Read access only cannot receive stock or fulfilments.
   </Accordion>
 </AccordionGroup>
-
----
 
 ## See also
 
 <CardGroup cols={3}>
   <Card title="Shopify" icon="shopify" href="/integrations/shopify">
-    The other supported e-commerce integration with full webhook sync.
+    The same for a Shopify store.
   </Card>
-  <Card title="Sales & POS" icon="cart-shopping" href="/erp/sales">
-    Imported WooCommerce orders appear in Sales.
+  <Card title="Sales & POS" icon="cash-register" href="/erp/sales">
+    Where online orders arrive.
   </Card>
-  <Card title="Channel Performance" icon="chart-bar" href="/erp/reports">
-    Compare revenue across all sales channels.
+  <Card title="Products & Services" icon="boxes-stacked" href="/erp/inventory">
+    Products and stock.
   </Card>
 </CardGroup>
