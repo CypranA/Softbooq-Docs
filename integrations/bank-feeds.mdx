@@ -1,116 +1,77 @@
 ---
 title: Bank Feeds
-description: Live bank transaction feeds via Enable Banking (PSD2 across the EU and UK)
+description: Bring your bank transactions into Softbooq and match them to invoices and bills
 icon: building-columns
 ---
 
-Bank Feeds connect your business bank account to Softbooq so transactions appear in Finance automatically and can be matched to invoices and bills without manual entry. The integration is powered by [Enable Banking](https://enablebanking.com/), a licensed PSD2 / Open Banking provider covering 2,500+ banks in the EU, UK, EEA, and Switzerland.
+Bank feeds bring your bank account's transactions into Softbooq every few hours, so you can match each payment to the invoice, bill or expense it settles. Banks across the SEPA countries and the UK connect through Enable Banking. If you would rather not connect your bank, you can upload a statement file instead.
 
-## What you get
+Bank feeds are part of Finance, on every plan.
 
-- Live transaction sync from your business current account, savings accounts, and credit cards
-- Automatic reconciliation against invoices and vendor bills via the Reconciliation Workbench
-- 90 days of historical transactions on first connect
-- 180-day rolling consent window (PSD2 standard); reauth required twice yearly
-- No screen-scraping or stored credentials, all access uses regulated open-banking APIs
+## Before you start: your Enable Banking app
 
-<Note>
-  Enable Banking is licensed as an AISP (Account Information Service Provider) under PSD2. Softbooq itself never sees or stores your bank login credentials. The OAuth-style consent happens entirely on your bank's domain.
-</Note>
+Softbooq connects to your bank through your own Enable Banking application. Enable Banking bills you for it directly.
 
----
+<Steps>
+  <Step title="Register an application at Enable Banking">
+    In Enable Banking's control panel, register an application. It gives you an application ID and a private key file.
+  </Step>
+  <Step title="Open Settings → Banking → Bank Feeds">
+    Under **Enable Banking - API credentials**, choose the **Environment** (**Production** for your real bank, **Sandbox** to try it out).
+  </Step>
+  <Step title="Enter your credentials">
+    Paste the **App ID**, and the whole private key file into **RSA Private Key (PEM)**, including its BEGIN and END lines. Choose **Save credentials**, then **Test credentials** to check them.
+  </Step>
+</Steps>
+
+You need permission to manage Finance to change these.
 
 ## Connect a bank account
 
 <Steps>
-  <Step title="Open Settings → Integrations → Bank Feeds → Connect">
-    Bank Feeds requires a Standard plan or above and a fully verified company profile.
+  <Step title="Choose Connect Bank">
+    In **Add a bank account**, pick the **Country** and your bank.
   </Step>
-  <Step title="Pick your bank">
-    Search the country and bank list. Most major EU and UK banks are supported, including Barclays, HSBC, NatWest, BNP Paribas, ING, Nordea, Revolut Business, Wise Business, and many regional and challenger banks.
+  <Step title="Choose Authorise">
+    You are sent to your bank to approve access. The access is read-only: Softbooq can see transactions but cannot make payments.
   </Step>
-  <Step title="Authenticate at your bank">
-    You are redirected to your bank's login screen via Enable Banking. Authenticate with your usual bank credentials and confirm the consent on the bank's screen. Softbooq does not see any of this.
-  </Step>
-  <Step title="Pick which accounts to share">
-    Most banks let you select specific accounts to grant read access to. Tick only the business accounts you want connected.
-  </Step>
-  <Step title="Wait for the initial backfill">
-    Up to 90 days of historical transactions are pulled in. Larger accounts can take a few minutes. You can leave the page; you'll get a notification when it completes.
+  <Step title="Choose the GL Account">
+    Pick the account in your chart of accounts that this bank account posts to.
   </Step>
 </Steps>
 
----
+The first sync brings in the last 30 days. After that, new transactions arrive every 6 hours. You can also sync at any time with the sync button next to the connection, or **Sync** in Finance.
 
-## How sync runs
+Your bank's approval lasts 90 days. After that, connect the account again to keep transactions coming.
 
-After the initial backfill, transactions are fetched on a 4-hour schedule. Most banks support push notifications via webhooks; for those, new transactions appear within minutes. For banks without push support the 4-hourly poll catches new activity.
+## Match transactions
 
-A nightly job cross-checks the previous 7 days of transactions to repair any gaps caused by missed webhook deliveries.
+Transactions land in **Finance → Accounting → Bank Feeds**, where you can filter them as **Unmatched**, **Auto-matched**, **Matched** or **Excluded**:
 
----
+- **Match** links a transaction to the record it pays, then **Confirm match**
+- **Unmatch** undoes a match
+- **Exclude** takes a transaction out of reconciliation, such as a transfer between your own accounts. **Put back in reconciliation** brings it back
 
-## Auto-reconciliation
+Every night, Softbooq matches what it can by itself. On Softbooq Plus and Pro, **Reports → Recon Workbench** shows those matches with how sure Softbooq was, so you can **Confirm match** or **Reject match**, link the rest with **Link manually**, and run **Run Auto-Match** whenever you like. **Needs Review** counts the matches Softbooq was least sure of.
 
-The Auto-Reconciliation Engine compares incoming bank transactions against your Softbooq invoices, vendor bills, expense claims and payment runs. It uses three confidence levels:
+## Upload a statement instead
 
-- **HIGH** — exact reference + amount + date match. Auto-applied with no human review.
-- **MEDIUM** — close match (e.g. amount matches, reference partial). Surfaced for one-click confirmation.
-- **LOW** — fuzzy match. Suggested but not applied; you confirm or reject.
-
-Unmatched transactions stay in the Reconciliation Workbench (Reports → Reconciliation Workbench) until you assign them or rule them out. See [the Reports page](/erp/reports#reconciliation-workbench) for how to use it.
-
----
-
-## Consent renewal
-
-PSD2 mandates that account access consent must be renewed by the customer at least every 180 days. Two weeks before expiry, you'll receive an in-app banner and an email asking you to reauth. Click the banner and complete the bank login flow again. If consent is missed your sync will stop until you renew, but historical data is kept.
-
----
+In **Finance → Accounting → Reconciliation**, choose **Upload Statement** and pick a file from your bank: CSV, CAMT.053, MT940, OFX or QIF. You then match its transactions on the same screen.
 
 ## Disconnect
 
-<Steps>
-  <Step title="Open Settings → Integrations → Bank Feeds → Account → Disconnect" />
-  <Step title="Confirm">
-    The consent token is revoked at Enable Banking and at your bank. Sync stops immediately.
-  </Step>
-  <Step title="Historical transactions are kept">
-    Already-imported transactions remain in Softbooq for reporting and reconciliation. Only the live feed stops.
-  </Step>
-</Steps>
-
----
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title="My bank is not in the list">
-    If your bank is not searchable, it has not been onboarded by Enable Banking yet. Contact Softbooq support with the bank name and country; we will request integration on your behalf.
-  </Accordion>
-  <Accordion title="Sync stopped working after about six months">
-    PSD2 consent expired. You should have received an in-app banner two weeks before expiry. Open Settings → Integrations → Bank Feeds → Reauth and complete the bank login again.
-  </Accordion>
-  <Accordion title="Transactions appear with the wrong sign">
-    Some banks report all transactions as positive amounts with a separate debit/credit indicator. Softbooq normalises this; if you see a credit appearing as a debit (or vice versa), report it to support with the transaction's bank reference and we will tune the parser for that bank.
-  </Accordion>
-  <Accordion title="Auto-reconciliation is not matching obviously linked transactions">
-    The HIGH-confidence auto-match requires an exact reference. If your bank truncates or modifies references (some do, e.g. removing special characters), the engine may downgrade to MEDIUM or LOW. Use the Reconciliation Workbench to confirm those manually; the system learns from your confirmations and improves matching over time.
-  </Accordion>
-</AccordionGroup>
-
----
+Disconnecting stops new transactions coming in. Transactions already imported stay. To withdraw the access at your bank too, do it in your online banking.
 
 ## See also
 
 <CardGroup cols={3}>
+  <Card title="Payments" icon="money-bill-transfer" href="/integrations/payments">
+    Pay suppliers through Wise, Revolut or a bank file.
+  </Card>
   <Card title="Finance" icon="chart-pie" href="/erp/finance">
-    Where bank transactions appear and reconciliation happens.
+    Invoices, bills and your books.
   </Card>
-  <Card title="Reconciliation Workbench" icon="check-double" href="/erp/reports">
-    The interface for confirming and managing matches.
-  </Card>
-  <Card title="Outbound Payments" icon="money-bill-transfer" href="/integrations/payments">
-    Pay vendor bills from the same bank account via Wise or Revolut.
+  <Card title="Reports" icon="chart-bar" href="/erp/reports">
+    The reconciliation reports.
   </Card>
 </CardGroup>

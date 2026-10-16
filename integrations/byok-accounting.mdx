@@ -1,137 +1,90 @@
 ---
-title: BYOK Accounting Tools
-description: Push invoices from Softbooq Finance to lexoffice, sevDesk, Moneybird, Pennylane, Zoho Books or DATEV
+title: lexoffice, Pennylane, sevdesk, MoneyBird, Zoho Books and DATEV
+sidebarTitle: Other accounting tools
+description: Send your invoices to the accounting tool your accountant uses
 icon: file-invoice
 ---
 
-If your accountant or tax advisor works in a specific accounting platform, Softbooq can push invoices and contacts to it automatically. The BYOK (Bring Your Own Key) accounting integrations support six platforms: lexoffice, sevDesk, Moneybird, Pennylane, Zoho Books, and DATEV. Each connects with an API key from that platform — no OAuth redirect required.
+If your accountant works in lexoffice, Pennylane, sevdesk, MoneyBird, Zoho Books or DATEV, Softbooq can send your invoices there. With lexoffice, Pennylane and Zoho Books it also brings back customers and payments, so an invoice paid in that tool is marked paid in Softbooq. For Xero and QuickBooks Online, see [Xero and QuickBooks Online](/integrations/xero).
 
-## What it pushes
+They are all in **Settings → Integrations**, under **Accounting**. You need to be an Admin to connect one.
 
-| Entity | Direction | Trigger |
-|--------|-----------|---------|
-| Invoices | Outbound | On Finance invoice issued |
-| Credit notes | Outbound | On Finance credit note issued |
-| Contacts | Outbound | On CRM customer created |
+## What each one does
 
-<Note>
-These integrations are write-only from Softbooq's side. Softbooq does not pull account balances, tax reports, or payment status from these platforms. If you want bidirectional sync, use the Xero integration instead. BYOK accounting is the right choice when your accountant owns the accounting platform and you want Softbooq to feed data into it automatically.
-</Note>
+| Tool | How you connect | Sends invoices | Brings back customers | Brings back payments |
+|------|-----------------|:--------------:|:---------------------:|:--------------------:|
+| lexoffice | Paste an **API Key** | Yes | Yes | Yes |
+| Pennylane | Paste a **Personal Access Token** | Yes | Yes | Yes |
+| Zoho Books | Sign in to Zoho | Yes | Yes | Yes |
+| sevdesk | Paste an **API Token** | Yes | No | No |
+| MoneyBird | Paste a **Personal Access Token** | Yes | No | No |
+| DATEV | Request access, then sign in to DATEV | Yes | No | No |
 
----
+Customers coming back are matched to your existing customers by email; anyone new becomes a customer in Softbooq. A payment coming back marks the Softbooq invoice **Paid** and posts it to your books.
 
-## Supported platforms
+## Connect a tool with a key
 
-| Platform | Best for | Primary region |
-|----------|----------|----------------|
-| lexoffice | Small German businesses | Germany |
-| sevDesk | SMB accounting and invoicing | Germany, Austria |
-| Moneybird | Freelancers and Dutch SMBs | Netherlands |
-| Pennylane | French startups and SMBs | France |
-| Zoho Books | Multi-country SMBs | Global |
-| DATEV | Tax advisors and accounting firms | Germany, DACH |
-
----
-
-## Connect an accounting tool
-
-The setup flow is the same for all six platforms:
+lexoffice, Pennylane, sevdesk and MoneyBird connect with a key you create in that tool.
 
 <Steps>
-  <Step title="Open Settings → Integrations → BYOK Accounting → [Platform] → Connect">
-    Each platform has its own card under the BYOK Accounting section.
+  <Step title="Create the key in the accounting tool">
+    - **lexoffice**: Einstellungen → Public API
+    - **Pennylane**: Settings → API → Personal access tokens
+    - **sevdesk**: Settings → User → API token (32 characters)
+    - **MoneyBird**: Settings → API tokens
   </Step>
-  <Step title="Generate an API key in the accounting platform">
-    Log into the platform and find its API or developer settings:
-
-    - **lexoffice**: Settings → API → Create API key
-    - **sevDesk**: User Profile → API token
-    - **Moneybird**: Settings → Developers → API tokens → New token
-    - **Pennylane**: Settings → API → Generate API token
-    - **Zoho Books**: Zoho API Console → Self Client → Generate token (select Books scope)
-    - **DATEV**: DATEV-issued API credentials are required — contact your DATEV advisor or tax firm to request access.
+  <Step title="Open its tile in Settings → Integrations">
+    Choose **Connect lexoffice** (or Pennylane, sevdesk, MoneyBird), paste the key and confirm. The key is stored encrypted.
   </Step>
-  <Step title="Enter the API key in Softbooq">
-    Paste the API key. It is stored encrypted in the Softbooq Vault and cannot be viewed again after saving.
-  </Step>
-  <Step title="Map your income account (optional)">
-    Some platforms (DATEV, lexoffice, sevDesk) require a specific income account code. Enter the account number used for sales revenue in that platform. If left blank, the integration uses the platform's default income account.
+  <Step title="Choose Test connection">
+    It confirms the key works. To change a key later, choose **Disconnect** and connect again with the new one.
   </Step>
 </Steps>
 
----
+## Connect Zoho Books
 
-## How invoice push works
+Choose **Connect Zoho Books** and sign in to Zoho. Softbooq finds your Zoho region by itself. The panel then shows the **Organization** you connected.
 
-When you mark a Softbooq invoice as **Issued** (or click Send Invoice):
+## Connect DATEV
 
-1. Softbooq looks up the customer in the accounting platform by email. If not found, a new contact is created automatically.
-2. The invoice is built with the same line items, amounts, tax, currency, and due date as the Softbooq invoice.
-3. It is submitted to the accounting platform.
+DATEV is a paid add-on. Click the DATEV tile, tell us in **Reason (optional)** why you need it, and **Submit request**. We review requests within one business day and email you when it is approved. You can then choose **Connect DATEV** and sign in. DATEV receives invoices only once they have left draft.
 
-If the push fails (invalid account code, API key revoked, platform unreachable), the Softbooq invoice is still issued normally. The failure is logged on the invoice's activity timeline with the platform's error message. You can retry the push manually at any time.
+## When invoices are sent
 
----
+Nothing moves straight after connecting. Invoices go across:
 
-## Backfilling historical invoices
+- every night, or
+- when you choose **Push invoices** in the tool's panel
 
-To push historical invoices — for example, when onboarding a new accountant who needs a complete AR history:
+The first time, Softbooq sends invoices dated in the last 90 days. After that it sends new ones. Each invoice is sent once, and each run sends up to 100, oldest first. Credit notes are not sent.
 
-<Steps>
-  <Step title="Open Settings → Integrations → BYOK Accounting → [Platform] → Backfill" />
-  <Step title="Choose a date range">
-    Default is the start of the current financial year. Invoices outside the range are skipped.
-  </Step>
-  <Step title="Run the backfill">
-    The job runs in the background. Progress and per-invoice push status appear in the sync log. Invoices already pushed are skipped — the backfill is idempotent.
-  </Step>
-</Steps>
+With lexoffice, Pennylane and Zoho Books, the nightly run also brings back payments and customers. You can do that yourself at any time with **Pull payments** and **Sync contacts**.
 
----
+## Tax codes and cost centres
+
+Under each panel, **Integration Mappings** has **Tax Codes** and **Cost Centers** tabs: choose which code in the accounting tool each Softbooq tax rate and cost centre becomes, then **Save mappings**.
+
+## When something does not go across
+
+- The panel shows the last error in red under **Invoice push**, and the tile shows **Error**.
+- Your Dashboard lists each record that could not be sent and why, with buttons to **Open integration**, **Open mappings** or **Reconnect**. Correct the record and send it again.
+
+If **Test connection** says **Saved key is no longer valid - reconnect.**, the key was revoked or expired in the accounting tool: disconnect and connect again with a new key.
 
 ## Disconnect
 
-<Steps>
-  <Step title="Open Settings → Integrations → BYOK Accounting → [Platform] → Disconnect" />
-  <Step title="Confirm">
-    The API key is removed. No further pushes occur. Invoices already pushed to the platform are not deleted from it.
-  </Step>
-</Steps>
-
----
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title="A push failed with InvalidAccountCode">
-    The income account code in the integration mapping does not exist in the accounting platform. Open Settings → Integrations → BYOK Accounting → [Platform] → Account mapping, correct the code, then retry the failed push from the invoice's activity timeline.
-  </Accordion>
-  <Accordion title="Pushes are failing with 401 Unauthorized after working previously">
-    API keys can be revoked or rotated. Regenerate the key in the accounting platform and update it in Softbooq under Settings → Integrations → BYOK Accounting → [Platform] → Update key.
-  </Accordion>
-  <Accordion title="DATEV is showing as unavailable">
-    DATEV API access requires specific credentials issued by DATEV, obtained through your DATEV advisor or tax firm. Contact them to request API access for your Softbooq integration — this is separate from any DATEV login you may already have.
-  </Accordion>
-  <Accordion title="An invoice appears twice in the accounting platform">
-    This can happen if a push succeeded in the accounting platform but the confirmation response did not reach Softbooq (a network drop between the two). Check the accounting platform for a duplicate invoice number and void the duplicate there. Future push attempts check the invoice number for an existing match before creating a new record, preventing further duplicates.
-  </Accordion>
-  <Accordion title="Contacts are being created as duplicates in the accounting platform">
-    Contact lookup matches on the customer's email address. If the same customer was previously added to the accounting platform with a different email, no match is found and a new contact is created. Merge the contacts in the accounting platform, then ensure the email matches the customer's email in Softbooq CRM.
-  </Accordion>
-</AccordionGroup>
-
----
+**Disconnect** stops sending invoices. Invoices already in the accounting tool stay there, and you can reconnect later.
 
 ## See also
 
 <CardGroup cols={3}>
+  <Card title="Xero and QuickBooks Online" icon="arrows-rotate" href="/integrations/xero">
+    Two-way sync with Xero or QuickBooks.
+  </Card>
   <Card title="Finance" icon="chart-pie" href="/erp/finance">
-    Source of all invoices, credit notes and contacts pushed to accounting tools.
+    Where your invoices live.
   </Card>
-  <Card title="Xero" icon="chart-line" href="/integrations/xero">
-    OAuth-based integration with bidirectional contact sync and richer account mapping.
-  </Card>
-  <Card title="Bank Feeds" icon="building-columns" href="/integrations/bank-feeds">
-    Pair with BYOK accounting to reconcile live bank transactions against your pushed invoices.
+  <Card title="Integrations" icon="plug" href="/integrations/overview">
+    Everything Softbooq connects to.
   </Card>
 </CardGroup>
