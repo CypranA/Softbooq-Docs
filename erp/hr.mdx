@@ -1,188 +1,84 @@
 ---
-title: HR
-description: Employees, payroll, leave, attendance and onboarding
+title: Human Resources
+description: Your people, time and leave, payroll, hiring and HR rules, in five sections
 icon: briefcase
 ---
 
-The HR module manages the complete employee lifecycle — from onboarding a new hire to processing monthly payroll, managing leave requests, and tracking attendance. The employee record created here is the single source of truth used by Projects, Travel, Compliance, and Finance.
+Human Resources (HR for short) holds your employees and everything about their work: time, leave, pay, hiring and the rules behind them. It is part of Softbooq Pro.
 
-## What HR owns
+## How HR is organised
 
-- **Employees** — the master employee record used across the ERP
-- **Payroll** — record salary runs and post them to your accounts; tax and deductions come from your payroll provider
-- **Leave requests** — manage annual leave, sick leave, and other absence types
-- **Attendance** — clock-in/clock-out tracking and timesheets
-- **Onboarding** — structured onboarding checklists for new hires
+HR has five sections along the top:
 
-## Data flows out of HR to
+| Section | What is in it |
+|---------|---------------|
+| **Me** | Your own time, absence, profile and documents (payslips are under **My documents**) |
+| **Team** | **Directory**, Departments and the org chart |
+| **Operations** | Analytics, **Attendance**, **Time Approvals**, Billable Report, **Leave**, Team Calendar, **Payroll**, Cost per Employee, Performance, Delegations |
+| **Talent** | **Job Openings**, **Candidate Pipeline**, Application Templates |
+| **Governance** | Schedules, **Approval Policies**, **Leave Types**, Public Holidays, Onboarding Templates, Offboarding Policies |
 
-| Module | What it sends |
-|--------|--------------|
-| Finance | Payroll for accounting |
-| Projects | Resource allocation |
-| Travel & Expense | Employee travel policies and per diem rates |
-| Compliance | Employee records for policy assignment |
-| Reports | Workforce data |
+HR also keeps positions and job grades, skills, courses and credentials with their renewals, surveys and succession plans.
 
-<Note>
-  An employee must exist in HR before they can be assigned to projects, log expenses, or be included in payroll. Create the employee record before setting up their system user account.
-</Note>
+People without HR admin rights see **Me** first: their own time, leave and documents.
 
 ---
 
 ## Common tasks
 
-### Add a new employee
+### Add an employee
 
 <Steps>
-  <Step title="Open HR → Employees → New Employee" />
-  <Step title="Enter personal details">
-    Fill in full name, date of birth, national ID or passport number, personal email, phone, and emergency contact.
+  <Step title="Team → Directory → Add Employee" />
+  <Step title="Fill in the essentials">
+    Name, email, position, department and team, who they report to, cost center and hourly rate.
   </Step>
-  <Step title="Set role and department">
-    Assign a job title, department, and reporting manager. The reporting manager is used for leave approvals and expense approvals.
-  </Step>
-  <Step title="Set compensation">
-    Enter the salary, pay frequency (monthly, bi-weekly), and employment start date. Add any recurring allowances or deductions here.
-  </Step>
-  <Step title="Upload documents">
-    Attach the signed employment contract, ID documents, and any required certifications. These are stored securely against the employee record.
-  </Step>
-  <Step title="Assign an onboarding checklist (optional)">
-    Select a checklist template. The employee will receive automated reminders to complete each item.
-  </Step>
-  <Step title="Save">
-    The employee is now available across Projects, Travel, Compliance, and Payroll. Invite them to the system via **Settings → Users & Roles → Invite User** to give them a login.
+  <Step title="Invite them to sign in (optional)">
+    Tick the invitation and choose their role. An employee record without a sign-in does not use a paid seat.
   </Step>
 </Steps>
+
+Personal details and salary are added afterwards on the employee's profile.
 
 ### Run payroll
 
 <Steps>
-  <Step title="Open HR → Payroll → New Payroll Run" />
-  <Step title="Select the period">
-    Choose the pay period (e.g. March 2025). The system pulls in all active employees with their base salaries and recurring adjustments.
-  </Step>
+  <Step title="Operations → Payroll → New Payroll Run" />
   <Step title="Bring in tax and deductions">
-    By default Softbooq does not calculate tax. Your payroll provider works out tax and statutory deductions and you import the results into the run. Softbooq records the run and posts it to your accounts; use certified payroll software for statutory filing.
+    By default Softbooq does not calculate tax. Your payroll provider works out tax and statutory deductions, and you import the results. Softbooq records the run and posts it to your accounts; use certified payroll software for statutory filing.
   </Step>
-  <Step title="Review the payroll summary">
-    The system shows total gross pay, total deductions, and total net pay. Verify the figures before proceeding.
-  </Step>
-  <Step title="Process">
-    Click **Process Payroll**. Payslips are generated as PDFs for each employee. Employees can access their payslips from their profile.
-  </Step>
-  <Step title="Post to Finance">
-    Click **Post to Finance** to create the payroll journal entry automatically. This debits salary expense and credits the payroll liability accounts.
-  </Step>
+  <Step title="Process Run, then Post to Accounting" />
+  <Step title="Send payslips, then Mark paid" />
 </Steps>
 
-### Approve a leave request
+To leave someone out of a run, use **Leave out of this run** on their line.
 
-<Steps>
-  <Step title="Open HR → Leave or check your notification inbox">
-    Pending leave requests appear in your notification bell at the top of the screen.
-  </Step>
-  <Step title="Review the request">
-    Check the requested dates, leave type (annual, sick, parental, etc.), and the employee's remaining balance for that leave type.
-  </Step>
-  <Step title="Check team coverage (optional)">
-    If the employee is on a project or has upcoming scheduled tasks, flag the dates to the project manager before approving.
-  </Step>
-  <Step title="Approve or reject">
-    Click **Approve** or **Reject**. If rejecting, add a reason — the employee receives it in their notification. Leave balances update immediately on approval.
-  </Step>
-</Steps>
+### Request and approve leave
 
-### Record a sick day
+An employee chooses **Request Leave**, then **Submit Request**. Whoever approves it, as set in **Approval Policies**, chooses **Approve Request** or **Reject Request**; a rejection needs a reason. Kinds of leave are set in **Governance → Leave Types**, each marked as annual, sick, unpaid, parental or other: sick leave stays private, and unpaid leave reduces pay automatically.
 
-<Steps>
-  <Step title="Open HR → Leave → New Leave Request">
-    You can submit on behalf of an employee, or employees can submit themselves.
-  </Step>
-  <Step title="Select leave type: Sick Leave" />
-  <Step title="Set the dates">
-    Enter the first day of absence. If the duration is unknown, enter a single day and extend it later.
-  </Step>
-  <Step title="Save">
-    The absence is recorded immediately. If the employee's sick leave policy requires documentation after a certain number of days, the system will remind you to collect it.
-  </Step>
-</Steps>
+### Track time
 
-### Track attendance and timesheets
+Everyone can clock in and out, with breaks, from the clock at the top, and see their hours under **Me → My time**. Managers check attendance under **Operations → Attendance** and approve hours under **Time Approvals**. Approved hours are what projects and billing use.
 
-<Steps>
-  <Step title="Employees clock in and out">
-    Employees use the Clock In / Clock Out button in their dashboard. Each entry is timestamped.
-  </Step>
-  <Step title="View daily attendance">
-    Open HR → Attendance → Daily View to see who is in, who is absent, and who has not yet clocked in.
-  </Step>
-  <Step title="Review timesheets">
-    Open an employee's profile → Attendance tab to see the full monthly timesheet. Managers can edit incorrect clock entries.
-  </Step>
-  <Step title="Export for payroll">
-    If you run hours-based payroll, export the attendance data as CSV. Total hours per employee are calculated automatically.
-  </Step>
-</Steps>
+### When someone leaves
 
-### Offboard a departing employee
+Open the employee's profile and the **Lifecycle** tab: choose the exit policy and type, work through the checklist, check what still needs a new owner, then **Finalize Exit & Release Access**. Equipment assigned to them goes back into the asset register.
 
-<Steps>
-  <Step title="Open the employee record → click Begin Offboarding" />
-  <Step title="Set the last working day" />
-  <Step title="Review open items">
-    The system checks for: outstanding leave balance (accrued but untaken), open expense reports, active project assignments, and assigned IT assets. Each item is flagged for action.
-  </Step>
-  <Step title="Process final payroll">
-    Include the employee in the next payroll run or run an off-cycle payroll for their final payment. Any accrued leave payout is added as a line item.
-  </Step>
-  <Step title="Deactivate the account">
-    On the last working day, click **Deactivate Employee**. Their system login is revoked and the record is archived. All historical data is retained.
-  </Step>
-</Steps>
+### Hire
 
----
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title="An employee is missing from the payroll run">
-    Check that the employee's start date is on or before the payroll period start, their status is Active, and they have a salary entered on their record. Employees on unpaid leave for the full period can also be excluded — check their leave status.
-  </Accordion>
-  <Accordion title="Payroll deductions look incorrect">
-    Tax and deductions come from your payroll provider. Check the figures there, then import the corrected results into the run before you post it.
-  </Accordion>
-  <Accordion title="A leave request was approved but the balance did not update">
-    Open HR → Leave → Employee Balances and search for the employee. If the balance shows the same number, check whether the approved leave type has a balance configured. Some leave types (e.g. sick leave without a cap) do not deduct from a numeric balance. If the balance should have decremented, contact support.
-  </Accordion>
-  <Accordion title="An employee cannot clock in">
-    Clock-in requires the employee to have an active system login and the Attendance feature to be enabled for their role. Check **Settings → Users & Roles** to confirm their account is active. If attendance is role-restricted, confirm they have the correct permissions.
-  </Accordion>
-  <Accordion title="I deactivated an employee but they still appear in project assignments">
-    Deactivating removes their login but does not remove them from active project tasks. Go to Projects and manually reassign their open tasks to another team member. Deactivated employees are hidden from new assignment dropdowns but will remain on records they were already assigned to.
-  </Accordion>
-</AccordionGroup>
+Publish a role in **Talent → Job Openings**; it appears on your careers page. Applicants move through the **Candidate Pipeline**. See [Careers](/portals/careers).
 
 ---
 
 ## FAQ
 
 <AccordionGroup>
-  <Accordion title="Can employees submit their own leave requests?">
-    Yes. Employees with the Employee role can submit leave requests from their dashboard. The request goes to their reporting manager (set on the employee record) for approval.
+  <Accordion title="Who can see salaries and payslips?">
+    Salaries, payslips and payroll totals need the sensitive-HR permission. Everyone sees their own payslips under **Me → My documents**.
   </Accordion>
-  <Accordion title="Can I run payroll for a subset of employees?">
-    Yes. When creating a new payroll run, you can filter by department or select specific employees instead of running for all active staff. This is useful for off-cycle runs for new starters or departing employees.
-  </Accordion>
-  <Accordion title="How are payslips shared with employees?">
-    Once payroll is processed, payslips are available in each employee's profile under the Payslips tab. If the employee has a system login, they can download their own payslips at any time. You can also email payslips in bulk from the payroll run screen.
-  </Accordion>
-  <Accordion title="Can I set different leave entitlements per employee?">
-    Yes. Each employee's leave entitlements are configured on their individual record. You can set a default policy for new hires under **Settings → HR → Leave Policies** and then override per employee as needed.
-  </Accordion>
-  <Accordion title="What happens to an employee's data when they are deactivated?">
-    Deactivating an employee revokes their login but retains all their data — payroll history, leave records, attendance, documents — permanently. This is necessary for audit and compliance purposes. You can reactivate the employee at any time if they return.
+  <Accordion title="Does Softbooq file payroll taxes?">
+    No. Tax and deductions come from your payroll provider. Softbooq records the run, posts it to your accounts and sends payslips.
   </Accordion>
 </AccordionGroup>
 
@@ -191,13 +87,13 @@ The HR module manages the complete employee lifecycle — from onboarding a new 
 ## See also
 
 <CardGroup cols={3}>
-  <Card title="Compliance" icon="shield-halved" href="/erp/compliance">
-    Assign and track policy acknowledgements for employees.
-  </Card>
   <Card title="Projects" icon="diagram-project" href="/erp/projects">
-    Log employee time against projects and track utilisation.
+    Where approved hours are used.
   </Card>
-  <Card title="Careers Portal" icon="briefcase" href="/portals/careers">
-    Publish job openings and receive applications online.
+  <Card title="Careers page" icon="user-plus" href="/portals/careers">
+    Your public job listings.
+  </Card>
+  <Card title="Finance" icon="chart-pie" href="/erp/finance">
+    Where payroll is posted.
   </Card>
 </CardGroup>
