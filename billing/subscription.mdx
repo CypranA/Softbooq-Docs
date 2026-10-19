@@ -26,7 +26,9 @@ You pay for each person who uses the workspace. **Auditor** and **AI User** seat
 
 Your trial lasts 30 days, on the plan you chose when you signed up (Softbooq Pro if you did not choose). While you are on trial, you can switch freely between plans in the ERP's **Settings → Billing & Plans**, under **Try a different plan**, and nothing is charged.
 
-Reminders come 7 days and 3 days before the trial ends, and on the day. If you have not subscribed by then, the workspace is locked: nobody can open it until an Admin chooses a plan. Your data is kept. 14 days after a trial ends without a subscription, it is cancelled, and 90 days after that its data is permanently deleted.
+Reminders come 7 days and 3 days before the trial ends, and on the day. If you have not subscribed by then, the workspace becomes **read-only**: everyone can still open it, read everything in it and export it, but nothing new can be saved, and connected integrations pause. An Admin can choose a plan at any time, and the workspace carries on where it left off.
+
+14 days after a trial ends without a subscription, the workspace is cancelled. See [When a workspace is deleted](#when-a-workspace-is-deleted).
 
 ## Change plan, pay, cancel
 
@@ -38,7 +40,13 @@ Billing is in the **Admin Portal**, at `accounts.softbooq.com/admin`, under **Bi
 
 ## If a payment fails
 
-The workspace stays fully usable for 14 days, and you get an email asking you to update your payment method. If it is still not paid after that, the workspace is locked until payment goes through, and it unlocks by itself once it does. Nothing is deleted while it is locked.
+The workspace stays fully usable for 14 days while the payment is retried, and you get an email asking you to update your payment method. If it is still not paid after that, the workspace becomes read-only until payment goes through, and it is fully usable again by itself once it does. Nothing is deleted while it is read-only.
+
+## When a workspace is deleted
+
+A cancelled workspace, or one an Admin [closes](/platform/admin#closing-the-workspace), is permanently deleted 90 days after it was cancelled or closed, with everything in it, unless a document in it is under legal hold. Until then it can be brought back: an Admin chooses a plan, or reopens it. The workspace shows the deletion date, and its Admins get an email 30 days, 7 days and 1 day before it.
+
+Softbooq does not keep your business's records for you after that. If the law requires you to keep them, as German commercial law does for your accounts, export them before the deletion date.
 
 ## FAQ
 

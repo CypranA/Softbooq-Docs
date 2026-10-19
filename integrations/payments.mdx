@@ -12,8 +12,10 @@ A payment run pays many bills, expense claims and wages at once. You choose what
 In **Settings → Banking → Send Payments / Payouts**:
 
 - **Bank File Export** needs no setup and is always on. Softbooq makes a file in your bank's format and you upload it in your online banking.
-- **Wise Business**: enter an **API Token** and your business **Profile ID**, then **Verify Connection** and **Save Wise Settings**. Create the token in **Wise → Settings → Developer tools → API tokens**.
-- **Revolut Business**: enter an **API Token** and the **Account ID** of the account to pay from, then **Verify Connection** and **Save Revolut Settings**. Create the token in **Revolut Business → Settings → API → Personal API key**.
+- **Wise Business**: enter an **API Token** and your business **Profile ID**, choose **Save Wise Settings**, then **Verify Connection**. Create the token in **Wise → Settings → Developer tools → API tokens**.
+- **Revolut Business**: enter an **API Token** and the **Account ID** of the account to pay from, choose **Save Revolut Settings**, then **Verify Connection**. Create the token in **Revolut Business → Settings → API → Personal API key**.
+
+A saved token is kept where only Softbooq's servers can read it. The field shows that a token is stored, never the token itself, and nobody in the workspace can read it back, Admins included. To change it, type a new one and save.
 
 <Frame caption="Send Payments / Payouts: Wise, Revolut and the always-on bank file, with remittance advice above them.">
   <img src="/images/erp/payments.jpg" alt="Settings, Banking, Send Payments / Payouts: the remittance advice switch, the Wise Business, Revolut Business and Bank File Export cards, and the Wise API Token and Profile ID fields" />

@@ -7,8 +7,15 @@
  *    "Finance → Accounting → Period End Closing" - is a label the app shows: each step must be a string
  *    in the English locale files of the Softbooq apps (apps/<app>/src/locales/en/*.json, and the
  *    ERP's apps/erp/src/locales/en). A renamed tab or button then fails here instead of on a customer.
+ * 3. A page that names an integration the app shows as Coming soon says so (2026-10-18). The names come from
+ *    the one availability registry, packages/brand-assets/src/integrations.ts: every entry whose availability
+ *    is 'coming_soon'. A page naming one must carry a <Note> or <Warning> that contains "Coming soon" and that
+ *    name, so the docs never present as connectable what the app does not let anyone connect. QuickBooks went
+ *    Coming soon the day before launch, and five pages still walked readers through connecting it.
  *
- * The app is read from ERP_REPO (default ../Softbooq-ERP). Run: node scripts/check-docs.mjs
+ * The app is read from ERP_REPO. Without it: the monorepo root when these docs sit in its apps/docs
+ * (where they are written, and where the gate runs this through check-landing-claims), else
+ * ../Softbooq-ERP (the deploy-only Softbooq-Docs repo they are mirrored to). Run: node scripts/check-docs.mjs
  * Steps that are not app labels (a variable like "N", a URL) are skipped by the rules below; anything
  * else that is not found is listed with the page, and the run fails.
  */
@@ -17,7 +24,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ERP = path.resolve(ROOT, process.env.ERP_REPO || '../Softbooq-ERP');
+const IN_MONOREPO = fs.existsSync(path.join(ROOT, '../../apps/erp/src/locales/en'));
+const ERP = path.resolve(ROOT, process.env.ERP_REPO || (IN_MONOREPO ? '../..' : '../Softbooq-ERP'));
 
 function walk(dir, ext, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -50,9 +58,26 @@ if (labels.size < 5000) {
 // Module names as the sidebar shows them, and "{{assistant}}" resolved.
 for (const l of [...labels]) if (l.includes('{{assistant}}')) labels.add(l.replace(/\{\{assistant\}\}/g, 'Jacinta'));
 
+// Rule 3: the names of the integrations the registry marks Coming soon.
+const REGISTRY = path.join(ERP, 'packages/brand-assets/src/integrations.ts');
+if (!fs.existsSync(REGISTRY)) {
+  console.error(`check-docs: no availability registry at ${REGISTRY}. Set ERP_REPO to a Softbooq-ERP checkout.`);
+  process.exit(2);
+}
+const comingSoon = [];
+for (const m of fs.readFileSync(REGISTRY, 'utf8').matchAll(/\n {4}([a-z0-9_]+): \{([\s\S]*?)\n {4}\},/g)) {
+  const name = m[2].match(/\bname: '([^']+)'/)?.[1];
+  if (name && /availability: 'coming_soon'/.test(m[2])) comingSoon.push(name);
+}
+if (comingSoon.length < 5) {
+  console.error(`check-docs: read only ${comingSoon.length} Coming soon names from ${REGISTRY}; the parse is broken.`);
+  process.exit(2);
+}
+const escapeRe = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 const pages = walk(ROOT, '.mdx');
 const problems = [];
-let images = 0, steps = 0;
+let images = 0, steps = 0, soonNamed = 0;
 const EXTERNAL = /^(WooCommerce|Shopify|Xero|HubSpot|Trello|Jira|Confluence|Asana|Linear|Microsoft|Azure|Entra|Intune|Jamf|Google|Stripe|Wise|Revolut|lexoffice|Pennylane|sevdesk|MoneyBird|Zoho|Personio|Salesforce|Pipedrive|Airalo|Enable Banking)\b/;
 const SKIP =/^(N|\.\.\.|[A-Z]{2,}|.*\.(com|json|md)|<.*>)$/;
 for (const p of pages) {
@@ -73,9 +98,17 @@ for (const p of pages) {
       if (!labels.has(step)) problems.push(`${rel}: "${step}" (in "${m[1].trim()}") is not a label the app shows`);
     }
   }
+  const notes = [...s.matchAll(/<(Note|Warning)>([\s\S]*?)<\/\1>/g)].map((n) => n[2]).filter((n) => /Coming soon/i.test(n));
+  for (const name of comingSoon) {
+    if (!new RegExp(`\\b${escapeRe(name)}\\b`).test(s)) continue;
+    soonNamed++;
+    if (!notes.some((n) => n.includes(name))) {
+      problems.push(`${rel}: names ${name}, which the app shows as Coming soon, without a <Note> saying "Coming soon" that names it`);
+    }
+  }
 }
 if (problems.length) {
   console.error(`check-docs: ${problems.length} problem(s) in ${pages.length} pages:\n  ${problems.join('\n  ')}`);
   process.exit(1);
 }
-console.log(`check-docs: OK - ${images} images exist, ${steps} path steps in ${pages.length} pages are labels the app shows (${labels.size} app strings).`);
+console.log(`check-docs: OK - ${images} images exist, ${steps} path steps in ${pages.length} pages are labels the app shows (${labels.size} app strings), and ${soonNamed} mentions of ${comingSoon.length} Coming soon integrations say so.`);

@@ -1,33 +1,46 @@
 # Softbooq Docs
 
-Official documentation for the [Softbooq](https://softbooq.com) platform — ERP, Files, and AI tools for growing businesses.
+The help centre for [Softbooq](https://softbooq.com), live at [docs.softbooq.com](https://docs.softbooq.com).
 
-Live at [docs.softbooq.com](https://docs.softbooq.com)
+## Where to edit
+
+Edit the docs in the Softbooq monorepo, in `apps/docs`. After a release reaches `main`,
+`.github/workflows/docs-mirror.yml` copies this folder to the `CypranA/Softbooq-Docs` repository,
+which is what Mintlify deploys. If anything is committed directly in Softbooq-Docs, the next mirror
+stops and names it rather than overwriting it, so make the change here.
 
 ## What's in here
 
 ```
-erp/          ERP module documentation (Finance, HR, CRM, and 14 others)
-portals/      Public-facing features (Storefront, Client Portal, Careers, Landing Page)
-quickstart.mdx
-introduction.mdx
-mint.json     Mintlify site config
+introduction.mdx, quickstart.mdx
+erp/           One page per module, plus Settings and Softbooq on your phone
+portals/       The public site: landing page, shop, careers page, customer account
+integrations/  The tools Softbooq connects to
+platform/      Accounts, the Admin Portal, support access, Softbooq AI
+billing/       Plans and AI credits
+files/         Softbooq Files
+images/        Screenshots
+mint.json      Mintlify site config and navigation
+scripts/       check-docs.mjs
 ```
+
+## Every page says what the app says
+
+`node scripts/check-docs.mjs` checks that every image a page uses exists, and that every path
+written in bold with arrows, such as **Settings → Banking → Bank Feeds**, is made of labels the app
+actually shows in English. The gate runs it on every push, as part of
+`apps/marketing/scripts/check-landing-claims.mjs`. A path through another product's screens is
+skipped when it starts with that product's name: **Wise → Settings → Developer tools**.
+
+Write as `docs/VOICE.md` says: plain, warm, no em dashes, buttons named as they appear.
 
 ## Running locally
 
 ```bash
-npm i -g mintlify
-mintlify dev
+npx mintlify dev
 ```
 
 Opens at `http://localhost:3000`.
-
-## Contributing
-
-All content is MDX. Pages use standard [Mintlify components](https://mintlify.com/docs/content/components) — `<Steps>`, `<AccordionGroup>`, `<Note>`, `<Tip>`, `<Warning>`, `<CardGroup>`.
-
-The site deploys automatically on every push to `main`.
 
 ## License
 

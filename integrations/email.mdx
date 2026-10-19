@@ -4,7 +4,12 @@ description: Choose how your invoices, reminders and other emails are sent, and 
 icon: envelope
 ---
 
-Softbooq emails invoices, quotes, payment reminders and notifications on your behalf. Out of the box it sends them for you, up to a monthly limit. To send from your own address or send more, connect Brevo, SendGrid, Google, Microsoft 365 or your own mail server.
+Softbooq emails invoices, quotes, payment reminders and notifications on your behalf. Out of the box it sends them for you, up to a monthly limit. To send from your own address or send more, connect your own mail server.
+
+<Note>
+  **Coming soon.** Brevo, SendGrid, Google and Microsoft 365 show **Coming soon** under **Choose Email Provider** and cannot be chosen yet. **Default** and **Custom** can. Their rows below show what each will need.
+</Note>
+
 
 Everything is in **Settings → Messaging & Channels → Email Service**.
 
@@ -23,13 +28,15 @@ Under **Choose Email Provider**:
 | Provider | What you enter |
 |----------|----------------|
 | **Default** | Nothing. Softbooq sends for you, up to a number of free emails each month |
-| **Brevo** (Recommended) | An **API Key** from Brevo |
+| **Brevo** | An **API Key** from Brevo |
 | **SendGrid** | An **API Key** from SendGrid. Verify your sender in SendGrid first |
-| **Google** | **SMTP Host**, **Port**, **Username** and **Password**. Use `smtp.gmail.com`, port 587, and an app password from your Google account rather than your normal password |
+| **Google** | Coming as **Sign in with Google**: you will sign in with your Google account, with no password to type |
 | **Microsoft 365** | The **Sender Mailbox** and your **Microsoft Tenant ID**, then **Connect Microsoft 365**. Your Microsoft 365 admin approves Softbooq once |
 | **Custom** | Your mail server's **SMTP Host**, **Port**, **Username** and **Password**, and whether it uses SSL/TLS |
 
-Send yourself a test with **Test Connection**, then choose **Confirm Configuration**.
+Send yourself a test with **Test Connection**: it uses what is on screen, including an API key or password you have typed but not saved yet, so a wrong one shows before you save. Then choose **Confirm Configuration** to save.
+
+A saved API key or password is kept where only Softbooq's servers can read it. The field shows that one is stored, never the value, and nobody in the workspace can read it back. To change it, type a new one and save.
 
 The change takes effect at once: every email from then on goes through the new provider. If a provider was already saved, Softbooq asks you to confirm before replacing it.
 
