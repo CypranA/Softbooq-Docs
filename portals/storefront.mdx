@@ -12,6 +12,7 @@ The Online Storefront gives every Softbooq business a fully functional public e-
 - **Services & bookings**: bookable service items with real-time slot availability
 - **Cart**: persistent cart (survives page refresh), with quantity controls
 - **Checkout**: Stripe card payment or Request Quote (email-based order), customer's choice
+- **Delivery and payment**: delivery to areas you name, each with its fee, or collection in store; payment by card, transfer or mobile money, or on delivery. See [Delivery and payment in your shop](/portals/shop-delivery-payments)
 - **Multi-currency**: live FX rate conversion to any major world currency
 - **Multi-language**: EN, ES, FR, DE
 - **Dark/light mode**: visitor-controlled theme toggle
@@ -86,7 +87,7 @@ The Online Storefront gives every Softbooq business a fully functional public e-
     You are redirected to Stripe's onboarding. Complete the business verification steps.
   </Step>
   <Step title="Return to Softbooq">
-    Once connected, Stripe Connect is active. Online payments on the storefront are processed directly to your Stripe account.
+    When Stripe has everything it needs, the screen says **Stripe account active**, and payments on the storefront go straight to your Stripe account. If it says **Verification incomplete**, choose **Finish setup with Stripe**. See [Stripe](/integrations/stripe).
   </Step>
   <Step title="Set checkout mode to Stripe or Both">
     In **Settings → Business → Public Page**, under Storefront Configuration, choose **Integrated Payments (Stripe)** or **Both (Hybrid)**.
@@ -112,7 +113,7 @@ The Online Storefront gives every Softbooq business a fully functional public e-
     Each order shows the customer's name, contact details, items ordered, and checkout method.
   </Step>
   <Step title="Confirm and fulfil">
-    For Quote requests: contact the customer to confirm, then mark the order as Confirmed. For Stripe payments: the payment is already collected. Proceed directly to fulfilment.
+    For Quote requests: contact the customer to confirm, then mark the order as Confirmed. For Stripe payments: the payment is already collected. Proceed directly to fulfilment. For a transfer, record the payment when the money arrives; for pay on delivery, the rider records it at the door. See [Delivery and payment in your shop](/portals/shop-delivery-payments) and [Deliveries](/erp/deliveries).
   </Step>
 </Steps>
 
@@ -128,7 +129,7 @@ The Online Storefront gives every Softbooq business a fully functional public e-
     Booking slots are only shown for resources that are marked as publicly bookable. Open Resource Scheduling, edit the resource, and confirm that **Available for online booking** is ticked. Also check that the resource has availability windows configured for the selected day.
   </Accordion>
   <Accordion title="Stripe payment is failing at checkout">
-    Confirm that Stripe is fully set up and verified in **Settings → Banking → Receive Payments**. If the Stripe account verification is incomplete (e.g. additional documents required by Stripe), payments will be declined. Log in to your Stripe dashboard to check the account status.
+    Open **Settings → Banking → Receive Payments**. If it says **Verification incomplete**, Stripe still needs details from you before it takes payments: choose **Finish setup with Stripe**, then **Check Again** when you are done.
   </Accordion>
   <Accordion title="The customer's cart disappeared after they refreshed the page">
     Carts persist in the customer's browser local storage, keyed by your workspace ID. If local storage is cleared or the customer is using a private browser session, the cart will not persist. This is a browser behaviour limitation. There is no server-side cart persistence for guest visitors.

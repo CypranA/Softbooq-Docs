@@ -1,0 +1,77 @@
+---
+title: Stripe
+sidebarTitle: Card payments (Stripe)
+description: Take card payments on invoices and in your shop, and who pays Stripe's fees and carries its losses
+icon: credit-card
+---
+
+Stripe takes card payments for your business: on invoice payment links, in your online shop's checkout, and in your customers' account on your site. The Stripe account is your own, and every payment is charged on it directly. Softbooq adds no fee of its own to a payment.
+
+Stripe lives in **Settings → Banking → Receive Payments**. You need the Manage Settings permission to see the Banking tab. Connecting, finishing setup and reconnecting are for workspace Admins.
+
+## Who pays the fees and who carries the losses
+
+- **Your business pays Stripe's fees.** Stripe takes them from each payment, as on any Stripe account.
+- **Disputes are between you and Stripe.** When a customer disputes a payment, Stripe takes the money back from your balance. Softbooq reopens the invoice it paid and tells your Admin, by notification and email. You answer the dispute in your Stripe Dashboard before Stripe's deadline.
+- **A refund comes from your Stripe balance.** Refunding a card-paid invoice in Softbooq sends the refund through your Stripe account and records it in your books.
+- **Stripe, not Softbooq, carries a loss your account cannot pay back**, such as a lost dispute or a refund larger than what is left on your Stripe balance.
+- **You sign in to your own Stripe Dashboard.** **Open Stripe Dashboard** takes you there.
+
+An account connected before these terms has them the other way round, and Softbooq asks you to reconnect it. See [Reconnect an older account](#reconnect-an-older-account).
+
+## Connect Stripe
+
+<Steps>
+  <Step title="Open Settings → Banking → Receive Payments" />
+  <Step title="Choose Connect with Stripe">
+    Stripe opens and asks for your business details, your identity and the bank account it pays out to. Stripe collects these itself; Softbooq never sees them.
+  </Step>
+  <Step title="Come back to Softbooq">
+    Stripe returns you to the same screen and Softbooq checks the account. When Stripe is ready, it says **Stripe account active**, with **Accepting payments** and **Payouts enabled**.
+  </Step>
+</Steps>
+
+## Finish setup
+
+Stripe may need more from you before it lets you take payments: a document, a missing detail, a bank account. Until then the screen says **Verification incomplete**, and your customers cannot pay by card.
+
+- **Finish setup with Stripe** opens Stripe where you left off. It is the same account; nothing new is created.
+- **Check Again** asks Stripe for the account's status now, for example after you finished in Stripe's own app.
+
+Softbooq counts the account as ready once Stripe has your details and allows payments on it. Stripe's own list of what is still due is in your Stripe Dashboard. On a phone, one button does both: it finishes setup until the account is active, then opens your Stripe Dashboard.
+
+## Reconnect an older account
+
+An account connected under the earlier setup shows **Reconnect Stripe**: "Stripe now handles disputes and fees directly with you. Reconnect to move this workspace to a Stripe account set up that way. Your current account keeps working until you do."
+
+Stripe fixes these terms when an account is created, so moving to them takes a new Stripe account. Reconnecting:
+
+- sets up a new Stripe account for this workspace and opens Stripe to finish it;
+- means open invoices need a new payment link, because links already sent belong to the previous account;
+- leaves payments taken before on the previous account, so a refund of one of them comes from that account.
+
+Nothing happens until an Admin confirms it. Your current account keeps taking payments until then.
+
+## Payouts
+
+Stripe pays out to your bank on its own schedule, automatically, unless you change it in your Stripe Dashboard. Funds typically arrive within 1 to 2 business days.
+
+## Disconnect
+
+**Disconnect** removes the Stripe connection from this workspace. Customers can still pay on payment links you already sent, but those payments will not appear in Softbooq.
+
+If the connection is ended from Stripe's side, Softbooq clears it, emails your Admin, and shows **Connect with Stripe** again.
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Online shop" icon="store" href="/portals/storefront">
+    Card payment at checkout.
+  </Card>
+  <Card title="Delivery and payment in your shop" icon="truck" href="/portals/shop-delivery-payments">
+    Delivery areas, pickup, transfer and pay on delivery.
+  </Card>
+  <Card title="Paying suppliers and staff" icon="money-bill-transfer" href="/integrations/payments">
+    Money going out, through Wise, Revolut or a bank file.
+  </Card>
+</CardGroup>

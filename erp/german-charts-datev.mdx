@@ -1,0 +1,81 @@
+---
+title: SKR03, SKR04 and the DATEV export
+sidebarTitle: German charts and DATEV
+description: Choose between the two German charts of accounts, and export your journal for your tax adviser
+icon: book
+---
+
+Softbooq carries both German charts of accounts: **SKR03** and **SKR04**. They hold the same accounts under different numbers. Ask your tax adviser which one they work with, and use that one.
+
+## Choose your chart
+
+A workspace in Germany starts on SKR03. To use SKR04 instead, switch before you post anything:
+
+<Steps>
+  <Step title="Open Finance → Accounting → Chart of Accounts" />
+  <Step title="Under Chart of accounts template, choose Germany - SKR04 (DATEV)" />
+  <Step title="Choose Switch chart and confirm">
+    Your whole chart of accounts is replaced with the SKR04 accounts, and every posting from then on uses their numbers.
+  </Step>
+</Steps>
+
+You need permission to change settings to see the picker.
+
+<Warning>
+The chart can be switched only while nothing has been posted. Once the workspace has a posted entry, the switch is refused, because the entries already posted point to the old chart's accounts.
+</Warning>
+
+## The SKR04 accounts Softbooq posts to
+
+| What | SKR04 account |
+|---|---|
+| Bank | 1800 |
+| Cash | 1600 |
+| Customers owe you (receivables) | 1200 |
+| You owe suppliers (payables) | 3300 |
+| Sales at 19 % / at 7 % | 4400 / 4300 |
+| VAT on sales at 19 % / at 7 % | 3806 / 3801 |
+| VAT you reclaim at 19 % / at 7 % | 1406 / 1401 |
+| Exchange-rate gains / losses | 4830 / 6300 |
+
+Sales at 0 % go to 4290, exempt sales to 4100, and reverse-charge sales to 4200. A tax code of your own at 7 % on SKR03 or SKR04 posts to the 7 % accounts. A tax code that names its own account always posts there.
+
+## The DATEV export
+
+Your tax adviser imports your journal into DATEV. Open **Finance → Accounting → Journal Entries**, choose the period, and choose **Export DATEV (EXTF)**. Softbooq writes every posted entry of the period into one file, `DATEV-Buchungsstapel-<date>.csv`, in DATEV's EXTF booking-batch format.
+
+What the file carries:
+
+- **Your chart.** The header says which chart the account numbers belong to: `03` for SKR03, `04` for SKR04. With the generic chart, the field is left empty.
+- **Amounts in euros**, from your entries' base amounts.
+- **Your fiscal year start**, from your workspace's fiscal year.
+- **Accounts with four digits.**
+- **Your DATEV numbers**, the consultant number and the client number, so your adviser's DATEV files the batch under the right client.
+- **Automatic accounts.** DATEV calculates the VAT itself on the accounts its charts mark AM or AV, such as 8400 Erlöse 19 % or 3400 Wareneingang 19 %. Your entries already carry their VAT on its own line, so every booking that touches one of those accounts, on either side, carries the key `40`, and DATEV does not add the VAT a second time. The VAT accounts themselves are not automatic accounts and carry no key.
+- **Cost centres**, where an entry has one.
+
+### Your DATEV numbers
+
+Enter your adviser's consultant number (Beraternummer, 4 to 7 digits) and your client number (Mandantennummer, 1 to 5 digits) in **Settings → Business → Accounting**, under **DATEV numbers**. If either is missing when you export, Softbooq says so before the download: you can add them first, or download anyway and tell your adviser which client the file is for.
+
+An entry with more than two sides, a payroll run for one, comes through as one line per account, held together by its document number.
+
+The same file is in the records you can download for your workspace in **Settings → Billing**.
+
+<Note>
+The DATEV connection is Coming soon. The export above works today, with the numbers you enter yourself. Ask your adviser to run one test import the first time, to confirm DATEV reads your file as expected.
+</Note>
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Finance" icon="coins" href="/erp/finance">
+    Your books, invoices and bills.
+  </Card>
+  <Card title="UStVA and the OSS return" icon="file-invoice" href="/erp/ustva-oss">
+    The German VAT pre-return by box number.
+  </Card>
+  <Card title="Month-end" icon="calendar-check" href="/erp/month-end">
+    Closing a period.
+  </Card>
+</CardGroup>

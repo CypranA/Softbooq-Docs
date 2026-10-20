@@ -60,6 +60,7 @@
       "pages": [
         "portals/landing-page",
         "portals/storefront",
+        "portals/shop-delivery-payments",
         "portals/customer-account",
         "portals/careers"
       ]
@@ -77,6 +78,7 @@
         "erp/month-end",
         "erp/crm",
         "erp/sales",
+        "erp/deliveries",
         "erp/hr",
         "erp/projects",
         "erp/procurement",
@@ -92,6 +94,8 @@
         "erp/it",
         "erp/reports",
         "erp/vat-return",
+        "erp/ustva-oss",
+        "erp/german-charts-datev",
         "erp/settings",
         "erp/email-delivery"
       ]
@@ -114,6 +118,7 @@
             "integrations/xero",
             "integrations/byok-accounting",
             "integrations/bank-feeds",
+            "integrations/stripe",
             "integrations/payments"
           ]
         },

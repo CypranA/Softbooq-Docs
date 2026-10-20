@@ -13,9 +13,11 @@ Sales & POS is where you sell: at the counter, by order, and from quotes. Every 
 </Frame>
 
 
-Tabs: **Sales Ledger**, **Orders**, **Reservations**, **Invoices**, **Quotes**, **Customers**, **Debtors**, **Returns**, **Registers**.
+Tabs: **Sales Ledger**, **Orders**, **Deliveries**, **Reservations**, **Invoices**, **Quotes**, **Customers**, **Debtors**, **Returns**, **Registers**.
 
 At the top: **POS Terminal** (the register), **Reserve** (hold stock for a customer), **New Order**, and the Sales settings (the gear).
+
+**Deliveries** is the list your own riders work from: where to go, what to collect at the door, and proof of delivery. See [Deliveries](/erp/deliveries).
 
 There is also **Softbooq POS**, a separate app for the counter that keeps selling when the internet drops and catches up afterwards.
 
@@ -43,7 +45,7 @@ Open **POS Terminal**, add items, and take payment. A customer is optional: a sa
 
 ### Send a quote
 
-Create the quote in **Quotes**. A quote needs a **Valid Until** date before it can be sent. From the quote you can:
+Create the quote in **Quotes**. A quote needs a **Valid Until** date before it can be sent. A sent quote becomes Expired at the end of that day, in your workspace's time zone: its link then tells the customer to ask for an updated one, and it can no longer be copied, emailed or turned into an invoice. From the quote you can:
 
 - **Mark as Sent**
 - **Copy Link**: a link where your customer can accept the quote
@@ -63,7 +65,7 @@ A credit note is issued against the invoice.
 
 ### Hold stock for a customer
 
-Use **Reserve**. The reservation appears under **Reservations**, where you **Collect** it when the customer picks it up, or release it.
+Use **Reserve**. The reservation appears under **Reservations**, where you **Collect** it when the customer picks it up, or release it. Releasing gives back the stock it held.
 
 ---
 
@@ -74,7 +76,7 @@ Use **Reserve**. The reservation appears under **Reservations**, where you **Col
     A customer is needed for larger sales and for sales paid only in part or later. Choose one, or create one from the cart.
   </Accordion>
   <Accordion title="I cannot cancel an order">
-    Orders can be cancelled only before they are fulfilled. After that, take a return.
+    An order can be cancelled only before it is fulfilled. If its invoice has been issued, Softbooq says so: choose **Open invoice**, void it, then cancel the order. Whatever stock the order took goes back. After fulfilment, take a return.
   </Accordion>
 </AccordionGroup>
 

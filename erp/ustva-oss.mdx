@@ -1,0 +1,79 @@
+---
+title: UStVA and the OSS return
+description: The German VAT pre-return by box number, and the EU One-Stop-Shop return for sales to consumers in other EU countries
+icon: file-invoice
+---
+
+Two reports sort your VAT return the way the tax office asks for it:
+
+- **UStVA by box number (Kennzahlen)**: the German VAT pre-return, each figure in its box. For workspaces in Germany.
+- **OSS return**: your sales to consumers in other EU countries that were taxed at their country's rate, by country and rate. For workspaces in the EU.
+
+Both are in **Reports → Financial Statements**, for anyone who can see Reports. Every figure comes from your [VAT return](/erp/vat-return) for the same period, so the three always agree. Softbooq prepares these figures; it does not file them for you. **Export** gives each one as a CSV or a PDF, for your own filing or for your tax adviser.
+
+## The UStVA by box number
+
+Open **Reports → Financial Statements → UStVA by box number (Kennzahlen)** and choose the year, then **Quarterly** or **Monthly** and the period. It opens on the current quarter.
+
+Each document of the period lands in exactly one box, or in one list of things waiting for you. Figures are in euros and cents.
+
+| Section | Boxes |
+|---|---|
+| **Sales** | 81 sales taxed at 19 %, 86 at 7 %, 35 and 36 at any other rate; 41 goods delivered to businesses in other EU countries (with their VAT number); 43 other tax-free sales with input VAT deduction, such as exports |
+| **Goods bought from other EU countries** | 89 at 19 %, 93 at 7 %, 95 and 98 at other rates |
+| **Purchases where you owe the VAT** | 46 and 47 services bought from businesses in other EU countries; 84 and 85 other purchases where you owe the VAT (section 13b), such as construction or services from outside the EU |
+| **Additional figures** | 60 sales in Germany where your customer owes the VAT (section 13b); 21 services to businesses in other EU countries; 45 other sales not taxable here |
+| **Input VAT** | 66 input VAT on invoices from other businesses; 61 on goods bought from other EU countries; 67 on purchases where you owe the VAT |
+
+Box 83, **VAT to pay (a minus is a refund)**, is the German return only: the VAT of these boxes less your input VAT. VAT on OSS sales is declared on the OSS return, and VAT still waiting for a choice from you is not in it yet. Under the boxes, Softbooq shows how the three add up to your VAT return.
+
+Register sales have no buyer on them, so they count as sales in Germany, in the box for their rate. A credit note is placed where the invoice it credits was placed.
+
+### When the boxes and your VAT return agree
+
+Under the boxes, Softbooq checks that they add up to your VAT return to the cent. When they do, it says: "Every figure here is from your VAT return for this period, and they add up to it exactly." If they ever do not, it names the difference and tells you not to file from the screen.
+
+### What is not in a box yet
+
+Some documents need one answer from you before they belong in a box. Until then their amounts sit in a list on the same screen, and a line above the lists says how much is waiting, and so how much box 83 leaves out until you sort it.
+
+- **Waiting for a goods or services choice.** A sale to another country is in box 41 if it delivered goods and in box 21 if it supplied services. On the invoice, answer **What does this invoice supply?**: **Goods**, **Services**, or **Both: I say per line**. Lines from your catalogue answer for themselves, by whether the item is a product or a service.
+- **Reverse-charge bills waiting for a kind.** Choose which reverse charge each supplier bill is, right in the list. Softbooq suggests one from the supplier's country: section 13b for a supplier in Germany, a service from outside the EU for a supplier outside it. For a supplier in another EU country you choose between goods and a service. Nothing posted changes, only the box.
+- **Zero-rated sales to check.** Sales at 0 % to a customer in Germany, or to a customer with no country. Exempt sales go in other boxes, so check each one.
+- **Taxed through the OSS return.** Sales taxed at another EU country's rate are not in the UStVA boxes. **Open the OSS return** shows them.
+
+Expenses count as ordinary input VAT, in box 66. An expense cannot be marked as reverse charge, so enter a reverse-charge purchase as a supplier bill.
+
+## The OSS return
+
+When you sell to consumers in other EU countries above the EU threshold, you charge VAT at their country's rate and declare it in one OSS return a quarter.
+
+### Turn it on
+
+In **Settings → Business → Tax & VAT**, under **Cross-border sales to consumers (EU OSS)**, turn on **Charge destination VAT on EU consumer sales** once you are registered for OSS. Below the threshold you may keep using your own rate.
+
+With it on, an invoice to a customer in another EU country with no valid VAT number is charged at that country's rate. The country is where the goods go when the invoice has a delivery address, else the customer's billing country. Softbooq stores that country with the invoice when it is issued.
+
+### Read the return
+
+Open **Reports → Financial Statements → OSS return** and choose the year and quarter. There is one row per country and rate, with the **Net**, the **VAT** and the number of **Documents**. Open a row to see its invoices.
+
+Above the table, **EU distance sales** shows this year's sales to consumers in other EU countries against the 10,000 EUR threshold: whether you are below it, and may tax those sales at your own rate, or over it, and must tax them at each country's rate.
+
+### Invoices with no country
+
+Invoices issued before the country was stored with the invoice can show "Some OSS sales have no country stored." Choose **Set the country** for each one. Softbooq suggests the delivery country, else the customer's. You set it once: after that it is locked, and a mistake is corrected with a credit note.
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="VAT return" icon="receipt" href="/erp/vat-return">
+    The return these reports come from, and Before you file.
+  </Card>
+  <Card title="Reports" icon="chart-line" href="/erp/reports">
+    The rest of your reports.
+  </Card>
+  <Card title="German charts of accounts" icon="book" href="/erp/german-charts-datev">
+    SKR03, SKR04 and the export for your adviser.
+  </Card>
+</CardGroup>

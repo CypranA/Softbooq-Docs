@@ -7,19 +7,21 @@ icon: envelope
 Softbooq emails invoices, quotes, payment reminders and notifications on your behalf. Out of the box it sends them for you, up to a monthly limit. To send from your own address or send more, connect your own mail server.
 
 <Note>
-  **Coming soon.** Brevo, SendGrid, Google and Microsoft 365 show **Coming soon** under **Choose Email Provider** and cannot be chosen yet. **Default** and **Custom** can. Their rows below show what each will need.
+  **Coming soon.** Microsoft 365 and Google come back as **Sign in with Microsoft** and **Sign in with Google**, with no password to type. SendGrid is no longer offered. A workspace that set up SendGrid, Microsoft 365 or Google before still sees it, so it can disconnect.
 </Note>
 
 
 Everything is in **Settings → Messaging & Channels → Email Service**.
 
 <Frame caption="A workspace whose free emails are used up: emails are held until next month, or until you choose a provider.">
-  <img src="/images/erp/email.jpg" alt="Settings, Messaging & Channels, Email Service: the Display Name, a notice that emails are being held, and the provider choices Default, Brevo (Recommended), SendGrid, Google, Microsoft 365 and Custom" />
+  <img src="/images/erp/email.jpg" alt="Settings, Messaging & Channels, Email Service: the Display Name and Reply-to address with what each falls back to, a notice that emails are being held, the provider choices Default, Your own domain, Brevo (Recommended) and Custom SMTP (advanced), and the box to send a test to" />
 </Frame>
 
 ## Who the email comes from
 
-Under **Notification Email**, set the **Display Name** your customers see, and the **From Address** for providers that send from an address you choose.
+Under **Notification Email**, set the **Display Name** your customers see, and the **From Address** for providers that send from an address you choose. Left empty, the display name is your workspace's name. With **Your own domain**, the **From name** and **From address** are on that provider's own panel, beside the domain, and Softbooq offers `billing@` on your domain. **Reply-to address** is where your customers' replies go; left empty, they go to your workspace's email.
+
+Sign-in codes, invitations and notifications to your team always come from Softbooq's own address, whichever provider you choose. Your provider sends what goes to your customers and suppliers: invoices, quotes, reminders, statements and receipts.
 
 ## Choose a provider
 
@@ -28,17 +30,19 @@ Under **Choose Email Provider**:
 | Provider | What you enter |
 |----------|----------------|
 | **Default** | Nothing. Softbooq sends for you, up to a number of free emails each month |
-| **Brevo** | An **API Key** from Brevo |
-| **SendGrid** | An **API Key** from SendGrid. Verify your sender in SendGrid first |
-| **Google** | Coming as **Sign in with Google**: you will sign in with your Google account, with no password to type |
-| **Microsoft 365** | The **Sender Mailbox** and your **Microsoft Tenant ID**, then **Connect Microsoft 365**. Your Microsoft 365 admin approves Softbooq once |
-| **Custom** | Your mail server's **SMTP Host**, **Port**, **Username** and **Password**, and whether it uses SSL/TLS |
+| **Your own domain** | Your domain, like `yourcompany.com`. Softbooq shows the DNS records to add at your domain provider; once **Check records** finds them, choose a **From address** on that domain, like `billing@yourcompany.com`. Softbooq sends for you, from your address |
+| **Brevo** | An **API Key** from your own Brevo account (Brevo has a free plan), and a **From address** that is a verified sender there. When Brevo asks how long the key should last, choose **No expiration**, or note the date: emails stop when it expires |
+| **Custom SMTP (advanced)** | Your mail server's **SMTP Host**, **Port** (465), **Username** and **Password**. Ports 25 and 587 cannot be used from Softbooq's servers |
 
 Send yourself a test with **Test Connection**: it uses what is on screen, including an API key or password you have typed but not saved yet, so a wrong one shows before you save. Then choose **Confirm Configuration** to save.
 
 A saved API key or password is kept where only Softbooq's servers can read it. The field shows that one is stored, never the value, and nobody in the workspace can read it back. To change it, type a new one and save.
 
 The change takes effect at once: every email from then on goes through the new provider. If a provider was already saved, Softbooq asks you to confirm before replacing it.
+
+### The language of an email
+
+An email to a customer or supplier is written in their language when Softbooq knows it, and in your workspace's language otherwise. The frame around it, down to the line at the bottom, follows the same language.
 
 ### When the free emails run out
 

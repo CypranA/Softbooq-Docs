@@ -1,0 +1,121 @@
+---
+title: Delivery and payment in your shop
+sidebarTitle: Delivery and payment
+description: Delivery areas and fees, collection in store, and how customers pay: card, transfer or mobile money, or on delivery
+icon: truck
+---
+
+Your online shop asks each customer two things at checkout: how they get their order, and how they pay. You choose the answers they can give in **Settings → Business → Online shop**. You need permission to manage settings or to handle online orders.
+
+The page has two cards, **Delivery** and **Payment**. Areas are saved as you add or change them; the switches are saved with **Save online shop**.
+
+## Delivery
+
+Switch on any of these:
+
+- **Collection in store.** Customers reserve online and pay when they collect. Free.
+- **Delivery to your areas.** You name the places you deliver to, in your own words, each with its fee. Customers choose one at checkout.
+- **"We'll confirm the delivery fee".** For an address outside your areas: the order comes in without a fee, you set it, and the customer approves it before paying.
+
+A shop that never opens this page offers collection in store and takes card payment.
+
+### Delivery areas and their fees
+
+<Steps>
+  <Step title="Under Delivery, type a name in New area">
+    Use the names your customers know: a district, an estate, a town. An area is a name, not a postcode, and each name is used once.
+  </Step>
+  <Step title="Enter its Fee and choose Add area">
+    A fee of 0 shows as **Free**. Fees are in your workspace currency and are entered like your prices, including or before tax.
+  </Step>
+  <Step title="Keep Offered at checkout on">
+    Switch it off to stop offering an area without losing it. **Remove area** takes it away for good; past orders keep the area they were delivered to.
+  </Step>
+</Steps>
+
+Adding your first area switches **Delivery to your areas** on.
+
+<Warning>
+If no area is offered and "We'll confirm the delivery fee" is off, customers cannot choose delivery: checkout offers only collection, and this page warns you. Offer an area, or switch on confirming the fee.
+</Warning>
+
+**Free delivery on orders from** sets an amount above which delivery to an area costs nothing. It is measured on the goods with their tax, as the cart shows them. **Never** means delivery always costs its fee. It does not apply to a fee you confirm later.
+
+The tax on a delivery follows the goods it delivers. When an order mixes VAT rates, the fee's tax is split the same way. The fee appears on the invoice as its own line, "Delivery:" and the area.
+
+### A fee you confirm
+
+With **"We'll confirm the delivery fee"** on, checkout adds "Somewhere else - the shop confirms the fee" to the list of areas. The customer orders without paying anything. With it off, a customer outside your areas can collect in store, if you offer that, but cannot have it delivered.
+
+<Steps>
+  <Step title="Open the order in Sales → Orders">
+    The order shows **Fee to set**, and "The customer is waiting for you to set the delivery fee."
+  </Step>
+  <Step title="Enter the Delivery fee and choose Set and send to customer">
+    The customer gets an email with the fee and the new total, and a link to approve it. The order now shows **Awaiting customer**. Until they answer, **Change and resend** corrects the fee.
+  </Step>
+  <Step title="The customer approves it">
+    On their order page they choose **Approve and continue**, and then see how to pay. The invoice is raised at that moment.
+  </Step>
+</Steps>
+
+Or the customer chooses **Decline**. The order is cancelled, its stock goes back, no invoice is raised and they pay nothing. You are told, and the order in **Sales → Orders** says the customer declined the delivery fee.
+
+Until the fee is approved the order cannot be shipped or paid, and it does not reach your deliveries.
+
+### Collection in store
+
+Customers collect from one of your active stores. With more than one, checkout asks which; with one, it is chosen for them. The items are held for the customer, and they pay when they collect.
+
+## Payment
+
+Switch on each way to pay you accept. Checkout asks "How would you like to pay?" only when there is more than one. Choose at least one: with none, delivered orders cannot be paid.
+
+- **Card.** Customers pay online after ordering, through your Stripe account. See [Stripe](/integrations/stripe).
+- **Transfer or mobile money.** Checkout shows your payment details and the order number to quote as the reference.
+- **Pay on delivery.** The order is placed unpaid, and the payment is recorded when the goods are handed over. Offered only for orders you deliver.
+
+### Transfer or mobile money
+
+Write the account or wallet details customers pay into in **Your payment details**: bank name, account number, mobile money number, whatever your customers use. Until you add them, customers are not offered this way to pay.
+
+After ordering, the customer can send a proof of payment from their order page: a screenshot or a PDF, up to 10 MB. Your Admin is notified, and the order in **Sales → Orders** shows **Proof uploaded**. **View proof** opens it, and **All proofs** lists every proof the customer sent with what happened to it.
+
+When the money is in your account:
+
+<Steps>
+  <Step title="Open the order and choose Payment received" />
+  <Step title="Check the Amount received, choose How, and add the Reference">
+    The amount starts at what is still owed. You cannot record more than that.
+  </Step>
+  <Step title="Choose Record payment">
+    The payment is recorded on the order's invoice and posted to your books, to cash for cash and to your bank for the rest.
+  </Step>
+</Steps>
+
+If a proof does not match a payment, choose **Not accepted**, add a **Reason** if you like, and **Mark as not accepted**. The proof stays on file and the order shows **Proof not accepted**. The customer is emailed, in their language, with your reason, and can send another from their order page. Recording the payment accepts the proof that is waiting.
+
+### Pay on delivery
+
+The invoice is raised unpaid when the customer orders, and the customer's order page says what they pay at the door. The rider records the payment when they hand the order over; see [Deliveries](/erp/deliveries). You can also record it yourself with **Payment received** in the order.
+
+## What your customer sees
+
+- At checkout: how they get their order, the area and its fee (or "To be confirmed"), and how they pay.
+- After ordering: your payment details and the reference to quote, or that they pay on delivery, or that you will confirm the delivery fee first.
+- On their order page, from the link in their order email, and in their [customer account](/portals/customer-account): what to approve, what to pay, and the order's progress through to "Delivered".
+- If you did not accept their proof: that you could not accept it, with your reason, and a way to send another. If they declined the delivery fee: that the order is cancelled and they pay nothing.
+
+## See also
+
+<CardGroup cols={3}>
+  <Card title="Online shop" icon="store" href="/portals/storefront">
+    Products, services and checkout.
+  </Card>
+  <Card title="Deliveries" icon="motorcycle" href="/erp/deliveries">
+    Your riders' list, and collecting at the door.
+  </Card>
+  <Card title="Stripe" icon="credit-card" href="/integrations/stripe">
+    Card payments.
+  </Card>
+</CardGroup>
