@@ -62,9 +62,24 @@ Open the invoice and choose **Record Payment**. Enter the amount, the method and
 
 A part payment leaves the invoice **Partially Paid**; full payment makes it **Paid**. A payment larger than the invoice becomes credit for that customer.
 
+For a payment by **Mobile money**, choose under **Received on** which of your mobile money accounts it arrived in. The provider is then named on the journal entry and on the customer's receipt.
+
+### A proof of payment from a customer
+
+When an invoice shows your bank details, payment instructions or mobile money accounts, the customer can send a photo or PDF of their payment from the invoice's pay page, up to 10 MB. An Admin gets a notification, and the invoice shows **Proof of payment from the customer** with the file. When you have checked your account:
+
+- **Payment received** records the payment on the invoice. Check **Paid by**, **Paid on**, the **Amount received** and, for mobile money, **Received on**.
+- **Not matched** asks **Why it does not match**. The customer is emailed your reason, when the invoice has an email address, and can send another proof from the pay page.
+
+For an order from your online shop, the customer sends the proof from their order page instead; see [Delivery and payment](/portals/shop-delivery-payments).
+
 ### Bills from suppliers
 
 Supplier bills reach **Purchases → Bills** from the **Invoice Inbox** (forwarded or uploaded) and from purchase orders (**Create Bill** in Procurement). Bills move through the stages **Inbox**, **To approve**, **To pay**, **Paid** (or **Rejected**). **Pay** takes you to **Payment Runs**, where you pay several suppliers at once or export a bank file.
+
+### Pay suppliers with a SEPA file
+
+A SEPA file from **Payment Runs** carries your company's address, from **Settings → Business**, and each supplier's address, in the structured form banks expect. When a payment goes to or from a bank outside the EEA, such as in Switzerland or the UK, and an address is missing, Softbooq says so first: add the address, or choose **Make the file anyway**.
 
 ### Log an expense
 
@@ -73,6 +88,8 @@ Supplier bills reach **Purchases → Bills** from the **Invoice Inbox** (forward
 ### Correct an invoice with a credit note
 
 Open the invoice and choose **Correct with a credit note**, or go to **Sales → Credit Notes → New credit note** and pick the invoice. Write the reason in your own words. You can save it as a draft first, and record whether goods came back.
+
+A credit note counts toward its invoice only in the invoice's own currency, and all the issued credit notes on an invoice together cannot come to more than the invoice. A new credit note starts at what is left to credit. An invoice paid by credit alone goes back to **Sent**, or **Overdue**, if the credit no longer covers it.
 
 ### Make a journal entry
 
