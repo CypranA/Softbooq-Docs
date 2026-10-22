@@ -94,6 +94,7 @@
         "erp/it",
         "erp/reports",
         "erp/vat-return",
+        "erp/e-invoicing",
         "erp/ustva-oss",
         "erp/german-charts-datev",
         "erp/settings",

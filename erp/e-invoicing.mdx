@@ -1,0 +1,63 @@
+---
+title: E-invoices and Peppol
+description: The e-invoice inside every invoice, its format, and sending invoices over Peppol through your own Storecove account
+icon: paper-plane
+---
+
+Every invoice in Softbooq can carry a legal e-invoice that your customer's accounting system reads by itself. You can also send invoices straight into your customers' systems over Peppol, the network businesses and governments in Europe and beyond use to exchange e-invoices.
+
+Setting this up needs permission to manage settings, which Admins have.
+
+## The e-invoice in your invoices
+
+In **Settings → Business → Tax & VAT**, under **E-invoicing (EU)**:
+
+- **Embed e-invoice XML in invoice PDFs** puts a Factur-X / ZUGFeRD e-invoice inside each invoice PDF, so the file is readable by a person and by accounting tools such as Lexware and sevDesk. It applies to invoices in euros, with no sign-up and no fee.
+- **E-invoice format**: **Automatic (recommended)** uses Factur-X for domestic invoices and EN 16931 for cross-border EU invoices. Choose **XRechnung (German public sector / B2G)** only when you invoice German public bodies; those invoices also need the buyer's Leitweg-ID.
+
+The e-invoice file of any invoice can also be downloaded from the invoice with **E-invoice (UBL)**.
+
+## Send invoices over Peppol
+
+Peppol delivers the invoice into your customer's accounting system, with no PDF to retype. Softbooq sends it through your own Storecove account: Storecove is the access point that puts your invoices on the Peppol network.
+
+<Note>
+  **Coming soon.** Sending over Peppol through Storecove cannot be switched on yet. Until then, nothing is sent electronically, and each invoice's e-invoice file can be downloaded from the invoice. The steps below describe how it will work.
+</Note>
+
+<Steps>
+  <Step title="Prepare your Storecove account">
+    In Storecove, create a sender (a legal entity) for your business and an API key.
+  </Step>
+  <Step title="Choose the route">
+    In **Settings → Business → Tax & VAT**, under **Sending e-invoices**, set **Route** to **Send over Peppol (through your Storecove account)**.
+  </Step>
+  <Step title="Connect and test">
+    Under **Your Storecove account**, enter the **Legal entity ID** and the **API key**, choose **Save connection**, then **Test connection**. The card shows **Connected**, **Not working** with the reason, or **Not tested yet**. The key cannot be read back once saved; the field shows its last four characters, and you can enter a new one to replace it.
+  </Step>
+  <Step title="Add your own Peppol address">
+    Under **Your Peppol address**, choose the **Scheme** and enter the **Address**, so your customers can reply to you and match your invoices.
+  </Step>
+  <Step title="Add your customers' Peppol addresses">
+    On each customer you send to, set their **Peppol scheme** and **Peppol address**. For a German public body, the scheme is 0204, the Leitweg-ID.
+  </Step>
+</Steps>
+
+From then on, an invoice is sent over Peppol when you issue it, that is when it is saved as anything other than a draft. A credit note on an invoice is sent too when you issue it; one made by a sales return is not sent yet. Softbooq sends in the background, and your Storecove account shows what was delivered.
+
+To stop sending, set **Route** back to **Do not send - e-invoices stay downloadable per invoice**, or choose **Remove** to take away the Storecove connection. Nothing is then sent electronically, and each invoice's e-invoice file can still be downloaded.
+
+## Countries with an official e-invoicing system
+
+In Nigeria (FIRS), Kenya (KRA eTIMS), Ghana (GRA E-VAT), Italy (SdI) and Poland (KSeF), the law sets the route, so there is nothing to choose. Softbooq does not submit invoices to these authorities yet. **Sending e-invoices** and each invoice say so under **Official e-invoicing**: if your business must submit its invoices, do it through the authority's own system. Your invoices are issued, kept and downloadable in Softbooq as usual, and nothing is marked as failed.
+
+## See also
+
+<CardGroup cols={2}>
+  <Card title="Settings" icon="gear" href="/erp/settings">
+    Your business details, tax and VAT, and the rest of Settings
+  </Card>
+  <Card title="Finance" icon="file-invoice" href="/erp/finance">
+    Creating, sending and correcting invoices
+  </Card>
+</CardGroup>
