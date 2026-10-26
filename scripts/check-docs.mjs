@@ -65,12 +65,19 @@ if (!fs.existsSync(REGISTRY)) {
   process.exit(2);
 }
 const comingSoon = [];
-for (const m of fs.readFileSync(REGISTRY, 'utf8').matchAll(/\n {4}([a-z0-9_]+): \{([\s\S]*?)\n {4}\},/g)) {
+// The parse is proven by the file, not by how many rows are Coming soon (four after 2026-10-25's flip, under the old
+// floor of 5): every row with an availability is read, and every 'coming_soon' in the file is one of them.
+const registryText = fs.readFileSync(REGISTRY, 'utf8');
+let registryRows = 0;
+for (const m of registryText.matchAll(/\n {4}([a-z0-9_]+): \{([\s\S]*?)\n {4}\},/g)) {
   const name = m[2].match(/\bname: '([^']+)'/)?.[1];
+  if (name && /availability: '(?:available|coming_soon)'/.test(m[2])) registryRows++;
   if (name && /availability: 'coming_soon'/.test(m[2])) comingSoon.push(name);
 }
-if (comingSoon.length < 5) {
-  console.error(`check-docs: read only ${comingSoon.length} Coming soon names from ${REGISTRY}; the parse is broken.`);
+const fileRows = (registryText.match(/\bavailability: '(?:available|coming_soon)'/g) ?? []).length;
+const fileSoon = (registryText.match(/\bavailability: 'coming_soon'/g) ?? []).length;
+if (registryRows < 40 || registryRows !== fileRows || comingSoon.length !== fileSoon) {
+  console.error(`check-docs: read ${registryRows} of ${fileRows} rows and ${comingSoon.length} of ${fileSoon} Coming soon names from ${REGISTRY}; the parse is broken.`);
   process.exit(2);
 }
 const escapeRe = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
