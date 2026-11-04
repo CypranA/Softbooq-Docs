@@ -73,6 +73,7 @@
         "erp/ai",
         "erp/jacinta-help",
         "erp/phone",
+        "erp/messages",
         "erp/teamchat",
         "erp/finance",
         "erp/books-health",
