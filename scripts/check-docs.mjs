@@ -12,6 +12,11 @@
  *    is 'coming_soon'. A page naming one must carry a <Note> or <Warning> that contains "Coming soon" and that
  *    name, so the docs never present as connectable what the app does not let anyone connect. QuickBooks went
  *    Coming soon the day before launch, and five pages still walked readers through connecting it.
+ * 4. Every page's frontmatter is YAML Mintlify can read (2026-11-11). An unquoted value holding ": " ("how customers
+ *    pay: card, ...") is not valid YAML, and Mintlify does not fail the deploy for it: it reports "Deployment
+ *    Succeeded", keeps the page in the sidebar, and serves it as a 404. erp/deliveries and
+ *    portals/shop-delivery-payments were 404 that way for three weeks (19 Oct to 11 Nov) until a Search Console
+ *    audit found them. No YAML library here: the mirror workflow runs this with no npm install.
  *
  * The app is read from ERP_REPO. Without it: the monorepo root when these docs sit in its apps/docs
  * (where they are written, and where the gate runs this through check-landing-claims), else
@@ -90,6 +95,12 @@ const SKIP =/^(N|\.\.\.|[A-Z]{2,}|.*\.(com|json|md)|<.*>)$/;
 for (const p of pages) {
   const rel = path.relative(ROOT, p).replace(/\\/g, '/');
   const s = fs.readFileSync(p, 'utf8');
+  const front = /^---\r?\n([\s\S]*?)\r?\n---/.exec(s)?.[1] ?? '';
+  for (const [, key, value] of front.matchAll(/^([A-Za-z][\w-]*):[ \t]+(.*?)\s*$/gm)) {
+    if (/^["'|>[{]/.test(value)) continue;
+    // ": " or a trailing ":" makes the line invalid YAML (the page 404s); " #" starts a comment and cuts the value.
+    if (/:\s|:$| #/.test(value)) problems.push(`${rel}: frontmatter ${key} holds ": " or " #" unquoted, so Mintlify does not read it as written (": " 404s the page) - put the value in double quotes`);
+  }
   for (const m of s.matchAll(/(?:<img[^>]*src="|!\[[^\]]*\]\()(\/images\/[^")\s]+)/g)) {
     images++;
     if (!fs.existsSync(path.join(ROOT, m[1]))) problems.push(`${rel}: image ${m[1]} does not exist`);
