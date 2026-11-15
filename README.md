@@ -27,7 +27,7 @@ scripts/       check-docs.mjs
 ## Every page says what the app says
 
 `node scripts/check-docs.mjs` checks that every image a page uses exists, and that every path
-written in bold with arrows, such as **Settings → Banking → Bank Feeds**, is made of labels the app
+written in bold with arrows, such as **Settings → Banking → Bank feeds**, is made of labels the app
 actually shows in English. The gate runs it on every push, as part of
 `apps/marketing/scripts/check-landing-claims.mjs`. A path through another product's screens is
 skipped when it starts with that product's name: **Wise → Settings → Developer tools**.

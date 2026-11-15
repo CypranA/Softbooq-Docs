@@ -66,11 +66,11 @@ The Online Storefront gives every Softbooq business a fully functional public e-
 ### Configure checkout options
 
 <Steps>
-  <Step title="Open Settings → Business → Public Page, then Storefront Configuration" />
+  <Step title="Open Settings → Business → Public page, then Storefront Configuration" />
   <Step title="Choose the Checkout Mode">
     **Quote / Order Request**: customers send their order and you take it from there. No payment is taken online. Suits B2B, custom orders, or a business not yet set up for online payments.
 
-    **Integrated Payments (Stripe)**: customers pay by card at checkout. Needs Stripe connected in **Settings → Banking → Receive Payments**.
+    **Integrated Payments (Stripe)**: customers pay by card at checkout. Needs Stripe connected in **Settings → Banking → Receive payments**.
 
     **Both (Hybrid)**: customers choose between sending a request and paying straight away.
 
@@ -82,7 +82,7 @@ The Online Storefront gives every Softbooq business a fully functional public e-
 ### Connect Stripe for online payments
 
 <Steps>
-  <Step title="Open Settings → Banking → Receive Payments" />
+  <Step title="Open Settings → Banking → Receive payments" />
   <Step title="Click Connect with Stripe">
     You are redirected to Stripe's onboarding. Complete the business verification steps.
   </Step>
@@ -90,7 +90,7 @@ The Online Storefront gives every Softbooq business a fully functional public e-
     When Stripe has everything it needs, the screen says **Stripe account active**, and payments on the storefront go straight to your Stripe account. If it says **Verification incomplete**, choose **Finish setup with Stripe**. See [Stripe](/integrations/stripe).
   </Step>
   <Step title="Set checkout mode to Stripe or Both">
-    In **Settings → Business → Public Page**, under Storefront Configuration, choose **Integrated Payments (Stripe)** or **Both (Hybrid)**.
+    In **Settings → Business → Public page**, under Storefront Configuration, choose **Integrated Payments (Stripe)** or **Both (Hybrid)**.
   </Step>
 </Steps>
 
@@ -129,7 +129,7 @@ The Online Storefront gives every Softbooq business a fully functional public e-
     Booking slots are only shown for resources that are marked as publicly bookable. Open Resource Scheduling, edit the resource, and confirm that **Available for online booking** is ticked. Also check that the resource has availability windows configured for the selected day.
   </Accordion>
   <Accordion title="Stripe payment is failing at checkout">
-    Open **Settings → Banking → Receive Payments**. If it says **Verification incomplete**, Stripe still needs details from you before it takes payments: choose **Finish setup with Stripe**, then **Check Again** when you are done.
+    Open **Settings → Banking → Receive payments**. If it says **Verification incomplete**, Stripe still needs details from you before it takes payments: choose **Finish setup with Stripe**, then **Check Again** when you are done.
   </Accordion>
   <Accordion title="The customer's cart disappeared after they refreshed the page">
     Carts persist in the customer's browser local storage, keyed by your workspace ID. If local storage is cleared or the customer is using a private browser session, the cart will not persist. This is a browser behaviour limitation. There is no server-side cart persistence for guest visitors.
